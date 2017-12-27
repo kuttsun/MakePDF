@@ -7,7 +7,16 @@
         xmlns:localvm="clr-namespace:MakePdf.Wpf.ViewModels"
         xmlns:localview="clr-namespace:MakePdf.Wpf.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525"
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
     <!-- View と ViewModel のマッピング -->
     <Window.Resources>
         <DataTemplate DataType="{x:Type localvm:HomePageViewModel}">
@@ -19,7 +28,7 @@
     </Window.DataContext>
 
     <DockPanel LastChildFill="True" >
-        <Button DockPanel.Dock="Top" Content="TogglePageCommand" Command="{Binding TogglePageCommand}"/>
+        
         <!-- CurrentPageのViewModelを使用して現在の画面を表示 -->
         <ContentControl DockPanel.Dock="Bottom" Content="{Binding CurrentPage}" />
     </DockPanel>
