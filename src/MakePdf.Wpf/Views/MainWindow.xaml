@@ -19,6 +19,9 @@
         FontFamily="{DynamicResource MaterialDesignFont}">
     <!-- Mapping of View and ViewModel -->
     <Window.Resources>
+        <DataTemplate DataType="{x:Type localvm:MenuViewModel}">
+            <localview:Menu/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type localvm:HomePageViewModel}">
             <localview:HomePage/>
         </DataTemplate>
@@ -28,40 +31,7 @@
     </Window.DataContext>
 
     <DockPanel LastChildFill="True" >
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-            <Menu IsMainMenu="True" >
-                <MenuItem Header="File(_F)">
-                    <Separator />
-                    <MenuItem Header="Exit" InputGestureText="Alt+F4">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="ExitToApp" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                </MenuItem>
-            </Menu>
-            <Menu IsMainMenu="True">
-                <MenuItem Header="Help(_H)">
-                    <MenuItem Header="GitHub">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="GitHubCircle" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Usage">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="HelpCircleOutline" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Check Update">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="Autorenew" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <Separator />
-                    <MenuItem Header="About">
-                    </MenuItem>
-                </MenuItem>
-            </Menu>
-        </StackPanel>
+        <ContentControl DockPanel.Dock="Top" Content="{Binding Menu}" />
         <ContentControl DockPanel.Dock="Bottom" Content="{Binding CurrentPage}" />
     </DockPanel>
 </Window>

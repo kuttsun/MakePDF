@@ -14,8 +14,11 @@ namespace MakePdf.Wpf.ViewModels
         public MainWindowViewModel()
         {
             HomePage = new HomePageViewModel();
+            Menu = new MenuViewModel();
             CurrentPage = HomePage;
         }
+
+        public BindableBase Menu { get; set; }
 
         private BindableBase _CurrentPage;
         public BindableBase CurrentPage
