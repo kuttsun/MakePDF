@@ -11,14 +11,13 @@ namespace MakePdf.Wpf.ViewModels
 {
     class MainWindowViewModel : BindableBase
     {
+        public HomePageViewModel HomePage { get; set; } = new HomePageViewModel();
+        public BindableBase Menu { get; set; } = new MenuViewModel();
+
         public MainWindowViewModel()
         {
-            HomePage = new HomePageViewModel();
-            Menu = new MenuViewModel();
             CurrentPage = HomePage;
         }
-
-        public BindableBase Menu { get; set; }
 
         private BindableBase _CurrentPage;
         public BindableBase CurrentPage
@@ -29,19 +28,6 @@ namespace MakePdf.Wpf.ViewModels
                 if (_CurrentPage != value)
                 {
                     SetProperty(ref _CurrentPage, value);
-                }
-            }
-        }
-
-        private HomePageViewModel _HomePage;
-        public HomePageViewModel HomePage
-        {
-            get { return _HomePage; }
-            set
-            {
-                if (_HomePage != value)
-                {
-                    SetProperty(ref _HomePage, value);
                 }
             }
         }
