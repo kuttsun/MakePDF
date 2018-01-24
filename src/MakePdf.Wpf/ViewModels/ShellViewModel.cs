@@ -12,7 +12,7 @@ namespace MakePdf.Wpf.ViewModels
     {
         public ShellViewModel(IRegionManager rm)
         {
-            // 初期ページを表示
+            // Set initial page
             rm.RegisterViewWithRegion("MenuRegion", typeof(Views.Menu));
             rm.RegisterViewWithRegion("MainRegion", typeof(Views.Home));
         }

@@ -23,8 +23,6 @@ namespace MakePdf.Wpf
 
         protected override void InitializeShell()
         {
-            // ここでViewModelを差し込む
-            // ここでやらないと、RegionManager に Region が生成される前に ViewModel が生成されたりして厄介なため
             //ViewModelLocator.SetAutoWireViewModel(Shell, true); 
 
             Application.Current.MainWindow.Show();
@@ -34,12 +32,11 @@ namespace MakePdf.Wpf
         {
             base.ConfigureContainer();
 
-            // View を全てコンテナに登録しておく (RegionManager で使うため)
+            // Register all Views (to use RegionManager)
             Container.RegisterTypeForNavigation<Menu>("Menu");
             Container.RegisterTypeForNavigation<Home>("Home");
             Container.RegisterTypeForNavigation<Views.EasyMode.Input>("EasyMode.Input");
 
-            //    // Viewを全てobject型としてコンテナに登録しておく（RegionManagerで使うため）
             //    this.Container.RegisterTypes(
             //        AllClasses.FromLoadedAssemblies().Where(t => t.Namespace.EndsWith(".Views")),
             //        getFromTypes: _ => new[] { typeof(object) },
