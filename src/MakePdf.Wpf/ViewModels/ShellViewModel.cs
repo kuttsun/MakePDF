@@ -14,7 +14,7 @@ namespace MakePdf.Wpf.ViewModels
         {
             // 初期ページを表示
             rm.RegisterViewWithRegion("MenuRegion", typeof(Views.Menu));
-            rm.RegisterViewWithRegion("MainRegion", typeof(Views.HomePage));
+            rm.RegisterViewWithRegion("MainRegion", typeof(Views.Home));
         }
     }
 }

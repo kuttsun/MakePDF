@@ -36,7 +36,8 @@ namespace MakePdf.Wpf
 
             // View を全てコンテナに登録しておく (RegionManager で使うため)
             Container.RegisterTypeForNavigation<Menu>("Menu");
-            Container.RegisterTypeForNavigation<HomePage>("HomePage");
+            Container.RegisterTypeForNavigation<Home>("Home");
+            Container.RegisterTypeForNavigation<Views.EasyMode.Input>("EasyMode.Input");
 
             //    // Viewを全てobject型としてコンテナに登録しておく（RegionManagerで使うため）
             //    this.Container.RegisterTypes(
