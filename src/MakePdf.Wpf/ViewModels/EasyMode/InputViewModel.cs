@@ -13,13 +13,25 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
 {
     class InputViewModel : BindableBase
     {
+        private readonly IRegionManager _regionManager;
+        public DelegateCommand BackButtonCommand { get; }
+
         public ObservableCollection<TargetFile> TargetFiles { get; set; } = new ObservableCollection<TargetFile>();
 
-        public InputViewModel()
+        public InputViewModel(IRegionManager regionManager)
         {
+            _regionManager = regionManager;
+
+            BackButtonCommand = new DelegateCommand(BackButtonClicked);
+
             // test
             TargetFiles.Add(new TargetFile { Filename = "foo", Path = "foo" });
             TargetFiles.Add(new TargetFile { Filename = "bar", Path = "bar" });
+        }
+
+        void BackButtonClicked()
+        {
+            _regionManager.RequestNavigate("MainRegion", "Home");
         }
     }
 

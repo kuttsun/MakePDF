@@ -41,7 +41,7 @@
             <Button Content="clear" Margin="10" />
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-            <Button Content="Back" Width="80" Margin="10" />
+            <Button Content="Back" Width="80" Margin="10" Command="{Binding  BackButtonCommand}" />
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1">
             <Button Content="Run" Margin="10" />
