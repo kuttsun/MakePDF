@@ -6,7 +6,7 @@ namespace MakePdf.Core
 {
     public class Facade
     {
-        public void Run(string[] files)
+        public static void Run(IEnumerable<string> files)
         {
             foreach (var file in files)
             {

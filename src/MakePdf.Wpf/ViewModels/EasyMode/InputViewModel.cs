@@ -10,12 +10,15 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 
+using MakePdf.Wpf.Models;
+
 namespace MakePdf.Wpf.ViewModels.EasyMode
 {
     class InputViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
         public DelegateCommand BackButtonCommand { get; }
+        public DelegateCommand RunButtonCommand { get; }
 
         public ObservableCollection<TargetFile> TargetFiles { get; set; } = new ObservableCollection<TargetFile>();
 
@@ -33,6 +36,20 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
         void BackButtonClicked()
         {
             _regionManager.RequestNavigate("MainRegion", "Home");
+        }
+
+        void RunButtonClicked()
+        {
+            //var files = new List<string>();
+
+            //foreach (var targetFile in TargetFiles)
+            //{
+            //    files.Add(targetFile.Path);
+            //}
+
+            var files = TargetFiles.Select(x => x.Path);
+
+            new Models.Core().Run(files);
         }
 
         public void AddFiles(List<string> files)
