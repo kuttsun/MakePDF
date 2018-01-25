@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
+using MakePdf.Core.Document;
+
 namespace MakePdf.Core
 {
     class Factory
     {
-        public static Document Create(string filename)
+        public static DocumentBase Create(string filename)
         {
             switch (Path.GetExtension(filename))
             {

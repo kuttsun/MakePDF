@@ -11,6 +11,7 @@ namespace MakePdf.Core
             foreach (var file in files)
             {
                 var doc = Factory.Create(file);
+                doc.ToPdf();
             }
         }
 

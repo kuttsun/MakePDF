@@ -85,6 +85,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Models\Core.cs" />
     <Compile Include="ViewModels\EasyMode\InputViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\EasyMode\Input.xaml.cs">
@@ -149,9 +150,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\MakePdf.Core\MakePdf.Core.csproj">
       <Project>{91a8f14d-0e94-4937-a0b1-f149fdc3de03}</Project>

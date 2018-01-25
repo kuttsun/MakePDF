@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MakePdf.Core
+namespace MakePdf.Core.Document
 {
-    abstract class Document
+    class Pdf : DocumentBase
     {
-        void ToPdf() { }
     }
 }
