@@ -26,7 +26,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="100" />
         </Grid.ColumnDefinitions>
-        <ListView Grid.Row="0" Grid.Column="0" ItemsSource="{Binding TargetFiles}">
+        <ListView Grid.Row="0" Grid.Column="0" ItemsSource="{Binding TargetFiles}" AllowDrop="True" Drop="ListView_Drop" PreviewDragOver="ListView_PreviewDragOver">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Filename" DisplayMemberBinding="{Binding Filename}" Width="200" />

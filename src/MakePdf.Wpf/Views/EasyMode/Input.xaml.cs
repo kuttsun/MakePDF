@@ -24,5 +24,32 @@ namespace MakePdf.Wpf.Views.EasyMode
         {
             InitializeComponent();
         }
+
+        // ref: https://qiita.com/Fuhduki/items/447e5707c4fa4c8f532a
+        dynamic VM
+        {
+            get { return DataContext; }
+        }
+
+        void ListView_Drop(object sender, DragEventArgs e)
+        {
+            var dropFileList = (e.Data.GetData(DataFormats.FileDrop) as string[]).ToList();
+            
+            VM.AddFiles(dropFileList);
+        }
+
+        void ListView_PreviewDragOver(object sender, DragEventArgs e)
+        {
+            // Only drop event
+            if (e.Data.GetDataPresent(DataFormats.FileDrop, true))
+            {
+                e.Effects = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+            e.Handled = true;
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.IO;
 
 using Prism.Commands;
 using Prism.Mvvm;
@@ -32,6 +33,14 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
         void BackButtonClicked()
         {
             _regionManager.RequestNavigate("MainRegion", "Home");
+        }
+
+        public void AddFiles(List<string> files)
+        {
+            foreach (var file in files)
+            {
+                TargetFiles.Add(new TargetFile { Filename = Path.GetFileName(file), Path = file });
+            }
         }
     }
 
