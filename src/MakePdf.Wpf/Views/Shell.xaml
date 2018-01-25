@@ -7,8 +7,8 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
-        Title="MakePdf" Height="375" Width="525">
-    <DockPanel LastChildFill="True" >
+        Title="MakePdf" Height="600" Width="800">
+    <DockPanel LastChildFill="True">
         <ContentControl DockPanel.Dock="Top" prism:RegionManager.RegionName="MenuRegion" />
         <ContentControl DockPanel.Dock="Bottom" prism:RegionManager.RegionName="MainRegion" />
     </DockPanel>

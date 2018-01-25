@@ -6,9 +6,45 @@
              xmlns:local="clr-namespace:MakePdf.Wpf.Views.EasyMode"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
+             mc:Ignorable="d"
+             
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <!-- default(32) + margin(10 x 2) -->
+            <RowDefinition Height="52" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="100" />
+        </Grid.ColumnDefinitions>
+        <ListView Grid.Row="0" Grid.Column="0" ItemsSource="{Binding TargetFiles}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Filename" DisplayMemberBinding="{Binding Filename}" Width="200" />
+                    <GridViewColumn Header="Path" DisplayMemberBinding="{Binding Path}" Width="200" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Button Content="up" Margin="10" />
+            <Button Content="down" Margin="10" />
+            <Button Content="delete" Margin="10" />
+            <Button Content="clear" Margin="10" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+            <Button Content="Back" Width="80" Margin="10" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Button Content="Run" Margin="10" />
+        </StackPanel>
     </Grid>
 </UserControl>
