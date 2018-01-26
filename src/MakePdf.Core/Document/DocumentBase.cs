@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace MakePdf.Core.Document
 {
-    abstract class DocumentBase
+    public abstract class DocumentBase
     {
         protected ILogger logger;
         protected string fullpath;
