@@ -4,7 +4,7 @@ using System.Text;
 
 using Microsoft.Extensions.Logging;
 
-namespace MakePdf.Core.Document
+namespace MakePdf.Core.Documents
 {
     class Pdf : DocumentBase
     {

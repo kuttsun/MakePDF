@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using Microsoft.Extensions.Logging;
 using MSWord = Microsoft.Office.Interop.Word;
 
-namespace MakePdf.Core.Document
+namespace MakePdf.Core.Documents
 {
     public class Word : DocumentBase
     {

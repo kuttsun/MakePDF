@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Extensions.Logging;
 using Microsoft.Office.Interop.Excel;
 
-namespace MakePdf.Core.Document
+namespace MakePdf.Core.Documents
 {
     class Excel : DocumentBase
     {

@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-using MakePdf.Core.Document;
+using MakePdf.Core.Documents;
 
 namespace MakePdf.Core.Tests
 {

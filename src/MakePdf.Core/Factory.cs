@@ -5,7 +5,7 @@ using System.IO;
 
 using Microsoft.Extensions.Logging;
 
-using MakePdf.Core.Document;
+using MakePdf.Core.Documents;
 
 namespace MakePdf.Core
 {
