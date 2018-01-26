@@ -20,7 +20,7 @@ namespace MakePdf.Core
 
         public void Run(string outputFullpath, IEnumerable<string> paths)
         {
-            using (var outputPdf = new Pdf(outputFullpath, logger))
+            using (var outputPdf = new OutputPdf(outputFullpath, logger))
             {
                 foreach (var path in paths)
                 {
