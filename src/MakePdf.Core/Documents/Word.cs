@@ -6,17 +6,17 @@ using System.Runtime.InteropServices;
 
 
 using Microsoft.Extensions.Logging;
-using MSWord = Microsoft.Office.Interop.Word;
+using MsWord = Microsoft.Office.Interop.Word;
 
 namespace MakePdf.Core.Documents
 {
     public class Word : DocumentBase
     {
-        MSWord.Application word;
+        MsWord.Application word;
 
         public Word(string fullpath, ILogger logger) : base(fullpath, logger)
         {
-            word = new MSWord.Application();
+            word = new MsWord.Application();
         }
 
         ~Word()
@@ -26,24 +26,36 @@ namespace MakePdf.Core.Documents
 
         public override void ToPdf()
         {
-            var doc = word.Documents.OpenNoRepairDialog(fullpath);
+            MsWord.Document doc = null;
 
-            // refs: https://msdn.microsoft.com/library/microsoft.office.tools.word.document.exportasfixedformat.aspx
-            doc.ExportAsFixedFormat(
-                OutputFilename,
-                MSWord.WdExportFormat.wdExportFormatPDF,
-                false,
-                MSWord.WdExportOptimizeFor.wdExportOptimizeForPrint,
-                MSWord.WdExportRange.wdExportAllDocument,
-                0,
-                0,
-                MSWord.WdExportItem.wdExportDocumentContent,
-                true,
-                true,
-                MSWord.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks,
-                false);
+            try
+            {
+                doc = word.Documents.OpenNoRepairDialog(fullpath);
 
-            doc.Close(MSWord.WdSaveOptions.wdDoNotSaveChanges);
+                // refs: https://msdn.microsoft.com/library/microsoft.office.tools.word.document.exportasfixedformat.aspx
+                doc.ExportAsFixedFormat(
+                    OutputFilename,
+                    MsWord.WdExportFormat.wdExportFormatPDF,
+                    false,
+                    MsWord.WdExportOptimizeFor.wdExportOptimizeForPrint,
+                    MsWord.WdExportRange.wdExportAllDocument,
+                    0,
+                    0,
+                    MsWord.WdExportItem.wdExportDocumentContent,
+                    true,
+                    true,
+                    MsWord.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks,
+                    false);
+            }
+            catch (Exception e)
+            {
+                logger?.LogError("Error Occurred", e);
+                throw;
+            }
+            finally
+            {
+                doc?.Close(MsWord.WdSaveOptions.wdDoNotSaveChanges);
+            }
         }
 
         // Flag: Has Dispose already been called?
@@ -74,7 +86,5 @@ namespace MakePdf.Core.Documents
 
             disposed = true;
         }
-
-
     }
 }
