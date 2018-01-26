@@ -10,9 +10,10 @@ namespace MakePdf.Core.Tests
         [Fact]
         public void ToPdfTest()
         {
-            var word = new Word(@"C:\Users\13005\svn\SD-2\README.doc", null);
-            word.ToPdf();
-            word.Close();
+            using (var word = new Word(@"C:\Users\13005\svn\SD-2\README.doc", null))
+            {
+                word.ToPdf();
+            }
         }
     }
 }

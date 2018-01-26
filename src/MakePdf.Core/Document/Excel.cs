@@ -18,5 +18,9 @@ namespace MakePdf.Core.Document
         {
 
         }
+
+        public override void Dispose()
+        {
+        }
     }
 }

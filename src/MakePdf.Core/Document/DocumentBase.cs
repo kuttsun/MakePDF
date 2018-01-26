@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace MakePdf.Core.Document
 {
-    public abstract class DocumentBase
+    public abstract class DocumentBase : IDisposable
     {
         protected ILogger logger;
         protected string fullpath;
@@ -18,5 +18,8 @@ namespace MakePdf.Core.Document
         }
 
         public virtual void ToPdf() { }
+
+        // https://msdn.microsoft.com/library/fs2xkftw.aspx
+        public abstract void Dispose();
     }
 }

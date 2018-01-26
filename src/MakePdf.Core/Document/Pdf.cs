@@ -11,5 +11,9 @@ namespace MakePdf.Core.Document
         public Pdf(string fullpath, ILogger logger) : base(fullpath, logger)
         {
         }
+
+        public override void Dispose()
+        {
+        }
     }
 }

@@ -19,6 +19,11 @@ namespace MakePdf.Core.Document
             word = new MSWord.Application();
         }
 
+        ~Word()
+        {
+            Dispose(false);
+        }
+
         public override void ToPdf()
         {
             var output = Path.ChangeExtension(fullpath, ".pdf");
@@ -43,18 +48,35 @@ namespace MakePdf.Core.Document
             doc.Close(MSWord.WdSaveOptions.wdDoNotSaveChanges);
         }
 
-        public bool Close()
-        {
-            bool ret = false;
+        // Flag: Has Dispose already been called?
+        bool disposed = false;
 
-            if (word != null)
+        // Public implementation of Dispose pattern callable by consumers.
+        public override void Dispose()
+        {
+            // Dispose of unmanaged resources.
+            Dispose(true);
+            // Suppress finalization.
+            GC.SuppressFinalize(this);
+        }
+
+        // Protected implementation of Dispose pattern.
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed) return;
+
+            if (disposing)
             {
-                word.Quit();
-                Marshal.ReleaseComObject(word);
-                word = null;
+                // Free any other managed objects here.
             }
 
-            return (ret);
+            // Free any unmanaged objects here.
+            word.Quit();
+            Marshal.ReleaseComObject(word);
+
+            disposed = true;
         }
+
+
     }
 }
