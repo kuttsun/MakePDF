@@ -12,7 +12,8 @@ namespace MakePdf.Wpf.Models
     {
         public void Run(IEnumerable<string> files)
         {
-            Facade.Run(files);
+            var facade = new Facade(null);
+            facade.Run(files);
         }
     }
 }
