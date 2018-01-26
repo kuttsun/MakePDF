@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 using Microsoft.Extensions.Logging;
 
@@ -10,11 +11,15 @@ namespace MakePdf.Core.Documents
     {
         protected ILogger logger;
         protected string fullpath;
+        public string OutputFilename { get; set; }
+
 
         protected DocumentBase(string fullpath, ILogger logger)
         {
             this.fullpath = fullpath;
             this.logger = logger;
+
+            OutputFilename = Path.ChangeExtension(fullpath, ".pdf");
         }
 
         public virtual void ToPdf() { }

@@ -26,13 +26,11 @@ namespace MakePdf.Core.Documents
 
         public override void ToPdf()
         {
-            var output = Path.ChangeExtension(fullpath, ".pdf");
-
             var doc = word.Documents.OpenNoRepairDialog(fullpath);
 
             // refs: https://msdn.microsoft.com/library/microsoft.office.tools.word.document.exportasfixedformat.aspx
             doc.ExportAsFixedFormat(
-                output,
+                OutputFilename,
                 MSWord.WdExportFormat.wdExportFormatPDF,
                 false,
                 MSWord.WdExportOptimizeFor.wdExportOptimizeForPrint,
