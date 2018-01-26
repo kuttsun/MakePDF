@@ -19,6 +19,7 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
         private readonly IRegionManager _regionManager;
         public DelegateCommand BackButtonCommand { get; }
         public DelegateCommand RunButtonCommand { get; }
+        public string OutputFullpath { get; set; }
 
         public ObservableCollection<TargetFile> TargetFiles { get; set; } = new ObservableCollection<TargetFile>();
 
@@ -49,7 +50,7 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
 
             var files = TargetFiles.Select(x => x.Fullpath);
 
-            new Models.Core().Run(files);
+            new Models.Core().Run(OutputFullpath, files);
         }
 
         public void AddFiles(List<string> files)

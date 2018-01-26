@@ -34,7 +34,7 @@ namespace MakePdf.Core.Documents
 
                 // refs: https://msdn.microsoft.com/library/microsoft.office.tools.word.document.exportasfixedformat.aspx
                 doc.ExportAsFixedFormat(
-                    OutputFilename,
+                    OutputFullpath,
                     MsWord.WdExportFormat.wdExportFormatPDF,
                     false,
                     MsWord.WdExportOptimizeFor.wdExportOptimizeForPrint,

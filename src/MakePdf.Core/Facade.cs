@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 using Microsoft.Extensions.Logging;
+
+using MakePdf.Core.Documents;
 
 namespace MakePdf.Core
 {
@@ -15,12 +18,23 @@ namespace MakePdf.Core
             this.logger = logger;
         }
 
-        public void Run(IEnumerable<string> files)
+        public void Run(string outputFullpath, IEnumerable<string> paths)
         {
-            foreach (var file in files)
+            using (var outputPdf = new Pdf(outputFullpath, logger))
             {
-                var doc = Factory.Create(file, logger);
-                doc.ToPdf();
+                foreach (var path in paths)
+                {
+                    if (File.Exists(path))
+                    {
+                        var doc = Factory.Create(path, logger);
+                        doc.ToPdf();
+                        outputPdf.Combine(doc.OutputFullpath);
+                    }
+                    else if (Directory.Exists(path))
+                    {
+
+                    }
+                }
             }
         }
 

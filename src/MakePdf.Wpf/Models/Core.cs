@@ -10,10 +10,10 @@ namespace MakePdf.Wpf.Models
 {
     class Core
     {
-        public void Run(IEnumerable<string> files)
+        public void Run(string outputFullpath, IEnumerable<string> items)
         {
             var facade = new Facade(null);
-            facade.Run(files);
+            facade.Run(outputFullpath, items);
         }
     }
 }
