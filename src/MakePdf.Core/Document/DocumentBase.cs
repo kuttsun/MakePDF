@@ -9,9 +9,11 @@ namespace MakePdf.Core.Document
     abstract class DocumentBase
     {
         protected ILogger logger;
+        protected string fullpath;
 
-        protected DocumentBase(ILogger logger)
+        protected DocumentBase(string fullpath, ILogger logger)
         {
+            this.fullpath = fullpath;
             this.logger = logger;
         }
 

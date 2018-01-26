@@ -11,18 +11,18 @@ namespace MakePdf.Core
 {
     class Factory
     {
-        public static DocumentBase Create(string filename, ILogger logger)
+        public static DocumentBase Create(string fullpath, ILogger logger)
         {
-            switch (Path.GetExtension(filename))
+            switch (Path.GetExtension(fullpath))
             {
                 case "doc":
                 case "docx":
-                    return new Word(logger);
+                    return new Word(fullpath, logger);
                 case "xls":
                 case "xlsx":
-                    return new Excel(logger);
+                    return new Excel(fullpath, logger);
                 case "pdf":
-                    return new Pdf(logger);
+                    return new Pdf(fullpath, logger);
                 default:
                     return null;
             }

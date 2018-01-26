@@ -8,7 +8,7 @@ namespace MakePdf.Core.Document
 {
     class Pdf : DocumentBase
     {
-        public Pdf(ILogger logger) : base(logger)
+        public Pdf(string fullpath, ILogger logger) : base(fullpath, logger)
         {
         }
     }

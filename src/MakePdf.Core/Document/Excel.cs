@@ -10,7 +10,7 @@ namespace MakePdf.Core.Document
     class Excel : DocumentBase
     {
 
-        public Excel(ILogger logger) : base(logger)
+        public Excel(string fullpath, ILogger logger) : base(fullpath, logger)
         {
         }
 

@@ -29,8 +29,8 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
             BackButtonCommand = new DelegateCommand(BackButtonClicked);
 
             // test
-            TargetFiles.Add(new TargetFile { Filename = "foo", Path = "foo" });
-            TargetFiles.Add(new TargetFile { Filename = "bar", Path = "bar" });
+            TargetFiles.Add(new TargetFile { Filename = "foo", Fullpath = "foo" });
+            TargetFiles.Add(new TargetFile { Filename = "bar", Fullpath = "bar" });
         }
 
         void BackButtonClicked()
@@ -47,7 +47,7 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
             //    files.Add(targetFile.Path);
             //}
 
-            var files = TargetFiles.Select(x => x.Path);
+            var files = TargetFiles.Select(x => x.Fullpath);
 
             new Models.Core().Run(files);
         }
@@ -56,7 +56,7 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
         {
             foreach (var file in files)
             {
-                TargetFiles.Add(new TargetFile { Filename = Path.GetFileName(file), Path = file });
+                TargetFiles.Add(new TargetFile { Filename = Path.GetFileName(file), Fullpath = file });
             }
         }
     }
@@ -64,7 +64,7 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
     class TargetFile
     {
         public string Filename { get; set; }
-        public string Path { get; set; }
+        public string Fullpath { get; set; }
 
         public TargetFile()
         {

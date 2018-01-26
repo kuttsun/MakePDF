@@ -9,7 +9,7 @@ namespace MakePdf.Core.Document
 {
     class Word : DocumentBase
     {
-        public Word(ILogger logger) : base(logger)
+        public Word(string fullpath, ILogger logger) : base(fullpath, logger)
         {
         }
 
