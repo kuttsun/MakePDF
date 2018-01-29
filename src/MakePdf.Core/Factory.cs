@@ -15,13 +15,13 @@ namespace MakePdf.Core
         {
             switch (Path.GetExtension(fullpath))
             {
-                case "doc":
-                case "docx":
+                case ".doc":
+                case ".docx":
                     return new Word(fullpath, logger);
-                case "xls":
-                case "xlsx":
+                case ".xls":
+                case ".xlsx":
                     return new Excel(fullpath, logger);
-                case "pdf":
+                case ".pdf":
                     return new Pdf(fullpath, logger);
                 default:
                     return null;
