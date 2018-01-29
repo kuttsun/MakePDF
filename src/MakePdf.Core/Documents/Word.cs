@@ -28,6 +28,8 @@ namespace MakePdf.Core.Documents
         {
             MsWord.Document doc = null;
 
+            logger?.LogInformation($"Start conversion from Word to PDF : {Path.GetFileName(fullpath)}");
+
             try
             {
                 doc = word.Documents.OpenNoRepairDialog(fullpath);
@@ -46,6 +48,8 @@ namespace MakePdf.Core.Documents
                     true,
                     MsWord.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks,
                     false);
+
+                logger?.LogInformation("Success");
             }
             catch (Exception e)
             {
