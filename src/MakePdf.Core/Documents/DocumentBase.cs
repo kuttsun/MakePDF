@@ -25,6 +25,14 @@ namespace MakePdf.Core.Documents
 
         public virtual void ToPdf() { }
 
+        public void DeleteOutputPdf(bool canDeletePdf)
+        {
+            if (!(this is Pdf) && canDeletePdf)
+            {
+                File.Delete(OutputFullpath);
+            }
+        }
+
         // https://msdn.microsoft.com/library/fs2xkftw.aspx
         public abstract void Dispose();
     }

@@ -89,11 +89,6 @@ namespace MakePdf.Core.Documents
 
                 // Update count of pages
                 pageCount += reader.NumberOfPages;
-
-                if (CanDeletePdf != false)
-                {
-                    File.Delete(fullpath);
-                }
             }
             catch (Exception e)
             {

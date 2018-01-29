@@ -55,6 +55,7 @@ namespace MakePdf.Core
                         {
                             doc.ToPdf();
                             outputPdf.Add(doc.OutputFullpath);
+                            doc.DeleteOutputPdf(Setting.CanDeletePdf);
                         }
                     }
                     else if (Directory.Exists(path))

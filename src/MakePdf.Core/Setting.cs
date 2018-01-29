@@ -10,6 +10,7 @@ namespace MakePdf.Core
         public AddFilenameToBookmark AddFilenameToBookmark { get; set; } = new AddFilenameToBookmark();
         public Property Property { get; set; } = new Property();
         public PageLayout PageLayout { get; set; } = new PageLayout();
+        public bool CanDeletePdf { get; set; } = true;
     }
 
     public class Bookmark

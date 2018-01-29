@@ -17,6 +17,7 @@ namespace MakePdf.Core.Tests
             {
                 Path.GetFullPath("MakePdfTest1.doc"),
                 Path.GetFullPath("MakePdfTest2.doc"),
+                Path.GetFullPath("MakePdfTest3.pdf"),
             };
 
             // Setting
