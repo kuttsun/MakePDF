@@ -23,7 +23,7 @@ namespace MakePdf.Core.Tests.Documents
         {
             Assert.Throws<IOException>(() =>
             {
-                var output = new OutputPdf("foo", null);
+                var output = new OutputPdf(@"C:\MakePdfOutput.pdf", null);
                 // Invalid path
                 output.Add("1:\\foo");
             });

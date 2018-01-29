@@ -14,10 +14,10 @@ namespace MakePdf.Core.Tests
 
             var files = new List<string>()
             {
-                @"C:\Users\13005\Desktop\test1.doc",
-                @"C:\Users\13005\Desktop\test2.doc"
+                @"C:\MakePdfTest1.doc",
+                @"C:\MakePdfTest2.doc"
             };
-            core.Run(@"C:\Users\13005\Desktop\hoge.pdf", files);
+            core.Run(@"C:\MakePdfOutput.pdf", files);
         }
 
         [Theory,

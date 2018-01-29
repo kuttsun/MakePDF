@@ -10,7 +10,7 @@ namespace MakePdf.Core.Tests
         [Fact(Skip = "Because it contains I/O")]
         public void ToPdfTest()
         {
-            using (var word = new Word(@"C:\Users\13005\svn\SD-2\README.doc", null))
+            using (var word = new Word(@"C:\MakePdfTest1.doc", null))
             {
                 word.ToPdf();
             }
