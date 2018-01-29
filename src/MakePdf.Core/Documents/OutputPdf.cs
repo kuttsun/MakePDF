@@ -192,17 +192,34 @@ namespace MakePdf.Core.Documents
             var action = PdfAction.GotoLocalPage(1, dest, copy);
             copy.SetOpenAction(action);
 
-            copy.Outlines = rootBookmarks;
             SetProperty();
+
+            ChangeBookmark(rootBookmarks);
+            copy.Outlines = rootBookmarks;
         }
 
-        public void SetProperty()
+        void SetProperty()
         {
             doc.AddTitle(Property.Title);
             doc.AddAuthor(Property.Author);
             doc.AddCreator(Property.Creator); // Application
             doc.AddSubject(Property.Subject); // Subtitle
             doc.AddKeywords(Property.Keywords);
+        }
+
+        void ChangeBookmark(List<Dictionary<string, object>> bookmarks)
+        {
+            // Change the way of opening each bookmark to "Fit to page height"
+            foreach (var bookmark in bookmarks)
+            {
+                bookmark["Page"] = Regex.Replace(bookmark["Page"] as string, "(\\d)\\s.*", "$1" + " FitV");
+                if (bookmark.ContainsKey("Kids"))
+                {
+                    // It has a child node.
+                    // --> Recursive processing
+                    ChangeBookmark(bookmark["Kids"] as List<Dictionary<string, object>>);
+                }
+            }
         }
 
         // Flag: Has Dispose already been called?
