@@ -19,7 +19,7 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
         private readonly IRegionManager _regionManager;
         public DelegateCommand BackButtonCommand { get; }
         public DelegateCommand ClearButtonCommand { get; }
-        public DelegateCommand RunButtonCommand { get; }
+        public DelegateCommand StartButtonCommand { get; }
         public string OutputFullpath { get; set; }
 
         public ObservableCollection<TargetFile> TargetFiles { get; set; } = new ObservableCollection<TargetFile>();
@@ -29,8 +29,9 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
             _regionManager = regionManager;
 
             BackButtonCommand = new DelegateCommand(BackButtonClicked);
-
             ClearButtonCommand = new DelegateCommand(() => TargetFiles.Clear());
+            StartButtonCommand = new DelegateCommand(StartButtonClicked);
+
 
             // test
             TargetFiles.Add(new TargetFile { Filename = "foo", Fullpath = "foo" });
@@ -42,7 +43,7 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
             _regionManager.RequestNavigate("MainRegion", "Home");
         }
 
-        void RunButtonClicked()
+        void StartButtonClicked()
         {
             //var files = new List<string>();
 
