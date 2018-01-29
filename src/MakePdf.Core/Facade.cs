@@ -26,15 +26,19 @@ namespace MakePdf.Core
                 {
                     if (File.Exists(path))
                     {
-                        var doc = Factory.Create(path, logger);
-                        doc.ToPdf();
-                        outputPdf.Combine(doc.OutputFullpath);
+                        using (var doc = Factory.Create(path, logger))
+                        {
+                            doc.ToPdf();
+                            outputPdf.Add(doc.OutputFullpath);
+                        }
                     }
                     else if (Directory.Exists(path))
                     {
 
                     }
                 }
+
+                outputPdf.Complete();
             }
         }
 
