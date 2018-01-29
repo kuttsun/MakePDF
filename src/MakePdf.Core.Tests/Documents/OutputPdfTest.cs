@@ -19,11 +19,11 @@ namespace MakePdf.Core.Tests.Documents
         }
 
         [Fact(Skip = "Because it contains I/O")]
-        public void AddTest()
+        public void AddExceptionTest()
         {
             Assert.Throws<IOException>(() =>
             {
-                var output = new OutputPdf(@"C:\MakePdfOutput.pdf", null);
+                var output = new OutputPdf(@"MakePdfOutput.pdf", null);
                 // Invalid path
                 output.Add("1:\\foo");
             });

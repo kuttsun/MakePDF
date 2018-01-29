@@ -29,6 +29,8 @@ namespace MakePdf.Core
             {".xlsx", SupportFileType.Excel },
         };
 
+        public Setting Setting { get; set; } = new Setting();
+
         public MakePdfCore(ILogger logger)
         {
             this.logger = logger;
@@ -38,6 +40,11 @@ namespace MakePdf.Core
         {
             using (var outputPdf = new OutputPdf(outputFullpath, logger))
             {
+                // Setting
+                outputPdf.ReplaceFileName = Setting.ReplaceFileName;
+                outputPdf.AddFilenameToBookmark = Setting.AddFilenameToBookmark;
+
+                // Convert and combine
                 foreach (var path in paths)
                 {
                     if (File.Exists(path))
@@ -54,6 +61,7 @@ namespace MakePdf.Core
                     }
                 }
 
+                // Finalize
                 outputPdf.Complete();
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 using Xunit;
 
@@ -7,17 +8,25 @@ namespace MakePdf.Core.Tests
 {
     public class MakePdfCoreTest
     {
-        [Fact]
+        [Fact(Skip = "Because it contains I/O")]
         void RunTest()
         {
             var core = new MakePdfCore(null);
 
             var files = new List<string>()
             {
-                @"C:\MakePdfTest1.doc",
-                @"C:\MakePdfTest2.doc"
+                Path.GetFullPath("MakePdfTest1.doc"),
+                Path.GetFullPath("MakePdfTest2.doc"),
             };
-            core.Run(@"C:\MakePdfOutput.pdf", files);
+
+            // Setting
+            core.Setting.AddFilenameToBookmark.IsEnabled = true;
+            //core.Setting.AddFilenameToBookmark.Exclude = "MakePdfTest1.*";
+            core.Setting.ReplaceFileName.IsEnabled = false;
+            core.Setting.ReplaceFileName.Before = "MakePdf(.*)\\..*";
+            core.Setting.ReplaceFileName.After = "$1";
+
+            core.Run(@"MakePdfOutput.pdf", files);
         }
 
         [Theory,

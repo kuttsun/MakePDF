@@ -11,6 +11,7 @@ namespace MakePdf.Core.Documents
     {
         protected ILogger logger;
         protected string fullpath;
+        protected string filename;
         public string OutputFullpath { get; set; }
 
 
@@ -18,7 +19,7 @@ namespace MakePdf.Core.Documents
         {
             this.fullpath = fullpath;
             this.logger = logger;
-
+            filename = Path.GetFileName(fullpath);
             OutputFullpath = Path.ChangeExtension(fullpath, ".pdf");
         }
 
