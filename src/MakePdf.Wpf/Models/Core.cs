@@ -12,8 +12,8 @@ namespace MakePdf.Wpf.Models
     {
         public void Run(string outputFullpath, IEnumerable<string> items)
         {
-            var facade = new Facade(null);
-            facade.Run(outputFullpath, items);
+            var core = new MakePdfCore(null);
+            core.Run(outputFullpath, items);
         }
     }
 }

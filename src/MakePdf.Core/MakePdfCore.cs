@@ -9,11 +9,11 @@ using MakePdf.Core.Documents;
 
 namespace MakePdf.Core
 {
-    public class Facade
+    public class MakePdfCore
     {
         ILogger logger;
 
-        public Facade(ILogger logger)
+        public MakePdfCore(ILogger logger)
         {
             this.logger = logger;
         }

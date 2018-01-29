@@ -5,19 +5,19 @@ using Xunit;
 
 namespace MakePdf.Core.Tests
 {
-    public class FacadeTest
+    public class MakePdfCoreTest
     {
         [Fact]
         void RunTest()
         {
-            var facade = new Facade(null);
+            var core = new MakePdfCore(null);
 
             var files = new List<string>()
             {
                 @"C:\Users\13005\Desktop\test1.doc",
                 @"C:\Users\13005\Desktop\test2.doc"
             };
-            facade.Run(@"C:\Users\13005\Desktop\hoge.pdf", files);
+            core.Run(@"C:\Users\13005\Desktop\hoge.pdf", files);
         }
     }
 }
