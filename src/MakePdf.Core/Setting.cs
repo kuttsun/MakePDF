@@ -8,11 +8,12 @@ namespace MakePdf.Core
     {
         public ReplaceFileName ReplaceFileName { get; set; } = new ReplaceFileName();
         public AddFilenameToBookmark AddFilenameToBookmark { get; set; } = new AddFilenameToBookmark();
+        public Property Property { get; set; } = new Property();
     }
 
     public class Bookmark
     {
-        
+
     }
 
     public class ReplaceFileName
@@ -26,5 +27,14 @@ namespace MakePdf.Core
     {
         public bool IsEnabled { get; set; } = true;
         public string Exclude { get; set; } = null;
+    }
+
+    public class Property
+    {
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public string Creator { get; set; } // Application
+        public string Subject { get; set; } // Subtitle
+        public string Keywords { get; set; }
     }
 }

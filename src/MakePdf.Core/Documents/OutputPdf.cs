@@ -23,6 +23,7 @@ namespace MakePdf.Core.Documents
         // Settings
         public AddFilenameToBookmark AddFilenameToBookmark { get; set; } = new AddFilenameToBookmark();
         public ReplaceFileName ReplaceFileName { get; set; } = new ReplaceFileName();
+        public Property Property { get; set; } = new Property();
         public bool CanDeletePdf { get; set; } = false;
 
         public OutputPdf(string fullpath, ILogger logger) : base(fullpath, logger)
@@ -172,16 +173,22 @@ namespace MakePdf.Core.Documents
 
         public void Complete()
         {
+            // 表示時にページの高さに合わせる
+            var dest = new PdfDestination(PdfDestination.FITV);// 引数2の意味がよくわからん(なんか座標を与えるらしいが・・・)
+            var action = PdfAction.GotoLocalPage(1, dest, copy);
+            copy.SetOpenAction(action);
+
             copy.Outlines = rootBookmarks;
+            SetProperty();
         }
 
-        public void SetProperty(string title = "", string author = "", string creator = "", string subject = "", string keyword = "")
+        public void SetProperty()
         {
-            doc.AddTitle(title);
-            doc.AddAuthor(author);
-            doc.AddCreator(creator); // Application
-            doc.AddSubject(subject); // Subtitle
-            doc.AddKeywords(keyword);
+            doc.AddTitle(Property.Title);
+            doc.AddAuthor(Property.Author);
+            doc.AddCreator(Property.Creator); // Application
+            doc.AddSubject(Property.Subject); // Subtitle
+            doc.AddKeywords(Property.Keywords);
         }
 
         // Flag: Has Dispose already been called?

@@ -26,6 +26,8 @@ namespace MakePdf.Core.Tests
             core.Setting.ReplaceFileName.Before = "MakePdf(.*)\\..*";
             core.Setting.ReplaceFileName.After = "$1";
 
+            core.Setting.Property.Title = "Title Test";
+
             core.Run(@"MakePdfOutput.pdf", files);
         }
 

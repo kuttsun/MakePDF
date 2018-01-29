@@ -43,6 +43,7 @@ namespace MakePdf.Core
                 // Setting
                 outputPdf.ReplaceFileName = Setting.ReplaceFileName;
                 outputPdf.AddFilenameToBookmark = Setting.AddFilenameToBookmark;
+                outputPdf.Property = Setting.Property;
 
                 // Convert and combine
                 foreach (var path in paths)
