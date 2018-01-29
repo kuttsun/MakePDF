@@ -24,6 +24,7 @@ namespace MakePdf.Core.Documents
         public AddFilenameToBookmark AddFilenameToBookmark { get; set; } = new AddFilenameToBookmark();
         public ReplaceFileName ReplaceFileName { get; set; } = new ReplaceFileName();
         public Property Property { get; set; } = new Property();
+        public PageLayout PageLayout { get; set; } = new PageLayout();
         public bool CanDeletePdf { get; set; } = false;
 
         public OutputPdf(string fullpath, ILogger logger) : base(fullpath, logger)
@@ -173,8 +174,21 @@ namespace MakePdf.Core.Documents
 
         public void Complete()
         {
-            // 表示時にページの高さに合わせる
-            var dest = new PdfDestination(PdfDestination.FITV);// 引数2の意味がよくわからん(なんか座標を与えるらしいが・・・)
+            int viewerPreferences = 0;
+            // Open bookmark panel when displaying
+            if (PageLayout.PageModeUseOutlines)
+            {
+                viewerPreferences |= PdfWriter.PageModeUseOutlines;
+            }
+            // Set page layout
+            if (PageLayout.SinglePage != false)
+            {
+                viewerPreferences |= PdfWriter.PageLayoutSinglePage;
+            }
+            copy.ViewerPreferences = viewerPreferences;
+
+            // Fit to page height when displayed
+            var dest = new PdfDestination(PdfDestination.FITV);
             var action = PdfAction.GotoLocalPage(1, dest, copy);
             copy.SetOpenAction(action);
 

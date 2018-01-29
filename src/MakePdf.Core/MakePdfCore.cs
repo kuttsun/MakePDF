@@ -44,6 +44,7 @@ namespace MakePdf.Core
                 outputPdf.ReplaceFileName = Setting.ReplaceFileName;
                 outputPdf.AddFilenameToBookmark = Setting.AddFilenameToBookmark;
                 outputPdf.Property = Setting.Property;
+                outputPdf.PageLayout = Setting.PageLayout;
 
                 // Convert and combine
                 foreach (var path in paths)
