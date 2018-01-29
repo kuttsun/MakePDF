@@ -18,13 +18,13 @@ namespace MakePdf.Core.Tests.Documents
             Assert.Throws<NotSupportedException>(() => new OutputPdf("1:\\foo", null));
         }
 
-        [Fact(Skip = "Because it contains I / O")]
+        [Fact(Skip = "Because it contains I/O")]
         public void AddTest()
         {
             Assert.Throws<IOException>(() =>
             {
                 var output = new OutputPdf("foo", null);
-                // Invalide path
+                // Invalid path
                 output.Add("1:\\foo");
             });
         }
