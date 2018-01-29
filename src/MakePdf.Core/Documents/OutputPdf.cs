@@ -10,7 +10,7 @@ using iTextSharp.text.pdf;
 
 namespace MakePdf.Core.Documents
 {
-    class OutputPdf : DocumentBase, IDisposable
+    public class OutputPdf : DocumentBase, IDisposable
     {
         Document doc;
         PdfCopy copy;
@@ -37,13 +37,24 @@ namespace MakePdf.Core.Documents
             //copy.Close();
             //doc.Close();
 
-            doc = new Document();
-            stream = new FileStream(fullpath, FileMode.Create);
-            copy = new PdfCopy(doc, stream);
+            try
+            {
+                doc = new Document();
+                stream = new FileStream(fullpath, FileMode.Create);
+                copy = new PdfCopy(doc, stream);
 
-            rootBookmarks = new List<Dictionary<string, object>>();
+                rootBookmarks = new List<Dictionary<string, object>>();
 
-            doc.Open();
+                doc.Open();
+            }
+            catch (NotSupportedException e)
+            {
+                logger?.LogError(e, "Output Filepath Error.");
+                throw;
+            }
+            finally
+            {
+            }
         }
 
         ~OutputPdf()
