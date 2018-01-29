@@ -7,7 +7,7 @@ namespace MakePdf.Core.Tests
 {
     public class WordTest
     {
-        [Fact]
+        [Fact(Skip = "“üo—Í‚ğ”º‚¤‚½‚ß")]
         public void ToPdfTest()
         {
             using (var word = new Word(@"C:\Users\13005\svn\SD-2\README.doc", null))
