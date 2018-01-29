@@ -24,9 +24,9 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="120" />
         </Grid.ColumnDefinitions>
-        <ListView Grid.Row="0" Grid.Column="0" ItemsSource="{Binding TargetFiles}" AllowDrop="True" Drop="ListView_Drop" PreviewDragOver="ListView_PreviewDragOver">
+        <ListView Grid.Row="0" Grid.Column="0" ItemsSource="{Binding TargetFiles}" AllowDrop="True" Drop="ListView_Drop" PreviewDragOver="ListView_PreviewDragOver" SelectionMode="Single">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Filename" DisplayMemberBinding="{Binding Filename}" Width="200" />
@@ -35,16 +35,46 @@
             </ListView.View>
         </ListView>
         <StackPanel Grid.Row="0" Grid.Column="1">
-            <Button Content="up" Margin="10" />
-            <Button Content="down" Margin="10" />
-            <Button Content="delete" Margin="10" />
-            <Button Content="clear" Margin="10" />
+            <Button Margin="10">
+                <StackPanel Orientation="Horizontal" >
+                    <materialDesign:PackIcon Kind="ArrowUpBold"/>
+                    <TextBlock VerticalAlignment="Center" Text="Up" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+            <Button Margin="10">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="ArrowDownBold"/>
+                    <TextBlock VerticalAlignment="Center" Text="Down" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+            <Button Margin="10">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Delete"/>
+                    <TextBlock VerticalAlignment="Center" Text="Delete" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+            <Button Margin="10" Command="{Binding  ClearButtonCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Broom"/>
+                    <TextBlock VerticalAlignment="Center" Text="Clear" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-            <Button Content="Back" Width="80" Margin="10" Command="{Binding  BackButtonCommand}" />
+            <Button Width="100" Margin="10" Command="{Binding  BackButtonCommand}">
+                <StackPanel Orientation="Horizontal" >
+                    <materialDesign:PackIcon Kind="ArrowLeftBold"/>
+                    <TextBlock VerticalAlignment="Center" Text="Back" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <Button Content="Run" Margin="10" />
+            <Button Margin="10" Command="{Binding  StartButtonCommand}">
+                <StackPanel Orientation="Horizontal" >
+                    <materialDesign:PackIcon Kind="Play"/>
+                    <TextBlock VerticalAlignment="Center" Text="Start" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
     </Grid>
 </UserControl>

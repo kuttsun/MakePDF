@@ -18,6 +18,7 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
     {
         private readonly IRegionManager _regionManager;
         public DelegateCommand BackButtonCommand { get; }
+        public DelegateCommand ClearButtonCommand { get; }
         public DelegateCommand RunButtonCommand { get; }
         public string OutputFullpath { get; set; }
 
@@ -28,6 +29,8 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
             _regionManager = regionManager;
 
             BackButtonCommand = new DelegateCommand(BackButtonClicked);
+
+            ClearButtonCommand = new DelegateCommand(() => TargetFiles.Clear());
 
             // test
             TargetFiles.Add(new TargetFile { Filename = "foo", Fullpath = "foo" });
