@@ -17,6 +17,11 @@ namespace MakePdf.Core.Documents
 
         }
 
+        ~Pdf()
+        {
+            Dispose(false);
+        }
+
         // Flag: Has Dispose already been called?
         bool disposed = false;
 
