@@ -27,7 +27,12 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
         public DelegateCommand DeleteButtonCommand { get; }
         public DelegateCommand ClearButtonCommand { get; }
         public DelegateCommand StartButtonCommand { get; }
-        public string OutputFile { get; set; }
+        public string OutputFile
+        {
+            get { return outputFile; }
+            set { SetProperty(ref outputFile, value); }
+        }
+        string outputFile;
 
         public ObservableCollection<TargetFile> TargetFiles { get; set; } = new ObservableCollection<TargetFile>();
         public TargetFile SelectedItem { get; set; } = new TargetFile();
@@ -35,7 +40,7 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
 
         public InputViewModel(IRegionManager regionManager)
         {
-             core = new Models.Core(null);
+            core = new Models.Core(null);
             _regionManager = regionManager;
 
             BackButtonCommand = new DelegateCommand(BackButtonClicked);
@@ -104,6 +109,8 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
                 }
             }
         }
+
+        public void AddOutputFile(string path) => OutputFile = path;
     }
 
     class TargetFile

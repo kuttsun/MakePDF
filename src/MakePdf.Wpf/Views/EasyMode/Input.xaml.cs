@@ -11,7 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+//using System.Windows.Shapes;
+using System.IO;
+
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace MakePdf.Wpf.Views.EasyMode
 {
@@ -20,9 +23,17 @@ namespace MakePdf.Wpf.Views.EasyMode
     /// </summary>
     public partial class Input : UserControl
     {
+        readonly string exePath;
+        readonly string exeFullPath;
+        readonly string startupPath;
+
         public Input()
         {
             InitializeComponent();
+
+            exePath = Environment.GetCommandLineArgs()[0];
+            exeFullPath = Path.GetFullPath(exePath);
+            startupPath = Path.GetDirectoryName(exeFullPath);
         }
 
         // ref: https://qiita.com/Fuhduki/items/447e5707c4fa4c8f532a
@@ -50,6 +61,25 @@ namespace MakePdf.Wpf.Views.EasyMode
                 e.Effects = DragDropEffects.None;
             }
             e.Handled = true;
+        }
+
+        void BrowseButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new CommonOpenFileDialog
+            {
+                Title = "Select Output File",
+                IsFolderPicker = false,
+                InitialDirectory = startupPath,
+                DefaultDirectory = startupPath,
+            };
+
+            dialog.Filters.Add(new CommonFileDialogFilter("PDF File", "*.pdf"));
+            dialog.Filters.Add(new CommonFileDialogFilter("All File", "*.*"));
+
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                VM.AddOutputFile(dialog.FileName);
+            }
         }
     }
 }
