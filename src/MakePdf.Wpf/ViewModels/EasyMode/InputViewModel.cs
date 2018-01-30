@@ -16,7 +16,7 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
 {
     class InputViewModel : BindableBase
     {
-        private readonly IRegionManager _regionManager;
+        readonly IRegionManager _regionManager;
 
         Models.Core core;
 
@@ -43,7 +43,10 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
             core = new Models.Core(null);
             _regionManager = regionManager;
 
-            BackButtonCommand = new DelegateCommand(BackButtonClicked);
+            BackButtonCommand = new DelegateCommand(()=>
+            {
+                _regionManager.RequestNavigate("MainRegion", "Home");
+            });
             UpButtonCommand = new DelegateCommand(() =>
             {
                 if (SelectedIndex > 0)
@@ -66,37 +69,23 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
             });
             DeleteButtonCommand = new DelegateCommand(() =>
             {
-                if (SelectedIndex >= 0)
+                if (SelectedIndex >= 0 && TargetFiles.Count() > 0)
                 {
                     TargetFiles.RemoveAt(SelectedIndex);
                 }
             });
             ClearButtonCommand = new DelegateCommand(() => TargetFiles.Clear());
             StartButtonCommand = new DelegateCommand(StartButtonClicked);
-
-
-            // test
-            TargetFiles.Add(new TargetFile { Filename = "foo", Path = "foo" });
-            TargetFiles.Add(new TargetFile { Filename = "bar", Path = "bar" });
-        }
-
-        void BackButtonClicked()
-        {
-            _regionManager.RequestNavigate("MainRegion", "Home");
         }
 
         void StartButtonClicked()
         {
-            //var files = new List<string>();
+            if (TargetFiles.Count() > 0)
+            {
+                var files = TargetFiles.Select(x => x.Path);
 
-            //foreach (var targetFile in TargetFiles)
-            //{
-            //    files.Add(targetFile.Path);
-            //}
-
-            var files = TargetFiles.Select(x => x.Path);
-
-            core.Run(OutputFile, files);
+                core.Run(OutputFile, files);
+            }
         }
 
         public void AddFiles(List<string> files)
