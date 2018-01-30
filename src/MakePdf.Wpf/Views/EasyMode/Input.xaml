@@ -26,7 +26,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="120" />
         </Grid.ColumnDefinitions>
-        <ListView Grid.Row="0" Grid.Column="0" ItemsSource="{Binding TargetFiles}" AllowDrop="True" Drop="ListView_Drop" PreviewDragOver="ListView_PreviewDragOver" SelectionMode="Single">
+        <ListView Grid.Row="0" Grid.Column="0" ItemsSource="{Binding TargetFiles}" SelectedItem="{Binding SelectedItem}" SelectedIndex="{Binding SelectedIndex}" AllowDrop="True" Drop="ListView_Drop" PreviewDragOver="ListView_PreviewDragOver" SelectionMode="Single">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Filename" DisplayMemberBinding="{Binding Filename}" Width="200" />
@@ -35,19 +35,19 @@
             </ListView.View>
         </ListView>
         <StackPanel Grid.Row="0" Grid.Column="1">
-            <Button Margin="10">
+            <Button Margin="10" Command="{Binding UpButtonCommand}">
                 <StackPanel Orientation="Horizontal" >
                     <materialDesign:PackIcon Kind="ArrowUpBold"/>
                     <TextBlock VerticalAlignment="Center" Text="Up" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
-            <Button Margin="10">
+            <Button Margin="10" Command="{Binding  DownButtonCommand}">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="ArrowDownBold"/>
                     <TextBlock VerticalAlignment="Center" Text="Down" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
-            <Button Margin="10">
+            <Button Margin="10" Command="{Binding  DeleteButtonCommand}">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="Delete"/>
                     <TextBlock VerticalAlignment="Center" Text="Delete" Margin="5,0,0,0"/>

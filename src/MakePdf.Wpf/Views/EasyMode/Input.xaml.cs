@@ -34,7 +34,7 @@ namespace MakePdf.Wpf.Views.EasyMode
         void ListView_Drop(object sender, DragEventArgs e)
         {
             var dropFileList = (e.Data.GetData(DataFormats.FileDrop) as string[]).ToList();
-            
+
             VM.AddFiles(dropFileList);
         }
 

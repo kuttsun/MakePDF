@@ -18,17 +18,50 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
     {
         private readonly IRegionManager _regionManager;
         public DelegateCommand BackButtonCommand { get; }
+
+        public DelegateCommand UpButtonCommand { get; }
+        public DelegateCommand DownButtonCommand { get; }
+        public DelegateCommand DeleteButtonCommand { get; }
         public DelegateCommand ClearButtonCommand { get; }
         public DelegateCommand StartButtonCommand { get; }
         public string OutputFullpath { get; set; }
 
         public ObservableCollection<TargetFile> TargetFiles { get; set; } = new ObservableCollection<TargetFile>();
+        public TargetFile SelectedItem { get; set; } = new TargetFile();
+        public int SelectedIndex { get; set; }
 
         public InputViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
 
             BackButtonCommand = new DelegateCommand(BackButtonClicked);
+            UpButtonCommand = new DelegateCommand(() =>
+            {
+                if (SelectedIndex > 0)
+                {
+                    var selectedIndex = SelectedIndex;
+                    var targetFile = TargetFiles[selectedIndex];
+                    TargetFiles.RemoveAt(selectedIndex);
+                    TargetFiles.Insert(selectedIndex - 1, targetFile);
+                }
+            });
+            DownButtonCommand = new DelegateCommand(() =>
+            {
+                if (0 <= SelectedIndex && SelectedIndex < TargetFiles.Count() - 1)
+                {
+                    var selectedIndex = SelectedIndex;
+                    var targetFile = TargetFiles[selectedIndex];
+                    TargetFiles.RemoveAt(selectedIndex);
+                    TargetFiles.Insert(selectedIndex + 1, targetFile);
+                }
+            });
+            DeleteButtonCommand = new DelegateCommand(() =>
+            {
+                if (SelectedIndex >= 0)
+                {
+                    TargetFiles.RemoveAt(SelectedIndex);
+                }
+            });
             ClearButtonCommand = new DelegateCommand(() => TargetFiles.Clear());
             StartButtonCommand = new DelegateCommand(StartButtonClicked);
 
