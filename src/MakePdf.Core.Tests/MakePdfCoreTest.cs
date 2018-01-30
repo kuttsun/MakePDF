@@ -42,7 +42,8 @@ namespace MakePdf.Core.Tests
             InlineData(false, ".txt")]
         void IsSupportedTest(bool expected, string ext)
         {
-            Assert.Equal(expected, MakePdfCore.IsSupported(ext));
+            var core = new MakePdfCore(null);
+            Assert.Equal(expected, core.IsSupported(ext));
         }
     }
 }

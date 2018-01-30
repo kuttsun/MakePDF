@@ -17,6 +17,9 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
     class InputViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
+
+        Models.Core core;
+
         public DelegateCommand BackButtonCommand { get; }
 
         public DelegateCommand UpButtonCommand { get; }
@@ -32,6 +35,7 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
 
         public InputViewModel(IRegionManager regionManager)
         {
+             core = new Models.Core(null);
             _regionManager = regionManager;
 
             BackButtonCommand = new DelegateCommand(BackButtonClicked);
@@ -67,8 +71,8 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
 
 
             // test
-            TargetFiles.Add(new TargetFile { Filename = "foo", Fullpath = "foo" });
-            TargetFiles.Add(new TargetFile { Filename = "bar", Fullpath = "bar" });
+            TargetFiles.Add(new TargetFile { Filename = "foo", Path = "foo" });
+            TargetFiles.Add(new TargetFile { Filename = "bar", Path = "bar" });
         }
 
         void BackButtonClicked()
@@ -87,14 +91,17 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
 
             var files = TargetFiles.Select(x => x.Path);
 
-            new Models.Core().Run(OutputFile, files);
+            core.Run(OutputFile, files);
         }
 
         public void AddFiles(List<string> files)
         {
             foreach (var file in files)
             {
-                TargetFiles.Add(new TargetFile { Filename = Path.GetFileName(file), Path = file });
+                if (core.IsSupported(file))
+                {
+                    TargetFiles.Add(new TargetFile { Filename = Path.GetFileName(file), Path = file });
+                }
             }
         }
     }

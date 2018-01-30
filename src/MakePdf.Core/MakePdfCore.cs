@@ -74,7 +74,7 @@ namespace MakePdf.Core
 
         }
 
-        public static bool IsSupported(string fullpath)
+        public bool IsSupported(string fullpath)
         {
             var ext = Path.GetExtension(fullpath);
 
