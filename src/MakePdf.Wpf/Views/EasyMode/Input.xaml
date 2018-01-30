@@ -36,7 +36,7 @@
         </ListView>
         <StackPanel Grid.Row="0" Grid.Column="1">
             <Button Margin="10" Command="{Binding UpButtonCommand}">
-                <StackPanel Orientation="Horizontal" >
+                <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="ArrowUpBold"/>
                     <TextBlock VerticalAlignment="Center" Text="Up" Margin="5,0,0,0"/>
                 </StackPanel>

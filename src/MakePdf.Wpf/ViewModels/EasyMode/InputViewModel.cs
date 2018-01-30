@@ -24,7 +24,7 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
         public DelegateCommand DeleteButtonCommand { get; }
         public DelegateCommand ClearButtonCommand { get; }
         public DelegateCommand StartButtonCommand { get; }
-        public string OutputFullpath { get; set; }
+        public string OutputFile { get; set; }
 
         public ObservableCollection<TargetFile> TargetFiles { get; set; } = new ObservableCollection<TargetFile>();
         public TargetFile SelectedItem { get; set; } = new TargetFile();
@@ -85,16 +85,16 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
             //    files.Add(targetFile.Path);
             //}
 
-            var files = TargetFiles.Select(x => x.Fullpath);
+            var files = TargetFiles.Select(x => x.Path);
 
-            new Models.Core().Run(OutputFullpath, files);
+            new Models.Core().Run(OutputFile, files);
         }
 
         public void AddFiles(List<string> files)
         {
             foreach (var file in files)
             {
-                TargetFiles.Add(new TargetFile { Filename = Path.GetFileName(file), Fullpath = file });
+                TargetFiles.Add(new TargetFile { Filename = Path.GetFileName(file), Path = file });
             }
         }
     }
@@ -102,7 +102,7 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
     class TargetFile
     {
         public string Filename { get; set; }
-        public string Fullpath { get; set; }
+        public string Path { get; set; }
 
         public TargetFile()
         {
