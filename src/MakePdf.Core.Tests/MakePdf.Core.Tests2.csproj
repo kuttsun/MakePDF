@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MakePdf.Core\MakePdf.Core.csproj" />
+    <ProjectReference Include="..\MakePdf.Core\MakePdf.Core2.csproj" />
   </ItemGroup>
 
 </Project>

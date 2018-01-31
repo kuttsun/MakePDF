@@ -185,9 +185,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\MakePdf.Core\MakePdf.Core.csproj">
+    <ProjectReference Include="..\MakePdf.Core\MakePdf.Core2.csproj">
       <Project>{91a8f14d-0e94-4937-a0b1-f149fdc3de03}</Project>
-      <Name>MakePdf.Core</Name>
+      <Name>MakePdf.Core2</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

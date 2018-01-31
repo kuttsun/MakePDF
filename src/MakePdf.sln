@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakePdf.Wpf", "MakePdf.Wpf\MakePdf.Wpf.csproj", "{31F31550-A83F-47D0-99B5-330B21E5EA33}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakePdf.Core", "MakePdf.Core\MakePdf.Core.csproj", "{91A8F14D-0E94-4937-A0B1-F149FDC3DE03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakePdf.Core2", "MakePdf.Core\MakePdf.Core2.csproj", "{91A8F14D-0E94-4937-A0B1-F149FDC3DE03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakePdf.Core.Tests", "MakePdf.Core.Tests\MakePdf.Core.Tests.csproj", "{18761D7F-ED8A-4677-B9BE-4B21CD6AA510}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakePdf.Core.Tests2", "MakePdf.Core.Tests\MakePdf.Core.Tests2.csproj", "{18761D7F-ED8A-4677-B9BE-4B21CD6AA510}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
