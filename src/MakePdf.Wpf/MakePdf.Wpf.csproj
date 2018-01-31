@@ -183,6 +183,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\MakePdf.Core\MakePdf.Core.csproj">
+      <Project>{56b048b9-7f8d-4dcb-9338-affe963a167a}</Project>
+      <Name>MakePdf.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
