@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.IO;
 
 using Microsoft.Extensions.Logging;
@@ -36,37 +37,42 @@ namespace MakePdf.Core
             this.logger = logger;
         }
 
-        public void Run(string outputFullpath, IEnumerable<string> paths)
+        public async Task<bool> RunAsync(string outputFullpath, IEnumerable<string> paths)
         {
-            using (var outputPdf = new OutputPdf(outputFullpath, logger))
+            await Task.Run(() =>
             {
-                // Setting
-                outputPdf.ReplaceFileName = Setting.ReplaceFileName;
-                outputPdf.AddFilenameToBookmark = Setting.AddFilenameToBookmark;
-                outputPdf.Property = Setting.Property;
-                outputPdf.PageLayout = Setting.PageLayout;
-
-                // Convert and combine
-                foreach (var path in paths)
+                using (var outputPdf = new OutputPdf(outputFullpath, logger))
                 {
-                    if (File.Exists(path))
+                    // Setting
+                    outputPdf.ReplaceFileName = Setting.ReplaceFileName;
+                    outputPdf.AddFilenameToBookmark = Setting.AddFilenameToBookmark;
+                    outputPdf.Property = Setting.Property;
+                    outputPdf.PageLayout = Setting.PageLayout;
+
+                    // Convert and combine
+                    foreach (var path in paths)
                     {
-                        using (var doc = Create(path, logger))
+                        if (File.Exists(path))
                         {
-                            doc.ToPdf();
-                            outputPdf.Add(doc.OutputFullpath);
-                            doc.DeleteOutputPdf(Setting.CanDeletePdf);
+                            using (var doc = Create(path, logger))
+                            {
+                                doc.ToPdf();
+                                outputPdf.Add(doc.OutputFullpath);
+                                doc.DeleteOutputPdf(Setting.CanDeletePdf);
+                            }
+                        }
+                        else if (Directory.Exists(path))
+                        {
+
                         }
                     }
-                    else if (Directory.Exists(path))
-                    {
 
-                    }
+                    // Finalize
+                    outputPdf.Complete();
                 }
+            });
 
-                // Finalize
-                outputPdf.Complete();
-            }
+            return true;
         }
 
         public void Run()

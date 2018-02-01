@@ -19,9 +19,9 @@ namespace MakePdf.Wpf.Models
             core = new MakePdfCore(null);
         }
 
-        public void Run(string outputFullpath, IEnumerable<string> items)
+        public async Task<bool> RunAsync(string outputFullpath, IEnumerable<string> items)
         {
-            core.Run(outputFullpath, items);
+            return await core.RunAsync(outputFullpath, items);
         }
 
         public bool IsSupported(string fullpath) => core.IsSupported(fullpath);

@@ -16,6 +16,11 @@ using System.IO;
 
 using Microsoft.WindowsAPICodePack.Dialogs;
 
+using MaterialDesignThemes.Wpf;
+
+using MakePdf.Wpf.Views.Dialogs;
+using MakePdf.Wpf.ViewModels.EasyMode;
+
 namespace MakePdf.Wpf.Views.EasyMode
 {
     /// <summary>
@@ -27,9 +32,13 @@ namespace MakePdf.Wpf.Views.EasyMode
         readonly string exeFullPath;
         readonly string startupPath;
 
+        InputViewModel vm;
+
         public Input()
         {
             InitializeComponent();
+
+            vm = DataContext as InputViewModel;
 
             exePath = Environment.GetCommandLineArgs()[0];
             exeFullPath = Path.GetFullPath(exePath);
@@ -37,16 +46,16 @@ namespace MakePdf.Wpf.Views.EasyMode
         }
 
         // ref: https://qiita.com/Fuhduki/items/447e5707c4fa4c8f532a
-        dynamic VM
-        {
-            get { return DataContext; }
-        }
+        //dynamic VM
+        //{
+        //    get { return DataContext; }
+        //}
 
         void ListView_Drop(object sender, DragEventArgs e)
         {
             var dropFileList = (e.Data.GetData(DataFormats.FileDrop) as string[]).ToList();
 
-            VM.AddFiles(dropFileList);
+            vm.AddFiles(dropFileList);
         }
 
         void ListView_PreviewDragOver(object sender, DragEventArgs e)
@@ -67,7 +76,7 @@ namespace MakePdf.Wpf.Views.EasyMode
         {
             var dropFileList = (e.Data.GetData(DataFormats.FileDrop) as string[]).ToList();
 
-            VM.OutputFile = dropFileList[0];
+            vm.OutputFile = dropFileList[0];
         }
 
         void OutputFile_PreviewDragOver(object sender, DragEventArgs e)
@@ -97,15 +106,59 @@ namespace MakePdf.Wpf.Views.EasyMode
             dialog.Filters.Add(new CommonFileDialogFilter("PDF File", "*.pdf"));
             dialog.Filters.Add(new CommonFileDialogFilter("All File", "*.*"));
 
-            if (VM.OutputFile != string.Empty)
+            if (vm.OutputFile != string.Empty)
             {
-                dialog.InitialDirectory = Path.GetDirectoryName(VM.OutputFile);
+                dialog.InitialDirectory = Path.GetDirectoryName(vm.OutputFile);
             }
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                VM.AddOutputFile(dialog.FileName);
+                vm.AddOutputFile(dialog.FileName);
             }
+        }
+
+        private async void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            var parentView = Application.Current.MainWindow as Shell;
+
+            if (vm.OutputFile == "")
+            {
+                var overwriteDialog = new OkDialog("Output file is empty.", $"Please specify the output file.");
+                await parentView.dialogHostMain.ShowDialog(overwriteDialog);
+                return;
+            }
+
+            if (File.Exists(vm.OutputFile))
+            {
+                var overwriteDialog = new YesNoDialog("Output file exists", $"Overwrite ?");
+                var result = await parentView.dialogHostMain.ShowDialog(overwriteDialog) as bool?;
+                if (result == false)
+                {
+                    return;
+                }
+            }
+
+            // Start
+            var processingDialog = new ProcessingDialog("Processing", $"Please wait ...");
+            var re = parentView.dialogHostMain.ShowDialog(processingDialog, async (object s, DialogOpenedEventArgs args) =>
+            {
+                await vm.StartAsync();
+                args.Session.Close(false);
+            });
+            
+
+            //VM.Start();
+            //var metroDialogSettings = new MetroDialogSettings()
+            //{
+            //    AffirmativeButtonText = "Yes",
+            //    NegativeButtonText = "No",
+            //};
+            //var metroWindow = Application.Current.MainWindow as MetroWindow;
+            //var select = await metroWindow.ShowMessageAsync("Title", $"test", MessageDialogStyle.AffirmativeAndNegative, metroDialogSettings);
+            //if (select == MessageDialogResult.Affirmative)
+            //{
+            //}
+
         }
     }
 }

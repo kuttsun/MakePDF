@@ -26,7 +26,7 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
         public DelegateCommand DownButtonCommand { get; }
         public DelegateCommand DeleteButtonCommand { get; }
         public DelegateCommand ClearButtonCommand { get; }
-        public DelegateCommand StartButtonCommand { get; }
+
         public string OutputFile
         {
             get { return outputFile; }
@@ -43,7 +43,7 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
             core = new Models.Core(null);
             _regionManager = regionManager;
 
-            BackButtonCommand = new DelegateCommand(()=>
+            BackButtonCommand = new DelegateCommand(() =>
             {
                 _regionManager.RequestNavigate("MainRegion", "Home");
             });
@@ -75,17 +75,13 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
                 }
             });
             ClearButtonCommand = new DelegateCommand(() => TargetFiles.Clear());
-            StartButtonCommand = new DelegateCommand(StartButtonClicked);
         }
 
-        void StartButtonClicked()
+        public async Task<bool> StartAsync()
         {
-            if (TargetFiles.Count() > 0)
-            {
-                var files = TargetFiles.Select(x => x.Path);
+            var files = TargetFiles.Select(x => x.Path);
 
-                core.Run(OutputFile, files);
-            }
+            return await core.RunAsync(OutputFile, files);
         }
 
         public void AddFiles(List<string> files)
