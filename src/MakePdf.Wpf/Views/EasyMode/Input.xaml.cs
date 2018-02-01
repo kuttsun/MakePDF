@@ -63,6 +63,27 @@ namespace MakePdf.Wpf.Views.EasyMode
             e.Handled = true;
         }
 
+        void OutputFile_Drop(object sender, DragEventArgs e)
+        {
+            var dropFileList = (e.Data.GetData(DataFormats.FileDrop) as string[]).ToList();
+
+            VM.OutputFile = dropFileList[0];
+        }
+
+        void OutputFile_PreviewDragOver(object sender, DragEventArgs e)
+        {
+            // Only drop event
+            if (e.Data.GetDataPresent(DataFormats.FileDrop, true))
+            {
+                e.Effects = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+            e.Handled = true;
+        }
+
         void BrowseButton_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new CommonOpenFileDialog
@@ -75,6 +96,11 @@ namespace MakePdf.Wpf.Views.EasyMode
 
             dialog.Filters.Add(new CommonFileDialogFilter("PDF File", "*.pdf"));
             dialog.Filters.Add(new CommonFileDialogFilter("All File", "*.*"));
+
+            if (VM.OutputFile != string.Empty)
+            {
+                dialog.InitialDirectory = Path.GetDirectoryName(VM.OutputFile);
+            }
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {

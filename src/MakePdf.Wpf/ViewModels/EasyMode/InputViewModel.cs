@@ -32,7 +32,7 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
             get { return outputFile; }
             set { SetProperty(ref outputFile, value); }
         }
-        string outputFile;
+        string outputFile = "";
 
         public ObservableCollection<TargetFile> TargetFiles { get; set; } = new ObservableCollection<TargetFile>();
         public TargetFile SelectedItem { get; set; } = new TargetFile();
