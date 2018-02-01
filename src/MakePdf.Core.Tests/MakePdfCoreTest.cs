@@ -29,7 +29,7 @@ namespace MakePdf.Core.Tests
 
             core.Setting.Property.Title = "Title Test";
 
-            core.Run(@"MakePdfOutput.pdf", files);
+            core.RunAsync(@"MakePdfOutput.pdf", files).Wait();
         }
 
         [Theory,
