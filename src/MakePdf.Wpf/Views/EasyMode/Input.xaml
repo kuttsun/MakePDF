@@ -21,7 +21,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
             <!-- default(32) + margin(10 x 2) -->
-            <RowDefinition Height="52" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -35,7 +35,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <StackPanel Grid.Row="0" Grid.Column="1">
+        <StackPanel Margin="5 0 0 5" Grid.Row="0" Grid.Column="1">
             <Button Margin="5" Command="{Binding  UpButtonCommand}" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="Up">
                 <materialDesign:PackIcon Kind="ArrowUpBold" Height="24" Width="24" />
             </Button>
@@ -49,28 +49,26 @@
                 <materialDesign:PackIcon Kind="Broom" Height="24" Width="24" />
             </Button>
         </StackPanel>
-        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-            <Button Width="100" Margin="10" Command="{Binding  BackButtonCommand}">
+        <Border Margin="0 5" Padding="5 0 0 0" Background="{DynamicResource MaterialDesignSelection}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <DockPanel  HorizontalAlignment="Stretch">
+                <Button DockPanel.Dock="Right" Grid.Row="1" Grid.Column="1" Margin="5" MinWidth="90"  VerticalAlignment="Center" Content="Browse..." Click="BrowseButton_Click" ToolTip="Open File Dialog" />
+                <TextBox materialDesign:HintAssist.Hint="Output File" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding OutputFile}" />
+            </DockPanel>
+        </Border>
+        <DockPanel Margin="5 10 5 0" Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Button DockPanel.Dock="Left" MinWidth="90" Command="{Binding  BackButtonCommand}">
                 <StackPanel Orientation="Horizontal" >
                     <materialDesign:PackIcon Kind="ArrowLeftBold"/>
                     <TextBlock VerticalAlignment="Center" Text="Back" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
-        </StackPanel>
-        <Border Padding="5 0 0 0" Background="{DynamicResource MaterialDesignSelection}" Grid.Row="1" Grid.Column="0">
-            <DockPanel  HorizontalAlignment="Stretch">
-                <!--<materialDesign:PackIcon DockPanel.Dock="Left" Margin="5" Height="24" Width="24" Kind="File" Foreground="{Binding ElementName=PhoneTextBox, Path=BorderBrush}" VerticalAlignment="Center"/>-->
-                <Button DockPanel.Dock="Right" Grid.Row="1" Grid.Column="1" Margin="5" VerticalAlignment="Center" Content="Browse..." Click="BrowseButton_Click" ToolTip="Open File Dialog" />
-                <TextBox materialDesign:HintAssist.Hint="Output File" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding OutputFile}" />
-            </DockPanel>
-        </Border>
-        <StackPanel Grid.Row="1" Grid.Column="1">
-
-        </StackPanel>
-        <StackPanel Grid.Row="2" Grid.Column="1">
-            <Button Command="{Binding  StartButtonCommand}" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTip="Start">
-                <materialDesign:PackIcon Kind="Play" Height="24" Width="24" />
+            <Button DockPanel.Dock="Right" MinWidth="90" Command="{Binding  StartButtonCommand}" Style="{StaticResource MaterialDesignRaisedAccentButton}">
+                <StackPanel Orientation="Horizontal" >
+                <materialDesign:PackIcon Kind="Play"/>
+                    <TextBlock VerticalAlignment="Center" Text="Start" Margin="5,0,0,0"/>
+                </StackPanel>
             </Button>
-        </StackPanel>
+            <Rectangle />
+        </DockPanel>
     </Grid>
 </UserControl>
