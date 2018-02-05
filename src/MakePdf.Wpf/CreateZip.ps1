@@ -1,4 +1,4 @@
-# プロジェクトルートで実行すること
+# run in the project root
 using namespace System.IO;
 using namespace System.IO.Compression;
 
@@ -10,19 +10,19 @@ if (-not ($sourceDir)) { return 100 }
 $targetZipFile = $Args[1]
 if (-not ($targetZipFile)) { return 101 }
 
-# target zip file からディレクトリ名を取得
+# get directory name from target zip file
 $parent = [Path]::GetDirectoryName($targetZipFile)
-# target zip file を置くディレクトリがない場合は作成する
+# if there is no directory for target zip file, create a new directory
 [Directory]::CreateDirectory($parent)
-# 既に zip ファイルがある場合は削除しておく
+# if zip file exists, delete it
 [File]::Delete($targetZipFile)
 
-# 一時ディレクトリ名
+# temporary directory name
 $tempDir = $parent + "\temp"
-# Release ディレクトリから一時ディレクトリに丸ごとコピー
+# copy to temporary directory from release directory
 Copy-Item $sourceDir -destination $tempDir -recurse
 
-# 一時ディレクトリから不要なファイルを削除(プロジェクトに応じて要変更)
+# delete unnecessary file from temporary directory
 Remove-Item -Recurse -path $tempDir\lib\linux
 Remove-Item -Recurse -path $tempDir\lib\osx
 Remove-Item -Recurse -path $tempDir\logs
@@ -30,12 +30,12 @@ Remove-Item -Recurse -path $tempDir -include *.pdb
 Remove-Item -Recurse -path $tempDir -include *.xml
 Remove-Item -Recurse -path $tempDir -include *.config -Exclude NLog.config
 
-# アセンブリの読み込み
+# read assembly
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
-# zip ファイル作成
+# create zip
 [ZipFile]::CreateFromDirectory($tempDir, $targetZipFile)
 
-# 一時ディレクトリ削除
+# delete temporary directory
 Remove-Item -Recurse -path $tempDir
 
