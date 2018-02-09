@@ -10,12 +10,24 @@ namespace SimpleUpdater.Tests
 {
     public class UpdateManagerTest
     {
-        [Fact]
-        public void CheckForLatestVersion()
+        UpdateManager mgr;
+
+        public UpdateManagerTest()
         {
-            var mgr = new UpdateManager("https://github.com/kuttsun/Test");
+            mgr = new UpdateManager("https://github.com/kuttsun/Test");
+        }
+
+        [Fact]
+        public void CheckForUpdateTest()
+        {
             var appInfo = mgr.CheckForUpdateAsync().Result;
             Assert.NotNull(appInfo);
+        }
+
+        [Fact]
+        public void UpdateFromZipTest()
+        {
+            Assert.True(mgr.UpdateFromZipAsync("test.zip").Result);
         }
     }
 }

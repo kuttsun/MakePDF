@@ -10,10 +10,6 @@ using System.Reflection;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-using AngleSharp.Parser.Html;
-using AngleSharp.Dom;
-using AngleSharp.Dom.Html;
-
 using Microsoft.Extensions.Logging;
 
 namespace SimpleUpdater
@@ -62,20 +58,37 @@ namespace SimpleUpdater
 
         public async Task<AppInfo> CheckForUpdateAsync()
         {
-            // This link simply redirects to the repositories latest release page,
-            // and cannot be used to download an asset directly
-            var response = await client.GetAsync(GitHubRepository + "/releases/latest");
+            var tag = await GetLatestReleaseTagAsync();
 
-            // e.g. https://github.com/MyName/MyApp/releases/tag/1.0.0
-            var latestReleaseUrl = response.RequestMessage.RequestUri;
+            return await CheckForUpdateAsync(tag);
+        }
 
+        public async Task<AppInfo> CheckForUpdateAsync(string tag)
+        {
             // e.g. https://github.com/MyName/MyApp/releases/download/1.0.0/AppInfo.json
-            var assetUrl = $"{GitHubRepository}/releases/download/{latestReleaseUrl.Segments.Last()}/{AppInfoName}";
+            var assetUrl = GetAssetUrl(tag, AppInfoName);
 
             var appInfo = await DownloadJsonAsync(assetUrl);
 
             // Deserialize
             return AppInfo.ReadString(appInfo);
+        }
+
+        public async Task<bool> UpdateFromZipAsync(string zipFileName, string outputDir = @".\")
+        {
+            var tag = await GetLatestReleaseTagAsync();
+
+            var assetUrl = GetAssetUrl(tag, zipFileName);
+
+            var appInfo = await DownloadJsonAsync(assetUrl);
+
+            var outputPath = outputDir + zipFileName;
+
+            await DownloadZipAsync(assetUrl, outputPath);
+
+            ExtractEntries(outputPath);
+
+            return true;
         }
 
         async Task<string> DownloadJsonAsync(string url)
@@ -84,100 +97,65 @@ namespace SimpleUpdater
             return await response.Content.ReadAsStringAsync();
         }
 
-        /// <summary>
-        /// アップデートが存在するかどうかチェックする
-        /// </summary>
-        /// <returns></returns>
-        public bool? CheckForUpdate(out string latestVersion)
+        async Task<bool> DownloadZipAsync(string url, string outputPath)
         {
-            // 最新のアップデートがあるかどうかチェックする
-            logger?.LogInformation("アップデートのチェック開始");
+            var response = await client.GetAsync(url);
 
-            // 自分自身のバージョン情報を取得する
-            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
-            // 結果を表示
-            logger?.LogInformation($"現在の製品バージョン(AssemblyVersion) {fvi.ProductVersion}");
-            logger?.LogInformation($"現在のファイルバージョン(AssemblyFileVersion) {fvi.FileVersion}");
-
-            latestVersion = GetLatestVersionAsync().Result;
-            if (latestVersion != null)
+            using (FileStream fs = new FileStream(outputPath, FileMode.Create, FileAccess.Write))
+            using (var stream = await response.Content.ReadAsStreamAsync())
             {
-                var version1 = new Version(fvi.FileVersion);
-                var version2 = new Version(latestVersion);
-                if (version1 < version2)
-                {
-                    this.latestVersion = latestVersion;
-                    logger?.LogInformation($"アップデートあり {latestVersion}");
-                    return true;
-                }
-                logger?.LogInformation($"アップデートなし {latestVersion}");
-                return false;
+                stream.CopyTo(fs);
+                fs.Flush();
             }
-            logger?.LogError("ネットワークエラー");
-            return null;
+
+            return true;
         }
 
-        /// <summary>
-        /// 最新のバージョンを取得
-        /// </summary>
-        /// <param name="currentVersion"></param>
-        /// <returns></returns>
-        public async Task<string> GetLatestVersionAsync()
+        async Task<Uri> GetLatestReleaseUrlAsync()
         {
-            string tag = null;
-            string title = null;
+            // This link simply redirects to the repositories latest release page,
+            // and cannot be used to download an asset directly
+            var response = await client.GetAsync(GitHubRepository + "/releases/latest");
 
-            try
-            {
-                var doc = default(IHtmlDocument);
-
-                // GitHub のリリースページから HTML を取得
-                using (var stream = await client.GetStreamAsync(gitHubReleaseURL))
-                {
-                    // HTMLをパース
-                    var parser = new HtmlParser();
-                    doc = await parser.ParseAsync(stream);
-                }
-
-                IEnumerable<IElement> elements = doc.QuerySelectorAll("div.release");
-                if (PreRelease == false)
-                {
-                    // Pre-Release を除外
-                    elements = elements.Where(m => m.ClassList.Contains("label-prerelease") == false);
-                }
-
-                // 最初に見つかったものが最も新しいバージョン
-
-                // タグの取得
-                tag = elements.First().QuerySelector("span.css-truncate-target").TextContent;
-                // リリースタイトルの取得
-                title = elements.First().QuerySelector("h1.release-title > a").TextContent;
-            }
-            catch (Exception e)
-            {
-                logger?.LogError(e.Message);
-            }
-
-            return tag;
+            // e.g. https://github.com/MyName/MyApp/releases/tag/1.0.0
+            return response.RequestMessage.RequestUri;
         }
 
-        /// <summary>
-        /// 最新バージョンのファイルをダウンロードする
-        /// </summary>
-        /// <param name="latestVersion"></param>
-        /// <returns></returns>
-        bool DownloadLatestVersion(string fileName)
+        async Task<string> GetLatestReleaseTagAsync()
         {
-            if (latestVersion != string.Empty)
+            // e.g. https://github.com/MyName/MyApp/releases/tag/1.0.0
+            var latestReleaseUrl = await GetLatestReleaseUrlAsync();
+
+            return latestReleaseUrl.Segments.Last();
+        }
+
+        string GetAssetUrl(string tag, string asset)
+        {
+            return $"{GitHubRepository}/releases/download/{tag}/{asset}";
+        }
+
+        bool ExtractEntries(string zipFileName, string outputDir)
+        {
+            // Open the zip file, and create a ZipArchive object.
+            using (ZipArchive archive = ZipFile.OpenRead(zipFileName))
             {
-                using (WebClient webClient = new WebClient())
+                // Write the selected file to the specified folder.
+                foreach (ZipArchiveEntry entry in archive.Entries)
                 {
-                    var downloadFileName = $"{gitHubReleaseURL}/download/{latestVersion}/{fileName}";
-                    webClient.DownloadFile(downloadFileName, fileName);
-                    return true;
+                    try
+                    {
+                        entry.ExtractToFile($@"{outputDir}\{entry.FullName}");
+                        logger?.LogInformation($"Success: {entry.FullName}");
+                    }
+                    catch (Exception e)
+                    {
+                        logger?.LogCritical(e, $"Failure: {entry.FullName}");
+                        return false;
+                    }
                 }
             }
-            return false;
+
+            return true;
         }
 
         /// <summary>
@@ -229,53 +207,6 @@ namespace SimpleUpdater
         }
 
         /// <summary>
-        /// 指定したzipファイルの中身を１つずつカレントディレクトリに展開する
-        /// </summary>
-        /// <param name="archiveFileName"></param>
-        bool ExtractEntries(string archiveFileName)
-        {
-            deleteFiles = "";
-
-            // ZIPファイルを開いてZipArchiveオブジェクトを作る
-            using (ZipArchive archive = ZipFile.OpenRead(archiveFileName))
-            {
-                // 選択したファイルを指定したフォルダーに書き出す
-                foreach (ZipArchiveEntry entry in archive.Entries)
-                {
-                    // 使用中のファイルは直接上書きできないので、リネームして展開し、再起動後に古いファイルを削除する
-                    // (使用中でないファイルは上書きできるが、処理を共通化するため全てリネームして展開する)
-                    try
-                    {
-                        string oldFullName = entry.FullName + ".old";
-                        File.Delete(oldFullName);
-                        File.Move(entry.FullName, oldFullName);
-
-                        logger?.LogInformation($"ファイル退避成功: {entry.FullName}");
-                        deleteFiles += $" --file={oldFullName}";
-                    }
-                    catch (Exception e)
-                    {
-                        // 新規に追加されたファイルの場合は古いファイルが存在しないのでここにくる
-                        logger?.LogError(e, $"ファイル退避失敗: {entry.FullName}");
-                    }
-
-                    // ファイルの展開
-                    try
-                    {
-                        entry.ExtractToFile(entry.FullName);
-                        logger?.LogInformation($"展開成功: {entry.FullName}");
-                    }
-                    catch (Exception e)
-                    {
-                        logger?.LogCritical(e, $"展開失敗: {entry.FullName}");
-                    }
-                }
-            }
-
-            return true;
-        }
-
-        /// <summary>
         /// アップデートを実行する
         /// </summary>
         /// <returns></returns>
@@ -290,7 +221,7 @@ namespace SimpleUpdater
 
             // 最新バージョンの zip ファイルをダウンロードする（ダウンロード前に今ある zip ファイルは削除しておく）
             File.Delete(archiveFileName);
-            DownloadLatestVersion(archiveFileName);
+            //DownloadLatestVersion(archiveFileName);
 
             logger?.LogInformation("最新バージョンのダウンロード完了");
 
