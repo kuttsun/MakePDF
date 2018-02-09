@@ -60,15 +60,14 @@ namespace SimpleUpdater
         {
             var tag = await GetLatestReleaseTagAsync();
 
-            return await CheckForUpdateAsync(tag);
+            var jsonUrl = GetAssetUrl(tag, AppInfoName);
+
+            return await CheckForUpdateAsync(jsonUrl);
         }
 
-        public async Task<AppInfo> CheckForUpdateAsync(string tag)
+        async Task<AppInfo> CheckForUpdateAsync(string jsonUrl)
         {
-            // e.g. https://github.com/MyName/MyApp/releases/download/1.0.0/AppInfo.json
-            var assetUrl = GetAssetUrl(tag, AppInfoName);
-
-            var appInfo = await DownloadJsonAsync(assetUrl);
+            var appInfo = await DownloadJsonAsync(jsonUrl);
 
             // Deserialize
             return AppInfo.ReadString(appInfo);
@@ -77,16 +76,16 @@ namespace SimpleUpdater
         public async Task<bool> UpdateFromZipAsync(string zipFileName, string outputDir = @".\")
         {
             var tag = await GetLatestReleaseTagAsync();
+            var jsonUrl = GetAssetUrl(tag, AppInfoName);
+            var zipUrl = GetAssetUrl(tag, zipFileName);
 
-            var assetUrl = GetAssetUrl(tag, zipFileName);
-
-            var appInfo = await DownloadJsonAsync(assetUrl);
+            var appInfo = await CheckForUpdateAsync(jsonUrl);
 
             var outputPath = outputDir + zipFileName;
 
-            await DownloadZipAsync(assetUrl, outputPath);
+            await DownloadZipAsync(zipUrl, outputPath);
 
-            ExtractEntries(outputPath);
+            ExtractEntries(outputPath, $"{appInfo.Name}-{appInfo.Version}");
 
             return true;
         }
@@ -111,24 +110,36 @@ namespace SimpleUpdater
             return true;
         }
 
+        /// <summary>
+        /// e.g. https://github.com/MyName/MyApp/releases/tag/1.0.0
+        /// </summary>
+        /// <returns></returns>
         async Task<Uri> GetLatestReleaseUrlAsync()
         {
             // This link simply redirects to the repositories latest release page,
             // and cannot be used to download an asset directly
             var response = await client.GetAsync(GitHubRepository + "/releases/latest");
 
-            // e.g. https://github.com/MyName/MyApp/releases/tag/1.0.0
             return response.RequestMessage.RequestUri;
         }
 
+        /// <summary>
+        /// e.g. https://github.com/MyName/MyApp/releases/tag/1.0.0
+        /// </summary>
+        /// <returns></returns>
         async Task<string> GetLatestReleaseTagAsync()
         {
-            // e.g. https://github.com/MyName/MyApp/releases/tag/1.0.0
             var latestReleaseUrl = await GetLatestReleaseUrlAsync();
 
             return latestReleaseUrl.Segments.Last();
         }
 
+        /// <summary>
+        /// e.g. https://github.com/MyName/MyApp/releases/download/1.0.0/AppInfo.json
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <param name="asset"></param>
+        /// <returns></returns>
         string GetAssetUrl(string tag, string asset)
         {
             return $"{GitHubRepository}/releases/download/{tag}/{asset}";
@@ -136,6 +147,11 @@ namespace SimpleUpdater
 
         bool ExtractEntries(string zipFileName, string outputDir)
         {
+            if (Directory.Exists(outputDir) == false)
+            {
+                Directory.CreateDirectory(outputDir);
+            }
+
             // Open the zip file, and create a ZipArchive object.
             using (ZipArchive archive = ZipFile.OpenRead(zipFileName))
             {
@@ -226,7 +242,7 @@ namespace SimpleUpdater
             logger?.LogInformation("最新バージョンのダウンロード完了");
 
             // ダウンロードした zip ファイルを展開し、１ファイルずつ上書きしていく
-            ExtractEntries(archiveFileName);
+            //ExtractEntries(archiveFileName);
 
             // ダウンロードした zip ファイルを削除
             File.Delete(archiveFileName);
