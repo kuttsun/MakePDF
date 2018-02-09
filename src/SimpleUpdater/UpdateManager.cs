@@ -87,6 +87,15 @@ namespace SimpleUpdater
 
             ExtractEntries(outputPath, $"{appInfo.Name}-{appInfo.Version}");
 
+            // Delete downloaded zip file.
+            File.Delete(outputPath);
+
+            // Start updater
+            string arguments = $"up --pid={Process.GetCurrentProcess().Id}{deleteFiles}";
+            Process.Start("dotnet SimpleUpdater.dll update", arguments);
+
+            // Application restart required
+
             return true;
         }
 
@@ -222,77 +231,17 @@ namespace SimpleUpdater
             return (relativePath);
         }
 
-        /// <summary>
-        /// アップデートを実行する
-        /// </summary>
-        /// <returns></returns>
-        public bool RunUpdate()
+        public static void RemainingUpdates(int pid, string targetAppName, string sourceDir)
         {
-            logger?.LogInformation("アップデート開始");
+            Console.WriteLine("Wait for the target application to finish...");
+            Process.GetProcessById(pid).WaitForExit();
 
-            // 現在のファイル一式をアーカイブして取っておく
-            ArchiveDir(Directory.GetCurrentDirectory(), backupFileName);
+            Console.WriteLine("Start the remaining updates.");
 
-            logger?.LogInformation("バックアップ完了");
+            // 現在の AppInfo を元に、現在のバージョンのファイルを全て削除
 
-            // 最新バージョンの zip ファイルをダウンロードする（ダウンロード前に今ある zip ファイルは削除しておく）
-            File.Delete(archiveFileName);
-            //DownloadLatestVersion(archiveFileName);
-
-            logger?.LogInformation("最新バージョンのダウンロード完了");
-
-            // ダウンロードした zip ファイルを展開し、１ファイルずつ上書きしていく
-            //ExtractEntries(archiveFileName);
-
-            // ダウンロードした zip ファイルを削除
-            File.Delete(archiveFileName);
-
-            logger?.LogInformation("ダウンロードファイルの削除完了");
-
-            // アプリケーションの再起動
-            string arguments = $"up --pid={Process.GetCurrentProcess().Id}{deleteFiles}";
-            logger?.LogInformation($"アプリケーション再起動({arguments})");
-            Process.Start(exeFullName, arguments);
-
-            return true;
-        }
-
-        /// <summary>
-        /// アップデート後の後始末を行う
-        /// </summary>
-        /// <returns></returns>
-        public void CleanUp(int pid, List<string> deleteFiles)
-        {
-            logger?.LogInformation("Start clean up");
-
-            // プログラム終了待ち
-            try
-            {
-                logger?.LogInformation("pid=" + pid);
-                Process.GetProcessById(pid).WaitForExit();
-            }
-            catch (Exception e)
-            {
-                logger?.LogWarning(e.Message);
-            }
-
-            // プログラムが終了したので古いファイルを削除
-            try
-            {
-                foreach (var file in deleteFiles)
-                {
-                    File.Delete(file);
-                    logger?.LogInformation($"Delete file: {file}");
-                }
-                logger?.LogInformation("Update completed");
-                logger?.LogInformation("Restart application");
-                Process.Start(exeFullName);
-            }
-            catch (Exception e)
-            {
-                logger?.LogCritical(e.Message);
-                throw;
-            }
+            // sourceDir の AppInfo を元に、ファイルをコピー
+        
         }
     }
 }
