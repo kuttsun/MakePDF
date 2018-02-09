@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakePdf.Core", "MakePdf.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakePdf.Core.Tests", "MakePdf.Core.Tests\MakePdf.Core.Tests.csproj", "{420F53EE-5A48-4A5F-931C-5740678AF65B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleUpdater", "SimpleUpdater\SimpleUpdater.csproj", "{FE70BE40-5E36-4E4E-BD28-CBB13EF39FC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{420F53EE-5A48-4A5F-931C-5740678AF65B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{420F53EE-5A48-4A5F-931C-5740678AF65B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{420F53EE-5A48-4A5F-931C-5740678AF65B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE70BE40-5E36-4E4E-BD28-CBB13EF39FC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE70BE40-5E36-4E4E-BD28-CBB13EF39FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE70BE40-5E36-4E4E-BD28-CBB13EF39FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE70BE40-5E36-4E4E-BD28-CBB13EF39FC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
