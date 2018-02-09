@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using System.Security.Cryptography;
 
 using Microsoft.Extensions.CommandLineUtils;
 
@@ -23,18 +22,27 @@ namespace SimpleUpdater
 
             cla.HelpOption("-?|-h|--help");
 
-            // Create a file list
+            // Create a AppInfo
             cla.Command("list", command =>
             {
                 command.Description = "Create a file list.";
                 command.HelpOption("-?|-h|--help");
 
                 var targetDir = command.Option("-d|--dir", "Target directory", CommandOptionType.SingleValue);
-                var outputFilename = command.Option("-o|--output", "Output file name", CommandOptionType.SingleValue);
+                var outputFilename = command.Option("-o|--output", "Output file name (Option). Default is AppInfo.json", CommandOptionType.SingleValue);
+                var appName = command.Option("-n|--name", "Application name (Option). Default is assembly name", CommandOptionType.SingleValue);
+                var version = command.Option("-v|--version", "Application version (Option). Default is assembly version", CommandOptionType.SingleValue);
 
                 command.OnExecute(() =>
                 {
-                    CreateFileList(targetDir.Value(), outputFilename.Value());
+                    var files = Directory.GetFiles(targetDir.Value(), "*", SearchOption.AllDirectories);
+                    var appInfo = new AppInfo()
+                    {
+                        Name = appName.Value() ?? Assembly.GetExecutingAssembly().GetName().Name,
+                        Version = version.Value() ?? ""
+                    };
+                    appInfo.AddFileInfo(files);
+                    appInfo.Save(outputFilename.Value() ?? "AppInfo.json");
                     return 0;
                 });
             });
@@ -54,21 +62,6 @@ namespace SimpleUpdater
             {
                 Console.Write(e.Message);
                 return 1;
-            }
-        }
-
-        static void CreateFileList(string target, string output)
-        {
-            var files = Directory.GetFiles(target, "*", SearchOption.AllDirectories);
-
-            foreach (var file in files)
-            {
-                using (var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
-                {
-                    var hash = Hash.GetHash<SHA256CryptoServiceProvider>(fs);
-                    Console.WriteLine(file);
-                    Console.WriteLine(hash);
-                }
             }
         }
     }
