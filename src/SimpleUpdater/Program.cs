@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Security.Cryptography;
 
 using Microsoft.Extensions.CommandLineUtils;
 
@@ -8,7 +9,7 @@ namespace SimpleUpdater
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             var assembly = Assembly.GetExecutingAssembly();
 
@@ -25,21 +26,15 @@ namespace SimpleUpdater
             // Create a file list
             cla.Command("list", command =>
             {
-                // 説明（ヘルプの出力で使用される）
                 command.Description = "Create a file list.";
-
                 command.HelpOption("-?|-h|--help");
 
                 var targetDir = command.Option("-d|--dir", "Target directory", CommandOptionType.SingleValue);
-
-                var outputDir = command.Option("-o|--output", "Target directory (Option)", CommandOptionType.SingleValue);
+                var outputFilename = command.Option("-o|--output", "Output file name", CommandOptionType.SingleValue);
 
                 command.OnExecute(() =>
                 {
-
-                    //Update.Instance.CleanUp(Convert.ToInt32(pidOptions.Value()), deleteFileOptions.Values);
-                    CreateFileList(targetDir.Value(), outputDir.Value());
-                    Console.WriteLine("cleanup!");
+                    CreateFileList(targetDir.Value(), outputFilename.Value());
                     return 0;
                 });
             });
@@ -51,16 +46,29 @@ namespace SimpleUpdater
                 return 0;
             });
 
-            cla.Execute(args);
+            try
+            {
+                return cla.Execute(args);
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+                return 1;
+            }
         }
 
-        static void CreateFileList(string targetDir, string outputDir)
+        static void CreateFileList(string target, string output)
         {
-            var files = Directory.GetFiles(targetDir, "*", SearchOption.AllDirectories);
+            var files = Directory.GetFiles(target, "*", SearchOption.AllDirectories);
 
-            foreach(var file in files)
+            foreach (var file in files)
             {
-                Console.WriteLine(file);
+                using (var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    var hash = Hash.GetHash<SHA256CryptoServiceProvider>(fs);
+                    Console.WriteLine(file);
+                    Console.WriteLine(hash);
+                }
             }
         }
     }
