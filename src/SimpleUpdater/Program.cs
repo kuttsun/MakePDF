@@ -42,7 +42,7 @@ namespace SimpleUpdater
                         Version = version.Value() ?? ""
                     };
                     appInfo.AddFileInfo(files);
-                    appInfo.Save(outputFilename.Value() ?? "AppInfo.json");
+                    appInfo.WriteFile(outputFilename.Value() ?? "AppInfo.json");
                     return 0;
                 });
             });

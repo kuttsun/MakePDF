@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SimpleUpdater
 {
-    class FileInfo
+    public class FileInfo
     {
         public string Name { get; set; }
         public string Hash { get; set; }

@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace SimpleUpdater
 {
-    class AppInfo
+    public class AppInfo
     {
         public string Name { get; set; }
         public string Version { get; set; }
@@ -28,7 +28,7 @@ namespace SimpleUpdater
             }
         }
 
-        public void Save(string fileName)
+        public void WriteFile(string fileName)
         {
             var json = JsonConvert.SerializeObject(this, Formatting.Indented);
 
@@ -37,6 +37,20 @@ namespace SimpleUpdater
             {
                 sw.Write(json);
             }
+        }
+
+        public static AppInfo ReadFile(string fileName)
+        {
+            using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            using (StreamReader sr = new StreamReader(fs))
+            {
+                return JsonConvert.DeserializeObject<AppInfo>(sr.ReadToEnd());
+            }
+        }
+
+        public static AppInfo ReadString(string str)
+        {
+            return JsonConvert.DeserializeObject<AppInfo>(str);
         }
     }
 }
