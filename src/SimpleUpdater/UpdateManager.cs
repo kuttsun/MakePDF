@@ -24,20 +24,8 @@ namespace SimpleUpdater
 
         // GitHub Repository (e.g. https://github.com/MyName/MyRepository)
         public string GitHubRepository { get; set; }
+        // e.g. AppInfo.json
         public string AppInfoName { get; set; }
-
-        // GitHub のリリースページの URL
-        string gitHubReleaseURL = string.Empty;
-        // exe ファイルの絶対パス（正確にはアセンブリ名）
-        string exeFullName = string.Empty;
-        // ダウンロードしてくる zip ファイル名
-        string archiveFileName = string.Empty;
-        // バックアップした後の zip ファイル名
-        string backupFileName = string.Empty;
-        // 最新のバージョン
-        string latestVersion = string.Empty;
-        // アップデート後のクリーンアップ時に削除するファイル
-        string deleteFiles = string.Empty;
 
         /// <summary>
         /// 
@@ -49,11 +37,6 @@ namespace SimpleUpdater
             this.logger = logger;
             GitHubRepository = gitHubRepository;
             AppInfoName = appInfoName;
-
-            gitHubReleaseURL = "https://github.com/kuttsun/PGReliefMoreForGit/releases";
-            exeFullName = Assembly.GetExecutingAssembly().Location;
-            archiveFileName = Path.GetFileNameWithoutExtension(exeFullName) + ".zip";
-            backupFileName = "Backup.zip";
         }
 
         public async Task<AppInfo> CheckForUpdateAsync()
@@ -91,8 +74,7 @@ namespace SimpleUpdater
             File.Delete(outputPath);
 
             // Start updater
-            string arguments = $"up --pid={Process.GetCurrentProcess().Id}{deleteFiles}";
-            Process.Start("dotnet SimpleUpdater.dll update", arguments);
+            Process.Start("dotnet SimpleUpdater.dll", $"update --pid={Process.GetCurrentProcess().Id}");
 
             // Application restart required
 
