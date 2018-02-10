@@ -4,17 +4,17 @@ using System.Text;
 
 using Xunit;
 
-//using SimpleUpdater;
+using SimpleUpdater.UpdateManager;
 
 namespace SimpleUpdater.Tests
 {
-    public class UpdateManagerTest
+    public class GitHubTest
     {
-        UpdateManager mgr;
+        UpdateManager.UpdateManager mgr;
 
-        public UpdateManagerTest()
+        public GitHubTest()
         {
-            mgr = new UpdateManager("https://github.com/kuttsun/Test");
+            mgr = new GitHub("https://github.com/kuttsun/Test");
         }
 
         [Fact]

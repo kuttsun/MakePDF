@@ -5,6 +5,8 @@ using System.Diagnostics;
 
 using Microsoft.Extensions.CommandLineUtils;
 
+using SimpleUpdater.UpdateManager;
+
 namespace SimpleUpdater
 {
     class Program
@@ -64,7 +66,7 @@ namespace SimpleUpdater
 
                 command.OnExecute(() =>
                 {
-                    UpdateManager.RemainingUpdates(Convert.ToInt32(pid.Value()), targetAppName.Value(), sourceDir.Value());
+                    UpdateManager.UpdateManager.Update(Convert.ToInt32(pid.Value()), targetAppName.Value(), sourceDir.Value());
 
                     return 0;
                 });

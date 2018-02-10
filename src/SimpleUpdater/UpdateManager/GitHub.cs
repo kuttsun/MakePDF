@@ -6,44 +6,36 @@ using System.Diagnostics;
 using System.Net;
 using System.IO;
 using System.IO.Compression;
-using System.Reflection;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 using Microsoft.Extensions.Logging;
 
-namespace SimpleUpdater
+namespace SimpleUpdater.UpdateManager
 {
-    public class UpdateManager
+    public class GitHub : UpdateManager
     {
-        ILogger logger;
-
-        public bool PreRelease { get; set; } = false;
-
         HttpClient client = new HttpClient();
 
         // GitHub Repository (e.g. https://github.com/MyName/MyRepository)
-        public string GitHubRepository { get; set; }
-        // e.g. AppInfo.json
-        public string AppInfoName { get; set; }
+        string gitHubRepository;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="gitHubRepository">GitHub Repository (e.g. https://github.com/MyName/MyRepository)</param>
         /// <param name="logger"></param>
-        public UpdateManager(string gitHubRepository, string appInfoName = "AppInfo.json", ILogger logger = null)
+        public GitHub(string gitHubRepository, string appInfoName = "AppInfo.json", ILogger logger = null) : base(appInfoName, logger)
         {
             this.logger = logger;
-            GitHubRepository = gitHubRepository;
-            AppInfoName = appInfoName;
+            this.gitHubRepository = gitHubRepository;
         }
 
-        public async Task<AppInfo> CheckForUpdateAsync()
+        override public async Task<AppInfo> CheckForUpdateAsync()
         {
             var tag = await GetLatestReleaseTagAsync();
 
-            var jsonUrl = GetAssetUrl(tag, AppInfoName);
+            var jsonUrl = GetAssetUrl(tag, appInfoName);
 
             return await CheckForUpdateAsync(jsonUrl);
         }
@@ -56,10 +48,10 @@ namespace SimpleUpdater
             return AppInfo.ReadString(appInfo);
         }
 
-        public async Task<bool> UpdateFromZipAsync(string zipFileName, string outputDir = @".\")
+        override public async Task<bool> UpdateFromZipAsync(string zipFileName, string outputDir = @".\")
         {
             var tag = await GetLatestReleaseTagAsync();
-            var jsonUrl = GetAssetUrl(tag, AppInfoName);
+            var jsonUrl = GetAssetUrl(tag, appInfoName);
             var zipUrl = GetAssetUrl(tag, zipFileName);
 
             var appInfo = await CheckForUpdateAsync(jsonUrl);
@@ -109,7 +101,7 @@ namespace SimpleUpdater
         {
             // This link simply redirects to the repositories latest release page,
             // and cannot be used to download an asset directly
-            var response = await client.GetAsync(GitHubRepository + "/releases/latest");
+            var response = await client.GetAsync(gitHubRepository + "/releases/latest");
 
             return response.RequestMessage.RequestUri;
         }
@@ -133,7 +125,7 @@ namespace SimpleUpdater
         /// <returns></returns>
         string GetAssetUrl(string tag, string asset)
         {
-            return $"{GitHubRepository}/releases/download/{tag}/{asset}";
+            return $"{gitHubRepository}/releases/download/{tag}/{asset}";
         }
 
         bool ExtractEntries(string zipFileName, string outputDir)
@@ -211,19 +203,6 @@ namespace SimpleUpdater
             relativePath.Replace('/', '\\');
 
             return (relativePath);
-        }
-
-        public static void RemainingUpdates(int pid, string targetAppName, string sourceDir)
-        {
-            Console.WriteLine("Wait for the target application to finish...");
-            Process.GetProcessById(pid).WaitForExit();
-
-            Console.WriteLine("Start the remaining updates.");
-
-            // 現在の AppInfo を元に、現在のバージョンのファイルを全て削除
-
-            // sourceDir の AppInfo を元に、ファイルをコピー
-        
         }
     }
 }
