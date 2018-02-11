@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.IO;
 
-namespace SimpleUpdater
+namespace SimpleUpdater.Common
 {
     public static class Hash
     {

@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 using Xunit;
 
-using SimpleUpdater;
+using SimpleUpdater.Common;
 
 namespace SimpleUpdater.Tests
 {

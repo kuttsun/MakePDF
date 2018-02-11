@@ -6,6 +6,8 @@ using System.Security.Cryptography;
 
 using Newtonsoft.Json;
 
+using SimpleUpdater.Common;
+
 namespace SimpleUpdater
 {
     public class AppInfo
