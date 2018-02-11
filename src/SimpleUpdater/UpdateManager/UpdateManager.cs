@@ -24,8 +24,40 @@ namespace SimpleUpdater.UpdateManager
 
         abstract public Task<AppInfo> CheckForUpdateAsync();
 
-        abstract public Task<bool> PreparingForUpdate(string inputPath, string outputPath);
+        /// <summary>
+        /// Prepare for update.
+        /// Please call ReserveForUpdate method and restart the application after calling this method.
+        /// </summary>
+        /// <param name="inputPath"></param>
+        /// <param name="outputPath"></param>
+        /// <returns></returns>
+        abstract public Task<bool> PrepareForUpdate(string inputPath, string outputPath);
 
+        /// <summary>
+        /// Reserve for update.
+        /// This method call after PreparingForUpdate method, and restart the application.
+        /// </summary>
+        /// <param name="processId"></param>
+        /// <example> 
+        /// <code>
+        /// ReserveForUpdate(Process.GetCurrentProcess().Id)
+        /// </code>
+        /// </example>
+        public void ReserveForUpdate(int processId)
+        {
+            // Start updater
+            Process.Start("dotnet SimpleUpdater.dll", $"update --pid={processId}");
+
+            // Application restart required
+        }
+
+        /// <summary>
+        /// Update the application.
+        /// This method call after restarting the application.
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <param name="targetAppName"></param>
+        /// <param name="sourceDir"></param>
         public static void Update(int pid, string targetAppName, string sourceDir)
         {
             Console.WriteLine("Wait for the target application to finish...");

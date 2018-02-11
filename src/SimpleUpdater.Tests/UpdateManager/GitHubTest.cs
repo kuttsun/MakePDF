@@ -25,9 +25,9 @@ namespace SimpleUpdater.Tests
         }
 
         [Fact]
-        public void PreparingForUpdateTest()
+        public void PrepareForUpdateTest()
         {
-            Assert.True(mgr.PreparingForUpdate("test.zip").Result);
+            Assert.True(mgr.PrepareForUpdate("test.zip").Result);
         }
     }
 }

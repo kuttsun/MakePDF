@@ -55,7 +55,7 @@ namespace SimpleUpdater.UpdateManager
         /// <param name="zipFileName"></param>
         /// <param name="outputDir"></param>
         /// <returns></returns>
-        override public async Task<bool> PreparingForUpdate(string zipFileName, string outputDir = @".\")
+        override public async Task<bool> PrepareForUpdate(string zipFileName, string outputDir = @".\")
         {
             var tag = await GetLatestReleaseTagAsync();
             var jsonUrl = GetAssetUrl(tag, appInfoName);
@@ -71,11 +71,6 @@ namespace SimpleUpdater.UpdateManager
 
             // Delete downloaded zip file.
             File.Delete(outputPath);
-
-            // Start updater
-            Process.Start("dotnet SimpleUpdater.dll", $"update --pid={Process.GetCurrentProcess().Id}");
-
-            // Application restart required
 
             return true;
         }
