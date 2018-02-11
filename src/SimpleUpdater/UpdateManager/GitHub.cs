@@ -109,7 +109,7 @@ namespace SimpleUpdater.UpdateManager
         }
 
         /// <summary>
-        /// e.g. https://github.com/MyName/MyApp/releases/tag/1.0.0
+        /// e.g. https://github.com/MyName/MyApp/releases/tag/1.0.0 --> 1.0.0
         /// </summary>
         /// <returns></returns>
         async Task<string> GetLatestReleaseTagAsync()
