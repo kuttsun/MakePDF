@@ -24,7 +24,7 @@ namespace SimpleUpdater.UpdateManager
 
         abstract public Task<AppInfo> CheckForUpdateAsync();
 
-        abstract public Task<bool> UpdateFromZipAsync(string zipFileName, string outputDir = @".\");
+        abstract public Task<bool> PreparingForUpdate(string inputPath, string outputPath);
 
         public static void Update(int pid, string targetAppName, string sourceDir)
         {

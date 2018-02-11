@@ -49,7 +49,13 @@ namespace SimpleUpdater.UpdateManager
             return AppInfo.ReadString(appInfo);
         }
 
-        override public async Task<bool> UpdateFromZipAsync(string zipFileName, string outputDir = @".\")
+        /// <summary>
+        /// Download zip from GitHub, and extract it
+        /// </summary>
+        /// <param name="zipFileName"></param>
+        /// <param name="outputDir"></param>
+        /// <returns></returns>
+        override public async Task<bool> PreparingForUpdate(string zipFileName, string outputDir = @".\")
         {
             var tag = await GetLatestReleaseTagAsync();
             var jsonUrl = GetAssetUrl(tag, appInfoName);

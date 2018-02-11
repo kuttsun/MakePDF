@@ -10,7 +10,7 @@ namespace SimpleUpdater.Tests
 {
     public class GitHubTest
     {
-        UpdateManager.UpdateManager mgr;
+        GitHub mgr;
 
         public GitHubTest()
         {
@@ -25,9 +25,9 @@ namespace SimpleUpdater.Tests
         }
 
         [Fact]
-        public void UpdateFromZipTest()
+        public void PreparingForUpdateTest()
         {
-            Assert.True(mgr.UpdateFromZipAsync("test.zip").Result);
+            Assert.True(mgr.PreparingForUpdate("test.zip").Result);
         }
     }
 }
