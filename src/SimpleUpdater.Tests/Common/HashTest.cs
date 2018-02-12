@@ -3,9 +3,7 @@ using System.Security.Cryptography;
 
 using Xunit;
 
-using SimpleUpdater.Common;
-
-namespace SimpleUpdater.Tests
+namespace SimpleUpdater.Common.Tests
 {
     public class HashTest
     {
