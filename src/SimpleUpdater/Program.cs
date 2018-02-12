@@ -55,7 +55,7 @@ namespace SimpleUpdater
             });
 
             // Start update
-            cla.Command("create", command =>
+            cla.Command("update", command =>
             {
                 command.Description = "Start update.";
                 command.HelpOption("-?|-h|--help");
@@ -66,7 +66,7 @@ namespace SimpleUpdater
 
                 command.OnExecute(() =>
                 {
-                    UpdateManager.Update(Convert.ToInt32(pid.Value()), targetAppName.Value(), sourceDir.Value());
+                    UpdateManager.Update(pid.Value(), targetAppName.Value(), sourceDir.Value());
 
                     return 0;
                 });

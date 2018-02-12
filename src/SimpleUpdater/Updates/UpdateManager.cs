@@ -26,7 +26,7 @@ namespace SimpleUpdater.Updates
 
         /// <summary>
         /// Prepare for update.
-        /// Please call ReserveForUpdate method and restart the application after calling this method.
+        /// Please call ReserveForUpdate method and close the application after this method.
         /// </summary>
         /// <param name="inputPath"></param>
         /// <param name="outputPath"></param>
@@ -35,7 +35,7 @@ namespace SimpleUpdater.Updates
 
         /// <summary>
         /// Reserve for update.
-        /// This method call after PreparingForUpdate method, and restart the application.
+        /// Call this method after PreparingForUpdate method, and close the application.
         /// </summary>
         /// <param name="processId"></param>
         /// <example> 
@@ -46,24 +46,25 @@ namespace SimpleUpdater.Updates
         public void ReserveForUpdate(int processId)
         {
             // Start updater
-            Process.Start("dotnet SimpleUpdater.dll", $"update --pid={processId}");
+            Process.Start("dotnet", $"SimpleUpdater.dll update --pid={processId}");
 
             // Application restart required
         }
 
         /// <summary>
         /// Update the application.
-        /// This method call after restarting the application.
+        /// This method implements the update after the application closes.
+        /// The application will start up after the update is completed.
         /// </summary>
         /// <param name="pid"></param>
         /// <param name="targetAppName"></param>
         /// <param name="sourceDir"></param>
-        public static void Update(int pid, string targetAppName, string sourceDir)
+        internal static void Update(string pid, string targetAppName, string sourceDir)
         {
             Console.WriteLine("Wait for the target application to finish...");
-            Process.GetProcessById(pid).WaitForExit();
+            Process.GetProcessById(Convert.ToInt32(pid)).WaitForExit();
 
-            Console.WriteLine("Start the remaining updates.");
+            Console.WriteLine("Start the updates.");
 
             // 現在の AppInfo を元に、現在のバージョンのファイルを全て削除
 
