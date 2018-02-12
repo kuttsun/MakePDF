@@ -12,14 +12,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-using MahApps.Metro.Controls;
-
 namespace MakePdf.Wpf.Views
 {
     /// <summary>
     /// Interaction logic for Shell.xaml
     /// </summary>
-    public partial class Shell : MetroWindow
+    public partial class Shell : Window
     {
         public Shell()
         {
