@@ -4,7 +4,7 @@ using System.Text;
 
 using Xunit;
 
-using SimpleUpdater.UpdateManager;
+using SimpleUpdater.Updates;
 
 namespace SimpleUpdater.Tests
 {

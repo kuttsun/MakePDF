@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 using Microsoft.Extensions.Logging;
 
-namespace SimpleUpdater.UpdateManager
+namespace SimpleUpdater.Updates
 {
     abstract public class UpdateManager
     {

@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 
 using SimpleUpdater.Common;
 
-namespace SimpleUpdater.UpdateManager
+namespace SimpleUpdater.Updates
 {
     public class GitHub : UpdateManager
     {
