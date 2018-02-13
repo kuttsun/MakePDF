@@ -16,25 +16,30 @@ namespace SimpleUpdater
         public string Version { get; set; }
         public List<FileInfo> Files { get; set; } = new List<FileInfo>();
 
-        public void AddFileInfo(string[] files)
+        public void AddFileInfo(string targetDir, string[] files)
         {
             foreach (var file in files)
             {
                 using (var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
+                    var name = Common.Path.GetRelativePath($@"{targetDir}\", file);
                     var hash = Hash.GetHash<SHA256CryptoServiceProvider>(fs);
-                    Files.Add(new FileInfo { Name = file, Hash = hash });
-                    Console.WriteLine(file);
+                    Files.Add(new FileInfo
+                    {
+                        Name = name,
+                        Hash = hash
+                    });
+                    Console.WriteLine(name);
                     Console.WriteLine(hash);
                 }
             }
         }
 
-        public void WriteFile(string outputDir, string fileName)
+        public void WriteFile(string targetDir, string fileName)
         {
             var json = JsonConvert.SerializeObject(this, Formatting.Indented);
 
-            using (FileStream fs = new FileStream($@"{outputDir}\{fileName}", FileMode.Create, FileAccess.Write))
+            using (FileStream fs = new FileStream($@"{targetDir}\{fileName}", FileMode.Create, FileAccess.Write))
             using (StreamWriter sw = new StreamWriter(fs))
             {
                 sw.Write(json);

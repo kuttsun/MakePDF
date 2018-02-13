@@ -48,7 +48,7 @@ namespace SimpleUpdater
                         Name = targetAppName.Value(),
                         Version = targetAppVersion.Value()
                     };
-                    appInfo.AddFileInfo(files);
+                    appInfo.AddFileInfo(targetDir.Value(), files);
                     appInfo.WriteFile(targetDir.Value(), outputFilename.Value() ?? "AppInfo.json");
                     return 0;
                 });
