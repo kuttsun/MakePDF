@@ -59,7 +59,7 @@ namespace SimpleUpdater.Updates
         /// <param name="pid"></param>
         /// <param name="targetAppName"></param>
         /// <param name="sourceDir"></param>
-        internal static void Update(string pid, string targetAppName, string sourceDir)
+        public static void Update(string pid, string targetAppName, string sourceDir)
         {
             Console.WriteLine("Wait for the target application to finish...");
             Process.GetProcessById(Convert.ToInt32(pid)).WaitForExit();
