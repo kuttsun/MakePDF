@@ -13,6 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using MaterialDesignThemes.Wpf;
+
+using MakePdf.Wpf.Views.Dialogs;
+using MakePdf.Wpf.ViewModels;
+
 namespace MakePdf.Wpf.Views
 {
     /// <summary>
@@ -20,9 +25,27 @@ namespace MakePdf.Wpf.Views
     /// </summary>
     public partial class Menu : UserControl
     {
+        MenuViewModel vm;
+
         public Menu()
         {
             InitializeComponent();
+
+            vm = DataContext as MenuViewModel;
+        }
+
+        void CheckForUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            var parentView = Application.Current.MainWindow as Shell;
+
+            var processingDialog = new ProcessingDialog("Processing", $"Check for Update ...");
+            var re = parentView.dialogHostMain.ShowDialog(processingDialog, async (object s, DialogOpenedEventArgs args) =>
+            {
+                await vm.CheckForUpdate();
+                args.Session.Close(false);
+            });
+
+            return;
         }
     }
 }

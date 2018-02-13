@@ -19,7 +19,6 @@
     <StackPanel Orientation="Horizontal">
         <Menu IsMainMenu="True" >
             <MenuItem Header="File(_F)">
-                <Separator />
                 <MenuItem Header="Exit" InputGestureText="Alt+F4">
                     <MenuItem.Icon>
                         <materialDesign:PackIcon Kind="ExitToApp" />
@@ -39,7 +38,7 @@
                         <materialDesign:PackIcon Kind="HelpCircleOutline" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Check Update">
+                <MenuItem Header="Check for update" Click="CheckForUpdate_Click">
                     <MenuItem.Icon>
                         <materialDesign:PackIcon Kind="Autorenew" />
                     </MenuItem.Icon>

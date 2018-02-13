@@ -11,5 +11,10 @@ namespace MakePdf.Wpf.ViewModels
 {
     class MenuViewModel : BindableBase
     {
+        public async Task<bool> CheckForUpdate()
+        {
+            await Task.Run(() => Task.Delay(3000));
+            return false;
+        }
     }
 }
