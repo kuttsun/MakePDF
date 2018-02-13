@@ -75,7 +75,7 @@ namespace SimpleUpdater
             // Default behavior
             cla.OnExecute(() =>
             {
-                Console.WriteLine("Hello World.");
+                cla.ShowHelp();
                 return 0;
             });
 
