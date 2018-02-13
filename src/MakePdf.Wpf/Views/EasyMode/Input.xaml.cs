@@ -117,7 +117,7 @@ namespace MakePdf.Wpf.Views.EasyMode
             }
         }
 
-        private async void StartButton_Click(object sender, RoutedEventArgs e)
+        async void StartButton_Click(object sender, RoutedEventArgs e)
         {
             var parentView = Application.Current.MainWindow as Shell;
 

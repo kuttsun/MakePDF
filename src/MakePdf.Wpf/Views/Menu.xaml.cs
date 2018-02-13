@@ -34,18 +34,30 @@ namespace MakePdf.Wpf.Views
             vm = DataContext as MenuViewModel;
         }
 
-        void CheckForUpdate_Click(object sender, RoutedEventArgs e)
+        async void CheckForUpdate_Click(object sender, RoutedEventArgs e)
         {
             var parentView = Application.Current.MainWindow as Shell;
 
-            var processingDialog = new ProcessingDialog("Processing", $"Check for Update ...");
-            var re = parentView.dialogHostMain.ShowDialog(processingDialog, async (object s, DialogOpenedEventArgs args) =>
+            string newVersion = null;
+
+            var processingDialog = new ProcessingDialog("Check for updates...", $"Please wait a minute.");
+            var ret = await parentView.dialogHostMain.ShowDialog(processingDialog, async (object s, DialogOpenedEventArgs args) =>
             {
-                await vm.CheckForUpdate();
+                newVersion = await vm.CheckForUpdate();
                 args.Session.Close(false);
             });
 
-            return;
+            if (newVersion == null)
+            {
+                var okdialog = new OkDialog("Not found", $"You are using the latest version.");
+                await parentView.dialogHostMain.ShowDialog(okdialog);
+                return;
+            }
+
+            var yesNoDialog = new YesNoDialog("New version found", $"The new version is available.{Environment.NewLine}Current version:{Environment.NewLine}New version: {newVersion + Environment.NewLine}Do you want to update now ?");
+            await parentView.dialogHostMain.ShowDialog(yesNoDialog);
+
+            // Update
         }
     }
 }

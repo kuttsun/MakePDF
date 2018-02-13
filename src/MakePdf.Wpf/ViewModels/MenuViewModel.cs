@@ -7,14 +7,22 @@ using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Mvvm;
 
+using MakePdf.Wpf.Models;
+
 namespace MakePdf.Wpf.ViewModels
 {
     class MenuViewModel : BindableBase
     {
-        public async Task<bool> CheckForUpdate()
+        Updater updater;
+
+        public MenuViewModel()
         {
-            await Task.Run(() => Task.Delay(3000));
-            return false;
+            updater = Updater.Instance;
+        }
+
+        public async Task<string> CheckForUpdate()
+        {
+            return await updater.CheckForUpdate();
         }
     }
 }

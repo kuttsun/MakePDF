@@ -116,7 +116,7 @@
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Models\Core.cs" />
-    <Compile Include="Models\Update.cs" />
+    <Compile Include="Models\Updater.cs" />
     <Compile Include="ViewModels\EasyMode\InputViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\Dialogs\OkDialog.xaml.cs">
@@ -206,6 +206,10 @@
     <ProjectReference Include="..\MakePdf.Core\MakePdf.Core.csproj">
       <Project>{56b048b9-7f8d-4dcb-9338-affe963a167a}</Project>
       <Name>MakePdf.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SimpleUpdater\SimpleUpdater.csproj">
+      <Project>{ec7942c8-2fc9-413f-a100-bcf20aa0072e}</Project>
+      <Name>SimpleUpdater</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
