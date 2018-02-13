@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakePdf.Core.Tests", "MakeP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleUpdater.Tests", "SimpleUpdater.Tests\SimpleUpdater.Tests.csproj", "{FE994272-E821-407E-A24C-C54E7E6AAFB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleUpdater.Core", "SimpleUpdater.Core\SimpleUpdater.Core.csproj", "{5D91E96A-C711-44E8-A586-F31CFA3BDE91}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleUpdater.Console", "SimpleUpdater.Console\SimpleUpdater.Console.csproj", "{5D91E96A-C711-44E8-A586-F31CFA3BDE91}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleUpdater", "SimpleUpdater\SimpleUpdater.csproj", "{EC7942C8-2FC9-413F-A100-BCF20AA0072E}"
 EndProject
