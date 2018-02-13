@@ -30,11 +30,11 @@ namespace SimpleUpdater
             }
         }
 
-        public void WriteFile(string fileName)
+        public void WriteFile(string outputDir, string fileName)
         {
             var json = JsonConvert.SerializeObject(this, Formatting.Indented);
 
-            using (FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+            using (FileStream fs = new FileStream($@"{outputDir}\{fileName}", FileMode.Create, FileAccess.Write))
             using (StreamWriter sw = new StreamWriter(fs))
             {
                 sw.Write(json);
