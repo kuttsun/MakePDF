@@ -33,6 +33,11 @@ namespace SimpleUpdater.Updates
         /// <returns></returns>
         abstract public Task<bool> PrepareForUpdate(string inputPath, string outputPath);
 
+        public Task<bool> PrepareForUpdate(string inputPath)
+        {
+            return PrepareForUpdate(inputPath, inputPath);
+        }
+
         /// <summary>
         /// Reserve for update.
         /// Call this method after PreparingForUpdate method, and close the application.

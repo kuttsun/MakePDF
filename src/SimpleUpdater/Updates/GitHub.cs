@@ -55,7 +55,7 @@ namespace SimpleUpdater.Updates
         /// <param name="zipFileName"></param>
         /// <param name="outputDir"></param>
         /// <returns></returns>
-        override public async Task<bool> PrepareForUpdate(string zipFileName, string outputDir = @".\")
+        override public async Task<bool> PrepareForUpdate(string zipFileName, string outputDir)
         {
             var tag = await GetLatestReleaseTagAsync();
             var jsonUrl = GetAssetUrl(tag, appInfoName);

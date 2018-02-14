@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.Diagnostics;
+using System.IO;
 
 using SimpleUpdater;
 using SimpleUpdater.Updates;
@@ -59,6 +60,17 @@ namespace MakePdf.Wpf.Models
                 Debug.WriteLine(e.Message);
                 return null;
             }
+        }
+
+        public async Task<bool> Update()
+        {
+            bool ret;
+
+            ret = await mgr.PrepareForUpdate(Directory.GetCurrentDirectory());
+
+            mgr.ReserveForUpdate(Process.GetCurrentProcess().Id);
+
+            return true;
         }
     }
 }

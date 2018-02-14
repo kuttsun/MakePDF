@@ -26,18 +26,18 @@ namespace MakePdf.Wpf.Views
     public partial class Menu : UserControl
     {
         MenuViewModel vm;
+        Shell parentView;
 
         public Menu()
         {
             InitializeComponent();
 
             vm = DataContext as MenuViewModel;
+            parentView = Application.Current.MainWindow as Shell;
         }
 
         async void CheckForUpdate_Click(object sender, RoutedEventArgs e)
         {
-            var parentView = Application.Current.MainWindow as Shell;
-
             string newVersion = null;
 
             var processingDialog = new ProcessingDialog("Check for updates...", $"Please wait a minute.");
@@ -62,12 +62,14 @@ namespace MakePdf.Wpf.Views
 
             if(needsUpdate == YesNo.No)
             {
-                Console.WriteLine("no");
                 return;
             }
 
             // Update
-            Console.WriteLine("yes");
+            if(await vm.Update())
+            {
+                parentView.Close();
+            }
         }
     }
 }
