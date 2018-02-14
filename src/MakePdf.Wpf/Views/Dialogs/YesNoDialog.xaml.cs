@@ -15,6 +15,12 @@ using System.Windows.Shapes;
 
 namespace MakePdf.Wpf.Views.Dialogs
 {
+    public enum YesNo
+    {
+        Yes,
+        No
+    }
+
     /// <summary>
     /// OverwriteDialog.xaml の相互作用ロジック
     /// </summary>

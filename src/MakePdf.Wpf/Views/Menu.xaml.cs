@@ -53,10 +53,21 @@ namespace MakePdf.Wpf.Views
                 await parentView.dialogHostMain.ShowDialog(okdialog);
             }
 
+            YesNo needsUpdate = YesNo.No;
             var yesNoDialog = new YesNoDialog("New version found", $"The new version is available.{Environment.NewLine}Current version:{Environment.NewLine}New version: {newVersion + Environment.NewLine}Do you want to update now ?");
-            await parentView.dialogHostMain.ShowDialog(yesNoDialog);
+            await parentView.dialogHostMain.ShowDialog(yesNoDialog, null, (object s, DialogClosingEventArgs args) =>
+            {
+                needsUpdate = (YesNo)args.Parameter;
+            });
+
+            if(needsUpdate == YesNo.No)
+            {
+                Console.WriteLine("no");
+                return;
+            }
 
             // Update
+            Console.WriteLine("yes");
         }
     }
 }
