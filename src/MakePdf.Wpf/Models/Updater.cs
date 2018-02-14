@@ -34,6 +34,10 @@ namespace MakePdf.Wpf.Models
             assemblyInformationalVersion = fvi.ProductVersion;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<string> CheckForUpdate()
         {
             try
@@ -48,13 +52,13 @@ namespace MakePdf.Wpf.Models
                     // New version found
                     return appInfo.Version;
                 }
-            }
-            catch
-            {
                 return null;
             }
-
-            return null;
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return null;
+            }
         }
     }
 }

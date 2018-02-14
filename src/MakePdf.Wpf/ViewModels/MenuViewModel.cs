@@ -22,7 +22,7 @@ namespace MakePdf.Wpf.ViewModels
 
         public async Task<string> CheckForUpdate()
         {
-            return await updater.CheckForUpdate();
+            return await updater.CheckForUpdate(); ;
         }
     }
 }
