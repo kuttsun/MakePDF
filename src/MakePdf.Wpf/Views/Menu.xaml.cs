@@ -41,7 +41,7 @@ namespace MakePdf.Wpf.Views
             string newVersion = null;
 
             var processingDialog = new ProcessingDialog("Check for updates...", $"Please wait a minute.");
-            var ret = await parentView.dialogHostMain.ShowDialog(processingDialog, async (object s, DialogOpenedEventArgs args) =>
+            await parentView.dialogHostMain.ShowDialog(processingDialog, async (object s, DialogOpenedEventArgs args) =>
             {
                 newVersion = await vm.CheckForUpdate();
                 args.Session.Close(false);
@@ -66,7 +66,14 @@ namespace MakePdf.Wpf.Views
             }
 
             // Update
-            if(await vm.Update())
+            bool result = false;
+            var processingDialog2 = new ProcessingDialog("Updating...", $"Please wait a minute.");
+            await parentView.dialogHostMain.ShowDialog(processingDialog, async (object s, DialogOpenedEventArgs args) =>
+            {
+                result = await vm.Update();
+                args.Session.Close(false);
+            });
+            if (result)
             {
                 parentView.Close();
             }

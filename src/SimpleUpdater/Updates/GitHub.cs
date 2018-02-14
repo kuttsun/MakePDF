@@ -55,7 +55,7 @@ namespace SimpleUpdater.Updates
         /// <param name="zipFileName"></param>
         /// <param name="outputDir"></param>
         /// <returns></returns>
-        override public async Task<bool> PrepareForUpdate(string zipFileName, string outputDir)
+        override public async Task<AppInfo> PrepareForUpdate(string zipFileName, string outputDir)
         {
             var tag = await GetLatestReleaseTagAsync();
             var jsonUrl = GetAssetUrl(tag, appInfoName);
@@ -67,12 +67,12 @@ namespace SimpleUpdater.Updates
 
             await DownloadZipAsync(zipUrl, outputPath);
 
-            Zip.ExtractEntries(outputPath, $"{appInfo.Name}-{appInfo.Version}");
+            Zip.ExtractEntries(outputPath, GetNewVersionDir(appInfo));
 
             // Delete downloaded zip file.
             File.Delete(outputPath);
 
-            return true;
+            return AppInfo.ReadString($@"{GetNewVersionDir(appInfo)}\AppInfo.json");
         }
 
         async Task<string> DownloadJsonAsync(string url)

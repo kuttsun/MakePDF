@@ -63,12 +63,11 @@ namespace MakePdf.Wpf.Models
         }
 
         public async Task<bool> Update()
-        {
-            bool ret;
+        { 
 
-            ret = await mgr.PrepareForUpdate(Directory.GetCurrentDirectory());
+            var appInfo = await mgr.PrepareForUpdate(Directory.GetCurrentDirectory());
 
-            mgr.ReserveForUpdate(Process.GetCurrentProcess().Id);
+            mgr.ReserveForUpdate(Process.GetCurrentProcess().Id,"MakePdf.exe",appInfo);
 
             return true;
         }

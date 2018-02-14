@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.IO;
 
 using Microsoft.Extensions.Logging;
 
@@ -31,9 +32,9 @@ namespace SimpleUpdater.Updates
         /// <param name="inputPath"></param>
         /// <param name="outputPath"></param>
         /// <returns></returns>
-        abstract public Task<bool> PrepareForUpdate(string inputPath, string outputPath);
+        abstract public Task<AppInfo> PrepareForUpdate(string inputPath, string outputPath);
 
-        public Task<bool> PrepareForUpdate(string inputPath)
+        public Task<AppInfo> PrepareForUpdate(string inputPath)
         {
             return PrepareForUpdate(inputPath, inputPath);
         }
@@ -48,7 +49,7 @@ namespace SimpleUpdater.Updates
         /// ReserveForUpdate(Process.GetCurrentProcess().Id)
         /// </code>
         /// </example>
-        public void ReserveForUpdate(int processId)
+        public void ReserveForUpdate(int processId,string targetAppName,AppInfo appInfo )
         {
             // Start updater
             Process.Start("dotnet", $"SimpleUpdater.dll update --pid={processId}");
@@ -71,10 +72,28 @@ namespace SimpleUpdater.Updates
 
             Console.WriteLine("Start the updates.");
 
-            // 現在の AppInfo を元に、現在のバージョンのファイルを全て削除
 
-            // sourceDir の AppInfo を元に、ファイルをコピー
+            var currentAppInfo = AppInfo.ReadFile("AppInfo.json");
+            var newAppInfo = AppInfo.ReadFile($@"{sourceDir}\AppInfo.json");
 
+            // Delete file in current dir.
+            foreach (var file in currentAppInfo.Files)
+            {
+                File.Delete(file.Name);
+            }
+            File.Delete("AppInfo.json");
+
+            // Copy file to current dir fron new dir.
+            foreach (var file in newAppInfo.Files)
+            {
+                File.Copy($@"{sourceDir}\{file.Name}", $"{file.Name}");
+            }
+            File.Copy($@"{sourceDir}\AppInfo.json", $"AppInfo.json");
+        }
+
+        protected static string GetNewVersionDir(AppInfo appInfo)
+        {
+            return $"{appInfo.Name}-{appInfo.Version}";
         }
     }
 }
