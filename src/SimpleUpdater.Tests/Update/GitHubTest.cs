@@ -25,7 +25,8 @@ namespace SimpleUpdater.Updates.Tests
         [Fact]
         public void PrepareForUpdateTest()
         {
-            Assert.True(mgr.PrepareForUpdate("test.zip").Result);
+            var appInfo = mgr.PrepareForUpdate("test.zip").Result;
+            Assert.NotNull(appInfo);
         }
     }
 }
