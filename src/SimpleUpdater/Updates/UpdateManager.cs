@@ -49,7 +49,10 @@ namespace SimpleUpdater.Updates
         public void Update(string pid, string srcDir, string dstDir)
         {
             // Wait for the target application to finish...
-            Process.GetProcessById(Convert.ToInt32(pid)).WaitForExit();
+            if (pid != null)
+            {
+                Process.GetProcessById(Convert.ToInt32(pid)).WaitForExit();
+            }
 
             // Start the updates.
             var currentAppInfo = AppInfo.ReadFile($@"{dstDir}\{AppInfoFileName}");
@@ -60,14 +63,14 @@ namespace SimpleUpdater.Updates
             {
                 File.Delete($@"{dstDir}\{file.Name}");
             }
-            File.Delete($@"{srcDir}\{AppInfoFileName}");
+            File.Delete($@"{dstDir}\{AppInfoFileName}");
 
             // Copy file to current dir fron new dir.
             foreach (var file in newAppInfo.Files)
             {
-                File.Copy($@"{srcDir}\{file.Name}", $@"{dstDir}\{file.Name}");
+                File.Copy($@"{srcDir}\{file.Name}", $@"{dstDir}\{file.Name}", true);
             }
-            File.Copy($@"{srcDir}\{AppInfoFileName}", $@"{dstDir}\{AppInfoFileName}");
+            File.Copy($@"{srcDir}\{AppInfoFileName}", $@"{dstDir}\{AppInfoFileName}", true);
         }
     }
 }
