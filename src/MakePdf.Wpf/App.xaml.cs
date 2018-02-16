@@ -5,6 +5,12 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Reflection;
+using System.Diagnostics;
+
+using Microsoft.Extensions.CommandLineUtils;
+
+using MakePdf.Wpf.Models;
 
 namespace MakePdf.Wpf
 {
@@ -14,11 +20,62 @@ namespace MakePdf.Wpf
     public partial class App : Application
     {
         [STAThread]
-        public static void Main()
+        public static int Main(string[] args)
         {
-            App app = new App();
-            app.InitializeComponent();
-            app.Run();
+            var assembly = Assembly.GetExecutingAssembly();
+            var appName = assembly.GetName().Name;
+            var appVersion = "";
+
+            Console.WriteLine($"{appName} {appVersion}");
+
+            // Analyze program arguments
+
+            var cla = new CommandLineApplication(throwOnUnexpectedArg: false)
+            {
+                // Application name
+                Name = appName,
+            };
+
+            cla.HelpOption("-?|-h|--help");
+
+            // Start update
+            cla.Command("update", command =>
+            {
+                command.Description = "Start update.";
+                command.HelpOption("-?|-h|--help");
+
+                var pid = command.Option("--pid", "Process ID of target application", CommandOptionType.SingleValue);
+                var targetAppName = command.Option("-n|--name", "Application name. Default is assembly name", CommandOptionType.SingleValue);
+                var srcDir = command.Option("-s|--src", "Source directory (new version directory)", CommandOptionType.SingleValue);
+                var dstDir = command.Option("-d|--dst", "Destination directory (current version direcroty)", CommandOptionType.SingleValue);
+
+                command.OnExecute(() =>
+                {
+                    Updater.Instance.Update(pid.Value(), targetAppName.Value(), srcDir.Value(), dstDir.Value());
+
+                    // Restart application
+                    Process.Start($@"{dstDir.Value()}\{targetAppName.Value()}");
+                    return 0;
+                });
+            });
+
+            // Default behavior
+            cla.OnExecute(() =>
+            {
+                App app = new App();
+                app.InitializeComponent();
+                return app.Run();
+            });
+
+            try
+            {
+                return cla.Execute(args);
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+                return 1;
+            }
         }
 
         protected override void OnStartup(StartupEventArgs e)

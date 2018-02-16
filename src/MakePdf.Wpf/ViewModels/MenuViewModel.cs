@@ -25,9 +25,9 @@ namespace MakePdf.Wpf.ViewModels
             return await updater.CheckForUpdate();
         }
 
-        public async Task<bool> Update()
+        public async Task<bool> PrepareForUpdate()
         {
-            return await updater.Update();
+            return await updater.PrepareForUpdate();
         }
     }
 }

@@ -59,5 +59,10 @@ namespace SimpleUpdater
         {
             return JsonConvert.DeserializeObject<AppInfo>(str);
         }
+
+        public string GetNewVersionDir()
+        {
+            return $"{Name}-{Version}";
+        }
     }
 }

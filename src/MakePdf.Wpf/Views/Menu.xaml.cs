@@ -65,12 +65,12 @@ namespace MakePdf.Wpf.Views
                 return;
             }
 
-            // Update
+            // Download and decompress
             bool result = false;
             var processingDialog2 = new ProcessingDialog("Updating...", $"Please wait a minute.");
             await parentView.dialogHostMain.ShowDialog(processingDialog, async (object s, DialogOpenedEventArgs args) =>
             {
-                result = await vm.Update();
+                result = await vm.PrepareForUpdate();
                 args.Session.Close(false);
             });
             if (result)

@@ -62,14 +62,27 @@ namespace MakePdf.Wpf.Models
             }
         }
 
-        public async Task<bool> Update()
-        { 
+        public async Task<bool> PrepareForUpdate()
+        {
+            try
+            {
+                var appInfo = await mgr.PrepareForUpdate(Directory.GetCurrentDirectory(), "MakePdf.zip");
 
-            var appInfo = await mgr.PrepareForUpdate(Directory.GetCurrentDirectory());
+                // Start new version application
+                Process.Start("MakePdf.exe", $"update --pid={Process.GetCurrentProcess().Id} -n=MakePdf.exe -s={Path.GetFullPath(appInfo.GetNewVersionDir())} -d={Path.GetFullPath(Directory.GetCurrentDirectory())}");
 
-            mgr.ReserveForUpdate(Process.GetCurrentProcess().Id,"MakePdf.exe",appInfo);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return false;
+            }
+        }
 
-            return true;
+        public void Update(string pid, string appName, string srcDir, string dstDir)
+        {
+            mgr.Update(pid, appName, srcDir, dstDir);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace SimpleUpdater.Updates
         /// </summary>
         /// <param name="gitHubRepository">GitHub Repository (e.g. https://github.com/MyName/MyRepository)</param>
         /// <param name="logger"></param>
-        public GitHub(string gitHubRepository, string appInfoName = "AppInfo.json", ILogger logger = null) : base(appInfoName, logger)
+        public GitHub(string gitHubRepository, ILogger logger = null) : base(logger)
         {
             this.logger = logger;
             this.gitHubRepository = gitHubRepository;
@@ -36,7 +36,7 @@ namespace SimpleUpdater.Updates
         {
             var tag = await GetLatestReleaseTagAsync();
 
-            var jsonUrl = GetAssetUrl(tag, appInfoName);
+            var jsonUrl = GetAssetUrl(tag, AppInfoFileName);
 
             return await CheckForUpdateAsync(jsonUrl);
         }
@@ -49,30 +49,35 @@ namespace SimpleUpdater.Updates
             return AppInfo.ReadString(appInfo);
         }
 
+        override public async Task<AppInfo> PrepareForUpdate(string outputDir)
+        {
+            return await PrepareForUpdate(outputDir, AppName + ".zip");
+        }
+
         /// <summary>
         /// Download zip from GitHub, and extract it
         /// </summary>
         /// <param name="zipFileName"></param>
         /// <param name="outputDir"></param>
         /// <returns></returns>
-        override public async Task<AppInfo> PrepareForUpdate(string zipFileName, string outputDir)
+        override public async Task<AppInfo> PrepareForUpdate(string outputDir, string zipFileName)
         {
             var tag = await GetLatestReleaseTagAsync();
-            var jsonUrl = GetAssetUrl(tag, appInfoName);
+            var jsonUrl = GetAssetUrl(tag, AppInfoFileName);
             var zipUrl = GetAssetUrl(tag, zipFileName);
 
             var appInfo = await CheckForUpdateAsync(jsonUrl);
 
-            var outputPath = outputDir + zipFileName;
+            var outputPath = $@"{outputDir}\{zipFileName}";
 
             await DownloadZipAsync(zipUrl, outputPath);
 
-            Zip.ExtractEntries(outputPath, GetNewVersionDir(appInfo));
+            Zip.ExtractEntries(outputPath, appInfo.GetNewVersionDir());
 
             // Delete downloaded zip file.
             File.Delete(outputPath);
 
-            return AppInfo.ReadString($@"{GetNewVersionDir(appInfo)}\AppInfo.json");
+            return AppInfo.ReadFile($@"{appInfo.GetNewVersionDir()}\{AppInfoFileName}");
         }
 
         async Task<string> DownloadJsonAsync(string url)

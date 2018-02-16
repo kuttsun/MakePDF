@@ -66,7 +66,7 @@ namespace SimpleUpdater
 
                 command.OnExecute(() =>
                 {
-                    UpdateManager.Update(pid.Value(), targetAppName.Value(), sourceDir.Value());
+                    //UpdateManager.Update(pid.Value(), targetAppName.Value(), sourceDir.Value());
 
                     return 0;
                 });

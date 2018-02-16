@@ -12,29 +12,12 @@ namespace SimpleUpdater.Common
     {
         public static bool ExtractEntries(string zipFileName, string outputDir, ILogger logger = null)
         {
-            if (Directory.Exists(outputDir) == false)
+            if (Directory.Exists(outputDir))
             {
-                Directory.CreateDirectory(outputDir);
+                Directory.Delete(outputDir, true);
             }
 
-            // Open the zip file, and create a ZipArchive object.
-            using (ZipArchive archive = ZipFile.OpenRead(zipFileName))
-            {
-                // Write the selected file to the specified folder.
-                foreach (ZipArchiveEntry entry in archive.Entries)
-                {
-                    try
-                    {
-                        entry.ExtractToFile($@"{outputDir}\{entry.FullName}");
-                        logger?.LogInformation($"Success: {entry.FullName}");
-                    }
-                    catch (Exception e)
-                    {
-                        logger?.LogCritical(e, $"Failure: {entry.FullName}");
-                        return false;
-                    }
-                }
-            }
+            ZipFile.ExtractToDirectory(zipFileName, outputDir);
 
             return true;
         }
