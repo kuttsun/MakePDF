@@ -9,23 +9,38 @@ using MakePdf.Core.Documents;
 
 namespace MakePdf.Core.Tests.Documents
 {
-    public class OutputPdfTest
+    public class OutputPdfTest : IDisposable
     {
+        string tmpfile = @"TestData\MakePdfOutput.pdf";
+
+        // Setup
+        public OutputPdfTest()
+        {
+        }
+
+        // Teardown
+        public void Dispose()
+        {
+            if (File.Exists(tmpfile)) File.Delete(tmpfile);
+        }
+
         [Fact]
         public void ConstructorTest()
         {
             // Invalid path
-            Assert.Throws<NotSupportedException>(() => new OutputPdf("1:\\foo", null));
+            Assert.Throws<NotSupportedException>(() => new OutputPdf(@"1:\\foo", null));
         }
 
-        [Fact(Skip = "Because it contains I/O")]
+        [Fact]
         public void AddExceptionTest()
         {
             Assert.Throws<IOException>(() =>
             {
-                var output = new OutputPdf(@"MakePdfOutput.pdf", null);
-                // Invalid path
-                output.Add("1:\\foo");
+                using (var output = new OutputPdf(tmpfile, null))
+                {
+                    // Invalid path
+                    output.Add("1:\\foo");
+                }
             });
         }
     }

@@ -16,4 +16,10 @@
     <ProjectReference Include="..\SimpleUpdater\SimpleUpdater.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TestData\AppInfoTest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

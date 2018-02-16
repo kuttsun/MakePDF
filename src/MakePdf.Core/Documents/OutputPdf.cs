@@ -76,12 +76,13 @@ namespace MakePdf.Core.Documents
         {
             var pdfFilename = Path.GetFileName(fullpath);
 
-            // Open PDF
-            var reader = new PdfReader(fullpath);
+            PdfReader reader = null;
 
             try
             {
-                // ドキュメントの結合(この方法だとメモリ消費が大きいらしいが、面倒なのでこれでいくよ)
+                // Open PDF
+                reader = new PdfReader(fullpath);
+
                 // Although this method seems to have a large memory consumption, it is troublesome as this is done
                 copy.AddDocument(reader);
 
@@ -97,7 +98,7 @@ namespace MakePdf.Core.Documents
             }
             finally
             {
-                reader.Close();
+                reader?.Close();
             }
         }
 
@@ -239,9 +240,15 @@ namespace MakePdf.Core.Documents
             }
 
             // Free any unmanaged objects here.
-            copy.Dispose();
+            if (copy.PageEmpty == false)
+            {
+                copy.Dispose();
+            }
             stream.Dispose();
-            doc.Dispose();
+            if (doc.PageNumber > 0)
+            {
+                doc.Dispose();
+            }
 
             disposed = true;
         }
