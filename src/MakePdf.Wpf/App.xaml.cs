@@ -13,6 +13,14 @@ namespace MakePdf.Wpf
     /// </summary>
     public partial class App : Application
     {
+        [STAThread]
+        public static void Main()
+        {
+            App app = new App();
+            app.InitializeComponent();
+            app.Run();
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
