@@ -80,9 +80,9 @@ namespace MakePdf.Wpf.Models
             }
         }
 
-        public void Update(string pid, string appName, string srcDir, string dstDir)
+        public void Update(string pid, string srcDir, string dstDir)
         {
-            mgr.Update(pid, appName, srcDir, dstDir);
+            mgr.Update(pid, srcDir, dstDir);
         }
     }
 }
