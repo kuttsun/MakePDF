@@ -65,6 +65,10 @@ namespace MakePdf.Core
                         {
 
                         }
+                        else
+                        {
+                            throw new FileNotFoundException();
+                        }
                     }
 
                     // Finalize

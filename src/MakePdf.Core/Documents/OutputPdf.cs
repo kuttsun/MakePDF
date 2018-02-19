@@ -240,7 +240,7 @@ namespace MakePdf.Core.Documents
             }
 
             // Free any unmanaged objects here.
-            if (copy.PageEmpty == false)
+            if (copy.PageNumber > 0)
             {
                 copy.Dispose();
             }

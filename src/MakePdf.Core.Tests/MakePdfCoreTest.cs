@@ -6,18 +6,41 @@ using Xunit;
 
 namespace MakePdf.Core.Tests
 {
-    public class MakePdfCoreTest
+    public class MakePdfCoreFixture : IDisposable
     {
-        [Fact(Skip = "Because it contains I/O")]
+        public string OutputFile { get; } = @"TestData\MakePdfOutput.pdf";
+
+        // Setup
+        public MakePdfCoreFixture()
+        {
+        }
+
+        // Teardown
+        public void Dispose()
+        {
+            File.Delete(OutputFile);
+        }
+    }
+
+    public class MakePdfCoreTest : IClassFixture<MakePdfCoreFixture>
+    {
+        MakePdfCoreFixture fixture;
+
+        public MakePdfCoreTest(MakePdfCoreFixture fixture)
+        {
+            this.fixture = fixture;
+        }
+
+        [Fact]
         void RunTest()
         {
             var core = new MakePdfCore(null);
 
             var files = new List<string>()
             {
-                Path.GetFullPath("MakePdfTest1.doc"),
-                Path.GetFullPath("MakePdfTest2.doc"),
-                Path.GetFullPath("MakePdfTest3.pdf"),
+                Path.GetFullPath(@"TestData\word1.docx"),
+                Path.GetFullPath(@"TestData\word2.doc"),
+                Path.GetFullPath(@"TestData\pdf1.pdf"),
             };
 
             // Setting
@@ -29,7 +52,9 @@ namespace MakePdf.Core.Tests
 
             core.Setting.Property.Title = "Title Test";
 
-            core.RunAsync(@"MakePdfOutput.pdf", files).Wait();
+            core.RunAsync(fixture.OutputFile, files).Wait();
+
+            Assert.True(File.Exists(fixture.OutputFile));
         }
 
         [Theory,
