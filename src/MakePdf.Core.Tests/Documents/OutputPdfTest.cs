@@ -11,7 +11,7 @@ namespace MakePdf.Core.Tests.Documents
 {
     public class OutputPdfTest : IDisposable
     {
-        string tmpfile = @"TestData\MakePdfOutput.pdf";
+        string tmpfile = @"TestData\OutputPdfTest.pdf";
 
         // Setup
         public OutputPdfTest()

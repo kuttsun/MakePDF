@@ -8,7 +8,7 @@ namespace MakePdf.Core.Tests
 {
     public class MakePdfCoreFixture : IDisposable
     {
-        public string OutputFile { get; } = @"TestData\MakePdfOutput.pdf";
+        public string OutputFile { get; } = @"TestData\MakePdfCoreTest.pdf";
 
         // Setup
         public MakePdfCoreFixture()
