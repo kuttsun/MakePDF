@@ -48,9 +48,10 @@ namespace SimpleUpdater.Updates
         /// <param name="dstDir"></param>
         public void Update(string pid, string srcDir, string dstDir)
         {
-            // Wait for the target application to finish...
+            logger?.LogInformation($"Start Update.");
             if (pid != null)
             {
+                logger?.LogInformation($"Wait for the target application ({pid}) to finish...");
                 Process.GetProcessById(Convert.ToInt32(pid)).WaitForExit();
             }
 

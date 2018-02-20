@@ -26,6 +26,7 @@ namespace MakePdf.Wpf.Models
         string assemblyInformationalVersion;
 
         UpdateManager mgr;
+        ILogger logger;
 
         private Updater()
         {
@@ -37,7 +38,7 @@ namespace MakePdf.Wpf.Models
             });
             loggerFactory.ConfigureNLog("NLog.config");
 
-            var logger = loggerFactory.CreateLogger("logfile");
+            logger = loggerFactory.CreateLogger("logfile");
 
             mgr = new GitHub("https://github.com/kuttsun/MakePdf", logger);
 
@@ -90,6 +91,8 @@ namespace MakePdf.Wpf.Models
 
                 // Start new version application
                 Process.Start($@"{srcDir}\{assemblyName}", $"update --pid={Process.GetCurrentProcess().Id} -n={assemblyName} -s={srcDir} -d={dstDir}");
+
+                logger?.LogInformation($@"StartProcess: {srcDir}\{assemblyName} update --pid={Process.GetCurrentProcess().Id} -n={assemblyName} -s={srcDir} -d={dstDir}");
 
                 return true;
             }

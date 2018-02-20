@@ -51,6 +51,7 @@ namespace MakePdf.Wpf.Views
             {
                 var okdialog = new OkDialog("Not found", $"You are using the latest version.");
                 await parentView.dialogHostMain.ShowDialog(okdialog);
+                return;
             }
 
             YesNo needsUpdate = YesNo.No;
