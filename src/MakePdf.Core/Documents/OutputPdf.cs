@@ -29,20 +29,6 @@ namespace MakePdf.Core.Documents
 
         public OutputPdf(string fullpath, ILogger logger) : base(fullpath, logger)
         {
-            //using (var doc = new Document())
-            //using (var stream = new FileStream(fullpath, FileMode.Create))
-            //{
-            //    // ドキュメントにファイルストリームを割り当てる?（ここらへんがいまいちピンとこない）
-            //    using (var copy = new PdfCopy(doc, stream))
-            //    {
-            //        doc.Open();
-            //    }
-            //}
-
-            // ドキュメントを閉じる
-            //copy.Close();
-            //doc.Close();
-
             try
             {
                 doc = new Document();
