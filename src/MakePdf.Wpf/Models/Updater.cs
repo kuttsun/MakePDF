@@ -16,6 +16,8 @@ namespace MakePdf.Wpf.Models
     {
         public static Updater Instance { get; } = new Updater();
 
+        string name;
+        string assemblyName;
         string assemblyVersion;
         string assemblyFileVersion;
         string assemblyInformationalVersion;
@@ -25,11 +27,10 @@ namespace MakePdf.Wpf.Models
         private Updater()
         {
             var assembly = Assembly.GetExecutingAssembly();
-
-            //Exeの場所を表示
-
             var fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
 
+            name = assembly.GetName().Name;
+            assemblyName = Path.GetFileName(Assembly.GetExecutingAssembly().Location);
             assemblyVersion = assembly.GetName().Version.ToString();
             assemblyFileVersion = fvi.FileVersion;
             assemblyInformationalVersion = fvi.ProductVersion;
@@ -66,10 +67,13 @@ namespace MakePdf.Wpf.Models
         {
             try
             {
-                var appInfo = await mgr.PrepareForUpdate(Directory.GetCurrentDirectory(), "MakePdf.zip");
+                var appInfo = await mgr.PrepareForUpdate(Directory.GetCurrentDirectory(), name + ".zip");
+
+                var srcDir = Path.GetFullPath(appInfo.GetNewVersionDir());
+                var dstDir = Path.GetFullPath(Directory.GetCurrentDirectory());
 
                 // Start new version application
-                Process.Start("MakePdf.exe", $"update --pid={Process.GetCurrentProcess().Id} -n=MakePdf.exe -s={Path.GetFullPath(appInfo.GetNewVersionDir())} -d={Path.GetFullPath(Directory.GetCurrentDirectory())}");
+                Process.Start($@"{srcDir}\{assemblyName}", $"update --pid={Process.GetCurrentProcess().Id} -n={assemblyName} -s={srcDir} -d={dstDir}");
 
                 return true;
             }
