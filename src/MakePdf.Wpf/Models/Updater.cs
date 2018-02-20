@@ -7,6 +7,9 @@ using System.Reflection;
 using System.Diagnostics;
 using System.IO;
 
+using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
+
 using SimpleUpdater;
 using SimpleUpdater.Updates;
 
@@ -22,10 +25,23 @@ namespace MakePdf.Wpf.Models
         string assemblyFileVersion;
         string assemblyInformationalVersion;
 
-        UpdateManager mgr = new GitHub("https://github.com/kuttsun/MakePdf");
+        UpdateManager mgr;
 
         private Updater()
         {
+            var loggerFactory = new LoggerFactory();
+            loggerFactory.AddNLog(new NLogProviderOptions
+            {
+                CaptureMessageTemplates = true,
+                CaptureMessageProperties = true
+            });
+            loggerFactory.ConfigureNLog("NLog.config");
+
+            var logger = loggerFactory.CreateLogger("logfile");
+
+            mgr = new GitHub("https://github.com/kuttsun/MakePdf", logger);
+
+
             var assembly = Assembly.GetExecutingAssembly();
             var fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
 

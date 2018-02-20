@@ -54,7 +54,7 @@ namespace MakePdf.Wpf
                     Updater.Instance.Update(pid.Value(), srcDir.Value(), dstDir.Value());
 
                     // Restart application
-                    Process.Start($@"{dstDir.Value()}\{targetAppName.Value()}");
+                    Process.Start($@"{dstDir.Value()}\{targetAppName.Value()}","completed");
                     return 0;
                 });
             });

@@ -62,15 +62,19 @@ namespace SimpleUpdater.Updates
             foreach (var file in currentAppInfo.Files)
             {
                 File.Delete($@"{dstDir}\{file.Name}");
+                logger?.LogDebug($@"[Delete] {dstDir}\{file.Name}");
             }
             File.Delete($@"{dstDir}\{AppInfoFileName}");
+            logger?.LogDebug($@"[Delete] {dstDir}\{AppInfoFileName}");
 
             // Copy file to current dir fron new dir.
             foreach (var file in newAppInfo.Files)
             {
                 File.Copy($@"{srcDir}\{file.Name}", $@"{dstDir}\{file.Name}", true);
+                logger?.LogDebug($@"[Copy] {srcDir}\{file.Name}");
             }
             File.Copy($@"{srcDir}\{AppInfoFileName}", $@"{dstDir}\{AppInfoFileName}", true);
+            logger?.LogDebug($@"[Copy] {srcDir}\{AppInfoFileName}");
         }
     }
 }
