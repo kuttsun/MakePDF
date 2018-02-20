@@ -240,14 +240,23 @@ namespace MakePdf.Core.Documents
             }
 
             // Free any unmanaged objects here.
-            if (copy.PageNumber > 0)
-            {
+            try { 
                 copy.Dispose();
             }
+            catch(Exception e)
+            {
+                logger?.LogError(e.Message);
+            }
+
             stream.Dispose();
-            if (doc.PageNumber > 0)
+
+            try
             {
                 doc.Dispose();
+            }
+            catch (Exception e)
+            {
+                logger?.LogError(e.Message);
             }
 
             disposed = true;
