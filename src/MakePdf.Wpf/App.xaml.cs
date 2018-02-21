@@ -58,7 +58,7 @@ namespace MakePdf.Wpf
 
                         param = "completed";
                     }
-                    catch(Exception)
+                    catch (Exception)
                     {
                         param = "failed";
                     }
@@ -84,7 +84,7 @@ namespace MakePdf.Wpf
             }
             catch (Exception e)
             {
-                Debug.Assert(false);
+                Debug.Assert(false, e.Message);
                 return 1;
             }
         }
