@@ -1,4 +1,9 @@
 # run in the project root
+
+# Arg[0] : Source directory (e.g. .\bin\Release)
+# Arg[1] : Destinate directory (e.g. .\bin)
+# Arg[2] : Application name (e.g. $(SolutionName))
+
 using namespace System.IO;
 using namespace System.IO.Compression;
 
@@ -7,7 +12,7 @@ $sourceDir = $Args[0]
 if (-not ($sourceDir)) { return 100 }
 
 # target zip file path
-$targetZipFile = $Args[1]
+$targetZipFile = $Args[1] + "\" + $Args[2] + ".zip"
 if (-not ($targetZipFile)) { return 101 }
 
 # get directory name from target zip file
@@ -18,7 +23,9 @@ $parent = [Path]::GetDirectoryName($targetZipFile)
 [File]::Delete($targetZipFile)
 
 # temporary directory name
-$tempDir = $parent + "\temp"
+$tempDir = $parent + "\" + $Args[2]
+# delete temporary directory
+Remove-Item -Recurse -path $tempDir
 # copy to temporary directory from release directory
 Copy-Item $sourceDir -destination $tempDir -recurse
 
@@ -36,6 +43,4 @@ Add-Type -AssemblyName System.IO.Compression.FileSystem
 # create zip
 [ZipFile]::CreateFromDirectory($tempDir, $targetZipFile)
 
-# delete temporary directory
-Remove-Item -Recurse -path $tempDir
 

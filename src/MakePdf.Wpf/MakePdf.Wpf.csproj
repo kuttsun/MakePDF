@@ -236,7 +236,7 @@
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release (
 cd $(ProjectDir)
-powershell -ExecutionPolicy Unrestricted .\CreateZip.ps1 .\bin\Release .\bin\$(SolutionName).zip
+powershell -ExecutionPolicy Unrestricted .\CreateZip.ps1 .\bin\Release .\bin $(SolutionName)
 )</PostBuildEvent>
   </PropertyGroup>
 </Project>

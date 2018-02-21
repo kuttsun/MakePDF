@@ -51,10 +51,21 @@ namespace MakePdf.Wpf
 
                 command.OnExecute(() =>
                 {
-                    Updater.Instance.Update(pid.Value(), srcDir.Value(), dstDir.Value());
+                    string param;
+                    try
+                    {
+                        Updater.Instance.Update(pid.Value(), srcDir.Value(), dstDir.Value());
+
+                        param = "completed";
+                    }
+                    catch(Exception)
+                    {
+                        param = "failed";
+                    }
 
                     // Restart application
-                    Process.Start($@"{dstDir.Value()}\{targetAppName.Value()}","completed");
+                    Process.Start($@"{dstDir.Value()}\{targetAppName.Value()}", param);
+
                     return 0;
                 });
             });
@@ -73,7 +84,7 @@ namespace MakePdf.Wpf
             }
             catch (Exception e)
             {
-                Console.Write(e.Message);
+                Debug.Assert(false);
                 return 1;
             }
         }
