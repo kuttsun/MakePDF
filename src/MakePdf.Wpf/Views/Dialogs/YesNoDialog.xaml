@@ -10,7 +10,7 @@
     <StackPanel Margin="16">
         <Label Content="{Binding Title}" x:Name="labelTitle" FontSize="24"/>
         <Label Content="{Binding Message}" x:Name="labelMessage"/>
-        <StackPanel Margin="16" Orientation="Horizontal">
+        <StackPanel Margin="16" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="Yes" Style="{DynamicResource MaterialDesignFlatButton}" Command="{x:Static material:DialogHost.CloseDialogCommand}">
                 <Button.CommandParameter>
                     <local:YesNo>Yes</local:YesNo>
