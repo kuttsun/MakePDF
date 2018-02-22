@@ -138,6 +138,7 @@
     <Compile Include="Models\Core.cs" />
     <Compile Include="Models\Updater.cs" />
     <Compile Include="ViewModels\EasyMode\InputViewModel.cs" />
+    <Compile Include="ViewModels\Messenger.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\Dialogs\OkDialog.xaml.cs">
       <DependentUpon>OkDialog.xaml</DependentUpon>

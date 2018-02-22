@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 
 using MaterialDesignThemes.Wpf;
 
+using Prism.Events;
+
 using MakePdf.Wpf.Views.Dialogs;
 using MakePdf.Wpf.ViewModels;
 
@@ -34,6 +36,8 @@ namespace MakePdf.Wpf.Views
 
             vm = DataContext as MenuViewModel;
             parentView = Application.Current.MainWindow as Shell;
+
+            Messenger.Instance.GetEvent<PubSubEvent<string>>().Subscribe(x => NewVersionFound(x));
         }
 
         async void CheckForUpdate_Click(object sender, RoutedEventArgs e)
@@ -54,6 +58,11 @@ namespace MakePdf.Wpf.Views
                 return;
             }
 
+            NewVersionFound(newVersion);
+        }
+
+        async void NewVersionFound(string newVersion)
+        {
             YesNo needsUpdate = YesNo.No;
             var yesNoDialog = new YesNoDialog("New version found", $"The new version is available.{Environment.NewLine}Current version:{Environment.NewLine}New version: {newVersion + Environment.NewLine}Do you want to update now ?");
             await parentView.dialogHostMain.ShowDialog(yesNoDialog, null, (object s, DialogClosingEventArgs args) =>
@@ -61,14 +70,14 @@ namespace MakePdf.Wpf.Views
                 needsUpdate = (YesNo)args.Parameter;
             });
 
-            if(needsUpdate == YesNo.No)
+            if (needsUpdate == YesNo.No)
             {
                 return;
             }
 
             // Download and decompress
             bool result = false;
-            var processingDialog2 = new ProcessingDialog("Updating...", $"Please wait a minute.");
+            var processingDialog = new ProcessingDialog("Downloading...", $"Please wait a minute.");
             await parentView.dialogHostMain.ShowDialog(processingDialog, async (object s, DialogOpenedEventArgs args) =>
             {
                 result = await vm.PrepareForUpdate();

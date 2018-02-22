@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Events;
 
 using MakePdf.Wpf.Models;
 
@@ -25,7 +26,10 @@ namespace MakePdf.Wpf.ViewModels
             {
                 var ret = await updater.CheckForUpdate();
 
-                Debug.WriteLine(ret);
+                if (ret != null)
+                {
+                    Messenger.Instance.GetEvent<PubSubEvent<string>>().Publish(ret);
+                }
             });
         }
 
