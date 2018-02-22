@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 using MaterialDesignThemes.Wpf;
 
@@ -39,6 +40,22 @@ namespace MakePdf.Wpf.Views
 
             Messenger.Instance.GetEvent<PubSubEvent<string>>().Subscribe(x => NewVersionFound(x));
         }
+
+        void GitHub_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/kuttsun/MakePdf");
+        }
+
+        void Usage_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/kuttsun/MakePdf/wiki");
+        }
+
+        void About_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
 
         async void CheckForUpdate_Click(object sender, RoutedEventArgs e)
         {
