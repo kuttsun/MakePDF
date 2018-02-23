@@ -13,28 +13,32 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MakePdf.Wpf.Views.Dialogs
+namespace MakePdf.Wpf.Views.Dialogs.Common
 {
-    public enum YesNo
+    public enum Selected
     {
-        Yes,
-        No
+        // e.g. Yes, OK
+        Affirmative,
+        // e.g. No, Cancel
+        Negative
     }
 
     /// <summary>
-    /// OverwriteDialog.xaml の相互作用ロジック
+    /// Interaction logic for TwoButtonDialog.xaml
     /// </summary>
-    public partial class YesNoDialog : UserControl
+    public partial class TwoButtonDialog : UserControl
     {
-        public YesNoDialog()
+        public TwoButtonDialog()
         {
             InitializeComponent();
         }
 
-        public YesNoDialog(string title, string message) : this()
+        public TwoButtonDialog(string title, string message, string affirmativeButtonText, string negativeButtonText) : this()
         {
             labelTitle.Content = title;
             labelMessage.Content = message;
+            affirmativeButton.Content = affirmativeButtonText;
+            negativeButton.Content = negativeButtonText;
         }
     }
 }

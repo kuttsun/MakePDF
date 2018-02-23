@@ -18,7 +18,7 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 
 using MaterialDesignThemes.Wpf;
 
-using MakePdf.Wpf.Views.Dialogs;
+using MakePdf.Wpf.Views.Dialogs.Common;
 using MakePdf.Wpf.ViewModels.EasyMode;
 
 namespace MakePdf.Wpf.Views.EasyMode
@@ -123,14 +123,14 @@ namespace MakePdf.Wpf.Views.EasyMode
 
             if (vm.OutputFile == "")
             {
-                var overwriteDialog = new OkDialog("Output file is empty.", $"Please specify the output file.");
+                var overwriteDialog = new OneButtonDialog("Output file is empty.", $"Please specify the output file.");
                 await parentView.dialogHostMain.ShowDialog(overwriteDialog);
                 return;
             }
 
             if (File.Exists(vm.OutputFile))
             {
-                var overwriteDialog = new YesNoDialog("Output file exists", $"Overwrite ?");
+                var overwriteDialog = new TwoButtonDialog("Output file exists", "", "Yes", "No");
                 var result = await parentView.dialogHostMain.ShowDialog(overwriteDialog) as bool?;
                 if (result == false)
                 {
@@ -145,7 +145,7 @@ namespace MakePdf.Wpf.Views.EasyMode
                 await vm.StartAsync();
                 args.Session.Close(false);
             });
-            
+
 
             //VM.Start();
             //var metroDialogSettings = new MetroDialogSettings()

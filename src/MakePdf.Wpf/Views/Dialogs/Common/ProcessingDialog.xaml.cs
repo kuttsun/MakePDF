@@ -13,10 +13,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MakePdf.Wpf.Views.Dialogs
+using MakePdf.Wpf.ViewModels.Dialogs.Common;
+
+namespace MakePdf.Wpf.Views.Dialogs.Common
 {
     /// <summary>
-    /// ProcessingDialog.xaml の相互作用ロジック
+    /// Interaction logic for ProcessingDialog.xaml
     /// </summary>
     public partial class ProcessingDialog : UserControl
     {

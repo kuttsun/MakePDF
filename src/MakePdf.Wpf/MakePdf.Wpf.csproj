@@ -137,25 +137,36 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Models\Core.cs" />
     <Compile Include="Models\Updater.cs" />
+    <Compile Include="ViewModels\Dialogs\Common\OneButtonDialogViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\Common\ProcessingDialogViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\Common\TwoButtonDialogViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\NewVersionFoundDialogViewModel.cs" />
     <Compile Include="ViewModels\EasyMode\InputViewModel.cs" />
     <Compile Include="ViewModels\Messenger.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
-    <Compile Include="Views\Dialogs\OkDialog.xaml.cs">
-      <DependentUpon>OkDialog.xaml</DependentUpon>
+    <Compile Include="Views\Dialogs\Common\OneButtonDialog.xaml.cs">
+      <DependentUpon>OneButtonDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\NewVersionFoundDialog.xaml.cs">
+      <DependentUpon>NewVersionFoundDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EasyMode\Input.xaml.cs">
       <DependentUpon>Input.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Dialogs\YesNoDialog.xaml.cs">
-      <DependentUpon>YesNoDialog.xaml</DependentUpon>
+    <Compile Include="Views\Dialogs\Common\TwoButtonDialog.xaml.cs">
+      <DependentUpon>TwoButtonDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Dialogs\ProcessingDialog.xaml.cs">
+    <Compile Include="Views\Dialogs\Common\ProcessingDialog.xaml.cs">
       <DependentUpon>ProcessingDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\Dialogs\OkDialog.xaml">
+    <Page Include="Views\Dialogs\Common\OneButtonDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialogs\NewVersionFoundDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -163,11 +174,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Dialogs\YesNoDialog.xaml">
+    <Page Include="Views\Dialogs\Common\TwoButtonDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Dialogs\ProcessingDialog.xaml">
+    <Page Include="Views\Dialogs\Common\ProcessingDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

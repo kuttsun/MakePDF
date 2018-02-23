@@ -19,6 +19,7 @@ using MaterialDesignThemes.Wpf;
 using Prism.Events;
 
 using MakePdf.Wpf.Views.Dialogs;
+using MakePdf.Wpf.Views.Dialogs.Common;
 using MakePdf.Wpf.ViewModels;
 
 namespace MakePdf.Wpf.Views
@@ -70,7 +71,7 @@ namespace MakePdf.Wpf.Views
 
             if (newVersion == null)
             {
-                var okdialog = new OkDialog("Not found", $"You are using the latest version.");
+                var okdialog = new OneButtonDialog("Not found", $"You are using the latest version.");
                 await parentView.dialogHostMain.ShowDialog(okdialog);
                 return;
             }
@@ -81,8 +82,8 @@ namespace MakePdf.Wpf.Views
         async void NewVersionFound(string newVersion)
         {
             YesNo needsUpdate = YesNo.No;
-            var yesNoDialog = new YesNoDialog("New version found", $"The new version is available.{Environment.NewLine}Current version:{Environment.NewLine}New version: {newVersion + Environment.NewLine}Do you want to update now ?");
-            await parentView.dialogHostMain.ShowDialog(yesNoDialog, null, (object s, DialogClosingEventArgs args) =>
+            var newVersionFoundDialog = new NewVersionFoundDialog(newVersion);
+            await parentView.dialogHostMain.ShowDialog(newVersionFoundDialog, null, (object s, DialogClosingEventArgs args) =>
             {
                 needsUpdate = (YesNo)args.Parameter;
             });

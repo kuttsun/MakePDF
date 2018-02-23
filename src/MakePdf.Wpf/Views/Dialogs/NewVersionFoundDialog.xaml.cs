@@ -15,20 +15,25 @@ using System.Windows.Shapes;
 
 namespace MakePdf.Wpf.Views.Dialogs
 {
-    /// <summary>
-    /// OverwriteDialog.xaml の相互作用ロジック
-    /// </summary>
-    public partial class OkDialog : UserControl
+    public enum YesNo
     {
-        public OkDialog()
+        Yes,
+        No
+    }
+
+    /// <summary>
+    /// Interaction logic for TwoButtonDialog.xaml
+    /// </summary>
+    public partial class NewVersionFoundDialog : UserControl
+    {
+        public NewVersionFoundDialog()
         {
             InitializeComponent();
         }
 
-        public OkDialog(string title, string message) : this()
+        public NewVersionFoundDialog(string newVersion) : this()
         {
-            labelTitle.Content = title;
-            labelMessage.Content = message;
+            labelNewVersion.Content = newVersion;
         }
     }
 }
