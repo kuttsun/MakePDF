@@ -20,9 +20,9 @@ using Prism.Events;
 
 using MakePdf.Wpf.Views.Dialogs;
 using MakePdf.Wpf.Views.Dialogs.Common;
-using MakePdf.Wpf.ViewModels;
+using MakePdf.Wpf.ViewModels.Pages;
 
-namespace MakePdf.Wpf.Views
+namespace MakePdf.Wpf.Views.Pages
 {
     /// <summary>
     /// Interaction logic for Menu.xaml

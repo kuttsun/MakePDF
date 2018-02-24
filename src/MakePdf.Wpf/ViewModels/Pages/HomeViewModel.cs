@@ -8,7 +8,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 
-namespace MakePdf.Wpf.ViewModels
+namespace MakePdf.Wpf.ViewModels.Pages
 {
     class HomeViewModel : BindableBase
     {

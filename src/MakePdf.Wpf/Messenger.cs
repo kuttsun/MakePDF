@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Prism.Events;
 
-namespace MakePdf.Wpf.ViewModels
+namespace MakePdf.Wpf
 {
     class Messenger : EventAggregator
     {

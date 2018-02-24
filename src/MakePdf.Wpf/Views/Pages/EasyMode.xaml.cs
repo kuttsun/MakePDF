@@ -19,26 +19,26 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using MaterialDesignThemes.Wpf;
 
 using MakePdf.Wpf.Views.Dialogs.Common;
-using MakePdf.Wpf.ViewModels.EasyMode;
+using MakePdf.Wpf.ViewModels.Pages;
 
-namespace MakePdf.Wpf.Views.EasyMode
+namespace MakePdf.Wpf.Views.Pages
 {
     /// <summary>
     /// Interaction logic for Input.xaml
     /// </summary>
-    public partial class Input : UserControl
+    public partial class EasyMode : UserControl
     {
         readonly string exePath;
         readonly string exeFullPath;
         readonly string startupPath;
 
-        InputViewModel vm;
+        EasyModeViewModel vm;
 
-        public Input()
+        public EasyMode()
         {
             InitializeComponent();
 
-            vm = DataContext as InputViewModel;
+            vm = DataContext as EasyModeViewModel;
 
             exePath = Environment.GetCommandLineArgs()[0];
             exeFullPath = Path.GetFullPath(exePath);

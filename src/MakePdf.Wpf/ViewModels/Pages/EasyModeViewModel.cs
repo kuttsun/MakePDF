@@ -12,9 +12,9 @@ using Prism.Regions;
 
 using MakePdf.Wpf.Models;
 
-namespace MakePdf.Wpf.ViewModels.EasyMode
+namespace MakePdf.Wpf.ViewModels.Pages
 {
-    class InputViewModel : BindableBase
+    class EasyModeViewModel : BindableBase
     {
         readonly IRegionManager _regionManager;
 
@@ -38,7 +38,7 @@ namespace MakePdf.Wpf.ViewModels.EasyMode
         public TargetFile SelectedItem { get; set; } = new TargetFile();
         public int SelectedIndex { get; set; }
 
-        public InputViewModel(IRegionManager regionManager)
+        public EasyModeViewModel(IRegionManager regionManager)
         {
             core = new Models.Core(null);
             _regionManager = regionManager;

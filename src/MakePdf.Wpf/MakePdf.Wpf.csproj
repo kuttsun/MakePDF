@@ -141,8 +141,8 @@
     <Compile Include="ViewModels\Dialogs\Common\ProcessingDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\Common\TwoButtonDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\NewVersionFoundDialogViewModel.cs" />
-    <Compile Include="ViewModels\EasyMode\InputViewModel.cs" />
-    <Compile Include="ViewModels\Messenger.cs" />
+    <Compile Include="ViewModels\Pages\EasyModeViewModel.cs" />
+    <Compile Include="Messenger.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\Dialogs\Common\OneButtonDialog.xaml.cs">
       <DependentUpon>OneButtonDialog.xaml</DependentUpon>
@@ -150,8 +150,8 @@
     <Compile Include="Views\Dialogs\NewVersionFoundDialog.xaml.cs">
       <DependentUpon>NewVersionFoundDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EasyMode\Input.xaml.cs">
-      <DependentUpon>Input.xaml</DependentUpon>
+    <Compile Include="Views\Pages\EasyMode.xaml.cs">
+      <DependentUpon>EasyMode.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dialogs\Common\TwoButtonDialog.xaml.cs">
       <DependentUpon>TwoButtonDialog.xaml</DependentUpon>
@@ -170,7 +170,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\EasyMode\Input.xaml">
+    <Page Include="Views\Pages\EasyMode.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -182,11 +182,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Menu.xaml">
+    <Page Include="Views\Pages\Menu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Home.xaml">
+    <Page Include="Views\Pages\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -194,12 +194,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModels\MenuViewModel.cs" />
-    <Compile Include="ViewModels\HomeViewModel.cs" />
-    <Compile Include="Views\Menu.xaml.cs">
+    <Compile Include="ViewModels\Pages\MenuViewModel.cs" />
+    <Compile Include="ViewModels\Pages\HomeViewModel.cs" />
+    <Compile Include="Views\Pages\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Home.xaml.cs">
+    <Compile Include="Views\Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\Shell.xaml">

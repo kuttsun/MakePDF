@@ -11,6 +11,7 @@ using Prism.Mvvm;
 using Prism.Unity;
 
 using MakePdf.Wpf.Views;
+using MakePdf.Wpf.Views.Pages;
 
 namespace MakePdf.Wpf
 {
@@ -35,7 +36,7 @@ namespace MakePdf.Wpf
             // Register all Views (to use RegionManager)
             Container.RegisterTypeForNavigation<Menu>("Menu");
             Container.RegisterTypeForNavigation<Home>("Home");
-            Container.RegisterTypeForNavigation<Views.EasyMode.Input>("EasyMode.Input");
+            Container.RegisterTypeForNavigation<Views.Pages.EasyMode>("EasyMode.Input");
 
             //    this.Container.RegisterTypes(
             //        AllClasses.FromLoadedAssemblies().Where(t => t.Namespace.EndsWith(".Views")),

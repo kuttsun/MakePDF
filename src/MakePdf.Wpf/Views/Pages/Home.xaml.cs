@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MakePdf.Wpf.Views
+namespace MakePdf.Wpf.Views.Pages
 {
     /// <summary>
     /// Interaction logic for HomePage.xaml

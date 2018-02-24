@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using Prism.Regions;
 
+using MakePdf.Wpf.Views.Pages;
+
 namespace MakePdf.Wpf.ViewModels
 {
     public class ShellViewModel
@@ -13,8 +15,8 @@ namespace MakePdf.Wpf.ViewModels
         public ShellViewModel(IRegionManager rm)
         {
             // Set initial page
-            rm.RegisterViewWithRegion("MenuRegion", typeof(Views.Menu));
-            rm.RegisterViewWithRegion("MainRegion", typeof(Views.Home));
+            rm.RegisterViewWithRegion("MenuRegion", typeof(Menu));
+            rm.RegisterViewWithRegion("MainRegion", typeof(Home));
         }
     }
 }

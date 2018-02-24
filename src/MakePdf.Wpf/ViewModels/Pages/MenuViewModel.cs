@@ -11,7 +11,7 @@ using Prism.Events;
 
 using MakePdf.Wpf.Models;
 
-namespace MakePdf.Wpf.ViewModels
+namespace MakePdf.Wpf.ViewModels.Pages
 {
     class MenuViewModel : BindableBase
     {
