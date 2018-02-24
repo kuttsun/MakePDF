@@ -130,9 +130,9 @@ namespace MakePdf.Wpf.Views.EasyMode
 
             if (File.Exists(vm.OutputFile))
             {
-                var overwriteDialog = new TwoButtonDialog("Output file exists", "", "Yes", "No");
-                var result = await parentView.dialogHostMain.ShowDialog(overwriteDialog) as bool?;
-                if (result == false)
+                var overwriteDialog = new TwoButtonDialog("Output file exists", $"The output file already exists.{Environment.NewLine}Would you like to overwrite it?", "Yes", "No");
+                var result = await parentView.dialogHostMain.ShowDialog(overwriteDialog) as Selected?;
+                if (result == Selected.Negative)
                 {
                     return;
                 }
@@ -145,20 +145,6 @@ namespace MakePdf.Wpf.Views.EasyMode
                 await vm.StartAsync();
                 args.Session.Close(false);
             });
-
-
-            //VM.Start();
-            //var metroDialogSettings = new MetroDialogSettings()
-            //{
-            //    AffirmativeButtonText = "Yes",
-            //    NegativeButtonText = "No",
-            //};
-            //var metroWindow = Application.Current.MainWindow as MetroWindow;
-            //var select = await metroWindow.ShowMessageAsync("Title", $"test", MessageDialogStyle.AffirmativeAndNegative, metroDialogSettings);
-            //if (select == MessageDialogResult.Affirmative)
-            //{
-            //}
-
         }
     }
 }
