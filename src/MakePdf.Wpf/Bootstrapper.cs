@@ -36,7 +36,8 @@ namespace MakePdf.Wpf
             // Register all Views (to use RegionManager)
             Container.RegisterTypeForNavigation<Menu>("Menu");
             Container.RegisterTypeForNavigation<Home>("Home");
-            Container.RegisterTypeForNavigation<Views.Pages.EasyMode>("EasyMode.Input");
+            Container.RegisterTypeForNavigation<EasyMode>("EasyMode");
+            Container.RegisterTypeForNavigation<StandardMode>("StandardMode");
 
             //    this.Container.RegisterTypes(
             //        AllClasses.FromLoadedAssemblies().Where(t => t.Namespace.EndsWith(".Views")),

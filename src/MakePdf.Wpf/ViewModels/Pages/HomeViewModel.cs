@@ -15,17 +15,21 @@ namespace MakePdf.Wpf.ViewModels.Pages
         private readonly IRegionManager _regionManager;
 
         public DelegateCommand EasyModeButtonCommand { get; }
+        public DelegateCommand StandardModeButtonCommand { get; }
 
         public HomeViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
 
-            EasyModeButtonCommand = new DelegateCommand(ButtonClicked);
-        }
+            EasyModeButtonCommand = new DelegateCommand(() =>
+            {
+                _regionManager.RequestNavigate("MainRegion", "EasyMode");
+            });
 
-        private void ButtonClicked()
-        {
-            _regionManager.RequestNavigate("MainRegion", "EasyMode.Input");
+            StandardModeButtonCommand = new DelegateCommand(() =>
+            {
+                _regionManager.RequestNavigate("MainRegion", "StandardMode");
+            });
         }
     }
 }

@@ -24,7 +24,7 @@ using MakePdf.Wpf.ViewModels.Pages;
 namespace MakePdf.Wpf.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for Input.xaml
+    /// Interaction logic for EasyMode.xaml
     /// </summary>
     public partial class EasyMode : UserControl
     {

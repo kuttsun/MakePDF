@@ -52,7 +52,7 @@
             </StackPanel>
             <Border Margin="0 5" Padding="5 0 0 0" Background="{DynamicResource MaterialDesignSelection}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                 <DockPanel  HorizontalAlignment="Stretch">
-                    <Button DockPanel.Dock="Right" Grid.Row="1" Grid.Column="1" Margin="5" MinWidth="90"  VerticalAlignment="Center" Content="Browse..." Click="BrowseButton_Click" ToolTip="Open File Dialog" />
+                    <Button DockPanel.Dock="Right" Margin="5" MinWidth="90"  VerticalAlignment="Center" Content="Browse..." Click="BrowseButton_Click" ToolTip="Open File Dialog" />
                     <TextBox materialDesign:HintAssist.Hint="Output File" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding OutputFile}" AllowDrop="True" Drop="OutputFile_Drop" PreviewDragOver="OutputFile_PreviewDragOver" />
                 </DockPanel>
             </Border>

@@ -1,0 +1,127 @@
+﻿<UserControl x:Class="MakePdf.Wpf.Views.Pages.StandardMode"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MakePdf.Wpf.Views.Pages"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}">
+    <DockPanel Margin="10">
+        <DockPanel DockPanel.Dock="Bottom" Margin="5 10 5 0">
+            <Button DockPanel.Dock="Left" MinWidth="90" Command="{Binding  BackButtonCommand}">
+                <StackPanel Orientation="Horizontal" >
+                    <materialDesign:PackIcon Kind="ArrowLeftBold"/>
+                    <TextBlock VerticalAlignment="Center" Text="Back" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+            <Button DockPanel.Dock="Right" MinWidth="90" Click="StartButton_Click" Style="{StaticResource MaterialDesignRaisedAccentButton}">
+                <StackPanel Orientation="Horizontal" >
+                    <materialDesign:PackIcon Kind="Play"/>
+                    <TextBlock VerticalAlignment="Center" Text="Start" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+            <Rectangle />
+        </DockPanel>
+        <ScrollViewer DockPanel.Dock="Top">
+            <StackPanel>
+                <Expander HorizontalAlignment="Stretch" Header="Input" IsExpanded="True">
+                    <Grid Margin="24,8,24,16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Files" />
+                        <TextBox Grid.Row="0" Grid.Column="1" materialDesign:HintAssist.Hint="Input file pattern" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding InputFilePattern}" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Folders" />
+                        <TextBox Grid.Row="1" Grid.Column="1" materialDesign:HintAssist.Hint="Input folder pattern" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding InputFolderPattern}" />
+                    </Grid>
+                </Expander>
+                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" />
+                <Expander HorizontalAlignment="Stretch" Header="Property" IsExpanded="True">
+                    <Grid Margin="24,8,24,16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Title" />
+                        <TextBox Grid.Row="0" Grid.Column="1" materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding InputFilePattern}" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Author" />
+                        <TextBox Grid.Row="1" Grid.Column="1" materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding InputFolderPattern}" />
+                        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Creator" />
+                        <TextBox Grid.Row="2" Grid.Column="1" materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding InputFolderPattern}" />
+                        <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Subject" />
+                        <TextBox Grid.Row="3" Grid.Column="1" materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding InputFolderPattern}" />
+                        <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Keywords" />
+                        <TextBox Grid.Row="4" Grid.Column="1" materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding InputFolderPattern}" />
+                    </Grid>
+                </Expander>
+                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" />
+                <Expander HorizontalAlignment="Stretch" Header="Page Layout" IsExpanded="True">
+                    <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                        <CheckBox IsThreeState="False" Margin="10 0 0 5">Open bookmark panel when displaying</CheckBox>
+                        <CheckBox IsThreeState="False" Margin="10 5 0 0">Single page</CheckBox>
+                    </StackPanel>
+                </Expander>
+                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" />
+                <Expander HorizontalAlignment="Stretch" Header="Word" IsExpanded="True">
+                    <Grid Margin="24,8,24,16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Outlines" />
+                        <ComboBox Grid.Row="0" Grid.Column="1" materialDesign:ComboBoxAssist.ShowSelectedItem="{Binding ElementName=DisplaySelectedItemCheckBox, Path=IsChecked}"
+                          Margin="0 8 0 8" HorizontalAlignment="Left">
+                            <ComboBoxItem IsSelected="True">from heading</ComboBoxItem>
+                            <ComboBoxItem>from bookmarks</ComboBoxItem>
+                        </ComboBox>
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Exclusion Pattern" />
+                        <TextBox Grid.Row="1" Grid.Column="1" materialDesign:HintAssist.Hint="Input folder pattern" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding InputFolderPattern}" />
+                    </Grid>
+                </Expander>
+                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" />
+                <Expander HorizontalAlignment="Stretch" Header="Excel" IsExpanded="True">
+                    <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                        
+                    </StackPanel>
+                </Expander>
+                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" />
+                <Expander HorizontalAlignment="Stretch" Header="Output" IsExpanded="True">
+                    <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                        <DockPanel  HorizontalAlignment="Stretch">
+                            <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Margin="10" Text="Output file" />
+                            <Button DockPanel.Dock="Right" Margin="5" MinWidth="90"  VerticalAlignment="Center" Content="Browse..." Click="BrowseButton_Click" ToolTip="Open File Dialog" />
+                            <TextBox materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding OutputFile}" AllowDrop="True" Drop="OutputFile_Drop" PreviewDragOver="OutputFile_PreviewDragOver" />
+                        </DockPanel>
+                        <CheckBox IsThreeState="False" Margin="10 5 0 0">Delete converted PDF</CheckBox>
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>

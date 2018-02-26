@@ -143,6 +143,7 @@
     <Compile Include="ViewModels\Dialogs\NewVersionFoundDialogViewModel.cs" />
     <Compile Include="ViewModels\Pages\EasyModeViewModel.cs" />
     <Compile Include="Messenger.cs" />
+    <Compile Include="ViewModels\Pages\StandardModeViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\Dialogs\Common\OneButtonDialog.xaml.cs">
       <DependentUpon>OneButtonDialog.xaml</DependentUpon>
@@ -158,6 +159,9 @@
     </Compile>
     <Compile Include="Views\Dialogs\Common\ProcessingDialog.xaml.cs">
       <DependentUpon>ProcessingDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\StandardMode.xaml.cs">
+      <DependentUpon>StandardMode.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
@@ -202,6 +206,10 @@
     <Compile Include="Views\Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Pages\StandardMode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Shell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
