@@ -80,6 +80,43 @@
                     </Grid>
                 </Expander>
                 <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" />
+                <Expander HorizontalAlignment="Stretch" Header="Bookmark" IsExpanded="True">
+                    <Grid Margin="24,8,24,16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 0 0 5" IsChecked="{Binding Setting.AddFileNameToBookmark.IsEnabled}">Add file name to bookmark</CheckBox>
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Exclusion pattern" />
+                        <TextBox Grid.Row="1" Grid.Column="1" materialDesign:HintAssist.Hint="Specify the files by regular expression" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.AddFileNameToBookmark.ExclusionPattern}" />
+                        <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 10 0 5" IsChecked="{Binding Setting.ReplaceFileName.IsEnabled}">Replace file name</CheckBox>
+                        <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Before" />
+                        <TextBox Grid.Row="3" Grid.Column="1" materialDesign:HintAssist.Hint="Specify the files by backreference of regular expression" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.ReplaceFileName.Before}" />
+                        <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="After" />
+                        <TextBox Grid.Row="4" Grid.Column="1" materialDesign:HintAssist.Hint="Specify the files by backreference of regular expression" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.ReplaceFileName.After}" />
+                        <CheckBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 10 0 5" IsChecked="{Binding Setting.AddDirectoryNameToBookmark.IsEnabled}">Add directory name to bookmark</CheckBox>
+                        <TextBlock Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Exclusion pattern" />
+                        <TextBox Grid.Row="6" Grid.Column="1" materialDesign:HintAssist.Hint="Specify the directories by regular expression" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.AddDirectoryNameToBookmark.ExclusionPattern}" />
+                        <CheckBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 10 0 5" IsChecked="{Binding Setting.ReplaceDirectoryName.IsEnabled}">Replace directory name</CheckBox>
+                        <TextBlock Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Before" />
+                        <TextBox Grid.Row="8" Grid.Column="1" materialDesign:HintAssist.Hint="Specify the directories by backreference of regular expression" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.ReplaceDirectoryName.Before}" />
+                        <TextBlock Grid.Row="9" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="After" />
+                        <TextBox Grid.Row="9" Grid.Column="1" materialDesign:HintAssist.Hint="Specify the directories by backreference of regular expression" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.ReplaceDirectoryName.After}" />
+                    </Grid>
+                </Expander>
+                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" />
                 <Expander HorizontalAlignment="Stretch" Header="Property" IsExpanded="True">
                     <Grid Margin="24,8,24,16">
                         <Grid.RowDefinitions>

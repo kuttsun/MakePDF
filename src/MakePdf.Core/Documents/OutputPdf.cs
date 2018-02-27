@@ -56,7 +56,7 @@ namespace MakePdf.Core.Documents
         public void SetSettings(Setting setting)
         {
             replaceFileName = setting.ReplaceFileName;
-            addFileNameToBookmark = setting.AddFilenameToBookmark;
+            addFileNameToBookmark = setting.AddFileNameToBookmark;
             property = setting.Property;
             pageLayout = setting.PageLayout;
         }

@@ -78,7 +78,11 @@ namespace MakePdf.Core
         {
             foreach (var path in paths)
             {
-                if (File.Exists(path))
+                if(path == outputPdf.OutputFullpath)
+                {
+                    continue;
+                }
+                else if (File.Exists(path))
                 {
                     if (Setting.TargetFiles.AllItems || Regex.IsMatch(path, Setting.TargetFiles.Pattern))
                     {

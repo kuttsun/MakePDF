@@ -11,8 +11,8 @@ namespace MakePdf.Core
         public Target TargetDirectories { get; set; } = new Target();
         public ReplacePattern ReplaceFileName { get; set; } = new ReplacePattern();
         public ReplacePattern ReplaceDirectoryName { get; set; } = new ReplacePattern();
-        public AddToBookmark AddFilenameToBookmark { get; set; } = new AddToBookmark();
-        public AddToBookmark AddFolderNameToBookmark { get; set; } = new AddToBookmark();
+        public AddToBookmark AddFileNameToBookmark { get; set; } = new AddToBookmark();
+        public AddToBookmark AddDirectoryNameToBookmark { get; set; } = new AddToBookmark();
         public WordSetting WordSetting { get; set; } = new WordSetting();
         public Property Property { get; set; } = new Property();
         public PageLayout PageLayout { get; set; } = new PageLayout();

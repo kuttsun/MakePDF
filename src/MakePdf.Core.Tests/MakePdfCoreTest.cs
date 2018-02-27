@@ -44,7 +44,7 @@ namespace MakePdf.Core.Tests
             };
 
             // Setting
-            core.Setting.AddFilenameToBookmark.IsEnabled = true;
+            core.Setting.AddFileNameToBookmark.IsEnabled = true;
             //core.Setting.AddFilenameToBookmark.Exclude = "MakePdfTest1.*";
             core.Setting.ReplaceFileName.IsEnabled = false;
             core.Setting.ReplaceFileName.Before = "MakePdf(.*)\\..*";
