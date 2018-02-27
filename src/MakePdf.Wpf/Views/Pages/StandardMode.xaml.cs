@@ -32,12 +32,14 @@ namespace MakePdf.Wpf.Views.Pages
         readonly string startupPath;
 
         StandardModeViewModel vm;
+        Shell parentView;
 
         public StandardMode()
         {
             InitializeComponent();
 
             vm = DataContext as StandardModeViewModel;
+            parentView = Application.Current.MainWindow as Shell;
 
             exePath = Environment.GetCommandLineArgs()[0];
             exeFullPath = Path.GetFullPath(exePath);
@@ -122,10 +124,78 @@ namespace MakePdf.Wpf.Views.Pages
             }
         }
 
+        async void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new CommonOpenFileDialog
+            {
+                Title = "Save settings",
+                IsFolderPicker = false,
+                InitialDirectory = startupPath,
+                DefaultDirectory = startupPath,
+            };
+
+            dialog.Filters.Add(new CommonFileDialogFilter("JSON File", "*.json"));
+            dialog.Filters.Add(new CommonFileDialogFilter("All File", "*.*"));
+
+            if (vm.LoadFile != string.Empty)
+            {
+                dialog.InitialDirectory = Path.GetDirectoryName(vm.LoadFile);
+            }
+
+            if (dialog.ShowDialog() != CommonFileDialogResult.Ok)
+            {
+                return;
+            }
+
+            if (File.Exists(dialog.FileName))
+            {
+                var overwriteDialog = new TwoButtonDialog("Output file exists", $"The output file already exists.{Environment.NewLine}Would you like to overwrite it?", "Yes", "No");
+                var result = await parentView.dialogHostMain.ShowDialog(overwriteDialog) as Selected?;
+                if (result == Selected.Negative)
+                {
+                    return;
+                }
+            }
+
+            vm.SaveSetting(dialog.FileName);
+        }
+
+        async void LoadButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new CommonOpenFileDialog
+            {
+                Title = "Load settings",
+                IsFolderPicker = false,
+                InitialDirectory = startupPath,
+                DefaultDirectory = startupPath,
+            };
+
+            dialog.Filters.Add(new CommonFileDialogFilter("JSON File", "*.json"));
+            dialog.Filters.Add(new CommonFileDialogFilter("All File", "*.*"));
+
+            if (vm.LoadFile != string.Empty)
+            {
+                dialog.InitialDirectory = Path.GetDirectoryName(vm.LoadFile);
+            }
+
+            if (dialog.ShowDialog() != CommonFileDialogResult.Ok)
+            {
+                return;
+            }
+
+            if (File.Exists(dialog.FileName))
+            {
+                vm.LoadSetting(dialog.FileName);
+            }
+            else
+            {
+                var overwriteDialog = new OneButtonDialog("The file doesn't exist", $"The setting file does not exists.");
+                await parentView.dialogHostMain.ShowDialog(overwriteDialog);
+            }
+        }
+
         async void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            var parentView = Application.Current.MainWindow as Shell;
-
             if (vm.InputDirectory == "")
             {
                 var overwriteDialog = new OneButtonDialog("Input directory is empty", $"Please specify the intput directory.");

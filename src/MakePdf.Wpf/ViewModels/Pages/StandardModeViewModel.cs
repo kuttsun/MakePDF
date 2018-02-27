@@ -17,11 +17,11 @@ namespace MakePdf.Wpf.ViewModels.Pages
     {
         readonly IRegionManager _regionManager;
 
-        string inputDirectories = Directory.GetCurrentDirectory();
+        string inputDirectory = Directory.GetCurrentDirectory();
         public string InputDirectory
         {
-            get { return inputDirectories; }
-            set { SetProperty(ref inputDirectories, value); }
+            get { return inputDirectory; }
+            set { SetProperty(ref inputDirectory, value); }
         }
 
         string outputFile = "";
@@ -30,6 +30,8 @@ namespace MakePdf.Wpf.ViewModels.Pages
             get { return outputFile; }
             set { SetProperty(ref outputFile, value); }
         }
+
+        public string LoadFile { get; set; } = string.Empty;
 
         Models.Core core;
         public Setting Setting { get; set; } = new Setting();
@@ -50,6 +52,18 @@ namespace MakePdf.Wpf.ViewModels.Pages
         public async Task<bool> StartAsync()
         {
             return await core.RunAsync(InputDirectory, OutputFile, Setting);
+        }
+
+        public void SaveSetting(string path)
+        {
+            Setting.WriteFile(path);
+            LoadFile = path;
+        }
+
+        public void LoadSetting(string path)
+        {
+            Setting = Setting.ReadFile(path);
+            LoadFile = path;
         }
     }
 }

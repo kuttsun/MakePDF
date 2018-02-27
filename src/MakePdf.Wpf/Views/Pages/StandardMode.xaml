@@ -24,6 +24,18 @@
                     <TextBlock VerticalAlignment="Center" Text="Back" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
+            <Button DockPanel.Dock="Left" MinWidth="90" Margin="30 0 10 0" Click="SaveButton_Click">
+                <StackPanel Orientation="Horizontal" >
+                    <materialDesign:PackIcon Kind="ContentSave" />
+                    <TextBlock VerticalAlignment="Center" Text="Save" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+            <Button DockPanel.Dock="Left" MinWidth="90" Click="LoadButton_Click">
+                <StackPanel Orientation="Horizontal" >
+                    <materialDesign:PackIcon Kind="OpenInApp"/>
+                    <TextBlock VerticalAlignment="Center" Text="Load" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
             <Button DockPanel.Dock="Right" MinWidth="90" Click="StartButton_Click" Style="{StaticResource MaterialDesignRaisedAccentButton}">
                 <StackPanel Orientation="Horizontal" >
                     <materialDesign:PackIcon Kind="Play"/>
