@@ -27,12 +27,12 @@ namespace MakePdf.Wpf.ViewModels.Pages
         public DelegateCommand DeleteButtonCommand { get; }
         public DelegateCommand ClearButtonCommand { get; }
 
+        string outputFile = "";
         public string OutputFile
         {
             get { return outputFile; }
             set { SetProperty(ref outputFile, value); }
         }
-        string outputFile = "";
 
         public ObservableCollection<TargetFile> TargetFiles { get; set; } = new ObservableCollection<TargetFile>();
         public TargetFile SelectedItem { get; set; } = new TargetFile();

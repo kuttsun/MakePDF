@@ -97,7 +97,7 @@ namespace MakePdf.Wpf.Views.Pages
         {
             var dialog = new CommonOpenFileDialog
             {
-                Title = "Select Output File",
+                Title = "Select output file",
                 IsFolderPicker = false,
                 InitialDirectory = startupPath,
                 DefaultDirectory = startupPath,
@@ -113,7 +113,7 @@ namespace MakePdf.Wpf.Views.Pages
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                vm.AddOutputFile(dialog.FileName);
+                vm.OutputFile = dialog.FileName;
             }
         }
 

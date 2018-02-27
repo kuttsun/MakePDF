@@ -136,6 +136,7 @@
     </Page>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Models\Core.cs" />
+    <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\Updater.cs" />
     <Compile Include="ViewModels\Dialogs\Common\OneButtonDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\Common\ProcessingDialogViewModel.cs" />

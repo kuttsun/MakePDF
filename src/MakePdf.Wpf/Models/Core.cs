@@ -36,6 +36,11 @@ namespace MakePdf.Wpf.Models
             return await core.RunAsync(outputFullpath, items);
         }
 
+        public async Task<bool> RunAsync(string inputDirectory, string outputFullpath, Setting setting)
+        {
+            return await core.RunAsync(inputDirectory, outputFullpath, setting);
+        }
+
         public bool IsSupported(string fullpath) => core.IsSupported(fullpath);
     }
 }

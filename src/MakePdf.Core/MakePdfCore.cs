@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Text.RegularExpressions;
 
 using Microsoft.Extensions.Logging;
 
@@ -43,33 +44,7 @@ namespace MakePdf.Core
             {
                 using (var outputPdf = new OutputPdf(outputFullpath, logger))
                 {
-                    // Setting
-                    outputPdf.ReplaceFileName = Setting.ReplaceFileName;
-                    outputPdf.AddFilenameToBookmark = Setting.AddFilenameToBookmark;
-                    outputPdf.Property = Setting.Property;
-                    outputPdf.PageLayout = Setting.PageLayout;
-
-                    // Convert and combine
-                    foreach (var path in paths)
-                    {
-                        if (File.Exists(path))
-                        {
-                            using (var doc = Create(path, logger))
-                            {
-                                doc.ToPdf();
-                                outputPdf.Add(doc.OutputFullpath);
-                                doc.DeleteOutputPdf(Setting.CanDeletePdf);
-                            }
-                        }
-                        else if (Directory.Exists(path))
-                        {
-
-                        }
-                        else
-                        {
-                            throw new FileNotFoundException();
-                        }
-                    }
+                    ConvertAndCombine(outputPdf, paths);
 
                     // Finalize
                     outputPdf.Complete();
@@ -79,9 +54,58 @@ namespace MakePdf.Core
             return true;
         }
 
-        public void Run()
+        public async Task<bool> RunAsync(string inputDirectory, string outputFullpath, Setting setting)
         {
+            await Task.Run(() =>
+            {
+                var paths = Directory.GetFiles(inputDirectory, "*", SearchOption.AllDirectories);
 
+                using (var outputPdf = new OutputPdf(outputFullpath, logger))
+                {
+                    outputPdf.SetSettings(setting);
+
+                    ConvertAndCombine(outputPdf, paths);
+
+                    // Finalize
+                    outputPdf.Complete();
+                }
+            });
+
+            return true;
+        }
+
+        void ConvertAndCombine(OutputPdf outputPdf, IEnumerable<string> paths)
+        {
+            foreach (var path in paths)
+            {
+                if (File.Exists(path))
+                {
+                    if (Setting.TargetFiles.AllItems || Regex.IsMatch(path, Setting.TargetFiles.Pattern))
+                    {
+                        if (IsSupported(path))
+                        {
+                            using (var doc = Create(path, logger))
+                            {
+                                doc.ToPdf();
+                                outputPdf?.Add(doc.OutputFullpath);
+                                doc.DeleteOutputPdf(Setting.CanDeletePdf);
+                            }
+                        }
+                    }
+                }
+                else if (Directory.Exists(path))
+                {
+                    if (Setting.TargetDirectories.AllItems || Regex.IsMatch(path, Setting.TargetDirectories.Pattern))
+                    {
+                        // Recursive processing
+                        ConvertAndCombine(outputPdf, Directory.GetFiles(path, "*", SearchOption.AllDirectories));
+                    }
+                }
+                else
+                {
+                    throw new FileNotFoundException();
+                }
+            }
         }
 
         public bool IsSupported(string fullpath)

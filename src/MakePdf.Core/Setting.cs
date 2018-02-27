@@ -1,34 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace MakePdf.Core
 {
     public class Setting
     {
-        public ReplaceFileName ReplaceFileName { get; set; } = new ReplaceFileName();
-        public AddFilenameToBookmark AddFilenameToBookmark { get; set; } = new AddFilenameToBookmark();
+        public Target TargetFiles { get; set; } = new Target();
+        public Target TargetDirectories { get; set; } = new Target();
+        public ReplacePattern ReplaceFileName { get; set; } = new ReplacePattern();
+        public ReplacePattern ReplaceDirectoryName { get; set; } = new ReplacePattern();
+        public AddToBookmark AddFilenameToBookmark { get; set; } = new AddToBookmark();
+        public AddToBookmark AddFolderNameToBookmark { get; set; } = new AddToBookmark();
+        public WordSetting WordSetting { get; set; } = new WordSetting();
         public Property Property { get; set; } = new Property();
         public PageLayout PageLayout { get; set; } = new PageLayout();
         public bool CanDeletePdf { get; set; } = true;
+        public bool ConvertOnly { get; set; } = false;
     }
 
-    public class Bookmark
+    public class Target
     {
-
+        public bool AllItems { get; set; } = true;
+        public string Pattern { get; set; } = null;
     }
 
-    public class ReplaceFileName
+    public class ReplacePattern
     {
         public bool IsEnabled { get; set; } = false;
         public string Before { get; set; } = null;
         public string After { get; set; } = null;
     }
 
-    public class AddFilenameToBookmark
+    public class AddToBookmark
     {
         public bool IsEnabled { get; set; } = true;
-        public string Exclude { get; set; } = null;
+        public string ExclusionPattern { get; set; } = null;
+    }
+
+    public class WordSetting
+    {
+        public bool CreatingBookmarkFromHeading { get; set; } = true;
+        public string ExclusionPattern { get; set; } = null;
     }
 
     public class Property

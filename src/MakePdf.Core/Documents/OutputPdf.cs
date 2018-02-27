@@ -21,11 +21,10 @@ namespace MakePdf.Core.Documents
         int pageCount = 0;
 
         // Settings
-        public AddFilenameToBookmark AddFilenameToBookmark { get; set; } = new AddFilenameToBookmark();
-        public ReplaceFileName ReplaceFileName { get; set; } = new ReplaceFileName();
-        public Property Property { get; set; } = new Property();
-        public PageLayout PageLayout { get; set; } = new PageLayout();
-        public bool CanDeletePdf { get; set; } = false;
+        AddToBookmark addFileNameToBookmark { get; set; } = new AddToBookmark();
+        ReplacePattern replaceFileName { get; set; } = new ReplacePattern();
+        Property property { get; set; } = new Property();
+        PageLayout pageLayout { get; set; } = new PageLayout();
 
         public OutputPdf(string fullpath, ILogger logger) : base(fullpath, logger)
         {
@@ -52,6 +51,14 @@ namespace MakePdf.Core.Documents
         ~OutputPdf()
         {
             Dispose(false);
+        }
+
+        public void SetSettings(Setting setting)
+        {
+            replaceFileName = setting.ReplaceFileName;
+            addFileNameToBookmark = setting.AddFilenameToBookmark;
+            property = setting.Property;
+            pageLayout = setting.PageLayout;
         }
 
         /// <summary>
@@ -105,9 +112,9 @@ namespace MakePdf.Core.Documents
 
             // Replace filename for bookmark
             string bookmarkFileName;
-            if (ReplaceFileName.IsEnabled != false)
+            if (replaceFileName.IsEnabled != false)
             {
-                bookmarkFileName = Regex.Replace(pdfFilename, ReplaceFileName.Before, ReplaceFileName.After);
+                bookmarkFileName = Regex.Replace(pdfFilename, replaceFileName.Before, replaceFileName.After);
             }
             else
             {
@@ -116,9 +123,9 @@ namespace MakePdf.Core.Documents
 
             // Create parent bookmark
             var bookmarks = new List<Dictionary<string, object>>();
-            if (AddFilenameToBookmark.IsEnabled == false)
+            if (addFileNameToBookmark.IsEnabled == false)
             {
-                if ((AddFilenameToBookmark.Exclude != null) && Regex.IsMatch(pdfFilename, AddFilenameToBookmark.Exclude))
+                if ((addFileNameToBookmark.ExclusionPattern != null) && Regex.IsMatch(pdfFilename, addFileNameToBookmark.ExclusionPattern))
                 {
                     bookmarks.Add(CreateBookmark(bookmarkFileName, childBookmark));
                 }
@@ -129,7 +136,7 @@ namespace MakePdf.Core.Documents
             }
             else
             {
-                if ((AddFilenameToBookmark.Exclude != null) && (Regex.IsMatch(pdfFilename, AddFilenameToBookmark.Exclude)))
+                if ((addFileNameToBookmark.ExclusionPattern != null) && (Regex.IsMatch(pdfFilename, addFileNameToBookmark.ExclusionPattern)))
                 {
                     bookmarks.AddRange(childBookmark);
                 }
@@ -158,12 +165,12 @@ namespace MakePdf.Core.Documents
         {
             int viewerPreferences = 0;
             // Open bookmark panel when displaying
-            if (PageLayout.PageModeUseOutlines)
+            if (pageLayout.PageModeUseOutlines)
             {
                 viewerPreferences |= PdfWriter.PageModeUseOutlines;
             }
             // Set page layout
-            if (PageLayout.SinglePage != false)
+            if (pageLayout.SinglePage != false)
             {
                 viewerPreferences |= PdfWriter.PageLayoutSinglePage;
             }
@@ -182,11 +189,11 @@ namespace MakePdf.Core.Documents
 
         void SetProperty()
         {
-            doc.AddTitle(Property.Title);
-            doc.AddAuthor(Property.Author);
-            doc.AddCreator(Property.Creator); // Application
-            doc.AddSubject(Property.Subject); // Subtitle
-            doc.AddKeywords(Property.Keywords);
+            doc.AddTitle(property.Title);
+            doc.AddAuthor(property.Author);
+            doc.AddCreator(property.Creator); // Application
+            doc.AddSubject(property.Subject); // Subtitle
+            doc.AddKeywords(property.Keywords);
         }
 
         void ChangeBookmark(List<Dictionary<string, object>> bookmarks)
