@@ -21,10 +21,10 @@ namespace MakePdf.Core.Documents
         int pageCount = 0;
 
         // Settings
-        AddToBookmark addFileNameToBookmark { get; set; } = new AddToBookmark();
-        ReplacePattern replaceFileName { get; set; } = new ReplacePattern();
-        Property property { get; set; } = new Property();
-        PageLayout pageLayout { get; set; } = new PageLayout();
+        AddToBookmark addFileNameToBookmark = new AddToBookmark();
+        ReplacePattern replaceFileName = new ReplacePattern();
+        Property property = new Property();
+        PageLayout pageLayout = new PageLayout();
 
         public OutputPdf(string fullpath, ILogger logger) : base(fullpath, logger)
         {
@@ -233,10 +233,11 @@ namespace MakePdf.Core.Documents
             }
 
             // Free any unmanaged objects here.
-            try { 
+            try
+            {
                 copy.Dispose();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 logger?.LogError(e.Message);
             }
