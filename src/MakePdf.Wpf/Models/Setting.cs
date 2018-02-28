@@ -6,12 +6,15 @@ using System.Text;
 
 using Newtonsoft.Json;
 
-using MakePdf.Core;
+
 
 namespace MakePdf.Wpf.Models
 {
     public class Setting : MakePdf.Core.Setting
     {
+        public string InputDirectory { get; set; }
+        public string OutputFile { get; set; }
+
         public void WriteFile(string path)
         {
             var json = JsonConvert.SerializeObject(this, Formatting.Indented);

@@ -16,25 +16,44 @@ namespace MakePdf.Wpf.ViewModels.Pages
     class StandardModeViewModel : BindableBase
     {
         readonly IRegionManager _regionManager;
+        Models.Core core;
 
         string inputDirectory = Directory.GetCurrentDirectory();
         public string InputDirectory
         {
             get { return inputDirectory; }
-            set { SetProperty(ref inputDirectory, value); }
+            set
+            {
+                SetProperty(ref inputDirectory, value);
+                Setting.InputDirectory = value;
+            }
         }
 
         string outputFile = "";
         public string OutputFile
         {
             get { return outputFile; }
-            set { SetProperty(ref outputFile, value); }
+            set
+            {
+                SetProperty(ref outputFile, value);
+                Setting.OutputFile = value;
+            }
         }
 
         public string LoadFile { get; set; } = string.Empty;
 
-        Models.Core core;
-        public Setting Setting { get; set; } = new Setting();
+
+        Setting setting = new Setting();
+        public Setting Setting
+        {
+            get { return setting; }
+            set
+            {
+                SetProperty(ref setting, value);
+                InputDirectory = setting.InputDirectory;
+                OutputFile = setting.OutputFile;
+            }
+        }
 
         public DelegateCommand BackButtonCommand { get; }
 
