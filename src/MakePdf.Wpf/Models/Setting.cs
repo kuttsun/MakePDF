@@ -12,7 +12,6 @@ namespace MakePdf.Wpf.Models
 {
     public class Setting : MakePdf.Core.Setting
     {
-        public string InputDirectory { get; set; }
         public string OutputFile { get; set; }
 
         public void WriteFile(string path)

@@ -18,14 +18,13 @@ namespace MakePdf.Wpf.ViewModels.Pages
         readonly IRegionManager _regionManager;
         Models.Core core;
 
-        string inputDirectory = Directory.GetCurrentDirectory();
-        public string InputDirectory
+        string workingDirectory = Directory.GetCurrentDirectory();
+        public string WorkingDirectory
         {
-            get { return inputDirectory; }
+            get { return workingDirectory; }
             set
             {
-                SetProperty(ref inputDirectory, value);
-                Setting.InputDirectory = value;
+                SetProperty(ref workingDirectory, value);
             }
         }
 
@@ -40,9 +39,6 @@ namespace MakePdf.Wpf.ViewModels.Pages
             }
         }
 
-        public string LoadFile { get; set; } = string.Empty;
-
-
         Setting setting = new Setting();
         public Setting Setting
         {
@@ -50,7 +46,6 @@ namespace MakePdf.Wpf.ViewModels.Pages
             set
             {
                 SetProperty(ref setting, value);
-                InputDirectory = setting.InputDirectory;
                 OutputFile = setting.OutputFile;
             }
         }
@@ -70,19 +65,30 @@ namespace MakePdf.Wpf.ViewModels.Pages
 
         public async Task<bool> StartAsync()
         {
-            return await core.RunAsync(InputDirectory, OutputFile, Setting);
+            return await core.RunAsync(WorkingDirectory, OutputFile, Setting);
         }
 
         public void SaveSetting(string path)
         {
             Setting.WriteFile(path);
-            LoadFile = path;
         }
 
         public void LoadSetting(string path)
         {
             Setting = Setting.ReadFile(path);
-            LoadFile = path;
+            WorkingDirectory = Path.GetDirectoryName(path);
+        }
+
+        string GetRelativePath(string uri1, string uri2)
+        {
+            var u1 = new Uri(Path.GetFullPath(uri1));
+            var u2 = new Uri(Path.GetFullPath(uri2));
+
+            var relativeUri = u1.MakeRelativeUri(u2);
+
+            var relativePath = relativeUri.ToString().Replace('/', '\\');
+
+            return (relativePath);
         }
     }
 }

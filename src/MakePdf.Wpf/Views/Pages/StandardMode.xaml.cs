@@ -52,7 +52,7 @@ namespace MakePdf.Wpf.Views.Pages
 
             if (Directory.Exists(dropFileList[0]))
             {
-                vm.InputDirectory = dropFileList[0];
+                vm.WorkingDirectory = dropFileList[0];
             }
         }
 
@@ -90,14 +90,14 @@ namespace MakePdf.Wpf.Views.Pages
                 DefaultDirectory = startupPath,
             };
 
-            if (vm.InputDirectory != string.Empty)
+            if (vm.WorkingDirectory != string.Empty)
             {
-                dialog.InitialDirectory = vm.InputDirectory;
+                dialog.InitialDirectory = vm.WorkingDirectory;
             }
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                vm.InputDirectory = dialog.FileName;
+                vm.WorkingDirectory = dialog.FileName;
             }
         }
         void SetOutputFileButton_Click(object sender, RoutedEventArgs e)
@@ -137,9 +137,9 @@ namespace MakePdf.Wpf.Views.Pages
             dialog.Filters.Add(new CommonFileDialogFilter("JSON File", "*.json"));
             dialog.Filters.Add(new CommonFileDialogFilter("All File", "*.*"));
 
-            if (vm.LoadFile != string.Empty)
+            if (vm.WorkingDirectory != string.Empty)
             {
-                dialog.InitialDirectory = Path.GetDirectoryName(vm.LoadFile);
+                dialog.InitialDirectory = Path.GetDirectoryName(vm.WorkingDirectory);
             }
 
             if (dialog.ShowDialog() != CommonFileDialogResult.Ok)
@@ -173,9 +173,9 @@ namespace MakePdf.Wpf.Views.Pages
             dialog.Filters.Add(new CommonFileDialogFilter("JSON File", "*.json"));
             dialog.Filters.Add(new CommonFileDialogFilter("All File", "*.*"));
 
-            if (vm.LoadFile != string.Empty)
+            if (vm.WorkingDirectory != string.Empty)
             {
-                dialog.InitialDirectory = Path.GetDirectoryName(vm.LoadFile);
+                dialog.InitialDirectory = Path.GetDirectoryName(vm.WorkingDirectory);
             }
 
             if (dialog.ShowDialog() != CommonFileDialogResult.Ok)
@@ -196,7 +196,7 @@ namespace MakePdf.Wpf.Views.Pages
 
         async void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            if (vm.InputDirectory == "")
+            if (vm.WorkingDirectory == "")
             {
                 var overwriteDialog = new OneButtonDialog("Input directory is empty", $"Please specify the intput directory.");
                 await parentView.dialogHostMain.ShowDialog(overwriteDialog);

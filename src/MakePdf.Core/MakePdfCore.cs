@@ -60,7 +60,7 @@ namespace MakePdf.Core
             {
                 var paths = Directory.GetFiles(inputDirectory, "*", SearchOption.AllDirectories);
 
-                using (var outputPdf = new OutputPdf(outputFullpath, logger))
+                using (var outputPdf = new OutputPdf($@"{inputDirectory}\{outputFullpath}", logger))
                 {
                     outputPdf.SetSettings(setting);
 
@@ -102,7 +102,7 @@ namespace MakePdf.Core
                     if (Setting.TargetDirectories.AllItems || Regex.IsMatch(path, Setting.TargetDirectories.Pattern))
                     {
                         // Recursive processing
-                        ConvertAndCombine(outputPdf, Directory.GetFiles(path, "*", SearchOption.AllDirectories));
+                        ConvertAndCombine(outputPdf, Directory.GetFiles(path, " * ", SearchOption.AllDirectories));
                     }
                 }
                 else
