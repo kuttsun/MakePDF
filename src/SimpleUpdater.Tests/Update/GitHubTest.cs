@@ -43,12 +43,12 @@ namespace SimpleUpdater.Updates.Tests
             Assert.NotNull(appInfo);
         }
 
-        [Fact]
-        public void PrepareForUpdateTest()
-        {
-            var appInfo = mgr.PrepareForUpdate("test.zip").Result;
-            Assert.NotNull(appInfo);
-        }
+        //[Fact]
+        //public void PrepareForUpdateTest()
+        //{
+        //    var appInfo = mgr.PrepareForUpdate("test.zip").Result;
+        //    Assert.NotNull(appInfo);
+        //}
 
         [Fact]
         public void UpdateTest()
