@@ -5,3 +5,11 @@ before_build:
 build:
   parallel: true
   project: src\MakePdf.sln
+after_test:
+  # OpenCover でカバレッジを計測
+  - src\OpenCover.bat vstest.console.exe
+  
+  # Codecov への送信コマンド
+  - "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
+  - pip install codecov
+  - codecov -f "src\OpenCover.xml"

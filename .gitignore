@@ -262,3 +262,5 @@ __pycache__/
 
 
 *.bak
+src/html
+src/OpenCover.xml
