@@ -20,14 +20,12 @@ namespace SimpleUpdater.Common
         /// </example>
         public static string GetRelativePath(string uri1, string uri2)
         {
-            Uri u1 = new Uri(uri1);
-            Uri u2 = new Uri(uri2);
+            var u1 = new Uri(uri1);
+            var u2 = new Uri(uri2);
 
-            Uri relativeUri = u1.MakeRelativeUri(u2);
+            var relativeUri = u1.MakeRelativeUri(u2);
 
-            string relativePath = relativeUri.ToString();
-
-            relativePath.Replace('/', '\\');
+            var relativePath = relativeUri.ToString().Replace('/', '\\');
 
             return (relativePath);
         }
