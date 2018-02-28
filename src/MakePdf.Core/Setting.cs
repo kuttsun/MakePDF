@@ -7,6 +7,8 @@ namespace MakePdf.Core
 {
     public class Setting
     {
+        public bool DeleteConvertedPdf { get; set; } = true;
+        public bool ConvertOnly { get; set; } = false;
         public Target TargetFiles { get; set; } = new Target();
         public Target TargetDirectories { get; set; } = new Target();
         public ReplacePattern ReplaceFileName { get; set; } = new ReplacePattern();
@@ -16,8 +18,6 @@ namespace MakePdf.Core
         public WordSetting WordSetting { get; set; } = new WordSetting();
         public Property Property { get; set; } = new Property();
         public PageLayout PageLayout { get; set; } = new PageLayout();
-        public bool CanDeletePdf { get; set; } = true;
-        public bool ConvertOnly { get; set; } = false;
     }
 
     public class Target

@@ -92,7 +92,7 @@ namespace MakePdf.Core
                             {
                                 doc.ToPdf();
                                 outputPdf?.Add(doc.OutputFullpath);
-                                doc.DeleteOutputPdf(Setting.CanDeletePdf);
+                                doc.DeleteCnvertedPdf(Setting.DeleteConvertedPdf);
                             }
                         }
                     }

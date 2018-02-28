@@ -25,7 +25,7 @@ namespace MakePdf.Core.Documents
 
         public virtual void ToPdf() { }
 
-        public void DeleteOutputPdf(bool canDeletePdf)
+        public void DeleteCnvertedPdf(bool canDeletePdf)
         {
             if (!(this is Pdf) && canDeletePdf)
             {
