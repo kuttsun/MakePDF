@@ -151,12 +151,14 @@ namespace MakePdf.Core.Documents
 
         Dictionary<String, Object> CreateBookmark(string title, object child)
         {
-            var bookmark = new Dictionary<String, Object>();
-            bookmark.Add("Title", title);
-            bookmark.Add("Page", $"{pageCount + 1} FitV");
-            bookmark.Add("Action", "GoTo");
-            bookmark.Add("Open", "false");// Close bookmark
-            bookmark.Add("Kids", child);
+            var bookmark = new Dictionary<String, Object>
+            {
+                { "Title", title },
+                { "Page", $"{pageCount + 1} FitV" },
+                { "Action", "GoTo" },
+                { "Open", "false" },// Close bookmark
+                { "Kids", child }
+            };
 
             return bookmark;
         }
@@ -242,7 +244,14 @@ namespace MakePdf.Core.Documents
                 logger?.LogError(e.Message);
             }
 
-            stream.Dispose();
+            try
+            {
+                stream.Dispose();
+            }
+            catch (Exception e)
+            {
+                logger?.LogError(e.Message);
+            }
 
             try
             {
