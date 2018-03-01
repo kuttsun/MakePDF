@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Reflection;
-using System.Diagnostics;
 using System.IO;
+using System.Diagnostics;
 
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
@@ -18,12 +17,7 @@ namespace MakePdf.Wpf.Models
     public class Updater
     {
         public static Updater Instance { get; } = new Updater();
-
-        string name;
-        string assemblyName;
-        string assemblyVersion;
-        string assemblyFileVersion;
-        string assemblyInformationalVersion;
+        MyInformation myInfo = MyInformation.Instance;
 
         UpdateManager mgr;
         ILogger logger;
@@ -41,16 +35,6 @@ namespace MakePdf.Wpf.Models
             logger = loggerFactory.CreateLogger("logfile");
 
             mgr = new GitHub("https://github.com/kuttsun/MakePdf", logger);
-
-
-            var assembly = Assembly.GetExecutingAssembly();
-            var fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-
-            name = assembly.GetName().Name;
-            assemblyName = Path.GetFileName(Assembly.GetExecutingAssembly().Location);
-            assemblyVersion = assembly.GetName().Version.ToString();
-            assemblyFileVersion = fvi.FileVersion;
-            assemblyInformationalVersion = fvi.ProductVersion;
         }
 
         /// <summary>
@@ -63,7 +47,7 @@ namespace MakePdf.Wpf.Models
             {
                 var appInfo = await mgr.CheckForUpdateAsync();
 
-                var version1 = new Version(assemblyInformationalVersion);
+                var version1 = new Version(myInfo.AssemblyInformationalVersion);
                 var version2 = new Version(appInfo.Version);
 
                 if (version1 < version2)
@@ -84,15 +68,15 @@ namespace MakePdf.Wpf.Models
         {
             try
             {
-                var appInfo = await mgr.PrepareForUpdate(Directory.GetCurrentDirectory(), name + ".zip");
+                var appInfo = await mgr.PrepareForUpdate(Directory.GetCurrentDirectory(), myInfo.Name + ".zip");
 
                 var srcDir = Path.GetFullPath(appInfo.GetNewVersionDir());
                 var dstDir = Path.GetFullPath(Directory.GetCurrentDirectory());
 
                 // Start new version application
-                Process.Start($@"{srcDir}\{assemblyName}", $"update --pid={Process.GetCurrentProcess().Id} -n={assemblyName} -s={srcDir} -d={dstDir}");
+                Process.Start($@"{srcDir}\{myInfo.AssemblyName}", $"update --pid={Process.GetCurrentProcess().Id} -n={myInfo.AssemblyName} -s={srcDir} -d={dstDir}");
 
-                logger?.LogInformation($@"StartProcess: {srcDir}\{assemblyName} update --pid={Process.GetCurrentProcess().Id} -n={assemblyName} -s={srcDir} -d={dstDir}");
+                logger?.LogInformation($@"StartProcess: {srcDir}\{myInfo.AssemblyName} update --pid={Process.GetCurrentProcess().Id} -n={myInfo.AssemblyName} -s={srcDir} -d={dstDir}");
 
                 return true;
             }

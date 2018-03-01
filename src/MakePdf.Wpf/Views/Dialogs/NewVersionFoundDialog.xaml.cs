@@ -33,6 +33,7 @@ namespace MakePdf.Wpf.Views.Dialogs
 
         public NewVersionFoundDialog(string newVersion) : this()
         {
+            labelCurrentVersion.Content = MyInformation.Instance.AssemblyInformationalVersion;
             labelNewVersion.Content = newVersion;
         }
     }

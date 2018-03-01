@@ -19,9 +19,14 @@ namespace MakePdf.Wpf
     /// </summary>
     public partial class App : Application
     {
+        [System.Runtime.InteropServices.DllImport("Kernel32.dll")]
+        public static extern bool AttachConsole(int processId);
+
         [STAThread]
         public static int Main(string[] args)
         {
+            AttachConsole(-1);
+
             var assembly = Assembly.GetExecutingAssembly();
             var appName = assembly.GetName().Name;
             var appVersion = "";
@@ -71,8 +76,16 @@ namespace MakePdf.Wpf
             });
 
             // Default behavior
+            var version = cla.Option("-v|--version", "Show version", CommandOptionType.NoValue);
             cla.OnExecute(() =>
             {
+                if (version.HasValue())
+                {
+                    var myInfo = MyInformation.Instance;
+                    Console.WriteLine($"{myInfo.Name} {myInfo.AssemblyInformationalVersion}");
+                    return 0;
+                };
+
                 App app = new App();
                 app.InitializeComponent();
                 return app.Run();
