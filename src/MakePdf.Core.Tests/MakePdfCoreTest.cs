@@ -44,15 +44,15 @@ namespace MakePdf.Core.Tests
             };
 
             // Setting
-            core.Setting.AddFileNameToBookmark.IsEnabled = true;
+            var setting = new Setting();
+            setting.AddFileNameToBookmark.IsEnabled = true;
             //core.Setting.AddFilenameToBookmark.Exclude = "MakePdfTest1.*";
-            core.Setting.ReplaceFileName.IsEnabled = false;
-            core.Setting.ReplaceFileName.Before = "MakePdf(.*)\\..*";
-            core.Setting.ReplaceFileName.After = "$1";
+            setting.ReplaceFileName.IsEnabled = false;
+            setting.ReplaceFileName.Before = "MakePdf(.*)\\..*";
+            setting.ReplaceFileName.After = "$1";
+            setting.Property.Title = "Title Test";
 
-            core.Setting.Property.Title = "Title Test";
-
-            core.RunAsync(fixture.OutputFile, files).Wait();
+            core.RunAsync(files, fixture.OutputFile, setting).Wait();
 
             Assert.True(File.Exists(fixture.OutputFile));
         }

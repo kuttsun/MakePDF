@@ -31,9 +31,9 @@ namespace MakePdf.Wpf.Models
             core = new MakePdfCore(logger);
         }
 
-        public async Task<bool> RunAsync(string outputFullpath, IEnumerable<string> items)
+        public async Task<bool> RunAsync(IEnumerable<string> items, string outputFullpath)
         {
-            return await core.RunAsync(outputFullpath, items);
+            return await core.RunAsync(items, outputFullpath);
         }
 
         public async Task<bool> RunAsync(string inputDirectory, string outputFullpath, Setting setting)

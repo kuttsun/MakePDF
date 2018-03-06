@@ -67,7 +67,7 @@
                             <Button DockPanel.Dock="Right" Margin="5" MinWidth="90"  VerticalAlignment="Center" Content="Browse..." Click="SetOutputFileButton_Click" ToolTip="Open File Dialog" />
                             <TextBox materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding OutputFile}" AllowDrop="True" Drop="OutputFile_Drop" PreviewDragOver="Item_PreviewDragOver" />
                         </DockPanel>
-                        <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 5 0 0" IsChecked="{Binding Setting.TargetFiles.DeleteConvertedPdf}">Delete converted PDF</CheckBox>
+                        <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 5 0 0" IsChecked="{Binding Setting.DeleteConvertedPdf}">Delete converted PDF</CheckBox>
                     </Grid>
                 </Expander>
                 <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" />

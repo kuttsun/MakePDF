@@ -81,7 +81,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
         {
             var files = TargetFiles.Select(x => x.Path);
 
-            return await core.RunAsync(OutputFile, files);
+            return await core.RunAsync(files, OutputFile);
         }
 
         public void AddFiles(List<string> files)

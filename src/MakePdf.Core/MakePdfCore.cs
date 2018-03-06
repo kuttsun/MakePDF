@@ -31,36 +31,20 @@ namespace MakePdf.Core
             {".xlsx", SupportFileType.Excel },
         };
 
-        public Setting Setting { get; set; } = new Setting();
+        Setting setting = new Setting();
 
         public MakePdfCore(ILogger logger)
         {
             this.logger = logger;
         }
 
-        public async Task<bool> RunAsync(string outputFullpath, IEnumerable<string> paths)
+        public async Task<bool> RunAsync(IEnumerable<string> paths, string outputFullpath, Setting setting = null)
         {
+            this.setting = setting ?? new Setting();
+
             await Task.Run(() =>
             {
                 using (var outputPdf = new OutputPdf(outputFullpath, logger))
-                {
-                    ConvertAndCombine(outputPdf, paths);
-
-                    // Finalize
-                    outputPdf.Complete();
-                }
-            });
-
-            return true;
-        }
-
-        public async Task<bool> RunAsync(string inputDirectory, string outputFullpath, Setting setting)
-        {
-            await Task.Run(() =>
-            {
-                var paths = Directory.GetFiles(inputDirectory, "*", SearchOption.AllDirectories);
-
-                using (var outputPdf = new OutputPdf($@"{inputDirectory}\{outputFullpath}", logger))
                 {
                     outputPdf.SetSettings(setting);
 
@@ -74,17 +58,24 @@ namespace MakePdf.Core
             return true;
         }
 
+        public async Task<bool> RunAsync(string inputDirectory, string outputFullpath, Setting setting = null)
+        {
+            var paths = Directory.GetFiles(inputDirectory, "*", SearchOption.AllDirectories);
+
+            return await RunAsync(paths, $@"{inputDirectory}\{outputFullpath}", setting);
+        }
+
         void ConvertAndCombine(OutputPdf outputPdf, IEnumerable<string> paths)
         {
             foreach (var path in paths)
             {
-                if(path == outputPdf.OutputFullpath)
+                if (path == outputPdf.OutputFullpath)
                 {
                     continue;
                 }
                 else if (File.Exists(path))
                 {
-                    if (Setting.TargetFiles.AllItems || Regex.IsMatch(path, Setting.TargetFiles.Pattern))
+                    if (setting.TargetFiles.AllItems || Regex.IsMatch(path, setting.TargetFiles.Pattern))
                     {
                         if (IsSupported(path))
                         {
@@ -92,14 +83,14 @@ namespace MakePdf.Core
                             {
                                 doc.ToPdf();
                                 outputPdf?.Add(doc.OutputFullpath);
-                                doc.DeleteCnvertedPdf(Setting.DeleteConvertedPdf);
+                                doc.DeleteCnvertedPdf(setting.DeleteConvertedPdf);
                             }
                         }
                     }
                 }
                 else if (Directory.Exists(path))
                 {
-                    if (Setting.TargetDirectories.AllItems || Regex.IsMatch(path, Setting.TargetDirectories.Pattern))
+                    if (setting.TargetDirectories.AllItems || Regex.IsMatch(path, setting.TargetDirectories.Pattern))
                     {
                         // Recursive processing
                         ConvertAndCombine(outputPdf, Directory.GetFiles(path, " * ", SearchOption.AllDirectories));
