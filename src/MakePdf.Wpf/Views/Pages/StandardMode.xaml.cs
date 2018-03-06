@@ -139,7 +139,7 @@ namespace MakePdf.Wpf.Views.Pages
 
             if (vm.WorkingDirectory != string.Empty)
             {
-                dialog.InitialDirectory = Path.GetDirectoryName(vm.WorkingDirectory);
+                dialog.InitialDirectory = vm.WorkingDirectory;
             }
 
             if (dialog.ShowDialog() != CommonFileDialogResult.Ok)
@@ -175,7 +175,7 @@ namespace MakePdf.Wpf.Views.Pages
 
             if (vm.WorkingDirectory != string.Empty)
             {
-                dialog.InitialDirectory = Path.GetDirectoryName(vm.WorkingDirectory);
+                dialog.InitialDirectory = vm.WorkingDirectory;
             }
 
             if (dialog.ShowDialog() != CommonFileDialogResult.Ok)
