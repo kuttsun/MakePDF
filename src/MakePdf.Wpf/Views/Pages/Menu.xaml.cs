@@ -42,6 +42,11 @@ namespace MakePdf.Wpf.Views.Pages
             Messenger.Instance.GetEvent<PubSubEvent<string>>().Subscribe(x => NewVersionFound(x));
         }
 
+        void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            parentView.Close();
+        }
+
         void GitHub_Click(object sender, RoutedEventArgs e)
         {
             Process.Start("https://github.com/kuttsun/MakePdf");
