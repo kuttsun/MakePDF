@@ -39,7 +39,7 @@ namespace MakePdf.Core.Tests.Documents
                 using (var output = new OutputPdf(tmpfile, null))
                 {
                     // Invalid path
-                    output.Add("1:\\foo");
+                    output.Add("1:\\foo", null);
                 }
             });
         }

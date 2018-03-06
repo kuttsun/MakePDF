@@ -23,6 +23,8 @@ namespace MakePdf.Core.Documents
         // Settings
         AddToBookmark addFileNameToBookmark = new AddToBookmark();
         ReplacePattern replaceFileName = new ReplacePattern();
+        AddToBookmark addDirectoryNameToBookmark = new AddToBookmark();
+        ReplacePattern replaceDirectoryName = new ReplacePattern();
         Property property = new Property();
         PageLayout pageLayout = new PageLayout();
 
@@ -55,8 +57,10 @@ namespace MakePdf.Core.Documents
 
         public void SetSettings(Setting setting)
         {
-            replaceFileName = setting.ReplaceFileName;
             addFileNameToBookmark = setting.AddFileNameToBookmark;
+            replaceFileName = setting.ReplaceFileName;
+            addDirectoryNameToBookmark = setting.AddDirectoryNameToBookmark;
+            replaceDirectoryName = setting.ReplaceDirectoryName;
             property = setting.Property;
             pageLayout = setting.PageLayout;
         }
@@ -65,7 +69,7 @@ namespace MakePdf.Core.Documents
         /// Add PdfFile
         /// </summary>
         /// <param name="fullpath"></param>
-        public void Add(string fullpath)
+        public void Add(string fullpath, List<Dictionary<String, Object>> parentBookmarks)
         {
             var pdfFilename = Path.GetFileName(fullpath);
 
@@ -79,7 +83,7 @@ namespace MakePdf.Core.Documents
                 // Although this method seems to have a large memory consumption, it is troublesome as this is done
                 copy.AddDocument(reader);
 
-                AddBookmark(reader, pdfFilename);
+                AddBookmark(reader, pdfFilename, parentBookmarks);
 
                 // Update count of pages
                 pageCount += reader.NumberOfPages;
@@ -95,9 +99,9 @@ namespace MakePdf.Core.Documents
             }
         }
 
-        void AddBookmark(PdfReader reader, string pdfFilename)
+        void AddBookmark(PdfReader reader, string pdfFilename, List<Dictionary<String, Object>> parentBookmarks)
         {
-            // Get bookmark
+            // Get bookmark from PDF
             var childBookmark = SimpleBookmark.GetBookmark(reader);
             if (childBookmark != null)
             {
@@ -121,7 +125,7 @@ namespace MakePdf.Core.Documents
                 bookmarkFileName = Path.GetFileName(pdfFilename);
             }
 
-            // Create parent bookmark
+            // Create filename bookmark
             var bookmarks = new List<Dictionary<string, object>>();
             if (addFileNameToBookmark.IsEnabled == false)
             {
@@ -146,7 +150,15 @@ namespace MakePdf.Core.Documents
                 }
             }
 
-            rootBookmarks.AddRange(bookmarks);
+            // Add bookmarks to parent bookmarks
+            if (parentBookmarks == null)
+            {
+                rootBookmarks.AddRange(bookmarks);
+            }
+            else
+            {
+                parentBookmarks.AddRange(bookmarks);
+            }
         }
 
         Dictionary<String, Object> CreateBookmark(string title, object child)
@@ -161,6 +173,72 @@ namespace MakePdf.Core.Documents
             };
 
             return bookmark;
+        }
+
+        public void AddDirectoryBookmark(List<Dictionary<String, Object>> parentBookmarks, string directoryName, List<Dictionary<String, Object>> childBookmarks)
+        {
+            var directoryBookmark = CreateDirectoryBookmark(directoryName, childBookmarks);
+
+            if (directoryBookmark == null)
+            {
+                if (parentBookmarks == null)
+                {
+                    rootBookmarks.AddRange(childBookmarks);
+                }
+                else
+                {
+                    parentBookmarks.AddRange(childBookmarks);
+                }
+            }
+            else
+            {
+                if (parentBookmarks == null)
+                {
+                    rootBookmarks.Add(directoryBookmark);
+                }
+                else
+                {
+                    parentBookmarks.Add(directoryBookmark);
+                }
+            }
+        }
+
+        Dictionary<String, Object> CreateDirectoryBookmark(string directoryName, List<Dictionary<String, Object>> childBookmarks)
+        {
+            // Replace directory name for bookmark
+            string bookmarkDirectoryName;
+            if (replaceDirectoryName.IsEnabled != false)
+            {
+                bookmarkDirectoryName = Regex.Replace(directoryName, replaceDirectoryName.Before, replaceDirectoryName.After);
+            }
+            else
+            {
+                bookmarkDirectoryName = Path.GetFileName(directoryName);
+            }
+
+            // Create directory name bookmark
+            if (addDirectoryNameToBookmark.IsEnabled == false)
+            {
+                if ((addDirectoryNameToBookmark.ExclusionPattern != null) && Regex.IsMatch(directoryName, addDirectoryNameToBookmark.ExclusionPattern))
+                {
+                    return CreateBookmark(bookmarkDirectoryName, childBookmarks);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                if ((addDirectoryNameToBookmark.ExclusionPattern != null) && (Regex.IsMatch(directoryName, addDirectoryNameToBookmark.ExclusionPattern)))
+                {
+                    return null;
+                }
+                else
+                {
+                    return CreateBookmark(bookmarkDirectoryName, childBookmarks);
+                }
+            }
         }
 
         public void Complete()

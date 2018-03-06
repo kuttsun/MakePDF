@@ -60,12 +60,12 @@ namespace MakePdf.Core
 
         public async Task<bool> RunAsync(string inputDirectory, string outputFullpath, Setting setting = null)
         {
-            var paths = Directory.GetFiles(inputDirectory, "*", SearchOption.AllDirectories);
+            var paths = Directory.GetFileSystemEntries(inputDirectory);
 
             return await RunAsync(paths, $@"{inputDirectory}\{outputFullpath}", setting);
         }
 
-        void ConvertAndCombine(OutputPdf outputPdf, IEnumerable<string> paths)
+        void ConvertAndCombine(OutputPdf outputPdf, IEnumerable<string> paths, List<Dictionary<string, object>> parentBookmarks = null)
         {
             foreach (var path in paths)
             {
@@ -82,7 +82,7 @@ namespace MakePdf.Core
                             using (var doc = Create(path, logger))
                             {
                                 doc.ToPdf();
-                                outputPdf?.Add(doc.OutputFullpath);
+                                outputPdf?.Add(doc.OutputFullpath, parentBookmarks);
                                 doc.DeleteCnvertedPdf(setting.DeleteConvertedPdf);
                             }
                         }
@@ -90,10 +90,14 @@ namespace MakePdf.Core
                 }
                 else if (Directory.Exists(path))
                 {
-                    if (setting.TargetDirectories.AllItems || Regex.IsMatch(path, setting.TargetDirectories.Pattern))
+                    var dirName = Path.GetFileName(path);
+
+                    if (setting.TargetDirectories.AllItems || Regex.IsMatch(dirName, setting.TargetDirectories.Pattern))
                     {
+                        var childBookmark = new List<Dictionary<string, object>>();
                         // Recursive processing
-                        ConvertAndCombine(outputPdf, Directory.GetFiles(path, " * ", SearchOption.AllDirectories));
+                        ConvertAndCombine(outputPdf, Directory.GetFileSystemEntries(path), childBookmark);
+                        outputPdf.AddDirectoryBookmark(parentBookmarks, dirName, childBookmark);
                     }
                 }
                 else
