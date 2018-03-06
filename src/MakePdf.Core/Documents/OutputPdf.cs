@@ -176,6 +176,10 @@ namespace MakePdf.Core.Documents
             {
                 viewerPreferences |= PdfWriter.PageLayoutSinglePage;
             }
+            else
+            {
+                viewerPreferences |= PdfWriter.PageLayoutOneColumn;
+            }
             copy.ViewerPreferences = viewerPreferences;
 
             // Fit to page height when displayed
