@@ -46,7 +46,7 @@ namespace MakePdf.Core
             {
                 using (var outputPdf = new OutputPdf(outputFullpath, logger))
                 {
-                    outputPdf.SetSettings(setting);
+                    outputPdf.SetSettings(this.setting);
 
                     ConvertAndCombine(outputPdf, paths);
 
