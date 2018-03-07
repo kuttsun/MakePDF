@@ -57,13 +57,13 @@
                 </DockPanel>
             </Border>
             <DockPanel Margin="5 10 5 0" Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
-                <Button DockPanel.Dock="Left" MinWidth="90" Command="{Binding  BackButtonCommand}">
+                <Button DockPanel.Dock="Left" MinWidth="90" ToolTip="Back Home" Command="{Binding  BackButtonCommand}">
                     <StackPanel Orientation="Horizontal" >
                         <materialDesign:PackIcon Kind="ArrowLeftBold"/>
                         <TextBlock VerticalAlignment="Center" Text="Back" Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
-                <Button DockPanel.Dock="Right" MinWidth="90" Click="StartButton_Click" Style="{StaticResource MaterialDesignRaisedAccentButton}">
+                <Button DockPanel.Dock="Right" MinWidth="90" Click="StartButton_Click" Style="{StaticResource MaterialDesignRaisedAccentButton}" ToolTip="Start">
                     <StackPanel Orientation="Horizontal" >
                         <materialDesign:PackIcon Kind="Play"/>
                         <TextBlock VerticalAlignment="Center" Text="Start" Margin="5,0,0,0"/>

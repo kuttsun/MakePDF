@@ -18,25 +18,25 @@
              FontFamily="{DynamicResource MaterialDesignFont}">
     <DockPanel Margin="10">
         <DockPanel DockPanel.Dock="Bottom" Margin="5 10 5 0">
-            <Button DockPanel.Dock="Left" MinWidth="90" Command="{Binding  BackButtonCommand}">
+            <Button DockPanel.Dock="Left" MinWidth="90" ToolTip="Back Home" Command="{Binding  BackButtonCommand}">
                 <StackPanel Orientation="Horizontal" >
                     <materialDesign:PackIcon Kind="ArrowLeftBold"/>
                     <TextBlock VerticalAlignment="Center" Text="Back" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
-            <Button DockPanel.Dock="Left" MinWidth="90" Margin="30 0 10 0" Click="SaveButton_Click">
+            <Button DockPanel.Dock="Left" MinWidth="90" Margin="30 0 10 0" ToolTip="Save Settings" Click="SaveButton_Click">
                 <StackPanel Orientation="Horizontal" >
                     <materialDesign:PackIcon Kind="ContentSave" />
                     <TextBlock VerticalAlignment="Center" Text="Save" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
-            <Button DockPanel.Dock="Left" MinWidth="90" Click="LoadButton_Click">
+            <Button DockPanel.Dock="Left" MinWidth="90" ToolTip="Load Settings" Click="LoadButton_Click">
                 <StackPanel Orientation="Horizontal" >
                     <materialDesign:PackIcon Kind="OpenInApp"/>
                     <TextBlock VerticalAlignment="Center" Text="Load" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
-            <Button DockPanel.Dock="Right" MinWidth="90" Click="StartButton_Click" Style="{StaticResource MaterialDesignRaisedAccentButton}">
+            <Button DockPanel.Dock="Right" MinWidth="90" ToolTip="Start" Click="StartButton_Click" Style="{StaticResource MaterialDesignRaisedAccentButton}">
                 <StackPanel Orientation="Horizontal" >
                     <materialDesign:PackIcon Kind="Play"/>
                     <TextBlock VerticalAlignment="Center" Text="Start" Margin="5,0,0,0"/>
@@ -59,7 +59,7 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Row="0" Grid.Column="0" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="10" Text="Working directory" />
                         <DockPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch">
-                            <Button DockPanel.Dock="Right" Margin="5" MinWidth="90"  VerticalAlignment="Center" Content="Browse..." Click="SetInputDirectoryButton_Click" ToolTip="Open File Dialog" />
+                            <Button DockPanel.Dock="Right" Margin="5" MinWidth="90"  VerticalAlignment="Center" Content="Browse..." Click="SetInputDirectoryButton_Click" ToolTip="Open Folder Dialog" />
                             <TextBox materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding WorkingDirectory}" AllowDrop="True" Drop="InputDirectory_Drop" PreviewDragOver="Item_PreviewDragOver" />
                         </DockPanel>
                         <TextBlock Grid.Row="1" Grid.Column="0" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="10" Text="Output file" />
