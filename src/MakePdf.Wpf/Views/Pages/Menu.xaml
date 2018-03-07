@@ -51,6 +51,9 @@
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="About" Click="About_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="InformationOutline" />
+                    </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
         </Menu>
