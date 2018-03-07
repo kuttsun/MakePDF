@@ -34,11 +34,6 @@
         </Menu>
         <Menu IsMainMenu="True">
             <MenuItem Header="Help(_H)">
-                <MenuItem Header="GitHub" Click="GitHub_Click">
-                    <MenuItem.Icon>
-                        <materialDesign:PackIcon Kind="GitHubCircle" />
-                    </MenuItem.Icon>
-                </MenuItem>
                 <MenuItem Header="Usage" Click="Usage_Click">
                     <MenuItem.Icon>
                         <materialDesign:PackIcon Kind="HelpCircleOutline" />

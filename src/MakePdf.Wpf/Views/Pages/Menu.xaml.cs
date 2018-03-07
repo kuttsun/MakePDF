@@ -47,11 +47,6 @@ namespace MakePdf.Wpf.Views.Pages
             parentView.Close();
         }
 
-        void GitHub_Click(object sender, RoutedEventArgs e)
-        {
-            Process.Start("https://github.com/kuttsun/MakePdf");
-        }
-
         void Usage_Click(object sender, RoutedEventArgs e)
         {
             Process.Start("https://github.com/kuttsun/MakePdf/wiki");
