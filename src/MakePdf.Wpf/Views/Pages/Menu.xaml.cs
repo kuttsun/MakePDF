@@ -62,7 +62,7 @@ namespace MakePdf.Wpf.Views.Pages
         {
             string newVersion = null;
 
-            var processingDialog = new ProcessingDialog("Check for updates...", $"Please wait a minute.");
+            var processingDialog = new ProcessingDialog("Check for updates...", $"Please wait for a while.");
             await parentView.dialogHostMain.ShowDialog(processingDialog, async (object s, DialogOpenedEventArgs args) =>
             {
                 newVersion = await vm.CheckForUpdate();
@@ -95,7 +95,7 @@ namespace MakePdf.Wpf.Views.Pages
 
             // Download and decompress
             bool result = false;
-            var processingDialog = new ProcessingDialog("Downloading...", $"Please wait a minute.");
+            var processingDialog = new ProcessingDialog("Downloading...", $"Please wait for a while.");
             await parentView.dialogHostMain.ShowDialog(processingDialog, async (object s, DialogOpenedEventArgs args) =>
             {
                 result = await vm.PrepareForUpdate();
