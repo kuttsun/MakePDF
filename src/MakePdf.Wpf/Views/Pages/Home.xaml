@@ -24,20 +24,24 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Grid.Column="0" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Padding="0" ToolTip="Easy Mode" Command="{Binding EasyModeButtonCommand}">
-            <StackPanel Margin="5" HorizontalAlignment="Left" VerticalAlignment="Stretch">
-                <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="5">Easy Mode</TextBlock>
-                <Border BorderThickness="0.5" BorderBrush="LightGray" />
-                <TextBlock Margin="5">Easy Mode</TextBlock>
-            </StackPanel>
-        </Button>
-
-        <Button Grid.Row="1" Grid.Column="0" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Padding="0" ToolTip="Standard Mode" Command="{Binding StandardModeButtonCommand}">
-            <StackPanel Margin="5" HorizontalAlignment="Left">
-                <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="5">Standard Mode</TextBlock>
-                <Border BorderThickness="0.5" BorderBrush="LightGray" />
-                <TextBlock Margin="5">Standard Mode</TextBlock>
-            </StackPanel>
-        </Button>
+        <materialDesign:Card Grid.Row="0" Grid.Column="0" Margin="5" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <DockPanel Margin="20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TextBlock DockPanel.Dock="top" Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="5">Easy Mode</TextBlock>
+                <Border DockPanel.Dock="top" BorderThickness="0.5" BorderBrush="LightGray" />
+                <TextBlock DockPanel.Dock="top" Margin="5">Easy Mode</TextBlock>
+                <Button DockPanel.Dock="Bottom" Height="Auto" Width="Auto" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0" Padding="10" ToolTip="Easy Mode" Content="Go Easy Mode" Command="{Binding EasyModeButtonCommand}"/>
+                <Rectangle/>
+            </DockPanel>
+        </materialDesign:Card>
+        
+        <materialDesign:Card Grid.Row="1" Grid.Column="0" Margin="5" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <DockPanel Margin="20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TextBlock DockPanel.Dock="top" Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="5">Standard Mode</TextBlock>
+                <Border DockPanel.Dock="top" BorderThickness="0.5" BorderBrush="LightGray" />
+                <TextBlock DockPanel.Dock="top" Margin="5">Standard Mode</TextBlock>
+                <Button DockPanel.Dock="Bottom" Height="Auto" Width="Auto" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0" Padding="10" ToolTip="Easy Mode" Content="Go Standard Mode" Command="{Binding StandardModeButtonCommand}"/>
+                <Rectangle/>
+            </DockPanel>
+        </materialDesign:Card>
     </Grid>
 </UserControl>
