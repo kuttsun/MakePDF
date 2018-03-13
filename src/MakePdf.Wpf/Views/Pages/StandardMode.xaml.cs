@@ -221,7 +221,7 @@ namespace MakePdf.Wpf.Views.Pages
             }
 
             // Start
-            var processingDialog = new ProcessingDialog("Processing", $"Please wait ...");
+            var processingDialog = new ProcessingDialog("Processing", $"Please wait for a while.");
             var re = parentView.dialogHostMain.ShowDialog(processingDialog, async (object s, DialogOpenedEventArgs args) =>
             {
                 await vm.StartAsync();
