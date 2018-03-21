@@ -29,7 +29,12 @@
                 <TextBlock DockPanel.Dock="top" Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="5">Easy Mode</TextBlock>
                 <Border DockPanel.Dock="top" BorderThickness="0.5" BorderBrush="LightGray" />
                 <TextBlock DockPanel.Dock="top" Margin="5">Easy Mode</TextBlock>
-                <Button DockPanel.Dock="Bottom" Height="Auto" Width="Auto" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0" Padding="10" ToolTip="Easy Mode" Content="Go Easy Mode" Command="{Binding EasyModeButtonCommand}"/>
+                <Button DockPanel.Dock="Bottom" Height="Auto" Width="Auto" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0" Padding="10" ToolTip="Go Easy Mode" Command="{Binding EasyModeButtonCommand}">
+                    <StackPanel Orientation="Horizontal" >
+                        <materialDesign:PackIcon Kind="ArrowRightBold"/>
+                        <TextBlock VerticalAlignment="Center" Text="Easy Mode" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </Button>
                 <Rectangle/>
             </DockPanel>
         </materialDesign:Card>
@@ -39,7 +44,12 @@
                 <TextBlock DockPanel.Dock="top" Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="5">Standard Mode</TextBlock>
                 <Border DockPanel.Dock="top" BorderThickness="0.5" BorderBrush="LightGray" />
                 <TextBlock DockPanel.Dock="top" Margin="5">Standard Mode</TextBlock>
-                <Button DockPanel.Dock="Bottom" Height="Auto" Width="Auto" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0" Padding="10" ToolTip="Easy Mode" Content="Go Standard Mode" Command="{Binding StandardModeButtonCommand}"/>
+                <Button DockPanel.Dock="Bottom" Height="Auto" Width="Auto" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0" Padding="10" ToolTip="Go Standard Mode" Command="{Binding StandardModeButtonCommand}">
+                    <StackPanel Orientation="Horizontal" >
+                        <materialDesign:PackIcon Kind="ArrowRightBold"/>
+                        <TextBlock VerticalAlignment="Center" Text="Standard Mode" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </Button>
                 <Rectangle/>
             </DockPanel>
         </materialDesign:Card>
