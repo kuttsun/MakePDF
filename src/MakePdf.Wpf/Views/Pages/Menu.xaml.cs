@@ -52,9 +52,10 @@ namespace MakePdf.Wpf.Views.Pages
             Process.Start("https://github.com/kuttsun/MakePdf/wiki");
         }
 
-        void About_Click(object sender, RoutedEventArgs e)
+        async void About_Click(object sender, RoutedEventArgs e)
         {
-            
+            var aboutDialog = new AboutDialog();
+            await parentView.dialogHostMain.ShowDialog(aboutDialog);
         }
 
 
