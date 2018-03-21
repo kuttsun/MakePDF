@@ -9,8 +9,8 @@ using System.Diagnostics;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 
-using SimpleUpdater;
-using SimpleUpdater.Updates;
+using CoreUpdater;
+using CoreUpdater.Updates;
 
 namespace MakePdf.Wpf.Models
 {
