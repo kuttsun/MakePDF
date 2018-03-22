@@ -30,12 +30,10 @@ Remove-Item -Recurse -path $tempDir
 Copy-Item $sourceDir -destination $tempDir -recurse
 
 # delete unnecessary file from temporary directory
-Remove-Item -Recurse -path $tempDir\lib\linux
-Remove-Item -Recurse -path $tempDir\lib\osx
 Remove-Item -Recurse -path $tempDir\logs
 Remove-Item -Recurse -path $tempDir -include *.pdb
-Remove-Item -Recurse -path $tempDir -include *.xml
-Remove-Item -Recurse -path $tempDir -include *.config -Exclude NLog.config
+#Remove-Item -Recurse -path $tempDir -include *.xml
+#Remove-Item -Recurse -path $tempDir -include *.config -Exclude NLog.config
 
 # read assembly
 Add-Type -AssemblyName System.IO.Compression.FileSystem
