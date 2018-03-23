@@ -3,8 +3,17 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
 namespace MakePdf.Core
 {
+    public enum PageLayout
+    {
+        SinglePage,
+        OneColumn,
+    }
+
     public class Setting
     {
         public bool DeleteConvertedPdf { get; set; } = true;
@@ -17,7 +26,7 @@ namespace MakePdf.Core
         public AddToBookmark AddDirectoryNameToBookmark { get; set; } = new AddToBookmark();
         public WordSetting WordSetting { get; set; } = new WordSetting();
         public Property Property { get; set; } = new Property();
-        public PageLayout PageLayout { get; set; } = new PageLayout();
+        public DisplayPdf DisplayPdf { get; set; } = new DisplayPdf();
     }
 
     public class Target
@@ -54,9 +63,11 @@ namespace MakePdf.Core
         public string Keywords { get; set; }
     }
 
-    public class PageLayout
+    public class DisplayPdf
     {
         public bool PageModeUseOutlines { get; set; } = true;
-        public bool SinglePage { get; set; } = true;
+        [JsonConverter(typeof(StringEnumConverter))]
+
+        public PageLayout PageLayout { get; set; } = PageLayout.SinglePage;
     }
 }

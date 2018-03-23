@@ -155,11 +155,24 @@
                     </Grid>
                 </Expander>
                 <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" />
-                <Expander HorizontalAlignment="Stretch" Header="Page Layout" IsExpanded="True">
-                    <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                        <CheckBox IsThreeState="False" Margin="10 0 0 5" IsChecked="{Binding Setting.PageLayout.PageModeUseOutlines}">Open bookmark panel when displaying</CheckBox>
-                        <CheckBox IsThreeState="False" Margin="10 5 0 0" IsChecked="{Binding Setting.PageLayout.SinglePage}">Single page</CheckBox>
-                    </StackPanel>
+                <Expander HorizontalAlignment="Stretch" Header="Display PDF" IsExpanded="True">
+                    <Grid Margin="24,8,24,16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 0 0 5" IsChecked="{Binding Setting.PageLayout.PageModeUseOutlines}">Open bookmark panel when displaying</CheckBox>
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Page Layout" />
+                        <!--<ComboBox Grid.Row="1" Grid.Column="1" materialDesign:ComboBoxAssist.ShowSelectedItem="{Binding ElementName=DisplaySelectedItemCheckBox, Path=IsChecked}" Margin="0 8 0 8" HorizontalAlignment="Left">
+                            <ComboBoxItem IsSelected="True">Single Page</ComboBoxItem>
+                            <ComboBoxItem>One Column</ComboBoxItem>
+                        </ComboBox>-->
+                        <ComboBox Grid.Row="1" Grid.Column="1" materialDesign:ComboBoxAssist.ShowSelectedItem="{Binding ElementName=DisplaySelectedItemCheckBox, Path=IsChecked}" Margin="0 8 0 8" HorizontalAlignment="Left" ItemsSource="{Binding PageLayouts}" SelectedValuePath="Key" DisplayMemberPath="Value" SelectedValue="{Binding Setting.DisplayPdf.PageLayout}" />
+                    </Grid>
                 </Expander>
                 <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" />
                 <Expander HorizontalAlignment="Stretch" Header="Word" IsExpanded="True">

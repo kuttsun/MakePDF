@@ -26,7 +26,7 @@ namespace MakePdf.Core.Documents
         AddToBookmark addDirectoryNameToBookmark = new AddToBookmark();
         ReplacePattern replaceDirectoryName = new ReplacePattern();
         Property property = new Property();
-        PageLayout pageLayout = new PageLayout();
+        DisplayPdf displayPdf = new DisplayPdf();
 
         public OutputPdf(string fullpath, ILogger logger) : base(fullpath, logger)
         {
@@ -62,7 +62,7 @@ namespace MakePdf.Core.Documents
             addDirectoryNameToBookmark = setting.AddDirectoryNameToBookmark;
             replaceDirectoryName = setting.ReplaceDirectoryName;
             property = setting.Property;
-            pageLayout = setting.PageLayout;
+            displayPdf = setting.DisplayPdf;
         }
 
         /// <summary>
@@ -245,18 +245,19 @@ namespace MakePdf.Core.Documents
         {
             int viewerPreferences = 0;
             // Open bookmark panel when displaying
-            if (pageLayout.PageModeUseOutlines)
+            if (displayPdf.PageModeUseOutlines)
             {
                 viewerPreferences |= PdfWriter.PageModeUseOutlines;
             }
             // Set page layout
-            if (pageLayout.SinglePage != false)
+            switch (displayPdf.PageLayout)
             {
-                viewerPreferences |= PdfWriter.PageLayoutSinglePage;
-            }
-            else
-            {
-                viewerPreferences |= PdfWriter.PageLayoutOneColumn;
+                case PageLayout.SinglePage:
+                    viewerPreferences |= PdfWriter.PageLayoutSinglePage;
+                    break;
+                case PageLayout.OneColumn:
+                    viewerPreferences |= PdfWriter.PageLayoutOneColumn;
+                    break;
             }
             copy.ViewerPreferences = viewerPreferences;
 

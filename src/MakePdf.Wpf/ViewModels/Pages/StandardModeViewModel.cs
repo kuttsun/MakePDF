@@ -18,6 +18,13 @@ namespace MakePdf.Wpf.ViewModels.Pages
         readonly IRegionManager _regionManager;
         Models.Core core;
 
+        // List of ComboBox
+        public Dictionary<Core.PageLayout, string> PageLayouts { get; } = new Dictionary<Core.PageLayout, string>
+        {
+            [Core.PageLayout.SinglePage] = "Single Page",
+            [Core.PageLayout.OneColumn] = "One Column",
+        };
+
         string workingDirectory = Directory.GetCurrentDirectory();
         public string WorkingDirectory
         {
@@ -52,6 +59,10 @@ namespace MakePdf.Wpf.ViewModels.Pages
 
         public DelegateCommand BackButtonCommand { get; }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="regionManager"></param>
         public StandardModeViewModel(IRegionManager regionManager)
         {
             core = new Models.Core(null);
