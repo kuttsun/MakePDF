@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace MakePdf.Core.Documents
 {
-    public abstract class DocumentBase : IDisposable
+    public abstract class DocumentBase : IDocument
     {
         protected ILogger logger;
         protected string fullpath;
@@ -17,8 +17,8 @@ namespace MakePdf.Core.Documents
 
         protected DocumentBase(string fullpath, ILogger logger)
         {
-            this.fullpath = fullpath;
             this.logger = logger;
+            this.fullpath = fullpath;
             filename = Path.GetFileName(fullpath);
             OutputFullpath = Path.ChangeExtension(fullpath, ".pdf");
         }

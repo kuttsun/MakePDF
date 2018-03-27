@@ -56,19 +56,5 @@ namespace MakePdf.Core.Tests
 
             Assert.True(File.Exists(fixture.OutputFile));
         }
-
-        [Theory,
-            InlineData(true, ".pdf"),
-            InlineData(true, ".doc"),
-            InlineData(true, ".docx"),
-            InlineData(true, ".xls"),
-            InlineData(true, ".xlsx"),
-            InlineData(false, ""),
-            InlineData(false, ".txt")]
-        void IsSupportedTest(bool expected, string ext)
-        {
-            var core = new MakePdfCore(null);
-            Assert.Equal(expected, core.IsSupported(ext));
-        }
     }
 }
