@@ -18,7 +18,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
     {
         readonly IRegionManager _regionManager;
 
-        Models.Core core;
+        Model model;
 
         public DelegateCommand BackButtonCommand { get; }
 
@@ -40,7 +40,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
 
         public EasyModeViewModel(IRegionManager regionManager)
         {
-            core = new Models.Core(null);
+            model = Model.Instance;
             _regionManager = regionManager;
 
             BackButtonCommand = new DelegateCommand(() =>
@@ -81,14 +81,14 @@ namespace MakePdf.Wpf.ViewModels.Pages
         {
             var files = TargetFiles.Select(x => x.Path);
 
-            return await core.RunAsync(files, OutputFile);
+            return await model.RunAsync(files, OutputFile);
         }
 
         public void AddFiles(List<string> files)
         {
             foreach (var file in files)
             {
-                if (core.IsSupported(file))
+                if (model.IsSupported(file))
                 {
                     TargetFiles.Add(new TargetFile { Filename = Path.GetFileName(file), Path = file });
                 }

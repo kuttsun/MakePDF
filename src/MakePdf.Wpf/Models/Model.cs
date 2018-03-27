@@ -11,22 +11,21 @@ using MakePdf.Core;
 
 namespace MakePdf.Wpf.Models
 {
-    class Core
+    sealed class Model
     {
         MakePdfCore core;
         ILogger logger;
 
-        public Core(ILogger logger)
+        public static Model Instance { get; } = new Model();
+
+
+        public Model()
         {
             var loggerFactory = new LoggerFactory();
-            loggerFactory.AddNLog(new NLogProviderOptions
-            {
-                CaptureMessageTemplates = true,
-                CaptureMessageProperties = true
-            });
+            loggerFactory.AddNLog();
             loggerFactory.ConfigureNLog("NLog.config");
 
-            this.logger = loggerFactory.CreateLogger("logfile");
+            logger = loggerFactory.CreateLogger("logfile");
 
             core = new MakePdfCore(logger);
         }
