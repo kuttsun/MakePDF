@@ -8,6 +8,7 @@ using System.Windows;
 using System.Reflection;
 using System.Diagnostics;
 
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.CommandLineUtils;
 
 using MakePdf.Wpf.Models;
@@ -27,18 +28,14 @@ namespace MakePdf.Wpf
         {
             AttachConsole(-1);
 
-            var assembly = Assembly.GetExecutingAssembly();
-            var appName = assembly.GetName().Name;
-            var appVersion = "";
-
-            Console.WriteLine($"{appName} {appVersion}");
+            var myInfo = MyInformation.Instance;
 
             // Analyze program arguments
 
             var cla = new CommandLineApplication(throwOnUnexpectedArg: false)
             {
                 // Application name
-                Name = appName,
+                Name = myInfo.Name,
             };
 
             cla.HelpOption("-?|-h|--help");
@@ -77,20 +74,29 @@ namespace MakePdf.Wpf
 
             // Default behavior
             var version = cla.Option("-v|--version", "Show version", CommandOptionType.NoValue);
+            var file = cla.Option("-f|--file", "Input file (CUI mode)", CommandOptionType.SingleValue);
             cla.OnExecute(() =>
             {
                 if (version.HasValue())
                 {
-                    var myInfo = MyInformation.Instance;
-                    Console.WriteLine($"{myInfo.Name} {myInfo.AssemblyInformationalVersion}");
+                    Console.WriteLine($"\n{myInfo.Name} {myInfo.AssemblyInformationalVersion}");
                     return 0;
-                };
+                }
+
+                var logger = Model.Instance.Logger;
+                logger.LogInformation($"{myInfo.Name} {myInfo.AssemblyInformationalVersion}");
+
+                if (file.HasValue())
+                {
+                    return new CuiMode(file.Value()).Start();
+                }
 
                 App app = new App();
                 app.InitializeComponent();
                 return app.Run();
             });
 
+            // Execution
             try
             {
                 return cla.Execute(args);
