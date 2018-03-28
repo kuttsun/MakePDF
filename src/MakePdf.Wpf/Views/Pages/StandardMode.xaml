@@ -197,7 +197,7 @@
                 <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" />
                 <Expander HorizontalAlignment="Stretch" Header="Excel" IsExpanded="True">
                     <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-
+                        <CheckBox IsThreeState="False" Margin="10 0 0 5" IsChecked="{Binding Setting.ExcelSetting.AddSheetNameToBookmark}">Add sheet name to bookmark</CheckBox>
                     </StackPanel>
                 </Expander>
             </StackPanel>

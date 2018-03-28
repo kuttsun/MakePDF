@@ -108,7 +108,7 @@ namespace MakePdf.Core
                     case FileType.Word:
                         return new Word(fullpath, logger);
                     case FileType.Excel:
-                        return new Excel(fullpath, logger);
+                        return new Excel(fullpath, logger) { Setting = setting.ExcelSetting };
                     default:
                         return null;
                 }
