@@ -48,7 +48,7 @@ namespace MakePdf.Core
         {
             var paths = Directory.GetFileSystemEntries(inputDirectory);
 
-            return await RunAsync(paths, $@"{inputDirectory}\{outputFullpath}", setting);
+            return await RunAsync(paths, outputFullpath, setting);
         }
 
         void ConvertAndCombine(IEnumerable<string> paths, List<Dictionary<string, object>> parentBookmarks = null)

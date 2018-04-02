@@ -66,8 +66,20 @@ namespace MakePdf.Wpf.Models
             return await core.RunAsync(items, outputFullpath);
         }
 
-        public async Task<bool> RunAsync(string inputDirectory, string outputFullpath, Setting setting)
+        public async Task<bool> RunAsync(string inputDirectory, string outputPath, Setting setting)
         {
+            var outputFullpath = "";
+
+            if (Path.IsPathRooted(outputPath))
+            {
+                // outputPath is absolute path.
+                outputFullpath = outputPath;
+            }
+            else
+            {
+                // outputPath is relative path.
+                outputFullpath = inputDirectory + @"\" + outputPath;
+            }
             return await core.RunAsync(inputDirectory, outputFullpath, setting);
         }
 
