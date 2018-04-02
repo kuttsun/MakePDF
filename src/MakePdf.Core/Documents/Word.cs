@@ -10,7 +10,7 @@ using MsWord = Microsoft.Office.Interop.Word;
 
 namespace MakePdf.Core.Documents
 {
-    public class Word : DocumentBase
+    class Word : DocumentBase
     {
         MsWord.Application word;
 

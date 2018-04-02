@@ -16,7 +16,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
     class StandardModeViewModel : BindableBase
     {
         readonly IRegionManager _regionManager;
-        Models.Core core;
+        Model model;
 
         // List of ComboBox
         public Dictionary<Core.PageLayout, string> PageLayouts { get; } = new Dictionary<Core.PageLayout, string>
@@ -65,7 +65,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
         /// <param name="regionManager"></param>
         public StandardModeViewModel(IRegionManager regionManager)
         {
-            core = new Models.Core(null);
+            model = Model.Instance;
             _regionManager = regionManager;
 
             BackButtonCommand = new DelegateCommand(() =>
@@ -76,7 +76,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
 
         public async Task<bool> StartAsync()
         {
-            return await core.RunAsync(WorkingDirectory, OutputFile, Setting);
+            return await model.RunAsync(WorkingDirectory, OutputFile, Setting);
         }
 
         public void SaveSetting(string path)

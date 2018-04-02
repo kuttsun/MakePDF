@@ -11,7 +11,7 @@ using iTextSharp.text.pdf;
 
 namespace MakePdf.Core.Documents
 {
-    public class OutputPdf : DocumentBase, IDisposable
+    public class OutputPdf : DocumentBase
     {
         Document doc;
         PdfCopy copy;
@@ -28,7 +28,7 @@ namespace MakePdf.Core.Documents
         Property property = new Property();
         DisplayPdf displayPdf = new DisplayPdf();
 
-        public OutputPdf(string fullpath, ILogger logger) : base(fullpath, logger)
+        public OutputPdf(string fullpath, ILogger<OutputPdf> logger) : base(fullpath, logger)
         {
             try
             {

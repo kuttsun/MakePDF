@@ -11,29 +11,14 @@ using MakePdf.Core.Documents;
 
 namespace MakePdf.Core
 {
-    enum SupportFileType
-    {
-        Pdf,
-        Word,
-        Excel
-    }
-
     public class MakePdfCore
     {
         ILogger logger;
-
-        static Dictionary<string, SupportFileType> SupportFileTypes { get; set; } = new Dictionary<string, SupportFileType>()
-        {
-            {".pdf", SupportFileType.Pdf },
-            {".doc", SupportFileType.Word },
-            {".docx", SupportFileType.Word },
-            {".xls", SupportFileType.Excel },
-            {".xlsx", SupportFileType.Excel },
-        };
+        OutputPdf outputPdf;
 
         Setting setting = new Setting();
 
-        public MakePdfCore(ILogger logger)
+        public MakePdfCore(ILogger<MakePdfCore> logger)
         {
             this.logger = logger;
         }
@@ -44,15 +29,16 @@ namespace MakePdf.Core
 
             await Task.Run(() =>
             {
-                using (var outputPdf = new OutputPdf(outputFullpath, logger))
+                using (outputPdf = new OutputPdf(outputFullpath, null))
                 {
                     outputPdf.SetSettings(this.setting);
 
-                    ConvertAndCombine(outputPdf, paths);
+                    ConvertAndCombine(paths);
 
                     // Finalize
                     outputPdf.Complete();
                 }
+
             });
 
             return true;
@@ -62,10 +48,10 @@ namespace MakePdf.Core
         {
             var paths = Directory.GetFileSystemEntries(inputDirectory);
 
-            return await RunAsync(paths, $@"{inputDirectory}\{outputFullpath}", setting);
+            return await RunAsync(paths, outputFullpath, setting);
         }
 
-        void ConvertAndCombine(OutputPdf outputPdf, IEnumerable<string> paths, List<Dictionary<string, object>> parentBookmarks = null)
+        void ConvertAndCombine(IEnumerable<string> paths, List<Dictionary<string, object>> parentBookmarks = null)
         {
             foreach (var path in paths)
             {
@@ -77,15 +63,17 @@ namespace MakePdf.Core
                 {
                     if (setting.TargetFiles.AllItems || Regex.IsMatch(path, setting.TargetFiles.Pattern))
                     {
-                        if (IsSupported(path))
+                        if (Support.IsSupported(path))
                         {
-                            using (var doc = Create(path, logger))
+                            using (var doc = Create(path))
                             {
                                 doc.ToPdf();
                                 outputPdf?.Add(doc.OutputFullpath, parentBookmarks);
                                 doc.DeleteCnvertedPdf(setting.DeleteConvertedPdf);
                             }
+
                         }
+
                     }
                 }
                 else if (Directory.Exists(path))
@@ -96,7 +84,7 @@ namespace MakePdf.Core
                     {
                         var childBookmark = new List<Dictionary<string, object>>();
                         // Recursive processing
-                        ConvertAndCombine(outputPdf, Directory.GetFileSystemEntries(path), childBookmark);
+                        ConvertAndCombine(Directory.GetFileSystemEntries(path), childBookmark);
                         outputPdf.AddDirectoryBookmark(parentBookmarks, dirName, childBookmark);
                     }
                 }
@@ -107,27 +95,20 @@ namespace MakePdf.Core
             }
         }
 
-        public bool IsSupported(string fullpath)
+        IDocument Create(string fullpath)
         {
             var ext = Path.GetExtension(fullpath);
 
-            return SupportFileTypes.ContainsKey(ext);
-        }
-
-        DocumentBase Create(string fullpath, ILogger logger)
-        {
-            var ext = Path.GetExtension(fullpath);
-
-            if (SupportFileTypes.ContainsKey(ext))
+            if (Support.FileTypes.ContainsKey(ext))
             {
-                switch (SupportFileTypes[ext])
+                switch (Support.FileTypes[ext])
                 {
-                    case SupportFileType.Pdf:
+                    case FileType.Pdf:
                         return new Pdf(fullpath, logger);
-                    case SupportFileType.Word:
+                    case FileType.Word:
                         return new Word(fullpath, logger);
-                    case SupportFileType.Excel:
-                        return new Excel(fullpath, logger);
+                    case FileType.Excel:
+                        return new Excel(fullpath, logger) { Setting = setting.ExcelSetting };
                     default:
                         return null;
                 }

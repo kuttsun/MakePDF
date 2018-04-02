@@ -84,6 +84,7 @@
     <Compile Include="Documents\WordTest.cs" />
     <Compile Include="MakePdfCoreTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SupportTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

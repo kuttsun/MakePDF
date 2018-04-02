@@ -24,9 +24,10 @@ namespace MakePdf.Core
         public ReplacePattern ReplaceDirectoryName { get; set; } = new ReplacePattern();
         public AddToBookmark AddFileNameToBookmark { get; set; } = new AddToBookmark();
         public AddToBookmark AddDirectoryNameToBookmark { get; set; } = new AddToBookmark();
-        public WordSetting WordSetting { get; set; } = new WordSetting();
         public Property Property { get; set; } = new Property();
         public DisplayPdf DisplayPdf { get; set; } = new DisplayPdf();
+        public WordSetting WordSetting { get; set; } = new WordSetting();
+        public ExcelSetting ExcelSetting { get; set; } = new ExcelSetting();
     }
 
     public class Target
@@ -48,12 +49,6 @@ namespace MakePdf.Core
         public string ExclusionPattern { get; set; } = null;
     }
 
-    public class WordSetting
-    {
-        public bool CreatingBookmarkFromHeading { get; set; } = true;
-        public string ExclusionPattern { get; set; } = null;
-    }
-
     public class Property
     {
         public string Title { get; set; }
@@ -70,4 +65,15 @@ namespace MakePdf.Core
 
         public PageLayout PageLayout { get; set; } = PageLayout.SinglePage;
     }
+    public class WordSetting
+    {
+        public bool CreatingBookmarkFromHeading { get; set; } = true;
+        public string ExclusionPattern { get; set; } = null;
+    }
+
+    public class ExcelSetting
+    {
+        public bool AddSheetNameToBookmark { get; set; } = true;
+    }
+
 }

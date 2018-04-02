@@ -76,12 +76,14 @@
   <ItemGroup>
     <Compile Include="Documents\DocumentBase.cs" />
     <Compile Include="Documents\Excel.cs" />
+    <Compile Include="Documents\IDocument.cs" />
     <Compile Include="Documents\OutputPdf.cs" />
     <Compile Include="Documents\Pdf.cs" />
     <Compile Include="Documents\Word.cs" />
     <Compile Include="MakePdfCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setting.cs" />
+    <Compile Include="Support.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
