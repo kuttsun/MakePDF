@@ -24,7 +24,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
 
             LoadedCommand = new DelegateCommand(async () =>
             {
-                var ret = await updater.CheckForUpdate();
+                var ret = await updater.CheckForUpdates();
 
                 if (ret != null)
                 {
@@ -35,12 +35,12 @@ namespace MakePdf.Wpf.ViewModels.Pages
 
         public async Task<string> CheckForUpdate()
         {
-            return await updater.CheckForUpdate();
+            return await updater.CheckForUpdates();
         }
 
         public async Task<bool> PrepareForUpdate()
         {
-            return await updater.PrepareForUpdate();
+            return await updater.PrepareForUpdates();
         }
     }
 }

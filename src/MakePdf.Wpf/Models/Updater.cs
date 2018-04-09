@@ -10,13 +10,15 @@ using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 
 using CoreUpdater;
-using CoreUpdater.Updates;
 
 namespace MakePdf.Wpf.Models
 {
     public class Updater
     {
         public static Updater Instance { get; } = new Updater();
+        public bool UpdateCompleted { get; private set; } = false;
+        public bool UpdateSuccessful { get; private set; } = true;
+
         MyInformation myInfo = MyInformation.Instance;
 
         UpdateManager mgr;
@@ -34,18 +36,18 @@ namespace MakePdf.Wpf.Models
 
             logger = loggerFactory.CreateLogger("logfile");
 
-            mgr = new GitHub("https://github.com/kuttsun/MakePdf", logger);
+            mgr = new GitHub("https://github.com/kuttsun/MakePdf", logger: logger);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public async Task<string> CheckForUpdate()
+        public async Task<string> CheckForUpdates()
         {
             try
             {
-                var appInfo = await mgr.CheckForUpdateAsync();
+                var appInfo = await mgr.CheckForUpdatesAsync();
 
                 var version1 = new Version(myInfo.AssemblyInformationalVersion);
                 var version2 = new Version(appInfo.Version);
@@ -64,19 +66,18 @@ namespace MakePdf.Wpf.Models
             }
         }
 
-        public async Task<bool> PrepareForUpdate()
+        public async Task<bool> PrepareForUpdates()
         {
             try
             {
-                var appInfo = await mgr.PrepareForUpdate(Directory.GetCurrentDirectory(), myInfo.Name + ".zip");
+                var appInfo = await mgr.PrepareForUpdatesAsync(Directory.GetCurrentDirectory(), myInfo.Name + ".zip");
 
                 var srcDir = Path.GetFullPath(appInfo.GetNewVersionDir());
                 var dstDir = Path.GetFullPath(Directory.GetCurrentDirectory());
 
                 // Start new version application
-                Process.Start($@"{srcDir}\{myInfo.AssemblyName}", $"update --pid={Process.GetCurrentProcess().Id} -n={myInfo.AssemblyName} -s={srcDir} -d={dstDir}");
-
-                logger?.LogInformation($@"StartProcess: {srcDir}\{myInfo.AssemblyName} update --pid={Process.GetCurrentProcess().Id} -n={myInfo.AssemblyName} -s={srcDir} -d={dstDir}");
+                mgr.StartUpdater();
+                logger?.LogInformation("Start updater");
 
                 return true;
             }
@@ -87,9 +88,23 @@ namespace MakePdf.Wpf.Models
             }
         }
 
-        public void Update(string pid, string srcDir, string dstDir)
+        public void Update(string[] args) => mgr.Update(args);
+        public void RestartApplication(string[] args) => mgr.RestartApplication(args);
+        public bool CanUpdate(string[] args) => mgr.CanUpdate(args);
+
+        public void Completed(string[] args)
         {
-            mgr.Update(pid, srcDir, dstDir);
+            switch (mgr.Completed(args))
+            {
+                case UpdateCompletedType.Success:
+                    UpdateCompleted = true;
+                    UpdateSuccessful = true;
+                    break;
+                case UpdateCompletedType.Failure:
+                    UpdateCompleted = true;
+                    UpdateSuccessful = false;
+                    break;
+            }
         }
     }
 }
