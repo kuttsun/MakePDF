@@ -167,6 +167,7 @@
     <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\Updater.cs" />
     <Compile Include="MyInformation.cs" />
+    <Compile Include="ResourceService.cs" />
     <Compile Include="ViewModels\Dialogs\Common\OneButtonDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\Common\ProcessingDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\Common\TwoButtonDialogViewModel.cs" />
@@ -268,7 +269,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="NLog.config">
