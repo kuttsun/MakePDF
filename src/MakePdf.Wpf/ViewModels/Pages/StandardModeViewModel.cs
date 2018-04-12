@@ -18,13 +18,6 @@ namespace MakePdf.Wpf.ViewModels.Pages
         readonly IRegionManager _regionManager;
         Model model;
 
-        // List of ComboBox
-        public Dictionary<Core.PageLayout, string> PageLayouts { get; } = new Dictionary<Core.PageLayout, string>
-        {
-            [Core.PageLayout.SinglePage] = "Single Page",
-            [Core.PageLayout.OneColumn] = "One Column",
-        };
-
         string workingDirectory = Directory.GetCurrentDirectory();
         public string WorkingDirectory
         {
@@ -43,6 +36,17 @@ namespace MakePdf.Wpf.ViewModels.Pages
             {
                 SetProperty(ref outputFile, value);
                 Setting.OutputFile = value;
+            }
+        }
+
+        int pageLayouts = 0;
+        public int PageLayouts
+        {
+            get { return pageLayouts; }
+            set
+            {
+                SetProperty(ref pageLayouts, value);
+                Setting.DisplayPdf.PageLayout = (Core.PageLayout)Enum.ToObject(typeof(Core.PageLayout), value); ;
             }
         }
 
@@ -72,6 +76,8 @@ namespace MakePdf.Wpf.ViewModels.Pages
             {
                 _regionManager.RequestNavigate("MainRegion", "Home");
             });
+
+            PageLayouts = (int)Setting.DisplayPdf.PageLayout;
         }
 
         public async Task<bool> StartAsync()

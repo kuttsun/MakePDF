@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="MakePdf.Wpf.Views.Dialogs.NewVersionFoundDialog"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:app="clr-namespace:MakePdf.Wpf"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MakePdf.Wpf.Views.Dialogs"
@@ -19,8 +20,8 @@
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}">
     <StackPanel Margin="16">
-        <Label Content="New version found" FontSize="24"/>
-        <Label Content="The new version is available." />
+        <Label Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Dialog_NewVersionFound_Title, Mode=OneWay}" FontSize="24"/>
+        <Label Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Dialog_NewVersionFound_Message1, Mode=OneWay}" />
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
@@ -30,19 +31,19 @@
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Content="Current version:" />
+            <Label Grid.Row="0" Grid.Column="0" Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Dialog_NewVersionFound_CurrentVersion, Mode=OneWay}" />
             <Label Grid.Row="0" Grid.Column="1" Content="{Binding CurrentVersion}" x:Name="labelCurrentVersion" />
-            <Label Grid.Row="1" Grid.Column="0" Content="New version:" />
+            <Label Grid.Row="1" Grid.Column="0" Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Dialog_NewVersionFound_NewVersion, Mode=OneWay}" />
             <Label Grid.Row="1" Grid.Column="1" Content="{Binding NewVersion}" x:Name="labelNewVersion" />
         </Grid>
-        <Label Content="Do you want to update now ?" />
+        <Label Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Dialog_NewVersionFound_Message2, Mode=OneWay}" />
         <StackPanel Margin="0 10 0 0" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Yes" Style="{DynamicResource MaterialDesignFlatButton}" Command="{x:Static material:DialogHost.CloseDialogCommand}">
+            <Button Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Dialog_NewVersionFound_Update, Mode=OneWay}" Style="{DynamicResource MaterialDesignFlatButton}" Command="{x:Static material:DialogHost.CloseDialogCommand}">
                 <Button.CommandParameter>
                     <local:YesNo>Yes</local:YesNo>
                 </Button.CommandParameter>
             </Button>
-            <Button Content="No" Style="{StaticResource MaterialDesignFlatButton}"
+            <Button Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Dialog_NewVersionFound_Later, Mode=OneWay}" Style="{StaticResource MaterialDesignFlatButton}"
                 Command="{x:Static material:DialogHost.CloseDialogCommand}">
                 <Button.CommandParameter>
                     <local:YesNo>No</local:YesNo>

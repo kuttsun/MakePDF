@@ -11,6 +11,13 @@ using MakePdf.Wpf.Properties;
 
 namespace MakePdf.Wpf
 {
+    public enum SupportedCulture
+    {
+        Auto,
+        en,
+        ja,
+    }
+
     // see. http://grabacr.net/archives/1647
     public class ResourceService : INotifyPropertyChanged
     {
@@ -27,16 +34,23 @@ namespace MakePdf.Wpf
         }
 
         #endregion
-        
-        public void ChangeCulture(string name)
+
+        public void ChangeCulture(SupportedCulture culture)
         {
-            if (name == null) {
+            if (culture == SupportedCulture.Auto)
+            {
                 Resources.Culture = CultureInfo.DefaultThreadCurrentCulture;
             }
-            else { 
-                Resources.Culture = CultureInfo.GetCultureInfo(name);
+            else
+            {
+                Resources.Culture = CultureInfo.GetCultureInfo(culture.ToString());
             }
             RaisePropertyChanged(nameof(Resources));
+        }
+
+        public SupportedCulture GetCulture()
+        {
+            return (SupportedCulture)Enum.Parse(typeof(SupportedCulture), Resources.Culture.Name, true);
         }
     }
 }

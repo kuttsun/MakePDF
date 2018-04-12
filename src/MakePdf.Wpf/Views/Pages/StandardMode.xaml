@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="MakePdf.Wpf.Views.Pages.StandardMode"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:app="clr-namespace:MakePdf.Wpf"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MakePdf.Wpf.Views.Pages"
@@ -18,35 +19,35 @@
              FontFamily="{DynamicResource MaterialDesignFont}">
     <DockPanel Margin="10">
         <DockPanel DockPanel.Dock="Bottom" Margin="5 10 5 0">
-            <Button DockPanel.Dock="Left" MinWidth="90" ToolTip="Back Home" Command="{Binding  BackButtonCommand}">
+            <Button DockPanel.Dock="Left" MinWidth="90" ToolTip="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_BackHome, Mode=OneWay}" Command="{Binding  BackButtonCommand}">
                 <StackPanel Orientation="Horizontal" >
                     <materialDesign:PackIcon Kind="ArrowLeftBold"/>
-                    <TextBlock VerticalAlignment="Center" Text="Back" Margin="5,0,0,0"/>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_Back, Mode=OneWay}" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
-            <Button DockPanel.Dock="Left" MinWidth="90" Margin="30 0 10 0" ToolTip="Save Settings" Click="SaveButton_Click">
+            <Button DockPanel.Dock="Left" MinWidth="90" Margin="30 0 10 0" ToolTip="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_SaveSetting, Mode=OneWay}" Click="SaveButton_Click">
                 <StackPanel Orientation="Horizontal" >
                     <materialDesign:PackIcon Kind="ContentSave" />
-                    <TextBlock VerticalAlignment="Center" Text="Save" Margin="5,0,0,0"/>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_Save, Mode=OneWay}" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
-            <Button DockPanel.Dock="Left" MinWidth="90" ToolTip="Load Settings" Click="LoadButton_Click">
+            <Button DockPanel.Dock="Left" MinWidth="90" ToolTip="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_LoadSetting, Mode=OneWay}" Click="LoadButton_Click">
                 <StackPanel Orientation="Horizontal" >
                     <materialDesign:PackIcon Kind="OpenInApp"/>
-                    <TextBlock VerticalAlignment="Center" Text="Load" Margin="5,0,0,0"/>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_Load, Mode=OneWay}" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
-            <Button DockPanel.Dock="Right" MinWidth="90" ToolTip="Start" Click="StartButton_Click" Style="{StaticResource MaterialDesignRaisedAccentButton}">
+            <Button DockPanel.Dock="Right" MinWidth="90" ToolTip="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_StartProcess, Mode=OneWay}" Click="StartButton_Click" Style="{StaticResource MaterialDesignRaisedAccentButton}">
                 <StackPanel Orientation="Horizontal" >
                     <materialDesign:PackIcon Kind="Play"/>
-                    <TextBlock VerticalAlignment="Center" Text="Start" Margin="5,0,0,0"/>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_Start, Mode=OneWay}" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
             <Rectangle />
         </DockPanel>
         <ScrollViewer DockPanel.Dock="Top">
             <StackPanel>
-                <Expander HorizontalAlignment="Stretch" Header="Input / Output" IsExpanded="True">
+                <Expander HorizontalAlignment="Stretch" Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_InputOutput, Mode=OneWay}" IsExpanded="True">
                     <Grid Margin="24,8,24,16">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -57,21 +58,21 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Row="0" Grid.Column="0" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="10" Text="Working directory" />
+                        <TextBlock Grid.Row="0" Grid.Column="0" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_InputOutput_WorkingDirectory, Mode=OneWay}" />
                         <DockPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch">
-                            <Button DockPanel.Dock="Right" Margin="5" MinWidth="90"  VerticalAlignment="Center" Content="Browse..." Click="SetInputDirectoryButton_Click" ToolTip="Open Folder Dialog" />
+                            <Button DockPanel.Dock="Right" Margin="5" MinWidth="90"  VerticalAlignment="Center" Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_Browse, Mode=OneWay}" Click="SetInputDirectoryButton_Click" ToolTip="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_OpenFolderDialog, Mode=OneWay}" />
                             <TextBox materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding WorkingDirectory}" AllowDrop="True" Drop="InputDirectory_Drop" PreviewDragOver="Item_PreviewDragOver" />
                         </DockPanel>
-                        <TextBlock Grid.Row="1" Grid.Column="0" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="10" Text="Output file" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_InputOutput_OutputFile, Mode=OneWay}" />
                         <DockPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch">
-                            <Button DockPanel.Dock="Right" Margin="5" MinWidth="90"  VerticalAlignment="Center" Content="Browse..." Click="SetOutputFileButton_Click" ToolTip="Open File Dialog" />
+                            <Button DockPanel.Dock="Right" Margin="5" MinWidth="90"  VerticalAlignment="Center" Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_Browse, Mode=OneWay}" Click="SetOutputFileButton_Click" ToolTip="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_OpenFileDialog, Mode=OneWay}" />
                             <TextBox materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding OutputFile}" AllowDrop="True" Drop="OutputFile_Drop" PreviewDragOver="Item_PreviewDragOver" />
                         </DockPanel>
-                        <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 5 0 0" IsChecked="{Binding Setting.DeleteConvertedPdf}">Delete converted PDF</CheckBox>
+                        <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 5 0 0" IsChecked="{Binding Setting.DeleteConvertedPdf}" Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_InputOutput_DeleteConvertedPdf, Mode=OneWay}" />
                     </Grid>
                 </Expander>
                 <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" />
-                <Expander HorizontalAlignment="Stretch" Header="Target" IsExpanded="True">
+                <Expander HorizontalAlignment="Stretch" Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Target, Mode=OneWay}" IsExpanded="True">
                     <Grid Margin="24,8,24,16">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -83,16 +84,16 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 0 0 5" IsChecked="{Binding Setting.TargetFiles.AllItems}">All supported files</CheckBox>
-                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Files" />
-                        <TextBox Grid.Row="1" Grid.Column="1" materialDesign:HintAssist.Hint="Specify target files by regular expression" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.TargetFiles.Pattern}" />
-                        <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 10 0 5" IsChecked="{Binding Setting.TargetDirectories.AllItems}">All directories</CheckBox>
-                        <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Directories" />
-                        <TextBox Grid.Row="3" Grid.Column="1" materialDesign:HintAssist.Hint="Specify target directories by regular expression" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.TargetDirectories.Pattern}" />
+                        <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 0 0 5" IsChecked="{Binding Setting.TargetFiles.AllItems}" Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_AllSupportedFiles, Mode=OneWay}" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Files, Mode=OneWay}" />
+                        <TextBox Grid.Row="1" Grid.Column="1" materialDesign:HintAssist.Hint="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_RegularExpression_File, Mode=OneWay}" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.TargetFiles.Pattern}" />
+                        <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 10 0 5" IsChecked="{Binding Setting.TargetDirectories.AllItems}" Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_AllDirectories, Mode=OneWay}" />
+                        <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Directories, Mode=OneWay}" />
+                        <TextBox Grid.Row="3" Grid.Column="1" materialDesign:HintAssist.Hint="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_RegularExpression_Directory, Mode=OneWay}" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.TargetDirectories.Pattern}" />
                     </Grid>
                 </Expander>
                 <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" />
-                <Expander HorizontalAlignment="Stretch" Header="Bookmark" IsExpanded="True">
+                <Expander HorizontalAlignment="Stretch" Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Bookmark, Mode=OneWay}" IsExpanded="True">
                     <Grid Margin="24,8,24,16">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -110,26 +111,26 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 0 0 5" IsChecked="{Binding Setting.AddFileNameToBookmark.IsEnabled}">Add file name to bookmark</CheckBox>
-                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Exclusion pattern" />
-                        <TextBox Grid.Row="1" Grid.Column="1" materialDesign:HintAssist.Hint="Specify the files by regular expression" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.AddFileNameToBookmark.ExclusionPattern}" />
-                        <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 10 0 5" IsChecked="{Binding Setting.ReplaceFileName.IsEnabled}">Replace file name</CheckBox>
-                        <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Before" />
-                        <TextBox Grid.Row="3" Grid.Column="1" materialDesign:HintAssist.Hint="Specify the files by backreference of regular expression" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.ReplaceFileName.Before}" />
-                        <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="After" />
-                        <TextBox Grid.Row="4" Grid.Column="1" materialDesign:HintAssist.Hint="Specify the files by backreference of regular expression" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.ReplaceFileName.After}" />
-                        <CheckBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 10 0 5" IsChecked="{Binding Setting.AddDirectoryNameToBookmark.IsEnabled}">Add directory name to bookmark</CheckBox>
-                        <TextBlock Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Exclusion pattern" />
-                        <TextBox Grid.Row="6" Grid.Column="1" materialDesign:HintAssist.Hint="Specify the directories by regular expression" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.AddDirectoryNameToBookmark.ExclusionPattern}" />
-                        <CheckBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 10 0 5" IsChecked="{Binding Setting.ReplaceDirectoryName.IsEnabled}">Replace directory name</CheckBox>
-                        <TextBlock Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Before" />
-                        <TextBox Grid.Row="8" Grid.Column="1" materialDesign:HintAssist.Hint="Specify the directories by backreference of regular expression" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.ReplaceDirectoryName.Before}" />
-                        <TextBlock Grid.Row="9" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="After" />
-                        <TextBox Grid.Row="9" Grid.Column="1" materialDesign:HintAssist.Hint="Specify the directories by backreference of regular expression" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.ReplaceDirectoryName.After}" />
+                        <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 0 0 5" IsChecked="{Binding Setting.AddFileNameToBookmark.IsEnabled}" Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Bookmark_AddFileName, Mode=OneWay}" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_ExclusionPattern, Mode=OneWay}" />
+                        <TextBox Grid.Row="1" Grid.Column="1" materialDesign:HintAssist.Hint="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_RegularExpression_File, Mode=OneWay}" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.AddFileNameToBookmark.ExclusionPattern}" />
+                        <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 10 0 5" IsChecked="{Binding Setting.ReplaceFileName.IsEnabled}" Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_ReplaceFileName, Mode=OneWay}" />
+                        <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Before, Mode=OneWay}" />
+                        <TextBox Grid.Row="3" Grid.Column="1" materialDesign:HintAssist.Hint="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_RegularExpression_ReplaceFile, Mode=OneWay}" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.ReplaceFileName.Before}" />
+                        <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_After, Mode=OneWay}" />
+                        <TextBox Grid.Row="4" Grid.Column="1" materialDesign:HintAssist.Hint="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_RegularExpression_ReplaceFile, Mode=OneWay}" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.ReplaceFileName.After}" />
+                        <CheckBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 10 0 5" IsChecked="{Binding Setting.AddDirectoryNameToBookmark.IsEnabled}" Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Bookmark_AddDirectoryName, Mode=OneWay}" />
+                        <TextBlock Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_ExclusionPattern, Mode=OneWay}" />
+                        <TextBox Grid.Row="6" Grid.Column="1" materialDesign:HintAssist.Hint="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_RegularExpression_Directory, Mode=OneWay}" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.AddDirectoryNameToBookmark.ExclusionPattern}" />
+                        <CheckBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 10 0 5" IsChecked="{Binding Setting.ReplaceDirectoryName.IsEnabled}" Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_ReplaceFileName, Mode=OneWay}" />
+                        <TextBlock Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Before, Mode=OneWay}" />
+                        <TextBox Grid.Row="8" Grid.Column="1" materialDesign:HintAssist.Hint="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_RegularExpression_ReplaceDirectory, Mode=OneWay}" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.ReplaceDirectoryName.Before}" />
+                        <TextBlock Grid.Row="9" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_After, Mode=OneWay}" />
+                        <TextBox Grid.Row="9" Grid.Column="1" materialDesign:HintAssist.Hint="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_RegularExpression_ReplaceDirectory, Mode=OneWay}" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.ReplaceDirectoryName.After}" />
                     </Grid>
                 </Expander>
                 <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" />
-                <Expander HorizontalAlignment="Stretch" Header="Property" IsExpanded="True">
+                <Expander HorizontalAlignment="Stretch" Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Property, Mode=OneWay}" IsExpanded="True">
                     <Grid Margin="24,8,24,16">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -142,20 +143,20 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Title" />
+                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Property_Title, Mode=OneWay}" />
                         <TextBox Grid.Row="0" Grid.Column="1" materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.Property.Title}" />
-                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Author" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Property_Author, Mode=OneWay}" />
                         <TextBox Grid.Row="1" Grid.Column="1" materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.Property.Author}" />
-                        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Creator" />
+                        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Property_Creator, Mode=OneWay}" />
                         <TextBox Grid.Row="2" Grid.Column="1" materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.Property.Creator}" />
-                        <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Subject" />
+                        <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Property_Subject, Mode=OneWay}" />
                         <TextBox Grid.Row="3" Grid.Column="1" materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.Property.Subject}" />
-                        <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Keywords" />
+                        <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Property_Keywords, Mode=OneWay}" />
                         <TextBox Grid.Row="4" Grid.Column="1" materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.Property.Keywords}" />
                     </Grid>
                 </Expander>
                 <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" />
-                <Expander HorizontalAlignment="Stretch" Header="Display PDF" IsExpanded="True">
+                <Expander HorizontalAlignment="Stretch" Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_DisplayPdf, Mode=OneWay}" IsExpanded="True">
                     <Grid Margin="24,8,24,16">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -165,39 +166,38 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 0 0 5" IsChecked="{Binding Setting.PageLayout.PageModeUseOutlines}">Open bookmark panel when displaying</CheckBox>
-                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Page Layout" />
-                        <!--<ComboBox Grid.Row="1" Grid.Column="1" materialDesign:ComboBoxAssist.ShowSelectedItem="{Binding ElementName=DisplaySelectedItemCheckBox, Path=IsChecked}" Margin="0 8 0 8" HorizontalAlignment="Left">
-                            <ComboBoxItem IsSelected="True">Single Page</ComboBoxItem>
-                            <ComboBoxItem>One Column</ComboBoxItem>
-                        </ComboBox>-->
-                        <ComboBox Grid.Row="1" Grid.Column="1" materialDesign:ComboBoxAssist.ShowSelectedItem="{Binding ElementName=DisplaySelectedItemCheckBox, Path=IsChecked}" Margin="0 8 0 8" HorizontalAlignment="Left" ItemsSource="{Binding PageLayouts}" SelectedValuePath="Key" DisplayMemberPath="Value" SelectedValue="{Binding Setting.DisplayPdf.PageLayout}" />
-                    </Grid>
-                </Expander>
-                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" />
-                <Expander HorizontalAlignment="Stretch" Header="Word" IsExpanded="True">
-                    <Grid Margin="24,8,24,16">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Create bookmarks" />
-                        <ComboBox Grid.Row="0" Grid.Column="1" materialDesign:ComboBoxAssist.ShowSelectedItem="{Binding ElementName=DisplaySelectedItemCheckBox, Path=IsChecked}" Margin="0 8 0 8" HorizontalAlignment="Left">
-                            <ComboBoxItem IsSelected="True">from word heading</ComboBoxItem>
-                            <ComboBoxItem>from word bookmarks</ComboBoxItem>
+                        <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 0 0 5" IsChecked="{Binding Setting.PageLayout.PageModeUseOutlines}" Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_DisplayPdf_BookmarkPanel, Mode=OneWay}" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_DisplayPdf_PageLayout, Mode=OneWay}" />
+                        <ComboBox Grid.Row="1" Grid.Column="1" materialDesign:ComboBoxAssist.ShowSelectedItem="{Binding ElementName=DisplaySelectedItemCheckBox, Path=IsChecked}" Margin="0 8 0 8" HorizontalAlignment="Left" SelectedIndex="{Binding PageLayouts}">
+                            <ComboBoxItem IsSelected="True" Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_DisplayPdf_PageLayout_SinglePage, Mode=OneWay}" />
+                            <ComboBoxItem Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_DisplayPdf_PageLayout_OneColumn, Mode=OneWay}" />
                         </ComboBox>
-                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="Exclusion Pattern" />
-                        <TextBox Grid.Row="1" Grid.Column="1" materialDesign:HintAssist.Hint="Specify the files by regular expression to exclude from the above" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding InputFolderPattern}" />
                     </Grid>
                 </Expander>
                 <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" />
-                <Expander HorizontalAlignment="Stretch" Header="Excel" IsExpanded="True">
+                <Expander HorizontalAlignment="Stretch" Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Word, Mode=OneWay}" IsExpanded="True">
+                    <Grid Margin="24,8,24,16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Word_CreateBookmarks, Mode=OneWay}" />
+                        <ComboBox Grid.Row="0" Grid.Column="1" materialDesign:ComboBoxAssist.ShowSelectedItem="{Binding ElementName=DisplaySelectedItemCheckBox, Path=IsChecked}" Margin="0 8 0 8" HorizontalAlignment="Left">
+                            <ComboBoxItem IsSelected="True" Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Word_CreateBookmarks_FromHeading, Mode=OneWay}" />
+                            <ComboBoxItem Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Word_CreateBookmarks_FromBookmark, Mode=OneWay}" />
+                        </ComboBox>
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_ExclusionPattern, Mode=OneWay}" />
+                        <TextBox Grid.Row="1" Grid.Column="1" materialDesign:HintAssist.Hint="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_RegularExpression_File2, Mode=OneWay}" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.WordSetting.ExclusionPattern}" />
+                    </Grid>
+                </Expander>
+                <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" />
+                <Expander HorizontalAlignment="Stretch" Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Excel, Mode=OneWay}" IsExpanded="True">
                     <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                        <CheckBox IsThreeState="False" Margin="10 0 0 5" IsChecked="{Binding Setting.ExcelSetting.AddSheetNameToBookmark}">Add sheet name to bookmark</CheckBox>
+                        <CheckBox IsThreeState="False" Margin="10 0 0 5" IsChecked="{Binding Setting.ExcelSetting.AddSheetNameToBookmark}" Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Excel_AddSheetToBookmark, Mode=OneWay}" />
                     </StackPanel>
                 </Expander>
             </StackPanel>
