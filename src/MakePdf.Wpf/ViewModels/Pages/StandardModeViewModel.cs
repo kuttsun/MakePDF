@@ -46,7 +46,18 @@ namespace MakePdf.Wpf.ViewModels.Pages
             set
             {
                 SetProperty(ref pageLayouts, value);
-                Setting.DisplayPdf.PageLayout = (Core.PageLayout)Enum.ToObject(typeof(Core.PageLayout), value); ;
+                Setting.DisplayPdf.PageLayout = (Core.PageLayout)Enum.ToObject(typeof(Core.PageLayout), value);
+            }
+        }
+
+        int createBookmarkFromWord = 0;
+        public int CreateBookmarkFromWord
+        {
+            get { return createBookmarkFromWord; }
+            set
+            {
+                SetProperty(ref createBookmarkFromWord, value);
+                Setting.WordSetting.CreateBookmarkFromWord = (Core.CreateBookmarkFromWord)Enum.ToObject(typeof(Core.CreateBookmarkFromWord), value);
             }
         }
 
@@ -58,6 +69,8 @@ namespace MakePdf.Wpf.ViewModels.Pages
             {
                 SetProperty(ref setting, value);
                 OutputFile = setting.OutputFile;
+                PageLayouts = (int)setting.DisplayPdf.PageLayout;
+                CreateBookmarkFromWord = (int)setting.WordSetting.CreateBookmarkFromWord;
             }
         }
 
@@ -78,6 +91,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
             });
 
             PageLayouts = (int)Setting.DisplayPdf.PageLayout;
+            CreateBookmarkFromWord = (int)setting.WordSetting.CreateBookmarkFromWord;
         }
 
         public async Task<bool> StartAsync()

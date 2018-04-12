@@ -14,6 +14,12 @@ namespace MakePdf.Core
         OneColumn,
     }
 
+    public enum CreateBookmarkFromWord
+    {
+        Heading,
+        Bookmark,
+    }
+
     public class Setting
     {
         public bool DeleteConvertedPdf { get; set; } = true;
@@ -62,12 +68,12 @@ namespace MakePdf.Core
     {
         public bool PageModeUseOutlines { get; set; } = true;
         [JsonConverter(typeof(StringEnumConverter))]
-
         public PageLayout PageLayout { get; set; } = PageLayout.SinglePage;
     }
     public class WordSetting
     {
-        public bool CreatingBookmarkFromHeading { get; set; } = true;
+        [JsonConverter(typeof(StringEnumConverter))]
+        public CreateBookmarkFromWord CreateBookmarkFromWord { get; set; } = CreateBookmarkFromWord.Heading;
         public string ExclusionPattern { get; set; } = null;
     }
 
