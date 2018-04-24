@@ -49,7 +49,15 @@ namespace MakePdf.Wpf.Views.Pages
 
         void Usage_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://github.com/kuttsun/MakePdf/wiki");
+            switch(ResourceService.Current.GetCulture())
+            {
+                case SupportedCulture.ja:
+                    Process.Start("https://github.com/kuttsun/MakePdf/wiki/Home（日本語）");
+                    break;
+                default:
+                    Process.Start("https://github.com/kuttsun/MakePdf/wiki");
+                    break;
+            }
         }
 
         async void About_Click(object sender, RoutedEventArgs e)
@@ -63,7 +71,7 @@ namespace MakePdf.Wpf.Views.Pages
         {
             string newVersion = null;
 
-            var processingDialog = new ProcessingDialog("Check for updates...", $"Please wait for a while.");
+            var processingDialog = new ProcessingDialog(Properties.Resources.MsgBox_CheckForUpdates_Title, Properties.Resources.MsgBox_CheckForUpdates_Message);
             await parentView.dialogHostMain.ShowDialog(processingDialog, async (object s, DialogOpenedEventArgs args) =>
             {
                 newVersion = await vm.CheckForUpdate();
@@ -72,7 +80,7 @@ namespace MakePdf.Wpf.Views.Pages
 
             if (newVersion == null)
             {
-                var okdialog = new OneButtonDialog("Not found", $"You are using the latest version.");
+                var okdialog = new OneButtonDialog(Properties.Resources.MsgBox_NotFound_Title, Properties.Resources.MsgBox_NotFound_Message);
                 await parentView.dialogHostMain.ShowDialog(okdialog);
                 return;
             }
@@ -96,7 +104,7 @@ namespace MakePdf.Wpf.Views.Pages
 
             // Download and decompress
             bool result = false;
-            var processingDialog = new ProcessingDialog("Downloading...", $"Please wait for a while.");
+            var processingDialog = new ProcessingDialog(Properties.Resources.MsgBox_Downloading_Title, Properties.Resources.MsgBox_Downloading_Message);
             await parentView.dialogHostMain.ShowDialog(processingDialog, async (object s, DialogOpenedEventArgs args) =>
             {
                 result = await vm.PrepareForUpdate();
@@ -107,5 +115,9 @@ namespace MakePdf.Wpf.Views.Pages
                 parentView.Close();
             }
         }
+
+        void ChangeCulture_Auto(object sender, RoutedEventArgs e) => ResourceService.Current.ChangeCulture(SupportedCulture.Auto);
+        void ChangeCulture_English(object sender, RoutedEventArgs e) => ResourceService.Current.ChangeCulture(SupportedCulture.en);
+        void ChangeCulture_Japanese(object sender, RoutedEventArgs e) => ResourceService.Current.ChangeCulture(SupportedCulture.ja);
     }
 }

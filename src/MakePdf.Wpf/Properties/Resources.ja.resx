@@ -118,300 +118,294 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Common_Back" xml:space="preserve">
-    <value>Back</value>
+    <value>戻る</value>
   </data>
   <data name="Common_BackHome" xml:space="preserve">
-    <value>Back Home</value>
+    <value>ホームへ戻る</value>
   </data>
   <data name="Common_Browse" xml:space="preserve">
-    <value>Browse...</value>
+    <value>参照...</value>
   </data>
   <data name="Common_Clear" xml:space="preserve">
-    <value>Clear</value>
+    <value>クリア</value>
   </data>
   <data name="Common_Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>削除</value>
   </data>
   <data name="Common_Down" xml:space="preserve">
-    <value>Down</value>
+    <value>下へ</value>
   </data>
   <data name="Common_ExclusionPattern" xml:space="preserve">
-    <value>Exclusion pattern</value>
+    <value>例外パターン</value>
   </data>
   <data name="Common_Load" xml:space="preserve">
-    <value>Load</value>
+    <value>読込</value>
   </data>
   <data name="Common_LoadSetting" xml:space="preserve">
-    <value>Load settings</value>
+    <value>設定の読込</value>
   </data>
   <data name="Common_No" xml:space="preserve">
-    <value>No</value>
+    <value>いいえ</value>
   </data>
   <data name="Common_OpenFileDialog" xml:space="preserve">
-    <value>Open File Dialog</value>
+    <value>ファイル選択ダイアログを開く</value>
   </data>
   <data name="Common_OpenFileDialog_FileType_All" xml:space="preserve">
-    <value>All File</value>
+    <value>全てのファイル</value>
   </data>
   <data name="Common_OpenFileDialog_FileType_Json" xml:space="preserve">
-    <value>JSON File</value>
+    <value>JSON ファイル</value>
   </data>
   <data name="Common_OpenFileDialog_FileType_Pdf" xml:space="preserve">
-    <value>PDF File</value>
+    <value>PDF ファイル</value>
   </data>
   <data name="Common_OpenFileDialog_Title_LoadSetting" xml:space="preserve">
-    <value>Load settings</value>
+    <value>設定の読み込み</value>
   </data>
   <data name="Common_OpenFileDialog_Title_OutputFile" xml:space="preserve">
-    <value>Select output file</value>
+    <value>出力ファイルの選択</value>
   </data>
   <data name="Common_OpenFileDialog_Title_SaveSetting" xml:space="preserve">
-    <value>Save setting</value>
+    <value>設定の保存</value>
   </data>
   <data name="Common_OpenFolderDialog" xml:space="preserve">
-    <value>Open folder dialog</value>
+    <value>フォルダ選択ダイアログを開く</value>
   </data>
   <data name="Common_OpenFolderDialog_Title_WorkingDirectory" xml:space="preserve">
-    <value>Select working directory</value>
+    <value>作業ディレクトリの選択</value>
   </data>
   <data name="Common_Save" xml:space="preserve">
-    <value>Save</value>
+    <value>保存</value>
   </data>
   <data name="Common_SaveSetting" xml:space="preserve">
-    <value>Save settings</value>
+    <value>設定の保存</value>
   </data>
   <data name="Common_Start" xml:space="preserve">
-    <value>Start</value>
+    <value>開始</value>
   </data>
   <data name="Common_StartProcess" xml:space="preserve">
-    <value>Start process</value>
+    <value>処理の開始</value>
   </data>
   <data name="Common_Up" xml:space="preserve">
-    <value>Up</value>
+    <value>上へ</value>
   </data>
   <data name="Common_Yes" xml:space="preserve">
-    <value>Yes</value>
+    <value>はい</value>
   </data>
   <data name="Dialog_DirectoryEmpty_Message_WorkingDirectory" xml:space="preserve">
-    <value>Please specify the working directory.</value>
+    <value>作業ディレクトリを指定してください</value>
   </data>
   <data name="Dialog_DirectoryEmpty_Title" xml:space="preserve">
-    <value>The directory is empty</value>
+    <value>ディレクトリが空です</value>
   </data>
   <data name="Dialog_FileExists_Message" xml:space="preserve">
-    <value>already exists</value>
+    <value>は既に存在します。</value>
   </data>
   <data name="Dialog_FileExists_Message_Overwrite" xml:space="preserve">
-    <value>Would you like to overwrite it?</value>
+    <value>上書きしますか？</value>
   </data>
   <data name="Dialog_FileExists_Title" xml:space="preserve">
-    <value>The file exists</value>
+    <value>ファイルが存在します</value>
   </data>
   <data name="Dialog_FileNameEmpty_Message_OutputFile" xml:space="preserve">
-    <value>Please specify the output file.</value>
+    <value>出力ファイル名を指定してください</value>
   </data>
   <data name="Dialog_FileNameEmpty_Title" xml:space="preserve">
-    <value>The file name is empty</value>
+    <value>ファイル名が空です</value>
   </data>
   <data name="Dialog_FileNotExists_Message_SettingFile" xml:space="preserve">
-    <value>The setting file does not exists.</value>
+    <value>設定ファイルが存在しません</value>
   </data>
   <data name="Dialog_FileNotExists_Title" xml:space="preserve">
-    <value>The file does not exists</value>
+    <value>ファイルが存在しません</value>
   </data>
   <data name="Dialog_NewVersionFound_CurrentVersion" xml:space="preserve">
-    <value>Current version</value>
+    <value>現在のバージョン</value>
   </data>
   <data name="Dialog_NewVersionFound_Later" xml:space="preserve">
-    <value>Later</value>
+    <value>後で</value>
   </data>
   <data name="Dialog_NewVersionFound_Message1" xml:space="preserve">
-    <value>The new version is available.</value>
+    <value>新しいバージョンが利用できます</value>
   </data>
   <data name="Dialog_NewVersionFound_Message2" xml:space="preserve">
-    <value>Do you want to update now ?</value>
+    <value>今すぐ更新しますか？</value>
   </data>
   <data name="Dialog_NewVersionFound_NewVersion" xml:space="preserve">
-    <value>New version</value>
+    <value>新しいバージョン</value>
   </data>
   <data name="Dialog_NewVersionFound_Title" xml:space="preserve">
-    <value>New version found</value>
+    <value>新しいバージョンが見つかりました</value>
   </data>
   <data name="Dialog_NewVersionFound_Update" xml:space="preserve">
-    <value>Update</value>
-  </data>
-  <data name="Dialog_Processing_Message" xml:space="preserve">
-    <value>Please wait for a while.</value>
-  </data>
-  <data name="Dialog_Processing_Title" xml:space="preserve">
-    <value>Processing</value>
+    <value>今すぐ更新</value>
   </data>
   <data name="MenuFile" xml:space="preserve">
-    <value>File(_F)</value>
+    <value>ファイル(_F)</value>
   </data>
   <data name="MenuFile_Exit" xml:space="preserve">
-    <value>Exit</value>
+    <value>終了</value>
   </data>
   <data name="MenuHelp" xml:space="preserve">
-    <value>Help(_H)</value>
+    <value>ヘルプ(_H)</value>
   </data>
   <data name="MenuHelp_About" xml:space="preserve">
-    <value>About</value>
+    <value>バージョン情報</value>
   </data>
   <data name="MenuHelp_CheckForUpdates" xml:space="preserve">
-    <value>Check for Updates</value>
+    <value>更新の確認</value>
   </data>
   <data name="MenuHelp_Usage" xml:space="preserve">
-    <value>Usage</value>
+    <value>使い方</value>
   </data>
   <data name="MenuLanguage" xml:space="preserve">
-    <value>Language</value>
+    <value>言語</value>
   </data>
   <data name="ModeEasy_Column_Filename" xml:space="preserve">
-    <value>Filename</value>
+    <value>ファイル名</value>
   </data>
   <data name="ModeEasy_Column_Path" xml:space="preserve">
-    <value>Path</value>
+    <value>パス</value>
   </data>
   <data name="ModeEasy_OutputFile" xml:space="preserve">
-    <value>Output file</value>
+    <value>出力ファイル名</value>
   </data>
   <data name="ModeEasy_Title" xml:space="preserve">
-    <value>Easy Mode</value>
+    <value>Easy モード</value>
   </data>
   <data name="ModeStandard_After" xml:space="preserve">
-    <value>After</value>
+    <value>置換後</value>
   </data>
   <data name="ModeStandard_AllDirectories" xml:space="preserve">
-    <value>All directories</value>
+    <value>全てのディレクトリ</value>
   </data>
   <data name="ModeStandard_AllSupportedFiles" xml:space="preserve">
-    <value>All supported files</value>
+    <value>全てのサポート済みのファイル</value>
   </data>
   <data name="ModeStandard_Before" xml:space="preserve">
-    <value>Before</value>
+    <value>置換前</value>
   </data>
   <data name="ModeStandard_Bookmark" xml:space="preserve">
-    <value>Bookmark</value>
+    <value>ブックマーク（しおり）</value>
   </data>
   <data name="ModeStandard_Bookmark_AddDirectoryName" xml:space="preserve">
-    <value>Add directory name to bookmark</value>
+    <value>ディレクトリ名をブックマークに追加</value>
   </data>
   <data name="ModeStandard_Bookmark_AddFileName" xml:space="preserve">
-    <value>Add file name to bookmark</value>
+    <value>ファイル名をブックマークに追加</value>
   </data>
   <data name="ModeStandard_Directories" xml:space="preserve">
-    <value>Directories</value>
+    <value>ディレクトリ</value>
   </data>
   <data name="ModeStandard_DisplayPdf" xml:space="preserve">
-    <value>Display PDF</value>
+    <value>PDF の表示</value>
   </data>
   <data name="ModeStandard_DisplayPdf_BookmarkPanel" xml:space="preserve">
-    <value>Open bookmark panel when displaying</value>
+    <value>表示にブックマークパネルを開く</value>
   </data>
   <data name="ModeStandard_DisplayPdf_PageLayout" xml:space="preserve">
-    <value>Page layout</value>
+    <value>ページ表示</value>
   </data>
   <data name="ModeStandard_DisplayPdf_PageLayout_OneColumn" xml:space="preserve">
-    <value>One column</value>
+    <value>スクロールを有効にする</value>
   </data>
   <data name="ModeStandard_DisplayPdf_PageLayout_SinglePage" xml:space="preserve">
-    <value>Single page</value>
+    <value>単一ページ表示</value>
   </data>
   <data name="ModeStandard_Excel" xml:space="preserve">
     <value>Excel</value>
   </data>
   <data name="ModeStandard_Excel_AddSheetToBookmark" xml:space="preserve">
-    <value>Add sheet name to bookmark</value>
+    <value>シート名をブックマークに追加</value>
   </data>
   <data name="ModeStandard_Files" xml:space="preserve">
-    <value>Files</value>
+    <value>ファイル</value>
   </data>
   <data name="ModeStandard_InputOutput" xml:space="preserve">
-    <value>Input / Output</value>
+    <value>入力 / 出力</value>
   </data>
   <data name="ModeStandard_InputOutput_DeleteConvertedPdf" xml:space="preserve">
-    <value>Delete converted PDF</value>
+    <value>変換後の PDF を削除する</value>
   </data>
   <data name="ModeStandard_InputOutput_OutputFile" xml:space="preserve">
-    <value>Output File</value>
+    <value>出力ファイル</value>
   </data>
   <data name="ModeStandard_InputOutput_WorkingDirectory" xml:space="preserve">
-    <value>Working Directory</value>
+    <value>作業ディレクトリ</value>
   </data>
   <data name="ModeStandard_Property" xml:space="preserve">
-    <value>Property</value>
+    <value>プロパティ</value>
   </data>
   <data name="ModeStandard_Property_Author" xml:space="preserve">
-    <value>Author</value>
+    <value>作成者</value>
   </data>
   <data name="ModeStandard_Property_Creator" xml:space="preserve">
-    <value>Creator</value>
+    <value>アプリケーション</value>
   </data>
   <data name="ModeStandard_Property_Keywords" xml:space="preserve">
-    <value>Keywords</value>
+    <value>キーワード</value>
   </data>
   <data name="ModeStandard_Property_Subject" xml:space="preserve">
-    <value>Subject</value>
+    <value>サブタイトル</value>
   </data>
   <data name="ModeStandard_Property_Title" xml:space="preserve">
-    <value>Title</value>
+    <value>タイトル</value>
   </data>
   <data name="ModeStandard_RegularExpression_Directory" xml:space="preserve">
-    <value>Specify target directories by regular expression</value>
+    <value>対象のディレクトリを正規表現で指定</value>
   </data>
   <data name="ModeStandard_RegularExpression_File" xml:space="preserve">
-    <value>Specify target files by regular expression</value>
+    <value>対象のファイルを正規表現で指定</value>
   </data>
   <data name="ModeStandard_RegularExpression_File2" xml:space="preserve">
-    <value>Specify the files by regular expression to exclude from the above</value>
+    <value>上記から除外したいファイルを正規表現で指定</value>
   </data>
   <data name="ModeStandard_RegularExpression_ReplaceDirectory" xml:space="preserve">
-    <value>Specify the directories by backreference of regular expression</value>
+    <value>対象のディレクトリ名を正規表現の後方置換で指定</value>
   </data>
   <data name="ModeStandard_RegularExpression_ReplaceFile" xml:space="preserve">
-    <value>Specify the files by backreference of regular expression</value>
+    <value>対象のファイル名を正規表現の後方置換で指定</value>
   </data>
   <data name="ModeStandard_ReplaceDirectoryName" xml:space="preserve">
-    <value>Replace directory name</value>
+    <value>ディレクトリ名を置換してブックマークに追加</value>
   </data>
   <data name="ModeStandard_ReplaceFileName" xml:space="preserve">
-    <value>Replace file name</value>
+    <value>ファイル名を置換してブックマークに追加</value>
   </data>
   <data name="ModeStandard_Target" xml:space="preserve">
-    <value>Target</value>
+    <value>対象</value>
   </data>
   <data name="ModeStandard_Title" xml:space="preserve">
-    <value>Standard Mode</value>
+    <value>Standard モード</value>
   </data>
   <data name="ModeStandard_Word" xml:space="preserve">
     <value>Word</value>
   </data>
   <data name="ModeStandard_Word_CreateBookmarks" xml:space="preserve">
-    <value>Create bookmarks</value>
+    <value>ブックマークの作成</value>
   </data>
   <data name="ModeStandard_Word_CreateBookmarks_FromBookmark" xml:space="preserve">
-    <value>from word bookmarks</value>
+    <value>Word のブックマークから作成</value>
   </data>
   <data name="ModeStandard_Word_CreateBookmarks_FromHeading" xml:space="preserve">
-    <value>from word heading</value>
+    <value>Word の見出しから作成</value>
   </data>
   <data name="MsgBox_CheckForUpdates_Message" xml:space="preserve">
-    <value>Please wait for a while.</value>
+    <value>しばらくお待ちください</value>
   </data>
   <data name="MsgBox_CheckForUpdates_Title" xml:space="preserve">
-    <value>Check for updates...</value>
+    <value>更新の確認中...</value>
   </data>
   <data name="MsgBox_Downloading_Message" xml:space="preserve">
-    <value>Please wait for a while.</value>
+    <value>しばらくお待ちください</value>
   </data>
   <data name="MsgBox_Downloading_Title" xml:space="preserve">
-    <value>Downloading...</value>
+    <value>ダウンロード中...</value>
   </data>
   <data name="MsgBox_NotFound_Message" xml:space="preserve">
-    <value>You are using the latest version.</value>
+    <value>既に最新バージョンを利用中です</value>
   </data>
   <data name="MsgBox_NotFound_Title" xml:space="preserve">
-    <value>Not found</value>
+    <value>見つかりませんでした</value>
   </data>
 </root>

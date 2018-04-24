@@ -18,13 +18,6 @@ namespace MakePdf.Wpf.ViewModels.Pages
         readonly IRegionManager _regionManager;
         Model model;
 
-        // List of ComboBox
-        public Dictionary<Core.PageLayout, string> PageLayouts { get; } = new Dictionary<Core.PageLayout, string>
-        {
-            [Core.PageLayout.SinglePage] = "Single Page",
-            [Core.PageLayout.OneColumn] = "One Column",
-        };
-
         string workingDirectory = Directory.GetCurrentDirectory();
         public string WorkingDirectory
         {
@@ -46,6 +39,28 @@ namespace MakePdf.Wpf.ViewModels.Pages
             }
         }
 
+        int pageLayouts = 0;
+        public int PageLayouts
+        {
+            get { return pageLayouts; }
+            set
+            {
+                SetProperty(ref pageLayouts, value);
+                Setting.DisplayPdf.PageLayout = (Core.PageLayout)Enum.ToObject(typeof(Core.PageLayout), value);
+            }
+        }
+
+        int createBookmarkFromWord = 0;
+        public int CreateBookmarkFromWord
+        {
+            get { return createBookmarkFromWord; }
+            set
+            {
+                SetProperty(ref createBookmarkFromWord, value);
+                Setting.WordSetting.CreateBookmarkFromWord = (Core.CreateBookmarkFromWord)Enum.ToObject(typeof(Core.CreateBookmarkFromWord), value);
+            }
+        }
+
         Setting setting = new Setting();
         public Setting Setting
         {
@@ -54,6 +69,8 @@ namespace MakePdf.Wpf.ViewModels.Pages
             {
                 SetProperty(ref setting, value);
                 OutputFile = setting.OutputFile;
+                PageLayouts = (int)setting.DisplayPdf.PageLayout;
+                CreateBookmarkFromWord = (int)setting.WordSetting.CreateBookmarkFromWord;
             }
         }
 
@@ -72,6 +89,9 @@ namespace MakePdf.Wpf.ViewModels.Pages
             {
                 _regionManager.RequestNavigate("MainRegion", "Home");
             });
+
+            PageLayouts = (int)Setting.DisplayPdf.PageLayout;
+            CreateBookmarkFromWord = (int)setting.WordSetting.CreateBookmarkFromWord;
         }
 
         public async Task<bool> StartAsync()

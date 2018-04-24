@@ -84,7 +84,7 @@ namespace MakePdf.Wpf.Views.Pages
         {
             var dialog = new CommonOpenFileDialog
             {
-                Title = "Select input directory",
+                Title = Properties.Resources.Common_OpenFolderDialog_Title_WorkingDirectory,
                 IsFolderPicker = true,
                 InitialDirectory = startupPath,
                 DefaultDirectory = startupPath,
@@ -104,14 +104,14 @@ namespace MakePdf.Wpf.Views.Pages
         {
             var dialog = new CommonOpenFileDialog
             {
-                Title = "Select output file",
+                Title = Properties.Resources.Common_OpenFileDialog_Title_OutputFile,
                 IsFolderPicker = false,
                 InitialDirectory = startupPath,
                 DefaultDirectory = startupPath,
             };
 
-            dialog.Filters.Add(new CommonFileDialogFilter("PDF File", "*.pdf"));
-            dialog.Filters.Add(new CommonFileDialogFilter("All File", "*.*"));
+            dialog.Filters.Add(new CommonFileDialogFilter(Properties.Resources.Common_OpenFileDialog_FileType_Pdf, "*.pdf"));
+            dialog.Filters.Add(new CommonFileDialogFilter(Properties.Resources.Common_OpenFileDialog_FileType_All, "*.*"));
 
             if (vm.OutputFile != string.Empty)
             {
@@ -128,14 +128,14 @@ namespace MakePdf.Wpf.Views.Pages
         {
             var dialog = new CommonOpenFileDialog
             {
-                Title = "Save settings",
+                Title = Properties.Resources.Common_OpenFileDialog_Title_SaveSetting,
                 IsFolderPicker = false,
                 InitialDirectory = startupPath,
                 DefaultDirectory = startupPath,
             };
 
-            dialog.Filters.Add(new CommonFileDialogFilter("JSON File", "*.json"));
-            dialog.Filters.Add(new CommonFileDialogFilter("All File", "*.*"));
+            dialog.Filters.Add(new CommonFileDialogFilter(Properties.Resources.Common_OpenFileDialog_FileType_Json, "*.json"));
+            dialog.Filters.Add(new CommonFileDialogFilter(Properties.Resources.Common_OpenFileDialog_FileType_All, "*.*"));
 
             if (vm.WorkingDirectory != string.Empty)
             {
@@ -147,9 +147,14 @@ namespace MakePdf.Wpf.Views.Pages
                 return;
             }
 
+            // The setting file already exists
             if (File.Exists(dialog.FileName))
             {
-                var overwriteDialog = new TwoButtonDialog("Output file exists", $"The output file already exists.{Environment.NewLine}Would you like to overwrite it?", "Yes", "No");
+                var overwriteDialog = new TwoButtonDialog(
+                     Properties.Resources.Dialog_FileExists_Title,
+                     Path.GetFileName(dialog.FileName) + " " + Properties.Resources.Dialog_FileExists_Message + Environment.NewLine + Properties.Resources.Dialog_FileExists_Message_Overwrite,
+                     Properties.Resources.Common_Yes,
+                     Properties.Resources.Common_No);
                 var result = await parentView.dialogHostMain.ShowDialog(overwriteDialog) as Selected?;
                 if (result == Selected.Negative)
                 {
@@ -164,14 +169,14 @@ namespace MakePdf.Wpf.Views.Pages
         {
             var dialog = new CommonOpenFileDialog
             {
-                Title = "Load settings",
+                Title = Properties.Resources.Common_OpenFileDialog_Title_LoadSetting,
                 IsFolderPicker = false,
                 InitialDirectory = startupPath,
                 DefaultDirectory = startupPath,
             };
 
-            dialog.Filters.Add(new CommonFileDialogFilter("JSON File", "*.json"));
-            dialog.Filters.Add(new CommonFileDialogFilter("All File", "*.*"));
+            dialog.Filters.Add(new CommonFileDialogFilter(Properties.Resources.Common_OpenFileDialog_FileType_Json, "*.json"));
+            dialog.Filters.Add(new CommonFileDialogFilter(Properties.Resources.Common_OpenFileDialog_FileType_All, "*.*"));
 
             if (vm.WorkingDirectory != string.Empty)
             {
@@ -189,30 +194,37 @@ namespace MakePdf.Wpf.Views.Pages
             }
             else
             {
-                var overwriteDialog = new OneButtonDialog("The file doesn't exist", $"The setting file does not exists.");
+                var overwriteDialog = new OneButtonDialog(Properties.Resources.Dialog_FileNotExists_Title, Properties.Resources.Dialog_FileNotExists_Message_SettingFile);
                 await parentView.dialogHostMain.ShowDialog(overwriteDialog);
             }
         }
 
         async void StartButton_Click(object sender, RoutedEventArgs e)
         {
+            // Working directory is empty
             if (vm.WorkingDirectory == "")
             {
-                var overwriteDialog = new OneButtonDialog("Input directory is empty", $"Please specify the intput directory.");
+                var overwriteDialog = new OneButtonDialog(Properties.Resources.Dialog_DirectoryEmpty_Title, Properties.Resources.Dialog_DirectoryEmpty_Message_WorkingDirectory);
                 await parentView.dialogHostMain.ShowDialog(overwriteDialog);
                 return;
             }
 
+            // Output file is empty
             if (vm.OutputFile == "")
             {
-                var overwriteDialog = new OneButtonDialog("Output file is empty", $"Please specify the output file.");
+                var overwriteDialog = new OneButtonDialog(Properties.Resources.Dialog_FileNameEmpty_Title, Properties.Resources.Dialog_FileNameEmpty_Message_OutputFile);
                 await parentView.dialogHostMain.ShowDialog(overwriteDialog);
                 return;
             }
 
+            // Output file already exists
             if (File.Exists(vm.OutputFile))
             {
-                var overwriteDialog = new TwoButtonDialog("Output file exists", $"The output file already exists.{Environment.NewLine}Would you like to overwrite it?", "Yes", "No");
+                var overwriteDialog = new TwoButtonDialog(
+                     Properties.Resources.Dialog_FileExists_Title,
+                     Path.GetFileName(vm.OutputFile) + " " + Properties.Resources.Dialog_FileExists_Message + Environment.NewLine + Properties.Resources.Dialog_FileExists_Message_Overwrite,
+                     Properties.Resources.Common_Yes,
+                     Properties.Resources.Common_No);
                 var result = await parentView.dialogHostMain.ShowDialog(overwriteDialog) as Selected?;
                 if (result == Selected.Negative)
                 {
@@ -221,7 +233,7 @@ namespace MakePdf.Wpf.Views.Pages
             }
 
             // Start
-            var processingDialog = new ProcessingDialog("Processing", $"Please wait for a while.");
+            var processingDialog = new ProcessingDialog(Properties.Resources.Dialog_Processing_Title, Properties.Resources.Dialog_Processing_Message);
             var re = parentView.dialogHostMain.ShowDialog(processingDialog, async (object s, DialogOpenedEventArgs args) =>
             {
                 await vm.StartAsync();

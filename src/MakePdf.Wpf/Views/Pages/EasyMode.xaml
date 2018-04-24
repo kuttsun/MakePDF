@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="MakePdf.Wpf.Views.Pages.EasyMode"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:app="clr-namespace:MakePdf.Wpf"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MakePdf.Wpf.Views.Pages"
@@ -31,42 +32,42 @@
             <ListView Grid.Row="0" Grid.Column="0" ItemsSource="{Binding TargetFiles}" SelectedItem="{Binding SelectedItem}" SelectedIndex="{Binding SelectedIndex}" AllowDrop="True" Drop="ListView_Drop" PreviewDragOver="ListView_PreviewDragOver" SelectionMode="Single">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Filename" DisplayMemberBinding="{Binding Filename}" Width="200" />
-                        <GridViewColumn Header="Path" DisplayMemberBinding="{Binding Path}" Width="200" />
+                        <GridViewColumn Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeEasy_Column_Filename, Mode=OneWay}" DisplayMemberBinding="{Binding Filename}" Width="200" />
+                        <GridViewColumn Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeEasy_Column_Path, Mode=OneWay}" DisplayMemberBinding="{Binding Path}" Width="200" />
                     </GridView>
                 </ListView.View>
             </ListView>
             <StackPanel Margin="5 0 0 5" Grid.Row="0" Grid.Column="1">
-                <Button Margin="5" Command="{Binding  UpButtonCommand}" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="Up">
+                <Button Margin="5" Command="{Binding  UpButtonCommand}" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_Up, Mode=OneWay}">
                     <materialDesign:PackIcon Kind="ArrowUpBold" Height="24" Width="24" />
                 </Button>
-                <Button Margin="5" Command="{Binding  DownButtonCommand}" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="Down">
+                <Button Margin="5" Command="{Binding  DownButtonCommand}" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_Down, Mode=OneWay}">
                     <materialDesign:PackIcon Kind="ArrowDownBold" Height="24" Width="24" />
                 </Button>
-                <Button Margin="5" Command="{Binding  DeleteButtonCommand}" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="Delete">
+                <Button Margin="5" Command="{Binding  DeleteButtonCommand}" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_Delete, Mode=OneWay}">
                     <materialDesign:PackIcon Kind="Delete" Height="24" Width="24" />
                 </Button>
-                <Button Margin="5" Command="{Binding  ClearButtonCommand}" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="Clear">
+                <Button Margin="5" Command="{Binding  ClearButtonCommand}" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_Clear, Mode=OneWay}">
                     <materialDesign:PackIcon Kind="Broom" Height="24" Width="24" />
                 </Button>
             </StackPanel>
             <Border Margin="0 5" Padding="5 0 0 0" Background="{DynamicResource MaterialDesignSelection}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                 <DockPanel  HorizontalAlignment="Stretch">
-                    <Button DockPanel.Dock="Right" Margin="5" MinWidth="90"  VerticalAlignment="Center" Content="Browse..." Click="BrowseButton_Click" ToolTip="Open File Dialog" />
-                    <TextBox materialDesign:HintAssist.Hint="Output File" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding OutputFile}" AllowDrop="True" Drop="OutputFile_Drop" PreviewDragOver="OutputFile_PreviewDragOver" />
+                    <Button DockPanel.Dock="Right" Margin="5" MinWidth="90"  VerticalAlignment="Center" Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_Browse, Mode=OneWay}" Click="BrowseButton_Click" ToolTip="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_OpenFileDialog, Mode=OneWay}" />
+                    <TextBox materialDesign:HintAssist.Hint="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeEasy_OutputFile, Mode=OneWay}" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding OutputFile}" AllowDrop="True" Drop="OutputFile_Drop" PreviewDragOver="OutputFile_PreviewDragOver" />
                 </DockPanel>
             </Border>
             <DockPanel Margin="5 10 5 0" Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
-                <Button DockPanel.Dock="Left" MinWidth="90" ToolTip="Back Home" Command="{Binding  BackButtonCommand}">
+                <Button DockPanel.Dock="Left" MinWidth="90" ToolTip="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_BackHome, Mode=OneWay}" Command="{Binding  BackButtonCommand}">
                     <StackPanel Orientation="Horizontal" >
                         <materialDesign:PackIcon Kind="ArrowLeftBold"/>
-                        <TextBlock VerticalAlignment="Center" Text="Back" Margin="5,0,0,0"/>
+                        <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_Back, Mode=OneWay}" Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
-                <Button DockPanel.Dock="Right" MinWidth="90" Click="StartButton_Click" Style="{StaticResource MaterialDesignRaisedAccentButton}" ToolTip="Start">
+                <Button DockPanel.Dock="Right" MinWidth="90" Click="StartButton_Click" Style="{StaticResource MaterialDesignRaisedAccentButton}" ToolTip="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_StartProcess, Mode=OneWay}">
                     <StackPanel Orientation="Horizontal" >
                         <materialDesign:PackIcon Kind="Play"/>
-                        <TextBlock VerticalAlignment="Center" Text="Start" Margin="5,0,0,0"/>
+                        <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_Start, Mode=OneWay}" Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
                 <Rectangle />

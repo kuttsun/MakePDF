@@ -30,8 +30,20 @@ namespace MakePdf.Wpf
 
             var myInfo = MyInformation.Instance;
 
-            // Analyze program arguments
+            // Update
+            var mgr = Updater.Instance;
+            if (mgr.CanUpdate(args))
+            {
+                Console.WriteLine("Start Update.");
+                mgr.Update(args);
+                mgr.RestartApplication(args);
+                return 0;
+            }
 
+            // Update is complete
+            mgr.Completed(args);
+
+            // Analyze program arguments
             var cla = new CommandLineApplication(throwOnUnexpectedArg: false)
             {
                 // Application name
@@ -39,38 +51,6 @@ namespace MakePdf.Wpf
             };
 
             cla.HelpOption("-?|-h|--help");
-
-            // Start update
-            cla.Command("update", command =>
-            {
-                command.Description = "Start update.";
-                command.HelpOption("-?|-h|--help");
-
-                var pid = command.Option("--pid", "Process ID of target application", CommandOptionType.SingleValue);
-                var targetAppName = command.Option("-n|--name", "Application name. Default is assembly name", CommandOptionType.SingleValue);
-                var srcDir = command.Option("-s|--src", "Source directory (new version directory)", CommandOptionType.SingleValue);
-                var dstDir = command.Option("-d|--dst", "Destination directory (current version direcroty)", CommandOptionType.SingleValue);
-
-                command.OnExecute(() =>
-                {
-                    string param;
-                    try
-                    {
-                        Updater.Instance.Update(pid.Value(), srcDir.Value(), dstDir.Value());
-
-                        param = "completed";
-                    }
-                    catch (Exception)
-                    {
-                        param = "failed";
-                    }
-
-                    // Restart application
-                    Process.Start($@"{dstDir.Value()}\{targetAppName.Value()}", param);
-
-                    return 0;
-                });
-            });
 
             // Default behavior
             var version = cla.Option("-v|--version", "Show version", CommandOptionType.NoValue);

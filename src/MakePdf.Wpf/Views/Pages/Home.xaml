@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="MakePdf.Wpf.Views.Pages.Home"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:app="clr-namespace:MakePdf.Wpf"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:MakePdf.Wpf.Views.Pages"
@@ -26,13 +27,13 @@
         </Grid.ColumnDefinitions>
         <materialDesign:Card Grid.Row="0" Grid.Column="0" Margin="5" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <DockPanel Margin="20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <TextBlock DockPanel.Dock="top" Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="5">Easy Mode</TextBlock>
+                <TextBlock DockPanel.Dock="top" Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="5" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeEasy_Title, Mode=OneWay}" />
                 <Border DockPanel.Dock="top" BorderThickness="0.5" BorderBrush="LightGray" />
                 <TextBlock DockPanel.Dock="top" Margin="5">Easy Mode</TextBlock>
                 <Button DockPanel.Dock="Bottom" Height="Auto" Width="Auto" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0" Padding="10" ToolTip="Go Easy Mode" Command="{Binding EasyModeButtonCommand}">
                     <StackPanel Orientation="Horizontal" >
                         <materialDesign:PackIcon Kind="ArrowRightBold"/>
-                        <TextBlock VerticalAlignment="Center" Text="Easy Mode" Margin="5,0,0,0"/>
+                        <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeEasy_Title, Mode=OneWay}" Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
                 <Rectangle/>
@@ -41,13 +42,13 @@
         
         <materialDesign:Card Grid.Row="1" Grid.Column="0" Margin="5" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <DockPanel Margin="20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <TextBlock DockPanel.Dock="top" Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="5">Standard Mode</TextBlock>
+                <TextBlock DockPanel.Dock="top" Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="5" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Title, Mode=OneWay}" />
                 <Border DockPanel.Dock="top" BorderThickness="0.5" BorderBrush="LightGray" />
                 <TextBlock DockPanel.Dock="top" Margin="5">Standard Mode</TextBlock>
                 <Button DockPanel.Dock="Bottom" Height="Auto" Width="Auto" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0" Padding="10" ToolTip="Go Standard Mode" Command="{Binding StandardModeButtonCommand}">
                     <StackPanel Orientation="Horizontal" >
                         <materialDesign:PackIcon Kind="ArrowRightBold"/>
-                        <TextBlock VerticalAlignment="Center" Text="Standard Mode" Margin="5,0,0,0"/>
+                        <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Title, Mode=OneWay}" Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
                 <Rectangle/>
