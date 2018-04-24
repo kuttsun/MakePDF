@@ -20,7 +20,7 @@ namespace MakePdf.Wpf.Models
             var fullpath = Path.GetFullPath(inputFile);
             setting = Setting.ReadFile(fullpath);
             workingDirectory = Path.GetDirectoryName(fullpath);
-            logger = Model.Instance.Logger;
+            logger = Log.Logger;
         }
 
         public int Start()

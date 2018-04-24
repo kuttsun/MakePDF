@@ -163,6 +163,7 @@
     </Page>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Models\CuiMode.cs" />
+    <Compile Include="Models\Log.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\Updater.cs" />

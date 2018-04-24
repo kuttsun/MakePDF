@@ -63,7 +63,7 @@ namespace MakePdf.Wpf
                     return 0;
                 }
 
-                var logger = Model.Instance.Logger;
+                var logger = Log.Logger;
                 logger.LogInformation($"{myInfo.Name} {myInfo.AssemblyInformationalVersion}");
 
                 if (file.HasValue())

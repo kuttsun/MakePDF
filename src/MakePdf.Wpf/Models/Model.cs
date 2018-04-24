@@ -9,8 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 
-using NLog.Extensions.Logging;
-
 using MakePdf.Core;
 
 namespace MakePdf.Wpf.Models
@@ -22,18 +20,12 @@ namespace MakePdf.Wpf.Models
 
         public static Model Instance { get; } = new Model();
 
-        public ILoggerFactory LoggerFactory { get; }
-        public ILogger Logger { get; }
-
 
         public Model()
         {
-            LoggerFactory = new LoggerFactory().AddNLog();
-            Logger = LoggerFactory.CreateLogger("Wpf");
-
             IServiceCollection serviceCollection = new ServiceCollection();
 
-            ConfigureServices(serviceCollection, LoggerFactory);
+            ConfigureServices(serviceCollection, Log.LoggerFactory);
 
             serviceProvider = serviceCollection.BuildServiceProvider();
 

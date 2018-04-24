@@ -26,15 +26,7 @@ namespace MakePdf.Wpf.Models
 
         private Updater()
         {
-            var loggerFactory = new LoggerFactory();
-            loggerFactory.AddNLog(new NLogProviderOptions
-            {
-                CaptureMessageTemplates = true,
-                CaptureMessageProperties = true
-            });
-            loggerFactory.ConfigureNLog("NLog.config");
-
-            logger = loggerFactory.CreateLogger("logfile");
+            logger = Log.Logger;
 
             mgr = new GitHub("https://github.com/kuttsun/MakePdf", logger: logger);
         }
