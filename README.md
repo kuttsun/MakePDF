@@ -2,7 +2,7 @@
 
 |master|develop|
 |---|---|
-|[![Build status](https://ci.appveyor.com/api/projects/status/4977ewi1dfnomf2h/branch/master?svg=true)](https://ci.appveyor.com/project/kuttsun/makepdf/branch/master)|[![Build status](https://ci.appveyor.com/api/projects/status/4977ewi1dfnomf2h/branch/develop?svg=true)](https://ci.appveyor.com/project/kuttsun/makepdf/branch/develop)|
+|[![Build status](https://ci.appveyor.com/api/projects/status/4977ewi1dfnomf2h/branch/master?svg=true)](https://ci.appveyor.com/project/kuttsun/makepdf/branch/master) [![codecov](https://codecov.io/gh/kuttsun/MakePdf/branch/master/graph/badge.svg)](https://codecov.io/gh/kuttsun/MakePdf)|[![Build status](https://ci.appveyor.com/api/projects/status/4977ewi1dfnomf2h/branch/develop?svg=true)](https://ci.appveyor.com/project/kuttsun/makepdf/branch/develop) [![codecov](https://codecov.io/gh/kuttsun/MakePdf/branch/develop/graph/badge.svg)](https://codecov.io/gh/kuttsun/MakePdf)|
 
 This is under development.
 
