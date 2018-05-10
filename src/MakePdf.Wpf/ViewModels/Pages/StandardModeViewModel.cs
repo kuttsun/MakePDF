@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -16,7 +18,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
     class StandardModeViewModel : BindableBase
     {
         readonly IRegionManager _regionManager;
-        Model model;
+        Runner runner;
 
         string workingDirectory = Directory.GetCurrentDirectory();
         public string WorkingDirectory
@@ -82,7 +84,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
         /// <param name="regionManager"></param>
         public StandardModeViewModel(IRegionManager regionManager)
         {
-            model = Model.Instance;
+            runner = Service.Provider.GetService<Runner>();
             _regionManager = regionManager;
 
             BackButtonCommand = new DelegateCommand(() =>
@@ -96,7 +98,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
 
         public async Task<bool> StartAsync()
         {
-            return await model.RunAsync(WorkingDirectory, OutputFile, Setting);
+            return await runner.RunAsync(WorkingDirectory, OutputFile, Setting);
         }
 
         public void SaveSetting(string path)

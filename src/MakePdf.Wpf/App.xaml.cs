@@ -8,6 +8,7 @@ using System.Windows;
 using System.Reflection;
 using System.Diagnostics;
 
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.CommandLineUtils;
 
@@ -31,7 +32,7 @@ namespace MakePdf.Wpf
             var myInfo = MyInformation.Instance;
 
             // Update
-            var mgr = Updater.Instance;
+            var mgr = Service.Provider.GetService<Updater>();
             if (mgr.CanUpdate(args))
             {
                 Console.WriteLine("Start Update.");
@@ -63,12 +64,13 @@ namespace MakePdf.Wpf
                     return 0;
                 }
 
-                var logger = Log.Logger;
+                var logger = Service.Provider.GetService<ILogger<App>>();
                 logger.LogInformation($"{myInfo.Name} {myInfo.AssemblyInformationalVersion}");
 
                 if (file.HasValue())
                 {
-                    return new CuiMode(file.Value()).Start();
+                    var cuimode = Service.Provider.GetService<CuiMode>();
+                    return cuimode.Start(file.Value());
                 }
 
                 App app = new App();
