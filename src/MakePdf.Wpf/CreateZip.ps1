@@ -35,10 +35,14 @@ Remove-Item -Recurse -path $tempDir -include *.pdb
 #Remove-Item -Recurse -path $tempDir -include *.xml
 #Remove-Item -Recurse -path $tempDir -include *.config -Exclude NLog.config
 
-# read assembly
-Add-Type -AssemblyName System.IO.Compression.FileSystem
+# create CoreUpdaterInfo.json
+Start-Process -FilePath CoreUpdaterInfo.bat -Wait
+$jsonFile = $tempDir + "\CoreUpdaterInfo.json"
+$destDir = $Args[1] + "\"
+Copy-Item $jsonFile $destDir
 
 # create zip
+Add-Type -AssemblyName System.IO.Compression.FileSystem
 [ZipFile]::CreateFromDirectory($tempDir, $targetZipFile)
 
 
