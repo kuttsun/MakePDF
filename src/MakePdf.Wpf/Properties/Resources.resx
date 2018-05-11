@@ -246,6 +246,9 @@
   <data name="Dialog_Processing_Title" xml:space="preserve">
     <value>Processing</value>
   </data>
+  <data name="Home_Cui_Detail1" xml:space="preserve">
+    <value>It also supports CUI. Please see the help for details.</value>
+  </data>
   <data name="Home_Easy_Detail1" xml:space="preserve">
     <value>Drag and drop files and easily convert to PDF.</value>
   </data>

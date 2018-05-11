@@ -21,6 +21,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -29,17 +30,19 @@
             <DockPanel Margin="20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <TextBlock DockPanel.Dock="top" Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="5" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeEasy_Title, Mode=OneWay}" />
                 <Border DockPanel.Dock="top" BorderThickness="0.5" BorderBrush="LightGray" />
-                <StackPanel DockPanel.Dock="top" Margin="10">
+                <DockPanel DockPanel.Dock="Right">
+                    <Button DockPanel.Dock="Bottom" Height="Auto" Width="Auto" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0" Padding="10" ToolTip="Go Easy Mode" Command="{Binding EasyModeButtonCommand}">
+                        <StackPanel Orientation="Horizontal" >
+                            <materialDesign:PackIcon Kind="ArrowRightBold"/>
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeEasy_Title, Mode=OneWay}" Margin="5,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <Rectangle/>
+                </DockPanel>
+                <StackPanel Margin="10">
                     <TextBlock Margin="5" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Home_Easy_Detail1, Mode=OneWay}"/>
                     <TextBlock Margin="5" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Home_Easy_Detail2, Mode=OneWay}"/>
                 </StackPanel>
-                <Button DockPanel.Dock="Bottom" Height="Auto" Width="Auto" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0" Padding="10" ToolTip="Go Easy Mode" Command="{Binding EasyModeButtonCommand}">
-                    <StackPanel Orientation="Horizontal" >
-                        <materialDesign:PackIcon Kind="ArrowRightBold"/>
-                        <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeEasy_Title, Mode=OneWay}" Margin="5,0,0,0"/>
-                    </StackPanel>
-                </Button>
-                <Rectangle/>
             </DockPanel>
         </materialDesign:Card>
 
@@ -47,19 +50,26 @@
             <DockPanel Margin="20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <TextBlock DockPanel.Dock="top" Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="5" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Title, Mode=OneWay}" />
                 <Border DockPanel.Dock="top" BorderThickness="0.5" BorderBrush="LightGray" />
-                <StackPanel DockPanel.Dock="top" Margin="10">
+                <DockPanel DockPanel.Dock="Right">
+                    <Button DockPanel.Dock="Bottom" Height="Auto" Width="Auto" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0" Padding="10" ToolTip="Go Standard Mode" Command="{Binding StandardModeButtonCommand}">
+                        <StackPanel Orientation="Horizontal" >
+                            <materialDesign:PackIcon Kind="ArrowRightBold"/>
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Title, Mode=OneWay}" Margin="5,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <Rectangle/>
+                </DockPanel>
+                <StackPanel Margin="10">
                     <TextBlock Margin="5" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Home_Standard_Detail1, Mode=OneWay}"/>
                     <TextBlock Margin="5" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Home_Standard_Detail2, Mode=OneWay}"/>
                     <TextBlock Margin="5" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Home_Standard_Detail3, Mode=OneWay}"/>
                 </StackPanel>
-                <Button DockPanel.Dock="Bottom" Height="Auto" Width="Auto" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0" Padding="10" ToolTip="Go Standard Mode" Command="{Binding StandardModeButtonCommand}">
-                    <StackPanel Orientation="Horizontal" >
-                        <materialDesign:PackIcon Kind="ArrowRightBold"/>
-                        <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeStandard_Title, Mode=OneWay}" Margin="5,0,0,0"/>
-                    </StackPanel>
-                </Button>
-                <Rectangle/>
             </DockPanel>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="2" Grid.Column="0" Margin="5" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel Margin="20,10,20,10">
+                <TextBlock Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Home_Cui_Detail1, Mode=OneWay}"/>
+            </StackPanel>
         </materialDesign:Card>
     </Grid>
 </UserControl>

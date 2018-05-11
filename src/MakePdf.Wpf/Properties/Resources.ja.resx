@@ -240,6 +240,9 @@
   <data name="Dialog_NewVersionFound_Update" xml:space="preserve">
     <value>今すぐ更新</value>
   </data>
+  <data name="Home_Cui_Detail1" xml:space="preserve">
+    <value>CUI にも対応しています。詳細はヘルプを参照してください。</value>
+  </data>
   <data name="Home_Easy_Detail1" xml:space="preserve">
     <value>ファイルをドラッグ&amp;ドロップするだけで簡単に PDF へ変換・結合できます。</value>
   </data>

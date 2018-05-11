@@ -448,6 +448,15 @@ namespace MakePdf.Wpf.Properties {
         }
         
         /// <summary>
+        ///   It also supports CUI. Please see the help for details. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Home_Cui_Detail1 {
+            get {
+                return ResourceManager.GetString("Home_Cui_Detail1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Drag and drop files and easily convert to PDF. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Home_Easy_Detail1 {
