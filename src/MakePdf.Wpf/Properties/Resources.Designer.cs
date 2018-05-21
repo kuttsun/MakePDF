@@ -448,6 +448,60 @@ namespace MakePdf.Wpf.Properties {
         }
         
         /// <summary>
+        ///   It also supports CUI. Please see the help for details. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Home_Cui_Detail1 {
+            get {
+                return ResourceManager.GetString("Home_Cui_Detail1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Drag and drop files and easily convert to PDF. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Home_Easy_Detail1 {
+            get {
+                return ResourceManager.GetString("Home_Easy_Detail1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   It is not possible to make detailed settings. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Home_Easy_Detail2 {
+            get {
+                return ResourceManager.GetString("Home_Easy_Detail2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Set input and output patterns, convert and combine to PDF. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Home_Standard_Detail1 {
+            get {
+                return ResourceManager.GetString("Home_Standard_Detail1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Some settings use regular expressions. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Home_Standard_Detail2 {
+            get {
+                return ResourceManager.GetString("Home_Standard_Detail2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   The settings can be saved in a file. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Home_Standard_Detail3 {
+            get {
+                return ResourceManager.GetString("Home_Standard_Detail3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   File(_F) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MenuFile {

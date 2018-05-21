@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.IO;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -16,6 +18,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
 {
     class EasyModeViewModel : BindableBase
     {
+        Runner runner;
         readonly IRegionManager _regionManager;
 
         public DelegateCommand BackButtonCommand { get; }
@@ -38,6 +41,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
 
         public EasyModeViewModel(IRegionManager regionManager)
         {
+            runner = Service.Provider.GetService<Runner>();
             _regionManager = regionManager;
 
             BackButtonCommand = new DelegateCommand(() =>
@@ -78,14 +82,14 @@ namespace MakePdf.Wpf.ViewModels.Pages
         {
             var files = TargetFiles.Select(x => x.Path);
 
-            return await Model.Instance.RunAsync(files, OutputFile);
+            return await runner.RunAsync(files, OutputFile);
         }
 
         public void AddFiles(List<string> files)
         {
             foreach (var file in files)
             {
-                if (Model.IsSupported(file))
+                if (Runner.IsSupported(file))
                 {
                     TargetFiles.Add(new TargetFile { Filename = Path.GetFileName(file), Path = file });
                 }

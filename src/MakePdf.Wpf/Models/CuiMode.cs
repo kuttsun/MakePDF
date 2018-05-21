@@ -5,30 +5,32 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace MakePdf.Wpf.Models
 {
     class CuiMode
     {
-        Setting setting;
-        string workingDirectory;
         ILogger logger;
+        Runner runner;
 
-        public CuiMode(string inputFile)
+        public CuiMode(Runner runner, ILogger logger)
         {
-            var fullpath = Path.GetFullPath(inputFile);
-            setting = Setting.ReadFile(fullpath);
-            workingDirectory = Path.GetDirectoryName(fullpath);
-            logger = Model.Instance.Logger;
+            this.logger = logger;
+            this.runner = runner;
         }
 
-        public int Start()
+        public int Start(string inputFile)
         {
+            var fullpath = Path.GetFullPath(inputFile);
+            var setting = Setting.ReadFile(fullpath);
+            var workingDirectory = Path.GetDirectoryName(fullpath);
+
             logger.LogInformation("Start CUI Mode");
             try
             {
-                var result = Model.Instance.RunAsync(workingDirectory, setting.OutputFile, setting).Result;
+                var result = runner.RunAsync(workingDirectory, setting.OutputFile, setting).Result;
                 if (result)
                 {
                     logger.LogInformation("Completed");

@@ -7,36 +7,31 @@ using System.IO;
 using System.Diagnostics;
 
 using Microsoft.Extensions.Logging;
-using NLog.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 using CoreUpdater;
+
+using MakePdf.Wpf.Models.Settings;
 
 namespace MakePdf.Wpf.Models
 {
     public class Updater
     {
-        public static Updater Instance { get; } = new Updater();
         public bool UpdateCompleted { get; private set; } = false;
         public bool UpdateSuccessful { get; private set; } = true;
 
         MyInformation myInfo = MyInformation.Instance;
 
         UpdateManager mgr;
-        ILogger logger;
+        readonly ILogger logger;
+        readonly AppSetting appSetting;
 
-        private Updater()
+        public Updater(IOptions<AppSetting> appSetting, ILogger<Updater> logger)
         {
-            var loggerFactory = new LoggerFactory();
-            loggerFactory.AddNLog(new NLogProviderOptions
-            {
-                CaptureMessageTemplates = true,
-                CaptureMessageProperties = true
-            });
-            loggerFactory.ConfigureNLog("NLog.config");
+            this.logger = logger;
+            this.appSetting = appSetting.Value;
 
-            logger = loggerFactory.CreateLogger("logfile");
-
-            mgr = new GitHub("https://github.com/kuttsun/MakePdf", logger: logger);
+            mgr = new GitHub(this.appSetting.GitHubUrl, logger: logger);
         }
 
         /// <summary>

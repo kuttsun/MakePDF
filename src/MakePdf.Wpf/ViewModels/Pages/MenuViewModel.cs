@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Events;
@@ -20,7 +22,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
 
         public MenuViewModel()
         {
-            updater = Updater.Instance;
+            updater = Service.Provider.GetService<Updater>();
 
             LoadedCommand = new DelegateCommand(async () =>
             {

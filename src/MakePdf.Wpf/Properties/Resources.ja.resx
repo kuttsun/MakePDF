@@ -240,6 +240,24 @@
   <data name="Dialog_NewVersionFound_Update" xml:space="preserve">
     <value>今すぐ更新</value>
   </data>
+  <data name="Home_Cui_Detail1" xml:space="preserve">
+    <value>CUI にも対応しています。詳細はヘルプを参照してください。</value>
+  </data>
+  <data name="Home_Easy_Detail1" xml:space="preserve">
+    <value>ファイルをドラッグ&amp;ドロップするだけで簡単に PDF へ変換・結合できます。</value>
+  </data>
+  <data name="Home_Easy_Detail2" xml:space="preserve">
+    <value>細かい設定を行うことはできません。</value>
+  </data>
+  <data name="Home_Standard_Detail1" xml:space="preserve">
+    <value>入力や出力のパターンを設定して、PDF への変換と結合を行います。</value>
+  </data>
+  <data name="Home_Standard_Detail2" xml:space="preserve">
+    <value>一部の設定は正規表現を使用します。</value>
+  </data>
+  <data name="Home_Standard_Detail3" xml:space="preserve">
+    <value>設定した内容はファイルに保存することができます。</value>
+  </data>
   <data name="MenuFile" xml:space="preserve">
     <value>ファイル(_F)</value>
   </data>
