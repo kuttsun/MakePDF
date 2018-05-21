@@ -23,6 +23,13 @@ namespace MakePdf.Wpf
     {
         public static ResourceService Current { get; } = new ResourceService();
         public Resources Resources { get; } = new Resources();
+        readonly CultureInfo defaultCultureInfo;
+
+        ResourceService()
+        {
+            defaultCultureInfo = CultureInfo.CurrentCulture;
+            Resources.Culture = defaultCultureInfo;
+        }
 
         #region INotifyPropertyChanged members
 
@@ -39,7 +46,7 @@ namespace MakePdf.Wpf
         {
             if (culture == SupportedCulture.Auto)
             {
-                Resources.Culture = CultureInfo.DefaultThreadCurrentCulture;
+                Resources.Culture = defaultCultureInfo;
             }
             else
             {
@@ -50,7 +57,10 @@ namespace MakePdf.Wpf
 
         public SupportedCulture GetCulture()
         {
-            return (SupportedCulture)Enum.Parse(typeof(SupportedCulture), Resources.Culture.Name, true);
+            // Name may contains "Country code"
+            var lang = Resources.Culture.Name.Split('-');
+
+            return (SupportedCulture)Enum.Parse(typeof(SupportedCulture), lang[0], true);
         }
     }
 }
