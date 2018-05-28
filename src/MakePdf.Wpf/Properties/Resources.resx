@@ -291,133 +291,130 @@
   <data name="MenuLanguage" xml:space="preserve">
     <value>Language</value>
   </data>
-  <data name="ModeEasy_Column_Filename" xml:space="preserve">
+  <data name="Item_Column_Filename" xml:space="preserve">
     <value>Filename</value>
   </data>
-  <data name="ModeEasy_Column_Path" xml:space="preserve">
+  <data name="Item_Column_Path" xml:space="preserve">
     <value>Path</value>
   </data>
-  <data name="ModeEasy_OutputFile" xml:space="preserve">
+  <data name="Item_OutputFile" xml:space="preserve">
     <value>Output file</value>
   </data>
   <data name="ModeEasy_Title" xml:space="preserve">
     <value>Easy Mode</value>
   </data>
-  <data name="ModeStandard_After" xml:space="preserve">
+  <data name="Item_After" xml:space="preserve">
     <value>After</value>
   </data>
-  <data name="ModeStandard_AllDirectories" xml:space="preserve">
+  <data name="Item_AllDirectories" xml:space="preserve">
     <value>All directories</value>
   </data>
-  <data name="ModeStandard_AllSupportedFiles" xml:space="preserve">
+  <data name="Item_AllSupportedFiles" xml:space="preserve">
     <value>All supported files</value>
   </data>
-  <data name="ModeStandard_Before" xml:space="preserve">
+  <data name="Item_Before" xml:space="preserve">
     <value>Before</value>
   </data>
-  <data name="ModeStandard_Bookmark" xml:space="preserve">
+  <data name="Item_Bookmark" xml:space="preserve">
     <value>Bookmark</value>
   </data>
-  <data name="ModeStandard_Bookmark_AddDirectoryName" xml:space="preserve">
+  <data name="Item_Bookmark_AddDirectoryName" xml:space="preserve">
     <value>Add directory name to bookmark</value>
   </data>
-  <data name="ModeStandard_Bookmark_AddFileName" xml:space="preserve">
+  <data name="Item_Bookmark_AddFileName" xml:space="preserve">
     <value>Add file name to bookmark</value>
   </data>
-  <data name="ModeStandard_Directories" xml:space="preserve">
+  <data name="Item_Directories" xml:space="preserve">
     <value>Directories</value>
   </data>
-  <data name="ModeStandard_DisplayPdf" xml:space="preserve">
+  <data name="Item_DisplayPdf" xml:space="preserve">
     <value>Display PDF</value>
   </data>
-  <data name="ModeStandard_DisplayPdf_BookmarkPanel" xml:space="preserve">
+  <data name="Item_DisplayPdf_BookmarkPanel" xml:space="preserve">
     <value>Open bookmark panel when displaying</value>
   </data>
-  <data name="ModeStandard_DisplayPdf_PageLayout" xml:space="preserve">
+  <data name="Item_DisplayPdf_PageLayout" xml:space="preserve">
     <value>Page layout</value>
   </data>
-  <data name="ModeStandard_DisplayPdf_PageLayout_OneColumn" xml:space="preserve">
+  <data name="Item_DisplayPdf_PageLayout_OneColumn" xml:space="preserve">
     <value>One column</value>
   </data>
-  <data name="ModeStandard_DisplayPdf_PageLayout_SinglePage" xml:space="preserve">
+  <data name="Item_DisplayPdf_PageLayout_SinglePage" xml:space="preserve">
     <value>Single page</value>
   </data>
-  <data name="ModeStandard_Excel" xml:space="preserve">
+  <data name="Item_Excel" xml:space="preserve">
     <value>Excel</value>
   </data>
-  <data name="ModeStandard_Excel_AddSheetToBookmark" xml:space="preserve">
+  <data name="Item_Excel_AddSheetToBookmark" xml:space="preserve">
     <value>Add sheet name to bookmark</value>
   </data>
-  <data name="ModeStandard_Files" xml:space="preserve">
+  <data name="Item_Files" xml:space="preserve">
     <value>Files</value>
   </data>
-  <data name="ModeStandard_InputOutput" xml:space="preserve">
-    <value>Input / Output</value>
-  </data>
-  <data name="ModeStandard_InputOutput_DeleteConvertedPdf" xml:space="preserve">
+  <data name="Item_InputOutput_DeleteConvertedPdf" xml:space="preserve">
     <value>Delete converted PDF</value>
   </data>
-  <data name="ModeStandard_InputOutput_OutputFile" xml:space="preserve">
+  <data name="Item_InputOutput_OutputFile" xml:space="preserve">
     <value>Output File</value>
   </data>
-  <data name="ModeStandard_InputOutput_WorkingDirectory" xml:space="preserve">
+  <data name="Item_InputOutput_WorkingDirectory" xml:space="preserve">
     <value>Working Directory</value>
   </data>
-  <data name="ModeStandard_Property" xml:space="preserve">
+  <data name="Item_Property" xml:space="preserve">
     <value>Property</value>
   </data>
-  <data name="ModeStandard_Property_Author" xml:space="preserve">
+  <data name="Item_Property_Author" xml:space="preserve">
     <value>Author</value>
   </data>
-  <data name="ModeStandard_Property_Creator" xml:space="preserve">
+  <data name="Item_Property_Creator" xml:space="preserve">
     <value>Creator</value>
   </data>
-  <data name="ModeStandard_Property_Keywords" xml:space="preserve">
+  <data name="Item_Property_Keywords" xml:space="preserve">
     <value>Keywords</value>
   </data>
-  <data name="ModeStandard_Property_Subject" xml:space="preserve">
+  <data name="Item_Property_Subject" xml:space="preserve">
     <value>Subject</value>
   </data>
-  <data name="ModeStandard_Property_Title" xml:space="preserve">
+  <data name="Item_Property_Title" xml:space="preserve">
     <value>Title</value>
   </data>
-  <data name="ModeStandard_RegularExpression_Directory" xml:space="preserve">
+  <data name="Item_RegularExpression_Directory" xml:space="preserve">
     <value>Specify target directories by regular expression</value>
   </data>
-  <data name="ModeStandard_RegularExpression_File" xml:space="preserve">
+  <data name="Item_RegularExpression_File" xml:space="preserve">
     <value>Specify target files by regular expression</value>
   </data>
-  <data name="ModeStandard_RegularExpression_File2" xml:space="preserve">
+  <data name="Item_RegularExpression_File2" xml:space="preserve">
     <value>Specify the files by regular expression to exclude from the above</value>
   </data>
-  <data name="ModeStandard_RegularExpression_ReplaceDirectory" xml:space="preserve">
+  <data name="Item_RegularExpression_ReplaceDirectory" xml:space="preserve">
     <value>Specify the directories by backreference of regular expression</value>
   </data>
-  <data name="ModeStandard_RegularExpression_ReplaceFile" xml:space="preserve">
+  <data name="Item_RegularExpression_ReplaceFile" xml:space="preserve">
     <value>Specify the files by backreference of regular expression</value>
   </data>
-  <data name="ModeStandard_ReplaceDirectoryName" xml:space="preserve">
+  <data name="Item_ReplaceDirectoryName" xml:space="preserve">
     <value>Replace directory name</value>
   </data>
-  <data name="ModeStandard_ReplaceFileName" xml:space="preserve">
+  <data name="Item_ReplaceFileName" xml:space="preserve">
     <value>Replace file name</value>
   </data>
-  <data name="ModeStandard_Target" xml:space="preserve">
+  <data name="Item_Target" xml:space="preserve">
     <value>Target</value>
   </data>
   <data name="ModeStandard_Title" xml:space="preserve">
     <value>Standard Mode</value>
   </data>
-  <data name="ModeStandard_Word" xml:space="preserve">
+  <data name="Item_Word" xml:space="preserve">
     <value>Word</value>
   </data>
-  <data name="ModeStandard_Word_CreateBookmarks" xml:space="preserve">
+  <data name="Item_Word_CreateBookmarks" xml:space="preserve">
     <value>Create bookmarks</value>
   </data>
-  <data name="ModeStandard_Word_CreateBookmarks_FromBookmark" xml:space="preserve">
+  <data name="Item_Word_CreateBookmarks_FromBookmark" xml:space="preserve">
     <value>from word bookmarks</value>
   </data>
-  <data name="ModeStandard_Word_CreateBookmarks_FromHeading" xml:space="preserve">
+  <data name="Item_Word_CreateBookmarks_FromHeading" xml:space="preserve">
     <value>from word heading</value>
   </data>
   <data name="MsgBox_CheckForUpdates_Message" xml:space="preserve">

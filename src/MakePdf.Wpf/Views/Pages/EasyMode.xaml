@@ -49,8 +49,8 @@
                         <ListView Grid.Row="0" Grid.Column="0" ItemsSource="{Binding TargetFiles}" SelectedItem="{Binding SelectedItem}" SelectedIndex="{Binding SelectedIndex}" AllowDrop="True" Drop="ListView_Drop" PreviewDragOver="ListView_PreviewDragOver" SelectionMode="Single">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeEasy_Column_Filename, Mode=OneWay}" DisplayMemberBinding="{Binding Filename}" Width="200" />
-                                    <GridViewColumn Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeEasy_Column_Path, Mode=OneWay}" DisplayMemberBinding="{Binding Path}" Width="200" />
+                                    <GridViewColumn Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Item_Column_Filename, Mode=OneWay}" DisplayMemberBinding="{Binding Filename}" Width="200" />
+                                    <GridViewColumn Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Item_Column_Path, Mode=OneWay}" DisplayMemberBinding="{Binding Path}" Width="200" />
                                 </GridView>
                             </ListView.View>
                         </ListView>
@@ -71,15 +71,59 @@
                         <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0 5" Padding="5 0 0 0" Background="{DynamicResource MaterialDesignSelection}">
                             <DockPanel  HorizontalAlignment="Stretch">
                                 <Button DockPanel.Dock="Right" Margin="5" MinWidth="90"  VerticalAlignment="Center" Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_Browse, Mode=OneWay}" Click="BrowseButton_Click" ToolTip="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Common_OpenFileDialog, Mode=OneWay}" />
-                                <TextBox materialDesign:HintAssist.Hint="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.ModeEasy_OutputFile, Mode=OneWay}" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding OutputFile}" AllowDrop="True" Drop="OutputFile_Drop" PreviewDragOver="OutputFile_PreviewDragOver" />
+                                <TextBox materialDesign:HintAssist.Hint="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Item_OutputFile, Mode=OneWay}" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding OutputFile}" AllowDrop="True" Drop="OutputFile_Drop" PreviewDragOver="OutputFile_PreviewDragOver" />
                             </DockPanel>
                         </Border>
 
                     </Grid>
                 </TabItem>
                 <TabItem Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Item_Option, Mode=OneWay}">
-
-
+                    <StackPanel>
+                        <Expander HorizontalAlignment="Stretch" Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Item_Property, Mode=OneWay}" IsExpanded="True">
+                            <Grid Margin="24,8,24,16">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Item_Property_Title, Mode=OneWay}" />
+                                <TextBox Grid.Row="0" Grid.Column="1" materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.Property.Title}" />
+                                <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Item_Property_Author, Mode=OneWay}" />
+                                <TextBox Grid.Row="1" Grid.Column="1" materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.Property.Author}" />
+                                <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Item_Property_Creator, Mode=OneWay}" />
+                                <TextBox Grid.Row="2" Grid.Column="1" materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.Property.Creator}" />
+                                <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Item_Property_Subject, Mode=OneWay}" />
+                                <TextBox Grid.Row="3" Grid.Column="1" materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.Property.Subject}" />
+                                <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Item_Property_Keywords, Mode=OneWay}" />
+                                <TextBox Grid.Row="4" Grid.Column="1" materialDesign:HintAssist.Hint="" VerticalAlignment="Center" materialDesign:TransitionAssist.DisableTransitions="True" Text="{Binding Setting.Property.Keywords}" />
+                            </Grid>
+                        </Expander>
+                        <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" />
+                        <Expander HorizontalAlignment="Stretch" Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Item_DisplayPdf, Mode=OneWay}" IsExpanded="True">
+                            <Grid Margin="24,8,24,16">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" IsThreeState="False" Margin="10 0 0 5" IsChecked="{Binding Setting.PageLayout.PageModeUseOutlines}" Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Item_DisplayPdf_BookmarkPanel, Mode=OneWay}" />
+                                <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10" Text="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Item_DisplayPdf_PageLayout, Mode=OneWay}" />
+                                <ComboBox Grid.Row="1" Grid.Column="1" materialDesign:ComboBoxAssist.ShowSelectedItem="{Binding ElementName=DisplaySelectedItemCheckBox, Path=IsChecked}" Margin="0 8 0 8" HorizontalAlignment="Left" SelectedIndex="{Binding PageLayouts}">
+                                    <ComboBoxItem IsSelected="True" Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Item_DisplayPdf_PageLayout_SinglePage, Mode=OneWay}" />
+                                    <ComboBoxItem Content="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Item_DisplayPdf_PageLayout_OneColumn, Mode=OneWay}" />
+                                </ComboBox>
+                            </Grid>
+                        </Expander>
+                    </StackPanel>
                 </TabItem>
             </dragablz:TabablzControl>
         </DockPanel>

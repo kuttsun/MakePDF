@@ -285,133 +285,130 @@
   <data name="MenuLanguage" xml:space="preserve">
     <value>言語</value>
   </data>
-  <data name="ModeEasy_Column_Filename" xml:space="preserve">
+  <data name="Item_Column_Filename" xml:space="preserve">
     <value>ファイル名</value>
   </data>
-  <data name="ModeEasy_Column_Path" xml:space="preserve">
+  <data name="Item_Column_Path" xml:space="preserve">
     <value>パス</value>
   </data>
-  <data name="ModeEasy_OutputFile" xml:space="preserve">
+  <data name="Item_OutputFile" xml:space="preserve">
     <value>出力ファイル名</value>
   </data>
   <data name="ModeEasy_Title" xml:space="preserve">
     <value>Easy モード</value>
   </data>
-  <data name="ModeStandard_After" xml:space="preserve">
+  <data name="Item_After" xml:space="preserve">
     <value>置換後</value>
   </data>
-  <data name="ModeStandard_AllDirectories" xml:space="preserve">
+  <data name="Item_AllDirectories" xml:space="preserve">
     <value>全てのディレクトリ</value>
   </data>
-  <data name="ModeStandard_AllSupportedFiles" xml:space="preserve">
+  <data name="Item_AllSupportedFiles" xml:space="preserve">
     <value>全てのサポート済みのファイル</value>
   </data>
-  <data name="ModeStandard_Before" xml:space="preserve">
+  <data name="Item_Before" xml:space="preserve">
     <value>置換前</value>
   </data>
-  <data name="ModeStandard_Bookmark" xml:space="preserve">
+  <data name="Item_Bookmark" xml:space="preserve">
     <value>ブックマーク（しおり）</value>
   </data>
-  <data name="ModeStandard_Bookmark_AddDirectoryName" xml:space="preserve">
+  <data name="Item_Bookmark_AddDirectoryName" xml:space="preserve">
     <value>ディレクトリ名をブックマークに追加</value>
   </data>
-  <data name="ModeStandard_Bookmark_AddFileName" xml:space="preserve">
+  <data name="Item_Bookmark_AddFileName" xml:space="preserve">
     <value>ファイル名をブックマークに追加</value>
   </data>
-  <data name="ModeStandard_Directories" xml:space="preserve">
+  <data name="Item_Directories" xml:space="preserve">
     <value>ディレクトリ</value>
   </data>
-  <data name="ModeStandard_DisplayPdf" xml:space="preserve">
+  <data name="Item_DisplayPdf" xml:space="preserve">
     <value>PDF の表示</value>
   </data>
-  <data name="ModeStandard_DisplayPdf_BookmarkPanel" xml:space="preserve">
+  <data name="Item_DisplayPdf_BookmarkPanel" xml:space="preserve">
     <value>表示にブックマークパネルを開く</value>
   </data>
-  <data name="ModeStandard_DisplayPdf_PageLayout" xml:space="preserve">
+  <data name="Item_DisplayPdf_PageLayout" xml:space="preserve">
     <value>ページ表示</value>
   </data>
-  <data name="ModeStandard_DisplayPdf_PageLayout_OneColumn" xml:space="preserve">
+  <data name="Item_DisplayPdf_PageLayout_OneColumn" xml:space="preserve">
     <value>スクロールを有効にする</value>
   </data>
-  <data name="ModeStandard_DisplayPdf_PageLayout_SinglePage" xml:space="preserve">
+  <data name="Item_DisplayPdf_PageLayout_SinglePage" xml:space="preserve">
     <value>単一ページ表示</value>
   </data>
-  <data name="ModeStandard_Excel" xml:space="preserve">
+  <data name="Item_Excel" xml:space="preserve">
     <value>Excel</value>
   </data>
-  <data name="ModeStandard_Excel_AddSheetToBookmark" xml:space="preserve">
+  <data name="Item_Excel_AddSheetToBookmark" xml:space="preserve">
     <value>シート名をブックマークに追加</value>
   </data>
-  <data name="ModeStandard_Files" xml:space="preserve">
+  <data name="Item_Files" xml:space="preserve">
     <value>ファイル</value>
   </data>
-  <data name="ModeStandard_InputOutput" xml:space="preserve">
-    <value>入力 / 出力</value>
-  </data>
-  <data name="ModeStandard_InputOutput_DeleteConvertedPdf" xml:space="preserve">
+  <data name="Item_InputOutput_DeleteConvertedPdf" xml:space="preserve">
     <value>変換後の PDF を削除する</value>
   </data>
-  <data name="ModeStandard_InputOutput_OutputFile" xml:space="preserve">
+  <data name="Item_InputOutput_OutputFile" xml:space="preserve">
     <value>出力ファイル</value>
   </data>
-  <data name="ModeStandard_InputOutput_WorkingDirectory" xml:space="preserve">
+  <data name="Item_InputOutput_WorkingDirectory" xml:space="preserve">
     <value>作業ディレクトリ</value>
   </data>
-  <data name="ModeStandard_Property" xml:space="preserve">
+  <data name="Item_Property" xml:space="preserve">
     <value>プロパティ</value>
   </data>
-  <data name="ModeStandard_Property_Author" xml:space="preserve">
+  <data name="Item_Property_Author" xml:space="preserve">
     <value>作成者</value>
   </data>
-  <data name="ModeStandard_Property_Creator" xml:space="preserve">
+  <data name="Item_Property_Creator" xml:space="preserve">
     <value>アプリケーション</value>
   </data>
-  <data name="ModeStandard_Property_Keywords" xml:space="preserve">
+  <data name="Item_Property_Keywords" xml:space="preserve">
     <value>キーワード</value>
   </data>
-  <data name="ModeStandard_Property_Subject" xml:space="preserve">
+  <data name="Item_Property_Subject" xml:space="preserve">
     <value>サブタイトル</value>
   </data>
-  <data name="ModeStandard_Property_Title" xml:space="preserve">
+  <data name="Item_Property_Title" xml:space="preserve">
     <value>タイトル</value>
   </data>
-  <data name="ModeStandard_RegularExpression_Directory" xml:space="preserve">
+  <data name="Item_RegularExpression_Directory" xml:space="preserve">
     <value>対象のディレクトリを正規表現で指定</value>
   </data>
-  <data name="ModeStandard_RegularExpression_File" xml:space="preserve">
+  <data name="Item_RegularExpression_File" xml:space="preserve">
     <value>対象のファイルを正規表現で指定</value>
   </data>
-  <data name="ModeStandard_RegularExpression_File2" xml:space="preserve">
+  <data name="Item_RegularExpression_File2" xml:space="preserve">
     <value>上記から除外したいファイルを正規表現で指定</value>
   </data>
-  <data name="ModeStandard_RegularExpression_ReplaceDirectory" xml:space="preserve">
+  <data name="Item_RegularExpression_ReplaceDirectory" xml:space="preserve">
     <value>対象のディレクトリ名を正規表現の後方置換で指定</value>
   </data>
-  <data name="ModeStandard_RegularExpression_ReplaceFile" xml:space="preserve">
+  <data name="Item_RegularExpression_ReplaceFile" xml:space="preserve">
     <value>対象のファイル名を正規表現の後方置換で指定</value>
   </data>
-  <data name="ModeStandard_ReplaceDirectoryName" xml:space="preserve">
+  <data name="Item_ReplaceDirectoryName" xml:space="preserve">
     <value>ディレクトリ名を置換してブックマークに追加</value>
   </data>
-  <data name="ModeStandard_ReplaceFileName" xml:space="preserve">
+  <data name="Item_ReplaceFileName" xml:space="preserve">
     <value>ファイル名を置換してブックマークに追加</value>
   </data>
-  <data name="ModeStandard_Target" xml:space="preserve">
+  <data name="Item_Target" xml:space="preserve">
     <value>対象</value>
   </data>
   <data name="ModeStandard_Title" xml:space="preserve">
     <value>Standard モード</value>
   </data>
-  <data name="ModeStandard_Word" xml:space="preserve">
+  <data name="Item_Word" xml:space="preserve">
     <value>Word</value>
   </data>
-  <data name="ModeStandard_Word_CreateBookmarks" xml:space="preserve">
+  <data name="Item_Word_CreateBookmarks" xml:space="preserve">
     <value>ブックマークの作成</value>
   </data>
-  <data name="ModeStandard_Word_CreateBookmarks_FromBookmark" xml:space="preserve">
+  <data name="Item_Word_CreateBookmarks_FromBookmark" xml:space="preserve">
     <value>Word のブックマークから作成</value>
   </data>
-  <data name="ModeStandard_Word_CreateBookmarks_FromHeading" xml:space="preserve">
+  <data name="Item_Word_CreateBookmarks_FromHeading" xml:space="preserve">
     <value>Word の見出しから作成</value>
   </data>
   <data name="MsgBox_CheckForUpdates_Message" xml:space="preserve">

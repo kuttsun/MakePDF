@@ -502,6 +502,168 @@ namespace MakePdf.Wpf.Properties {
         }
         
         /// <summary>
+        ///   After に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_After {
+            get {
+                return ResourceManager.GetString("Item_After", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   All directories に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_AllDirectories {
+            get {
+                return ResourceManager.GetString("Item_AllDirectories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   All supported files に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_AllSupportedFiles {
+            get {
+                return ResourceManager.GetString("Item_AllSupportedFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Before に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Before {
+            get {
+                return ResourceManager.GetString("Item_Before", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Bookmark に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Bookmark {
+            get {
+                return ResourceManager.GetString("Item_Bookmark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Add directory name to bookmark に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Bookmark_AddDirectoryName {
+            get {
+                return ResourceManager.GetString("Item_Bookmark_AddDirectoryName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Add file name to bookmark に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Bookmark_AddFileName {
+            get {
+                return ResourceManager.GetString("Item_Bookmark_AddFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Filename に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Column_Filename {
+            get {
+                return ResourceManager.GetString("Item_Column_Filename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Path に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Column_Path {
+            get {
+                return ResourceManager.GetString("Item_Column_Path", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Directories に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Directories {
+            get {
+                return ResourceManager.GetString("Item_Directories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Display PDF に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_DisplayPdf {
+            get {
+                return ResourceManager.GetString("Item_DisplayPdf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Open bookmark panel when displaying に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_DisplayPdf_BookmarkPanel {
+            get {
+                return ResourceManager.GetString("Item_DisplayPdf_BookmarkPanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Page layout に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_DisplayPdf_PageLayout {
+            get {
+                return ResourceManager.GetString("Item_DisplayPdf_PageLayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   One column に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_DisplayPdf_PageLayout_OneColumn {
+            get {
+                return ResourceManager.GetString("Item_DisplayPdf_PageLayout_OneColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Single page に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_DisplayPdf_PageLayout_SinglePage {
+            get {
+                return ResourceManager.GetString("Item_DisplayPdf_PageLayout_SinglePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Excel に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Excel {
+            get {
+                return ResourceManager.GetString("Item_Excel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Add sheet name to bookmark に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Excel_AddSheetToBookmark {
+            get {
+                return ResourceManager.GetString("Item_Excel_AddSheetToBookmark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Files に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Files {
+            get {
+                return ResourceManager.GetString("Item_Files", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Input / Output に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Item_InputOutput {
@@ -511,11 +673,209 @@ namespace MakePdf.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Delete converted PDF に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_InputOutput_DeleteConvertedPdf {
+            get {
+                return ResourceManager.GetString("Item_InputOutput_DeleteConvertedPdf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Output File に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_InputOutput_OutputFile {
+            get {
+                return ResourceManager.GetString("Item_InputOutput_OutputFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Working Directory に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_InputOutput_WorkingDirectory {
+            get {
+                return ResourceManager.GetString("Item_InputOutput_WorkingDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Options に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Item_Option {
             get {
                 return ResourceManager.GetString("Item_Option", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Output file に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_OutputFile {
+            get {
+                return ResourceManager.GetString("Item_OutputFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Property に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Property {
+            get {
+                return ResourceManager.GetString("Item_Property", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Author に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Property_Author {
+            get {
+                return ResourceManager.GetString("Item_Property_Author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Creator に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Property_Creator {
+            get {
+                return ResourceManager.GetString("Item_Property_Creator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Keywords に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Property_Keywords {
+            get {
+                return ResourceManager.GetString("Item_Property_Keywords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Subject に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Property_Subject {
+            get {
+                return ResourceManager.GetString("Item_Property_Subject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Title に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Property_Title {
+            get {
+                return ResourceManager.GetString("Item_Property_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Specify target directories by regular expression に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_RegularExpression_Directory {
+            get {
+                return ResourceManager.GetString("Item_RegularExpression_Directory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Specify target files by regular expression に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_RegularExpression_File {
+            get {
+                return ResourceManager.GetString("Item_RegularExpression_File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Specify the files by regular expression to exclude from the above に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_RegularExpression_File2 {
+            get {
+                return ResourceManager.GetString("Item_RegularExpression_File2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Specify the directories by backreference of regular expression に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_RegularExpression_ReplaceDirectory {
+            get {
+                return ResourceManager.GetString("Item_RegularExpression_ReplaceDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Specify the files by backreference of regular expression に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_RegularExpression_ReplaceFile {
+            get {
+                return ResourceManager.GetString("Item_RegularExpression_ReplaceFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Replace directory name に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_ReplaceDirectoryName {
+            get {
+                return ResourceManager.GetString("Item_ReplaceDirectoryName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Replace file name に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_ReplaceFileName {
+            get {
+                return ResourceManager.GetString("Item_ReplaceFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Target に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Target {
+            get {
+                return ResourceManager.GetString("Item_Target", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Word に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Word {
+            get {
+                return ResourceManager.GetString("Item_Word", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Create bookmarks に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Word_CreateBookmarks {
+            get {
+                return ResourceManager.GetString("Item_Word_CreateBookmarks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   from word bookmarks に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Word_CreateBookmarks_FromBookmark {
+            get {
+                return ResourceManager.GetString("Item_Word_CreateBookmarks_FromBookmark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   from word heading に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Word_CreateBookmarks_FromHeading {
+            get {
+                return ResourceManager.GetString("Item_Word_CreateBookmarks_FromHeading", resourceCulture);
             }
         }
         
@@ -583,33 +943,6 @@ namespace MakePdf.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Filename に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeEasy_Column_Filename {
-            get {
-                return ResourceManager.GetString("ModeEasy_Column_Filename", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Path に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeEasy_Column_Path {
-            get {
-                return ResourceManager.GetString("ModeEasy_Column_Path", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Output file に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeEasy_OutputFile {
-            get {
-                return ResourceManager.GetString("ModeEasy_OutputFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Easy Mode に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ModeEasy_Title {
@@ -619,353 +952,11 @@ namespace MakePdf.Wpf.Properties {
         }
         
         /// <summary>
-        ///   After に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_After {
-            get {
-                return ResourceManager.GetString("ModeStandard_After", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   All directories に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_AllDirectories {
-            get {
-                return ResourceManager.GetString("ModeStandard_AllDirectories", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   All supported files に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_AllSupportedFiles {
-            get {
-                return ResourceManager.GetString("ModeStandard_AllSupportedFiles", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Before に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_Before {
-            get {
-                return ResourceManager.GetString("ModeStandard_Before", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Bookmark に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_Bookmark {
-            get {
-                return ResourceManager.GetString("ModeStandard_Bookmark", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Add directory name to bookmark に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_Bookmark_AddDirectoryName {
-            get {
-                return ResourceManager.GetString("ModeStandard_Bookmark_AddDirectoryName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Add file name to bookmark に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_Bookmark_AddFileName {
-            get {
-                return ResourceManager.GetString("ModeStandard_Bookmark_AddFileName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Directories に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_Directories {
-            get {
-                return ResourceManager.GetString("ModeStandard_Directories", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Display PDF に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_DisplayPdf {
-            get {
-                return ResourceManager.GetString("ModeStandard_DisplayPdf", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Open bookmark panel when displaying に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_DisplayPdf_BookmarkPanel {
-            get {
-                return ResourceManager.GetString("ModeStandard_DisplayPdf_BookmarkPanel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Page layout に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_DisplayPdf_PageLayout {
-            get {
-                return ResourceManager.GetString("ModeStandard_DisplayPdf_PageLayout", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   One column に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_DisplayPdf_PageLayout_OneColumn {
-            get {
-                return ResourceManager.GetString("ModeStandard_DisplayPdf_PageLayout_OneColumn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Single page に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_DisplayPdf_PageLayout_SinglePage {
-            get {
-                return ResourceManager.GetString("ModeStandard_DisplayPdf_PageLayout_SinglePage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Excel に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_Excel {
-            get {
-                return ResourceManager.GetString("ModeStandard_Excel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Add sheet name to bookmark に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_Excel_AddSheetToBookmark {
-            get {
-                return ResourceManager.GetString("ModeStandard_Excel_AddSheetToBookmark", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Files に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_Files {
-            get {
-                return ResourceManager.GetString("ModeStandard_Files", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Input / Output に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_InputOutput {
-            get {
-                return ResourceManager.GetString("ModeStandard_InputOutput", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Delete converted PDF に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_InputOutput_DeleteConvertedPdf {
-            get {
-                return ResourceManager.GetString("ModeStandard_InputOutput_DeleteConvertedPdf", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Output File に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_InputOutput_OutputFile {
-            get {
-                return ResourceManager.GetString("ModeStandard_InputOutput_OutputFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Working Directory に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_InputOutput_WorkingDirectory {
-            get {
-                return ResourceManager.GetString("ModeStandard_InputOutput_WorkingDirectory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Property に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_Property {
-            get {
-                return ResourceManager.GetString("ModeStandard_Property", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Author に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_Property_Author {
-            get {
-                return ResourceManager.GetString("ModeStandard_Property_Author", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Creator に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_Property_Creator {
-            get {
-                return ResourceManager.GetString("ModeStandard_Property_Creator", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Keywords に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_Property_Keywords {
-            get {
-                return ResourceManager.GetString("ModeStandard_Property_Keywords", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Subject に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_Property_Subject {
-            get {
-                return ResourceManager.GetString("ModeStandard_Property_Subject", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Title に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_Property_Title {
-            get {
-                return ResourceManager.GetString("ModeStandard_Property_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Specify target directories by regular expression に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_RegularExpression_Directory {
-            get {
-                return ResourceManager.GetString("ModeStandard_RegularExpression_Directory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Specify target files by regular expression に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_RegularExpression_File {
-            get {
-                return ResourceManager.GetString("ModeStandard_RegularExpression_File", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Specify the files by regular expression to exclude from the above に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_RegularExpression_File2 {
-            get {
-                return ResourceManager.GetString("ModeStandard_RegularExpression_File2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Specify the directories by backreference of regular expression に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_RegularExpression_ReplaceDirectory {
-            get {
-                return ResourceManager.GetString("ModeStandard_RegularExpression_ReplaceDirectory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Specify the files by backreference of regular expression に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_RegularExpression_ReplaceFile {
-            get {
-                return ResourceManager.GetString("ModeStandard_RegularExpression_ReplaceFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Replace directory name に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_ReplaceDirectoryName {
-            get {
-                return ResourceManager.GetString("ModeStandard_ReplaceDirectoryName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Replace file name に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_ReplaceFileName {
-            get {
-                return ResourceManager.GetString("ModeStandard_ReplaceFileName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Target に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_Target {
-            get {
-                return ResourceManager.GetString("ModeStandard_Target", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Standard Mode に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ModeStandard_Title {
             get {
                 return ResourceManager.GetString("ModeStandard_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Word に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_Word {
-            get {
-                return ResourceManager.GetString("ModeStandard_Word", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Create bookmarks に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_Word_CreateBookmarks {
-            get {
-                return ResourceManager.GetString("ModeStandard_Word_CreateBookmarks", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   from word bookmarks に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_Word_CreateBookmarks_FromBookmark {
-            get {
-                return ResourceManager.GetString("ModeStandard_Word_CreateBookmarks_FromBookmark", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   from word heading に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ModeStandard_Word_CreateBookmarks_FromHeading {
-            get {
-                return ResourceManager.GetString("ModeStandard_Word_CreateBookmarks_FromHeading", resourceCulture);
             }
         }
         
