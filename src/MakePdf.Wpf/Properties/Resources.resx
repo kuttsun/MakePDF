@@ -264,6 +264,12 @@
   <data name="Home_Standard_Detail3" xml:space="preserve">
     <value>The settings can be saved in a file.</value>
   </data>
+  <data name="Item_InputOutput" xml:space="preserve">
+    <value>Input / Output</value>
+  </data>
+  <data name="Item_Option" xml:space="preserve">
+    <value>Options</value>
+  </data>
   <data name="MenuFile" xml:space="preserve">
     <value>File(_F)</value>
   </data>

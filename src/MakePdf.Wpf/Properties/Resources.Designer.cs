@@ -502,6 +502,24 @@ namespace MakePdf.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Input / Output に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_InputOutput {
+            get {
+                return ResourceManager.GetString("Item_InputOutput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Options に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Item_Option {
+            get {
+                return ResourceManager.GetString("Item_Option", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   File(_F) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MenuFile {
