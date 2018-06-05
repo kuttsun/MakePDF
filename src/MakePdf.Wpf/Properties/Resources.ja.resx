@@ -325,7 +325,7 @@
     <value>PDF の表示</value>
   </data>
   <data name="Item_DisplayPdf_BookmarkPanel" xml:space="preserve">
-    <value>表示にブックマークパネルを開く</value>
+    <value>表示時にブックマークパネルを開く</value>
   </data>
   <data name="Item_DisplayPdf_PageLayout" xml:space="preserve">
     <value>ページ表示</value>
@@ -428,5 +428,11 @@
   </data>
   <data name="MsgBox_NotFound_Title" xml:space="preserve">
     <value>見つかりませんでした</value>
+  </data>
+  <data name="Dialog_Processing_Message" xml:space="preserve">
+    <value>しばらくお待ちください</value>
+  </data>
+  <data name="Dialog_Processing_Title" xml:space="preserve">
+    <value>処理中です</value>
   </data>
 </root>
