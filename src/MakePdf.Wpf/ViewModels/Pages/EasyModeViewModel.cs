@@ -35,6 +35,29 @@ namespace MakePdf.Wpf.ViewModels.Pages
             set { SetProperty(ref outputFile, value); }
         }
 
+        int pageLayouts = 0;
+        public int PageLayouts
+        {
+            get { return pageLayouts; }
+            set
+            {
+                SetProperty(ref pageLayouts, value);
+                Setting.DisplayPdf.PageLayout = (Core.PageLayout)Enum.ToObject(typeof(Core.PageLayout), value);
+            }
+        }
+
+        Setting setting = new Setting();
+        public Setting Setting
+        {
+            get { return setting; }
+            set
+            {
+                SetProperty(ref setting, value);
+                OutputFile = setting.OutputFile;
+                PageLayouts = (int)setting.DisplayPdf.PageLayout;
+            }
+        }
+
         public ObservableCollection<TargetFile> TargetFiles { get; set; } = new ObservableCollection<TargetFile>();
         public TargetFile SelectedItem { get; set; } = new TargetFile();
         public int SelectedIndex { get; set; }
@@ -82,7 +105,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
         {
             var files = TargetFiles.Select(x => x.Path);
 
-            return await runner.RunAsync(files, OutputFile);
+            return await runner.RunAsync(files, OutputFile, Setting);
         }
 
         public void AddFiles(List<string> files)
