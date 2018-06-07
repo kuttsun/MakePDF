@@ -285,11 +285,8 @@
   <data name="MenuLanguage" xml:space="preserve">
     <value>言語</value>
   </data>
-  <data name="Item_Column_Filename" xml:space="preserve">
-    <value>ファイル名</value>
-  </data>
-  <data name="Item_Column_Path" xml:space="preserve">
-    <value>パス</value>
+  <data name="Item_Column_File" xml:space="preserve">
+    <value>ファイル</value>
   </data>
   <data name="Item_OutputFile" xml:space="preserve">
     <value>出力ファイル名</value>

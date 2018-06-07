@@ -103,7 +103,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
 
         public async Task<bool> StartAsync()
         {
-            var files = TargetFiles.Select(x => x.Path);
+            var files = TargetFiles.Select(x => x.File);
 
             return await runner.RunAsync(files, OutputFile, Setting);
         }
@@ -114,7 +114,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
             {
                 if (Runner.IsSupported(file))
                 {
-                    TargetFiles.Add(new TargetFile { Filename = Path.GetFileName(file), Path = file });
+                    TargetFiles.Add(new TargetFile(file));
                 }
             }
         }
@@ -124,12 +124,11 @@ namespace MakePdf.Wpf.ViewModels.Pages
 
     class TargetFile
     {
-        public string Filename { get; set; }
-        public string Path { get; set; }
+        public string File { get; }
 
-        public TargetFile()
+        public TargetFile(string file = null)
         {
-
+            File = file;
         }
     }
 }

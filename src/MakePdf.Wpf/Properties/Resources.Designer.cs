@@ -565,20 +565,11 @@ namespace MakePdf.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Filename に類似しているローカライズされた文字列を検索します。
+        ///   File に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string Item_Column_Filename {
+        public static string Item_Column_File {
             get {
-                return ResourceManager.GetString("Item_Column_Filename", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Path に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string Item_Column_Path {
-            get {
-                return ResourceManager.GetString("Item_Column_Path", resourceCulture);
+                return ResourceManager.GetString("Item_Column_File", resourceCulture);
             }
         }
         

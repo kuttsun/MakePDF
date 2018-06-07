@@ -49,8 +49,7 @@
                         <ListView Grid.Row="0" Grid.Column="0" ItemsSource="{Binding TargetFiles}" SelectedItem="{Binding SelectedItem}" SelectedIndex="{Binding SelectedIndex}" AllowDrop="True" Drop="ListView_Drop" PreviewDragOver="ListView_PreviewDragOver" SelectionMode="Single">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Item_Column_Filename, Mode=OneWay}" DisplayMemberBinding="{Binding Filename}" Width="200" />
-                                    <GridViewColumn Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Item_Column_Path, Mode=OneWay}" DisplayMemberBinding="{Binding Path}" Width="200" />
+                                    <GridViewColumn Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.Item_Column_File, Mode=OneWay}" DisplayMemberBinding="{Binding File}" Width="Auto" />
                                 </GridView>
                             </ListView.View>
                         </ListView>
