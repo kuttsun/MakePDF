@@ -83,9 +83,9 @@ namespace MakePdf.Core
                     if (setting.TargetDirectories.AllItems || Regex.IsMatch(dirName, setting.TargetDirectories.Pattern))
                     {
                         var childBookmark = new List<Dictionary<string, object>>();
+                        outputPdf.AddDirectoryBookmark(parentBookmarks, dirName, childBookmark);
                         // Recursive processing
                         ConvertAndCombine(Directory.GetFileSystemEntries(path), childBookmark);
-                        outputPdf.AddDirectoryBookmark(parentBookmarks, dirName, childBookmark);
                     }
                 }
                 else
