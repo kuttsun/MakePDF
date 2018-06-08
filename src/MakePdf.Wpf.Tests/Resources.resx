@@ -291,8 +291,11 @@
   <data name="MenuLanguage" xml:space="preserve">
     <value>Language</value>
   </data>
-  <data name="Item_Column_File" xml:space="preserve">
-    <value>File</value>
+  <data name="Item_Column_Filename" xml:space="preserve">
+    <value>Filename</value>
+  </data>
+  <data name="Item_Column_Path" xml:space="preserve">
+    <value>Path</value>
   </data>
   <data name="Item_OutputFile" xml:space="preserve">
     <value>Output file</value>

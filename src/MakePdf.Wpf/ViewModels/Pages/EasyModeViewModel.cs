@@ -35,6 +35,29 @@ namespace MakePdf.Wpf.ViewModels.Pages
             set { SetProperty(ref outputFile, value); }
         }
 
+        int pageLayouts = 0;
+        public int PageLayouts
+        {
+            get { return pageLayouts; }
+            set
+            {
+                SetProperty(ref pageLayouts, value);
+                Setting.DisplayPdf.PageLayout = (Core.PageLayout)Enum.ToObject(typeof(Core.PageLayout), value);
+            }
+        }
+
+        Setting setting = new Setting();
+        public Setting Setting
+        {
+            get { return setting; }
+            set
+            {
+                SetProperty(ref setting, value);
+                OutputFile = setting.OutputFile;
+                PageLayouts = (int)setting.DisplayPdf.PageLayout;
+            }
+        }
+
         public ObservableCollection<TargetFile> TargetFiles { get; set; } = new ObservableCollection<TargetFile>();
         public TargetFile SelectedItem { get; set; } = new TargetFile();
         public int SelectedIndex { get; set; }
@@ -80,9 +103,9 @@ namespace MakePdf.Wpf.ViewModels.Pages
 
         public async Task<bool> StartAsync()
         {
-            var files = TargetFiles.Select(x => x.Path);
+            var files = TargetFiles.Select(x => x.File);
 
-            return await runner.RunAsync(files, OutputFile);
+            return await runner.RunAsync(files, OutputFile, Setting);
         }
 
         public void AddFiles(List<string> files)
@@ -91,7 +114,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
             {
                 if (Runner.IsSupported(file))
                 {
-                    TargetFiles.Add(new TargetFile { Filename = Path.GetFileName(file), Path = file });
+                    TargetFiles.Add(new TargetFile(file));
                 }
             }
         }
@@ -101,12 +124,11 @@ namespace MakePdf.Wpf.ViewModels.Pages
 
     class TargetFile
     {
-        public string Filename { get; set; }
-        public string Path { get; set; }
+        public string File { get; }
 
-        public TargetFile()
+        public TargetFile(string file = null)
         {
-
+            File = file;
         }
     }
 }
