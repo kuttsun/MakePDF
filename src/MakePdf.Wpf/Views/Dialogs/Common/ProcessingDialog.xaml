@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:MakePdf.Wpf.Views.Dialogs.Common"
              xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d"
              
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -16,9 +18,13 @@
              TextOptions.TextRenderingMode="Auto"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}">
+
     <StackPanel Margin="10">
         <Label Content="{Binding Title}" x:Name="labelTitle" FontSize="24"/>
-        <Label Content="{Binding Message}" x:Name="labelMessage"/>
-        <ProgressBar Style="{DynamicResource MaterialDesignCircularProgressBar}" HorizontalAlignment="Center" Margin="32" IsIndeterminate="True" Value="0" />
+        <Label Content="{Binding Message}" x:Name="labelMessage" Margin="0 10" />
+        <Border BorderThickness="1" BorderBrush="Silver">
+            <ListBox x:Name="ListBox" SelectionMode="Single" Width="400" Height="300" Margin="0" />
+        </Border>
+        <ProgressBar IsIndeterminate="True" Margin="0 10 0 0"/>
     </StackPanel>
 </UserControl>

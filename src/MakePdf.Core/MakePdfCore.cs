@@ -13,17 +13,18 @@ namespace MakePdf.Core
 {
     public class MakePdfCore
     {
-        ILogger logger;
+        readonly ILogger logger;
         OutputPdf outputPdf;
 
         Setting setting = new Setting();
+        public event Action<string> Subscriber;
 
         public MakePdfCore(ILogger<MakePdfCore> logger)
         {
             this.logger = logger;
         }
 
-        public async Task<bool> RunAsync(IEnumerable<string> paths, string outputFullpath, Setting setting = null)
+        public async Task<bool> RunAsync(IEnumerable<string> paths, string outputFullpath, Setting setting)
         {
             this.setting = setting ?? new Setting();
 
@@ -44,7 +45,7 @@ namespace MakePdf.Core
             return true;
         }
 
-        public async Task<bool> RunAsync(string inputDirectory, string outputFullpath, Setting setting = null)
+        public async Task<bool> RunAsync(string inputDirectory, string outputFullpath, Setting setting)
         {
             var paths = Directory.GetFileSystemEntries(inputDirectory);
 
@@ -55,42 +56,65 @@ namespace MakePdf.Core
         {
             foreach (var path in paths)
             {
-                if (path == outputPdf.OutputFullpath)
+                OutputInfo($"{Path.GetFileName(path)}");
+                try
                 {
-                    continue;
-                }
-                else if (File.Exists(path))
-                {
-                    if (setting.TargetFiles.AllItems || Regex.IsMatch(path, setting.TargetFiles.Pattern))
+                    if (path == outputPdf.OutputFullpath)
                     {
-                        if (Support.IsSupported(path))
+                        OutputInfo("Ignore (it is output file)");
+                        continue;
+                    }
+                    else if (File.Exists(path))
+                    {
+                        if (setting.TargetFiles.AllItems || Regex.IsMatch(path, setting.TargetFiles.Pattern))
                         {
-                            using (var doc = Create(path))
+                            if (Support.IsSupported(path))
                             {
-                                doc.ToPdf();
-                                outputPdf?.Add(doc.OutputFullpath, parentBookmarks);
-                                doc.DeleteCnvertedPdf(setting.DeleteConvertedPdf);
+                                OutputInfo("Start processing");
+                                using (var doc = Create(path))
+                                {
+                                    doc.ToPdf();
+                                    outputPdf?.Add(doc.OutputFullpath, parentBookmarks);
+                                    doc.DeleteCnvertedPdf(setting.DeleteConvertedPdf);
+                                }
+                                OutputInfo("Complete");
                             }
-
+                            else
+                            {
+                                OutputInfo("Ignore (it is not supported)");
+                            }
                         }
-
+                        else
+                        {
+                            OutputInfo("Ignore (it is not a target file)");
+                        }
                     }
-                }
-                else if (Directory.Exists(path))
-                {
-                    var dirName = Path.GetFileName(path);
-
-                    if (setting.TargetDirectories.AllItems || Regex.IsMatch(dirName, setting.TargetDirectories.Pattern))
+                    else if (Directory.Exists(path))
                     {
-                        var childBookmark = new List<Dictionary<string, object>>();
-                        outputPdf.AddDirectoryBookmark(parentBookmarks, dirName, childBookmark);
-                        // Recursive processing
-                        ConvertAndCombine(Directory.GetFileSystemEntries(path), childBookmark);
+                        var dirName = Path.GetFileName(path);
+
+                        if (setting.TargetDirectories.AllItems || Regex.IsMatch(dirName, setting.TargetDirectories.Pattern))
+                        {
+                            var childBookmark = new List<Dictionary<string, object>>();
+                            OutputInfo("Add directory name to bookmark");
+                            outputPdf.AddDirectoryBookmark(parentBookmarks, dirName, childBookmark);
+                            // Recursive processing
+                            ConvertAndCombine(Directory.GetFileSystemEntries(path), childBookmark);
+                        }
+                        else
+                        {
+                            OutputInfo("Ignore (it is not a target directory)");
+                        }
+                    }
+                    else
+                    {
+                        throw new FileNotFoundException();
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    throw new FileNotFoundException();
+                    Subscriber(e.Message);
+                    logger?.LogError(e, e.Message);
                 }
             }
         }
@@ -117,6 +141,12 @@ namespace MakePdf.Core
             {
                 return null;
             }
+        }
+
+        void OutputInfo(string msg)
+        {
+            Subscriber(msg);
+            logger?.LogInformation(msg);
         }
     }
 }

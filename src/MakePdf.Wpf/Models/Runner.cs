@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
+using Prism.Events;
+
 using MakePdf.Core;
 
 namespace MakePdf.Wpf.Models
@@ -16,11 +18,14 @@ namespace MakePdf.Wpf.Models
         public Runner(MakePdfCore core)
         {
             this.core = core;
+            core.Subscriber += x => Messenger.Instance[MessengerType.Processing].GetEvent<PubSubEvent<string>>().Publish(x);
         }
 
         public async Task<bool> RunAsync(IEnumerable<string> items, string outputFullpath, Setting setting)
         {
-            return await core.RunAsync(items, outputFullpath, setting);
+            var ret = await core.RunAsync(items, outputFullpath, setting);
+
+            return ret;
         }
 
         public async Task<bool> RunAsync(string inputDirectory, string outputPath, Setting setting)
@@ -37,7 +42,10 @@ namespace MakePdf.Wpf.Models
                 // outputPath is relative path.
                 outputFullpath = inputDirectory + @"\" + outputPath;
             }
-            return await core.RunAsync(inputDirectory, outputFullpath, setting);
+
+            var ret = await core.RunAsync(inputDirectory, outputFullpath, setting);
+
+            return ret;
         }
 
         public static bool IsSupported(string fullpath) => Support.IsSupported(fullpath);

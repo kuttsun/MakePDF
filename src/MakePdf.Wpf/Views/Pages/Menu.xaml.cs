@@ -39,7 +39,7 @@ namespace MakePdf.Wpf.Views.Pages
             vm = DataContext as MenuViewModel;
             parentView = Application.Current.MainWindow as Shell;
 
-            Messenger.Instance.GetEvent<PubSubEvent<string>>().Subscribe(x => NewVersionFound(x));
+            Messenger.Instance[MessengerType.NewVersionFound].GetEvent<PubSubEvent<string>>().Subscribe(x => NewVersionFound(x));
         }
 
         void Exit_Click(object sender, RoutedEventArgs e)
