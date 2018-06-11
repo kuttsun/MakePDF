@@ -34,9 +34,20 @@ namespace MakePdf.Wpf.Views.Dialogs.Common
                 Dispatcher.Invoke(() =>
                 {
                     ListBox.Items.Add(x);
-                    var lastIndex = ListBox.Items.Count - 1;
+
                     // see: http://kenzauros.com/blog/follow-last-item-of-wpf-listbox/
-                    ListBox.ScrollIntoView(ListBox.Items[lastIndex]);
+                    //var lastIndex = ListBox.Items.Count - 1;
+                    //ListBox.ScrollIntoView(ListBox.Items[lastIndex]);
+
+                    // Get ScrollViewer of ListBox
+                    // see http://1010029.blogspot.com/2013/01/wpflistbox_26.html
+                    if (VisualTreeHelper.GetChild(ListBox, 0) is Border border)
+                    {
+                        if (border.Child is ScrollViewer listBoxScroll)
+                        {
+                            listBoxScroll.ScrollToEnd();
+                        }
+                    }
                 });
             });
         }
