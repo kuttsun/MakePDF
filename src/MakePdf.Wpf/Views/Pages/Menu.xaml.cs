@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using MaterialDesignThemes.Wpf;
 
 using Prism.Events;
@@ -21,6 +23,7 @@ using Prism.Events;
 using MakePdf.Wpf.Views.Dialogs;
 using MakePdf.Wpf.Views.Dialogs.Common;
 using MakePdf.Wpf.ViewModels.Pages;
+using MakePdf.Wpf.Models;
 
 namespace MakePdf.Wpf.Views.Pages
 {
@@ -39,7 +42,14 @@ namespace MakePdf.Wpf.Views.Pages
             vm = DataContext as MenuViewModel;
             parentView = Application.Current.MainWindow as Shell;
 
-            Messenger.Instance[MessengerType.NewVersionFound].GetEvent<PubSubEvent<string>>().Subscribe(x => NewVersionFound(x));
+            Messenger.Instance[MessengerType.NewVersionFound].GetEvent<PubSubEvent<string>>().Subscribe(x =>
+            {
+                Runner runner = Service.Provider.GetService<Runner>();
+                if (runner.IsProcessing == false)
+                {
+                    NewVersionFound(x);
+                }
+            });
         }
 
         void Exit_Click(object sender, RoutedEventArgs e)
@@ -49,7 +59,7 @@ namespace MakePdf.Wpf.Views.Pages
 
         void Usage_Click(object sender, RoutedEventArgs e)
         {
-            switch(ResourceService.Current.GetCulture())
+            switch (ResourceService.Current.GetCulture())
             {
                 case SupportedCulture.ja:
                     Process.Start("https://github.com/kuttsun/MakePdf/wiki/Home（日本語）");
