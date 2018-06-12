@@ -49,5 +49,7 @@ namespace MakePdf.Wpf.Models
         }
 
         public static bool IsSupported(string fullpath) => Support.IsSupported(fullpath);
+
+        public bool IsProcessing => core.IsProcessing;
     }
 }

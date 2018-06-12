@@ -19,6 +19,8 @@ namespace MakePdf.Core
         Setting setting = new Setting();
         public event Action<string> Subscriber;
 
+        public bool IsProcessing { get; private set; } = false;
+
         public MakePdfCore(ILogger<MakePdfCore> logger)
         {
             this.logger = logger;
@@ -28,19 +30,28 @@ namespace MakePdf.Core
         {
             this.setting = setting ?? new Setting();
 
-            await Task.Run(() =>
-            {
-                using (outputPdf = new OutputPdf(outputFullpath, null))
-                {
-                    outputPdf.SetSettings(this.setting);
+            IsProcessing = true;
 
-                    ConvertAndCombine(paths);
+            try
+            {
+                await Task.Run(() =>
+                {
+                    using (outputPdf = new OutputPdf(outputFullpath, null))
+                    {
+                        outputPdf.SetSettings(this.setting);
+
+                        ConvertAndCombine(paths);
 
                     // Finalize
                     outputPdf.Complete();
-                }
+                    }
 
-            });
+                });
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
 
             return true;
         }

@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using Microsoft.Extensions.DependencyInjection;
+
+using MakePdf.Wpf.Models;
+
 namespace MakePdf.Wpf.Views
 {
     /// <summary>
@@ -22,6 +26,16 @@ namespace MakePdf.Wpf.Views
         public Shell()
         {
             InitializeComponent();
+        }
+
+        void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Runner runner = Service.Provider.GetService<Runner>();
+            if (runner.IsProcessing)
+            {
+                e.Cancel = true;
+                return;
+            }
         }
     }
 }
