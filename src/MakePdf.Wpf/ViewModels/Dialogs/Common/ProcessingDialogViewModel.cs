@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
-using Prism.Commands;
 using Prism.Mvvm;
-using Prism.Regions;
 
 namespace MakePdf.Wpf.ViewModels.Dialogs.Common
 {
@@ -24,10 +23,6 @@ namespace MakePdf.Wpf.ViewModels.Dialogs.Common
         {
             get { return message; }
             set { SetProperty(ref message, value); }
-        }
-
-        public ProcessingDialogViewModel()
-        {
         }
     }
 }

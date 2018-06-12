@@ -8,8 +8,29 @@ using Prism.Events;
 
 namespace MakePdf.Wpf
 {
-    class Messenger : EventAggregator
+    public enum MessengerType
+    {
+        NewVersionFound,
+        Processing,
+    }
+
+    class Messenger
     {
         public static Messenger Instance { get; } = new Messenger();
+        readonly List<EventAggregator> messengers;
+
+        Messenger()
+        {
+            messengers = new List<EventAggregator>();
+            for (int i = 0; i < Enum.GetNames(typeof(MessengerType)).Length; i++)
+            {
+                messengers.Add(new EventAggregator());
+            }
+        }
+
+        public  EventAggregator this[MessengerType type]
+        {
+            get => messengers[(int)type];
+        }
     }
 }

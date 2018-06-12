@@ -30,7 +30,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
 
                 if (ret != null)
                 {
-                    Messenger.Instance.GetEvent<PubSubEvent<string>>().Publish(ret);
+                    Messenger.Instance[MessengerType.NewVersionFound].GetEvent<PubSubEvent<string>>().Publish(ret);
                 }
             });
         }
