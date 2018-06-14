@@ -17,7 +17,7 @@
              TextOptions.TextRenderingMode="Auto"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}">
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" AllowDrop="True" Drop="Page_Drop" PreviewDragOver="Item_PreviewDragOver">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />

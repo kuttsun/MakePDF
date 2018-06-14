@@ -31,5 +31,15 @@ namespace MakePdf.Wpf.ViewModels.Pages
                 _regionManager.RequestNavigate("MainRegion", "StandardMode");
             });
         }
+
+        public void ReadSettingFile(string file)
+        {
+            var parameters = new NavigationParameters
+            {
+                { "file", file }
+            };
+            // see https://field-notes.sakura.ne.jp/pgmemo/microsoft/dotnet/wpf/samples#k74p16
+            _regionManager.RequestNavigate("MainRegion", "StandardMode", parameters);
+        }
     }
 }

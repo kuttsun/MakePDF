@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Diagnostics;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,7 +16,7 @@ using MakePdf.Wpf.Models;
 
 namespace MakePdf.Wpf.ViewModels.Pages
 {
-    class StandardModeViewModel : BindableBase
+    class StandardModeViewModel : BindableBase, INavigationAware
     {
         readonly IRegionManager _regionManager;
         Runner runner;
@@ -123,5 +124,24 @@ namespace MakePdf.Wpf.ViewModels.Pages
 
             return (relativePath);
         }
+
+        // Implement INavigationAware
+        #region 
+        // see https://github.com/runceel/PrismEdu/tree/master/06.Navigation
+        public bool IsNavigationTarget(NavigationContext navigationContext) => true;
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            return;
+        }
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            if (navigationContext.Parameters["file"] is string file)
+            {
+                LoadSetting(file);
+            }
+        }
+        #endregion
     }
 }
