@@ -46,6 +46,31 @@ namespace MakePdf.Wpf.Views.Pages
             startupPath = Path.GetDirectoryName(exeFullPath);
         }
 
+        async void Page_Drop(object sender, DragEventArgs e)
+        {
+            var element = e.Source as FrameworkElement;
+            if(element?.Name.Contains("DropAllowedControl") ?? false)
+            {
+                // ignore since the handler of the child control is being executed
+                return;
+            }
+
+            var dialog = new TwoButtonDialog(
+                     Properties.Resources.Dialog_DropSettingFile_Title,
+                     Properties.Resources.Dialog_DropSettingFile_Message,
+                     Properties.Resources.Common_Yes,
+                     Properties.Resources.Common_No);
+            var result = await parentView.dialogHostMain.ShowDialog(dialog) as Selected?;
+            if (result == Selected.Negative)
+            {
+                return;
+            }
+
+            var dropFileList = (e.Data.GetData(DataFormats.FileDrop) as string[]).ToList();
+
+            vm.LoadSetting(dropFileList.FirstOrDefault());
+        }
+
         void InputDirectory_Drop(object sender, DragEventArgs e)
         {
             var dropFileList = (e.Data.GetData(DataFormats.FileDrop) as string[]).ToList();
