@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 
 
 using Microsoft.Extensions.Logging;
@@ -13,10 +14,12 @@ namespace MakePdf.Core.Documents
     class Word : DocumentBase
     {
         MsWord.Application word;
+        public WordSetting Setting { get; set; }
 
         public Word(string fullpath, ILogger logger) : base(fullpath, logger)
         {
             word = new MsWord.Application();
+            Setting = new WordSetting();
         }
 
         ~Word()
@@ -46,7 +49,7 @@ namespace MakePdf.Core.Documents
                     MsWord.WdExportItem.wdExportDocumentContent,
                     true,
                     true,
-                    MsWord.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks,
+                    GetBookmarkCreation(fullpath),
                     false);
 
                 logger?.LogInformation("Success");
@@ -61,6 +64,41 @@ namespace MakePdf.Core.Documents
                 doc?.Close(MsWord.WdSaveOptions.wdDoNotSaveChanges);
             }
         }
+
+        MsWord.WdExportCreateBookmarks GetBookmarkCreation(string fullpath)
+        {
+            MsWord.WdExportCreateBookmarks ret;
+
+            switch (Setting.CreateBookmarkFromWord)
+            {
+                case CreateBookmarkFromWord.Heading:
+                    if ((Setting.ExclusionPattern != null) && Regex.IsMatch(Path.GetFileName(fullpath), Setting.ExclusionPattern))
+                    {
+                        ret = MsWord.WdExportCreateBookmarks.wdExportCreateWordBookmarks;
+                    }
+                    else
+                    {
+                        ret = MsWord.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks;
+                    }
+                    break;
+                case CreateBookmarkFromWord.Bookmark:
+                    if ((Setting.ExclusionPattern != null) && Regex.IsMatch(Path.GetFileName(fullpath), Setting.ExclusionPattern))
+                    {
+                        ret = MsWord.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks;
+                    }
+                    else
+                    {
+                        ret = MsWord.WdExportCreateBookmarks.wdExportCreateWordBookmarks;
+                    }
+                    break;
+                default:
+                    ret = MsWord.WdExportCreateBookmarks.wdExportCreateNoBookmarks;
+                    break;
+            }
+
+            return ret;
+        }
+
 
         // Flag: Has Dispose already been called?
         bool disposed = false;

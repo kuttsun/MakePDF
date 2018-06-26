@@ -889,6 +889,15 @@ namespace MakePdf.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string Item_Word_CreateBookmarks_None {
+            get {
+                return ResourceManager.GetString("Item_Word_CreateBookmarks_None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File(_F).
         /// </summary>
         public static string MenuFile {
