@@ -8,6 +8,8 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 
+using MakePdf.Wpf.Views.Pages;
+
 namespace MakePdf.Wpf.ViewModels.Pages
 {
     class HomeViewModel : BindableBase
@@ -23,12 +25,12 @@ namespace MakePdf.Wpf.ViewModels.Pages
 
             EasyModeButtonCommand = new DelegateCommand(() =>
             {
-                _regionManager.RequestNavigate("MainRegion", "EasyMode");
+                _regionManager.RequestNavigate(nameof(Region.MainRegion), nameof(EasyMode));
             });
 
             StandardModeButtonCommand = new DelegateCommand(() =>
             {
-                _regionManager.RequestNavigate("MainRegion", "StandardMode");
+                _regionManager.RequestNavigate(nameof(Region.MainRegion), nameof(StandardMode));
             });
         }
 
@@ -39,7 +41,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
                 { "file", file }
             };
             // see https://field-notes.sakura.ne.jp/pgmemo/microsoft/dotnet/wpf/samples#k74p16
-            _regionManager.RequestNavigate("MainRegion", "StandardMode", parameters);
+            _regionManager.RequestNavigate(nameof(Region.MainRegion), nameof(StandardMode), parameters);
         }
     }
 }

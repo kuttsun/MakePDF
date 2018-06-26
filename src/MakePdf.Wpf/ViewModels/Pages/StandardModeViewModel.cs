@@ -13,7 +13,7 @@ using Prism.Mvvm;
 using Prism.Regions;
 
 using MakePdf.Wpf.Models;
-using MakePdf.Wpf.Models.Settings;
+using MakePdf.Wpf.Views.Pages;
 
 namespace MakePdf.Wpf.ViewModels.Pages
 {
@@ -91,7 +91,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
 
             BackButtonCommand = new DelegateCommand(() =>
             {
-                _regionManager.RequestNavigate("MainRegion", "Home");
+                _regionManager.RequestNavigate(nameof(Region.MainRegion), nameof(Home));
             });
 
             PageLayouts = (int)Setting.DisplayPdf.PageLayout;
@@ -110,7 +110,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
             // Add RecentFiles
             var options = Service.Provider.GetService<Options>();
             options.AddRecentFile(path);
-            
+
         }
 
         public void LoadSetting(string path)

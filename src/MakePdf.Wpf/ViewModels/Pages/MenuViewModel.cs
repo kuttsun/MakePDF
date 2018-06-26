@@ -14,7 +14,7 @@ using Prism.Events;
 using Prism.Regions;
 
 using MakePdf.Wpf.Models;
-using MakePdf.Wpf.Models.Settings;
+using MakePdf.Wpf.Views.Pages;
 
 namespace MakePdf.Wpf.ViewModels.Pages
 {
@@ -68,13 +68,6 @@ namespace MakePdf.Wpf.ViewModels.Pages
                             Command = new DelegateCommand(() =>
                             {
                                 Messenger.Instance[MessengerType.ReadSettingFile].GetEvent<PubSubEvent<string>>().Publish(file);
-
-                                //var parameters = new NavigationParameters
-                                //{
-                                //    { "file", file }
-                                //};
-                                //// see https://field-notes.sakura.ne.jp/pgmemo/microsoft/dotnet/wpf/samples#k74p16
-                                //_regionManager.RequestNavigate("MainRegion", "StandardMode", parameters);
                             })
                         });
                 }
@@ -98,7 +91,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
                 { "file", file }
             };
             // see https://field-notes.sakura.ne.jp/pgmemo/microsoft/dotnet/wpf/samples#k74p16
-            _regionManager.RequestNavigate("MainRegion", "StandardMode", parameters);
+            _regionManager.RequestNavigate(nameof(Region.MainRegion), nameof(StandardMode), parameters);
         }
     }
 
