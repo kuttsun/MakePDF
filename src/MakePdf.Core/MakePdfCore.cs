@@ -17,7 +17,7 @@ namespace MakePdf.Core
         OutputPdf outputPdf;
 
         Setting setting = new Setting();
-        public event Action<string> Subscriber;
+        public event Action<string> Subscriber = delegate { };// Null Object
 
         public bool IsProcessing { get; private set; } = false;
 
@@ -77,7 +77,7 @@ namespace MakePdf.Core
                     }
                     else if (File.Exists(path))
                     {
-                        if (setting.TargetFiles.AllItems || 
+                        if (setting.TargetFiles.AllItems ||
                             (setting.TargetFiles.Pattern == null ? false : Regex.IsMatch(path, setting.TargetFiles.Pattern)))
                         {
                             if (Support.IsSupported(path))

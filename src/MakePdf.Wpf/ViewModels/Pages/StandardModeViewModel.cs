@@ -12,6 +12,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 
+using MakePdf.Core.Extensions;
 using MakePdf.Wpf.Models;
 using MakePdf.Wpf.Views.Pages;
 
@@ -39,7 +40,17 @@ namespace MakePdf.Wpf.ViewModels.Pages
             set
             {
                 SetProperty(ref outputFile, value);
-                Setting.OutputFile = value;
+
+                string baseDir;
+                if (!WorkingDirectory.EndsWith(@"\"))
+                {
+                    baseDir = WorkingDirectory + @"\";
+                }
+                else
+                {
+                    baseDir = WorkingDirectory;
+                }
+                Setting.OutputFile = value.GetRelativePath(baseDir);
             }
         }
 
@@ -121,18 +132,6 @@ namespace MakePdf.Wpf.ViewModels.Pages
             // Add RecentFiles
             var options = Service.Provider.GetService<Options>();
             options.AddRecentFile(path);
-        }
-
-        string GetRelativePath(string uri1, string uri2)
-        {
-            var u1 = new Uri(Path.GetFullPath(uri1));
-            var u2 = new Uri(Path.GetFullPath(uri2));
-
-            var relativeUri = u1.MakeRelativeUri(u2);
-
-            var relativePath = relativeUri.ToString().Replace('/', '\\');
-
-            return (relativePath);
         }
 
         // Implement INavigationAware
