@@ -45,6 +45,22 @@ namespace MakePdf.Wpf.Views.Pages
                     NewVersionFound(x);
                 }
             });
+
+            Messenger.Instance[MessengerType.ReadSettingFile].GetEvent<PubSubEvent<string>>().Subscribe(async x =>
+            {
+                var dialog = new TwoButtonDialog(
+                     Properties.Resources.Dialog_DropSettingFile_Title,
+                     Properties.Resources.Dialog_DropSettingFile_Message,
+                     Properties.Resources.Common_Yes,
+                     Properties.Resources.Common_No);
+                var result = await parentView.dialogHostMain.ShowDialog(dialog) as Selected?;
+                if (result == Selected.Negative)
+                {
+                    return;
+                }
+
+                vm.ReadSettingFile(x);
+            });
         }
 
         void OpenLogFolder_Click(object sender, RoutedEventArgs e)

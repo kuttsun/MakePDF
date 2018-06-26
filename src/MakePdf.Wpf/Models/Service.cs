@@ -45,7 +45,8 @@ namespace MakePdf.Wpf.Models
             var hoge = Directory.GetCurrentDirectory();
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(hoge)
-                .AddJsonFile("appsettings.json", optional: false)
+                .AddJsonFile("appsettings.json", false)
+                .AddJsonFile("usersettings.json", true, true)
                 .Build();
             services.AddSingleton(configuration);
 
@@ -54,12 +55,14 @@ namespace MakePdf.Wpf.Models
 
             // Initialize options
             services.Configure<AppSetting>(configuration.GetSection(nameof(AppSetting)));
+            services.Configure<UserSetting>(configuration.GetSection(nameof(UserSetting)));
 
             // Add application to DI container
             services.AddSingleton<MakePdfCore>();
             services.AddSingleton<Runner>();
             services.AddSingleton<Updater>();
             services.AddSingleton<CuiMode>();
+            services.AddSingleton<Options>();
 
             return services;
         }

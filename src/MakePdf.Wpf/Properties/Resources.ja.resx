@@ -441,4 +441,10 @@
   <data name="MenuFile_OpenLogFolder" xml:space="preserve">
     <value>ログフォルダを開く</value>
   </data>
+  <data name="MenuFile_RecentFiles" xml:space="preserve">
+    <value>最近使ったファイル</value>
+  </data>
+  <data name="Item_Word_CreateBookmarks_None" xml:space="preserve">
+    <value>なし</value>
+  </data>
 </root>

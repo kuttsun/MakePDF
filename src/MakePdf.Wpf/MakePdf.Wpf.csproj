@@ -172,14 +172,17 @@
     </Page>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Models\CuiMode.cs" />
+    <Compile Include="Models\Options.cs" />
     <Compile Include="Models\Runner.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\Settings\AppSetting.cs" />
+    <Compile Include="Models\Settings\UserSetting.cs" />
     <Compile Include="Models\Updater.cs" />
     <Compile Include="MyInformation.cs" />
     <Compile Include="ResourceService.cs" />
     <Compile Include="ViewModels\Dialogs\Common\OneButtonDialogViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\Common\ProcessingDialogDetailViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\Common\ProcessingDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\Common\TwoButtonDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\AboutDialogViewModel.cs" />
@@ -193,6 +196,9 @@
     </Compile>
     <Compile Include="Views\Dialogs\AboutDialog.xaml.cs">
       <DependentUpon>AboutDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\Common\ProcessingDialogDetail.xaml.cs">
+      <DependentUpon>ProcessingDialogDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dialogs\NewVersionFoundDialog.xaml.cs">
       <DependentUpon>NewVersionFoundDialog.xaml</DependentUpon>
@@ -217,6 +223,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Dialogs\AboutDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialogs\Common\ProcessingDialogDetail.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

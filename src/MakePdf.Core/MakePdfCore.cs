@@ -17,7 +17,7 @@ namespace MakePdf.Core
         OutputPdf outputPdf;
 
         Setting setting = new Setting();
-        public event Action<string> Subscriber;
+        public event Action<string> Subscriber = delegate { };// Null Object
 
         public bool IsProcessing { get; private set; } = false;
 
@@ -42,8 +42,8 @@ namespace MakePdf.Core
 
                         ConvertAndCombine(paths);
 
-                    // Finalize
-                    outputPdf.Complete();
+                        // Finalize
+                        outputPdf.Complete();
                     }
 
                 });
@@ -77,7 +77,8 @@ namespace MakePdf.Core
                     }
                     else if (File.Exists(path))
                     {
-                        if (setting.TargetFiles.AllItems || Regex.IsMatch(path, setting.TargetFiles.Pattern))
+                        if (setting.TargetFiles.AllItems ||
+                            (setting.TargetFiles.Pattern == null ? false : Regex.IsMatch(path, setting.TargetFiles.Pattern)))
                         {
                             if (Support.IsSupported(path))
                             {
@@ -104,7 +105,8 @@ namespace MakePdf.Core
                     {
                         var dirName = Path.GetFileName(path);
 
-                        if (setting.TargetDirectories.AllItems || Regex.IsMatch(dirName, setting.TargetDirectories.Pattern))
+                        if (setting.TargetDirectories.AllItems ||
+                            (setting.TargetDirectories.Pattern == null ? false : Regex.IsMatch(dirName, setting.TargetDirectories.Pattern)))
                         {
                             var childBookmark = new List<Dictionary<string, object>>();
                             OutputInfo("Add directory name to bookmark");
@@ -141,7 +143,7 @@ namespace MakePdf.Core
                     case FileType.Pdf:
                         return new Pdf(fullpath, logger);
                     case FileType.Word:
-                        return new Word(fullpath, logger);
+                        return new Word(fullpath, logger) { Setting = setting.WordSetting };
                     case FileType.Excel:
                         return new Excel(fullpath, logger) { Setting = setting.ExcelSetting };
                     default:

@@ -15,8 +15,8 @@ namespace MakePdf.Wpf.ViewModels
         public ShellViewModel(IRegionManager rm)
         {
             // Set initial page
-            rm.RegisterViewWithRegion("MenuRegion", typeof(Menu));
-            rm.RegisterViewWithRegion("MainRegion", typeof(Home));
+            rm.RegisterViewWithRegion(nameof(Region.MenuRegion), typeof(Menu));
+            rm.RegisterViewWithRegion(nameof(Region.MainRegion), typeof(Home));
         }
     }
 }

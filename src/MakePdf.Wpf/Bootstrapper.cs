@@ -15,6 +15,12 @@ using MakePdf.Wpf.Views.Pages;
 
 namespace MakePdf.Wpf
 {
+    enum Region
+    {
+        MenuRegion,
+        MainRegion,
+    }
+
     public class Bootstrapper : UnityBootstrapper
     {
         protected override DependencyObject CreateShell()
@@ -34,10 +40,10 @@ namespace MakePdf.Wpf
             base.ConfigureContainer();
 
             // Register all Views (to use RegionManager)
-            Container.RegisterTypeForNavigation<Menu>("Menu");
-            Container.RegisterTypeForNavigation<Home>("Home");
-            Container.RegisterTypeForNavigation<EasyMode>("EasyMode");
-            Container.RegisterTypeForNavigation<StandardMode>("StandardMode");
+            Container.RegisterTypeForNavigation<Menu>(nameof(Menu));
+            Container.RegisterTypeForNavigation<Home>(nameof(Home));
+            Container.RegisterTypeForNavigation<EasyMode>(nameof(EasyMode));
+            Container.RegisterTypeForNavigation<StandardMode>(nameof(StandardMode));
 
             //    this.Container.RegisterTypes(
             //        AllClasses.FromLoadedAssemblies().Where(t => t.Namespace.EndsWith(".Views")),

@@ -12,6 +12,8 @@ namespace MakePdf.Wpf
     {
         NewVersionFound,
         Processing,
+        UpdateRecentFiles,
+        ReadSettingFile,
     }
 
     class Messenger

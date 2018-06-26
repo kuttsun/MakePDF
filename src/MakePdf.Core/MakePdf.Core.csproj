@@ -80,6 +80,7 @@
     <Compile Include="Documents\OutputPdf.cs" />
     <Compile Include="Documents\Pdf.cs" />
     <Compile Include="Documents\Word.cs" />
+    <Compile Include="Extensions\String.cs" />
     <Compile Include="MakePdfCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setting.cs" />

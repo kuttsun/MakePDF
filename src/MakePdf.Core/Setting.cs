@@ -18,6 +18,7 @@ namespace MakePdf.Core
     {
         Heading,
         Bookmark,
+        None,
     }
 
     public class Setting

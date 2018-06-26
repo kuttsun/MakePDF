@@ -889,6 +889,15 @@ namespace MakePdf.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string Item_Word_CreateBookmarks_None {
+            get {
+                return ResourceManager.GetString("Item_Word_CreateBookmarks_None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File(_F).
         /// </summary>
         public static string MenuFile {
@@ -912,6 +921,15 @@ namespace MakePdf.Wpf.Properties {
         public static string MenuFile_OpenLogFolder {
             get {
                 return ResourceManager.GetString("MenuFile_OpenLogFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent Files.
+        /// </summary>
+        public static string MenuFile_RecentFiles {
+            get {
+                return ResourceManager.GetString("MenuFile_RecentFiles", resourceCulture);
             }
         }
         

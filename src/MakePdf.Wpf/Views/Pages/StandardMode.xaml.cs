@@ -258,7 +258,7 @@ namespace MakePdf.Wpf.Views.Pages
             }
 
             // Start
-            var processingDialog = new ProcessingDialog(Properties.Resources.Dialog_Processing_Title, Properties.Resources.Dialog_Processing_Message);
+            var processingDialog = new ProcessingDialogDetail(Properties.Resources.Dialog_Processing_Title, Properties.Resources.Dialog_Processing_Message);
             var re = parentView.dialogHostMain.ShowDialog(processingDialog, async (object s, DialogOpenedEventArgs args) =>
             {
                 await vm.StartAsync();

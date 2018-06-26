@@ -12,7 +12,9 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 
+using MakePdf.Core.Extensions;
 using MakePdf.Wpf.Models;
+using MakePdf.Wpf.Views.Pages;
 
 namespace MakePdf.Wpf.ViewModels.Pages
 {
@@ -38,7 +40,17 @@ namespace MakePdf.Wpf.ViewModels.Pages
             set
             {
                 SetProperty(ref outputFile, value);
-                Setting.OutputFile = value;
+
+                string baseDir;
+                if (!WorkingDirectory.EndsWith(@"\"))
+                {
+                    baseDir = WorkingDirectory + @"\";
+                }
+                else
+                {
+                    baseDir = WorkingDirectory;
+                }
+                Setting.OutputFile = value.GetRelativePath(baseDir);
             }
         }
 
@@ -90,7 +102,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
 
             BackButtonCommand = new DelegateCommand(() =>
             {
-                _regionManager.RequestNavigate("MainRegion", "Home");
+                _regionManager.RequestNavigate(nameof(Region.MainRegion), nameof(Home));
             });
 
             PageLayouts = (int)Setting.DisplayPdf.PageLayout;
@@ -105,24 +117,21 @@ namespace MakePdf.Wpf.ViewModels.Pages
         public void SaveSetting(string path)
         {
             Setting.WriteFile(path);
+
+            // Add RecentFiles
+            var options = Service.Provider.GetService<Options>();
+            options.AddRecentFile(path);
+
         }
 
         public void LoadSetting(string path)
         {
             Setting = Setting.ReadFile(path);
             WorkingDirectory = Path.GetDirectoryName(path);
-        }
 
-        string GetRelativePath(string uri1, string uri2)
-        {
-            var u1 = new Uri(Path.GetFullPath(uri1));
-            var u2 = new Uri(Path.GetFullPath(uri2));
-
-            var relativeUri = u1.MakeRelativeUri(u2);
-
-            var relativePath = relativeUri.ToString().Replace('/', '\\');
-
-            return (relativePath);
+            // Add RecentFiles
+            var options = Service.Provider.GetService<Options>();
+            options.AddRecentFile(path);
         }
 
         // Implement INavigationAware

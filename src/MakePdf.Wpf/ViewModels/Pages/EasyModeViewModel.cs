@@ -13,6 +13,7 @@ using Prism.Mvvm;
 using Prism.Regions;
 
 using MakePdf.Wpf.Models;
+using MakePdf.Wpf.Views.Pages;
 
 namespace MakePdf.Wpf.ViewModels.Pages
 {
@@ -69,7 +70,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
 
             BackButtonCommand = new DelegateCommand(() =>
             {
-                _regionManager.RequestNavigate("MainRegion", "Home");
+                _regionManager.RequestNavigate(nameof(Region.MainRegion), nameof(Home));
             });
             UpButtonCommand = new DelegateCommand(() =>
             {

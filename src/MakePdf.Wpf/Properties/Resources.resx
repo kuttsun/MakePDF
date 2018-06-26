@@ -414,6 +414,9 @@
   <data name="Item_Word_CreateBookmarks_FromHeading" xml:space="preserve">
     <value>from word heading</value>
   </data>
+  <data name="Item_Word_CreateBookmarks_None" xml:space="preserve">
+    <value>None</value>
+  </data>
   <data name="MsgBox_CheckForUpdates_Message" xml:space="preserve">
     <value>Please wait for a while.</value>
   </data>
@@ -440,5 +443,8 @@
   </data>
   <data name="MenuFile_OpenLogFolder" xml:space="preserve">
     <value>Open log folder</value>
+  </data>
+  <data name="MenuFile_RecentFiles" xml:space="preserve">
+    <value>Recent Files</value>
   </data>
 </root>
