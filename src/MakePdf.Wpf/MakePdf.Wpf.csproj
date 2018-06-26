@@ -172,10 +172,12 @@
     </Page>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Models\CuiMode.cs" />
+    <Compile Include="Models\Options.cs" />
     <Compile Include="Models\Runner.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\Settings\AppSetting.cs" />
+    <Compile Include="Models\Settings\UserSetting.cs" />
     <Compile Include="Models\Updater.cs" />
     <Compile Include="MyInformation.cs" />
     <Compile Include="ResourceService.cs" />

@@ -916,6 +916,15 @@ namespace MakePdf.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recent Files.
+        /// </summary>
+        public static string MenuFile_RecentFiles {
+            get {
+                return ResourceManager.GetString("MenuFile_RecentFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help(_H).
         /// </summary>
         public static string MenuHelp {

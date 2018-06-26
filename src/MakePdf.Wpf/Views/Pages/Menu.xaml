@@ -31,6 +31,17 @@
                         <materialDesign:PackIcon Kind="Folder" />
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.MenuFile_RecentFiles, Mode=OneWay}" ItemsSource="{Binding Path=RecentFiles}">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="FileMultiple" />
+                    </MenuItem.Icon>
+                    <MenuItem.ItemContainerStyle>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Header" Value="{Binding Title}"/>
+                            <Setter Property="Command" Value="{Binding Command}"/>
+                        </Style>
+                    </MenuItem.ItemContainerStyle>
+                </MenuItem>
                 <MenuItem Header="{Binding Source={x:Static app:ResourceService.Current}, Path=Resources.MenuFile_Exit, Mode=OneWay}" InputGestureText="Alt+F4" Click="Exit_Click">
                     <MenuItem.Icon>
                         <materialDesign:PackIcon Kind="ExitToApp" />

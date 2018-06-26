@@ -441,4 +441,7 @@
   <data name="MenuFile_OpenLogFolder" xml:space="preserve">
     <value>ログフォルダを開く</value>
   </data>
+  <data name="MenuFile_RecentFiles" xml:space="preserve">
+    <value>最近使ったファイル</value>
+  </data>
 </root>

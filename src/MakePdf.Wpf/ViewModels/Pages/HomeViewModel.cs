@@ -12,7 +12,7 @@ namespace MakePdf.Wpf.ViewModels.Pages
 {
     class HomeViewModel : BindableBase
     {
-        private readonly IRegionManager _regionManager;
+        readonly IRegionManager _regionManager;
 
         public DelegateCommand EasyModeButtonCommand { get; }
         public DelegateCommand StandardModeButtonCommand { get; }

@@ -13,6 +13,7 @@ using Prism.Mvvm;
 using Prism.Regions;
 
 using MakePdf.Wpf.Models;
+using MakePdf.Wpf.Models.Settings;
 
 namespace MakePdf.Wpf.ViewModels.Pages
 {
@@ -105,12 +106,21 @@ namespace MakePdf.Wpf.ViewModels.Pages
         public void SaveSetting(string path)
         {
             Setting.WriteFile(path);
+
+            // Add RecentFiles
+            var options = Service.Provider.GetService<Options>();
+            options.AddRecentFile(path);
+            
         }
 
         public void LoadSetting(string path)
         {
             Setting = Setting.ReadFile(path);
             WorkingDirectory = Path.GetDirectoryName(path);
+
+            // Add RecentFiles
+            var options = Service.Provider.GetService<Options>();
+            options.AddRecentFile(path);
         }
 
         string GetRelativePath(string uri1, string uri2)
