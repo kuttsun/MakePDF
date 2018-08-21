@@ -18,7 +18,7 @@ namespace MakePdf.Wpf.Models
         public Runner(MakePdfCore core)
         {
             this.core = core;
-            core.Subscriber += x => Messenger.Instance[MessengerType.Processing].GetEvent<PubSubEvent<string>>().Publish(x);
+            core.Subscriber += x => Messenger.Instance[MessengerType.Processing].GetEvent<PubSubEvent<Message>>().Publish(x);
         }
 
         public async Task<bool> RunAsync(IEnumerable<string> items, string outputFullpath, Setting setting)

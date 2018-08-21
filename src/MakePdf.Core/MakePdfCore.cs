@@ -17,7 +17,7 @@ namespace MakePdf.Core
         OutputPdf outputPdf;
 
         Setting setting = new Setting();
-        public event Action<string> Subscriber = delegate { };// Null Object
+        public event Action<Message> Subscriber = delegate { };// Null Object
 
         public bool IsProcessing { get; private set; } = false;
 
@@ -67,12 +67,12 @@ namespace MakePdf.Core
         {
             foreach (var path in paths)
             {
-                OutputInfo($"{Path.GetFileName(path)}");
+                OutputInfo(MessageType.Info, $"{Path.GetFileName(path)}");
                 try
                 {
                     if (path == outputPdf.OutputFullpath)
                     {
-                        OutputInfo("Ignore (it is output file)");
+                        OutputInfo(MessageType.Info, "Ignore (it is output file)");
                         continue;
                     }
                     else if (File.Exists(path))
@@ -82,23 +82,23 @@ namespace MakePdf.Core
                         {
                             if (Support.IsSupported(path))
                             {
-                                OutputInfo("Start processing");
+                                OutputInfo(MessageType.Info, "Start processing");
                                 using (var doc = Create(path))
                                 {
                                     doc.ToPdf();
                                     outputPdf?.Add(doc.OutputFullpath, parentBookmarks);
                                     doc.DeleteCnvertedPdf(setting.DeleteConvertedPdf);
                                 }
-                                OutputInfo("Complete");
+                                OutputInfo(MessageType.Info, "Complete");
                             }
                             else
                             {
-                                OutputInfo("Ignore (it is not supported)");
+                                OutputInfo(MessageType.Warning, "Ignore (it is not supported)");
                             }
                         }
                         else
                         {
-                            OutputInfo("Ignore (it is not a target file)");
+                            OutputInfo(MessageType.Warning, "Ignore (it is not a target file)");
                         }
                     }
                     else if (Directory.Exists(path))
@@ -109,14 +109,14 @@ namespace MakePdf.Core
                             (setting.TargetDirectories.Pattern == null ? false : Regex.IsMatch(dirName, setting.TargetDirectories.Pattern)))
                         {
                             var childBookmark = new List<Dictionary<string, object>>();
-                            OutputInfo("Add directory name to bookmark");
+                            OutputInfo(MessageType.Info, "Add directory name to bookmark");
                             outputPdf.AddDirectoryBookmark(parentBookmarks, dirName, childBookmark);
                             // Recursive processing
                             ConvertAndCombine(Directory.GetFileSystemEntries(path), childBookmark);
                         }
                         else
                         {
-                            OutputInfo("Ignore (it is not a target directory)");
+                            OutputInfo(MessageType.Warning, "Ignore (it is not a target directory)");
                         }
                     }
                     else
@@ -126,8 +126,7 @@ namespace MakePdf.Core
                 }
                 catch (Exception e)
                 {
-                    Subscriber(e.Message);
-                    logger?.LogError(e, e.Message);
+                    OutputInfo(MessageType.Error, e.Message);
                 }
             }
         }
@@ -156,10 +155,26 @@ namespace MakePdf.Core
             }
         }
 
-        void OutputInfo(string msg)
+        void OutputInfo(MessageType type, string content)
         {
-            Subscriber(msg);
-            logger?.LogInformation(msg);
+            Subscriber(new Message()
+            {
+                Type = type,
+                Content = content
+            });
+
+            switch (type)
+            {
+                case MessageType.Warning:
+                    logger?.LogWarning(content);
+                    break;
+                case MessageType.Error:
+                    logger?.LogError(content);
+                    break;
+                default:
+                    logger?.LogInformation(content);
+                    break;
+            }
         }
     }
 }

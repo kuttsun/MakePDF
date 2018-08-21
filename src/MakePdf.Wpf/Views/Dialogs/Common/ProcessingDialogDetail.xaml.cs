@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 
 using Prism.Events;
 
+using MakePdf.Core;
 using MakePdf.Wpf.ViewModels.Dialogs.Common;
 
 namespace MakePdf.Wpf.Views.Dialogs.Common
@@ -29,11 +30,24 @@ namespace MakePdf.Wpf.Views.Dialogs.Common
         {
             InitializeComponent();
 
-            Messenger.Instance[MessengerType.Processing].GetEvent<PubSubEvent<string>>().Subscribe(x =>
+            Messenger.Instance[MessengerType.Processing].GetEvent<PubSubEvent<Message>>().Subscribe(x =>
             {
                 Dispatcher.Invoke(() =>
                 {
-                    ListBox.Items.Add(x);
+                    var lbi = new ListBoxItem
+                    {
+                        Content = x.Content
+                    };
+                    switch (x.Type)
+                    {
+                        case MessageType.Warning:
+                            lbi.Foreground = Brushes.DarkOrange;
+                            break;
+                        case MessageType.Error:
+                            lbi.Foreground = Brushes.Red;
+                            break;
+                    }
+                    ListBox.Items.Add(lbi);
 
                     // see: http://kenzauros.com/blog/follow-last-item-of-wpf-listbox/
                     //var lastIndex = ListBox.Items.Count - 1;
@@ -41,11 +55,14 @@ namespace MakePdf.Wpf.Views.Dialogs.Common
 
                     // Get ScrollViewer of ListBox
                     // see http://1010029.blogspot.com/2013/01/wpflistbox_26.html
-                    if (VisualTreeHelper.GetChild(ListBox, 0) is Border border)
+                    if (VisualTreeHelper.GetChildrenCount(ListBox) > 0)
                     {
-                        if (border.Child is ScrollViewer listBoxScroll)
+                        if (VisualTreeHelper.GetChild(ListBox, 0) is Border border)
                         {
-                            listBoxScroll.ScrollToEnd();
+                            if (border.Child is ScrollViewer listBoxScroll)
+                            {
+                                listBoxScroll.ScrollToEnd();
+                            }
                         }
                     }
                 });
