@@ -448,11 +448,20 @@ namespace MakePdf.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Completed..
+        /// </summary>
+        public static string Dialog_Processing_Completed {
+            get {
+                return ResourceManager.GetString("Dialog_Processing_Completed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please wait for a while..
         /// </summary>
-        public static string Dialog_Processing_Message {
+        public static string Dialog_Processing_Started {
             get {
-                return ResourceManager.GetString("Dialog_Processing_Message", resourceCulture);
+                return ResourceManager.GetString("Dialog_Processing_Started", resourceCulture);
             }
         }
         

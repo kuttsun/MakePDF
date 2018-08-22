@@ -10,7 +10,8 @@ namespace MakePdf.Core
     {
         Info,
         Warning,
-        Error
+        Error,
+        Success
     }
 
     public struct Message

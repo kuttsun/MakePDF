@@ -46,6 +46,9 @@ namespace MakePdf.Wpf.Views.Dialogs.Common
                         case MessageType.Error:
                             lbi.Foreground = Brushes.Red;
                             break;
+                        case MessageType.Success:
+                            lbi.Foreground = Brushes.Green;
+                            break;
                     }
                     ListBox.Items.Add(lbi);
 
@@ -71,8 +74,8 @@ namespace MakePdf.Wpf.Views.Dialogs.Common
 
         public ProcessingDialogDetail(string title, string message) : this()
         {
-            labelTitle.Content = title;
-            labelMessage.Content = message;
+            Title.Content = title;
+            Message.Content = message;
         }
     }
 }

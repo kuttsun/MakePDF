@@ -426,7 +426,7 @@
   <data name="MsgBox_NotFound_Title" xml:space="preserve">
     <value>見つかりませんでした</value>
   </data>
-  <data name="Dialog_Processing_Message" xml:space="preserve">
+  <data name="Dialog_Processing_Started" xml:space="preserve">
     <value>しばらくお待ちください</value>
   </data>
   <data name="Dialog_Processing_Title" xml:space="preserve">
@@ -446,5 +446,8 @@
   </data>
   <data name="Item_Word_CreateBookmarks_None" xml:space="preserve">
     <value>なし</value>
+  </data>
+  <data name="Dialog_Processing_Completed" xml:space="preserve">
+    <value>完了しました</value>
   </data>
 </root>

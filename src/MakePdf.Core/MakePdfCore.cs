@@ -89,7 +89,7 @@ namespace MakePdf.Core
                                     outputPdf?.Add(doc.OutputFullpath, parentBookmarks);
                                     doc.DeleteCnvertedPdf(setting.DeleteConvertedPdf);
                                 }
-                                OutputInfo(MessageType.Info, "Complete");
+                                OutputInfo(MessageType.Success, "Success");
                             }
                             else
                             {
