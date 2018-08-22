@@ -145,11 +145,16 @@ namespace MakePdf.Wpf.Views.Pages
             }
 
             // Start
-            var processingDialog = new ProcessingDialogDetail(Properties.Resources.Dialog_Processing_Title, Properties.Resources.Dialog_Processing_Message);
-            var re = parentView.dialogHostMain.ShowDialog(processingDialog, async (object s, DialogOpenedEventArgs args) =>
+            var processingDialog = new ProcessingDialogDetail(Properties.Resources.Dialog_Processing_Title, Properties.Resources.Dialog_Processing_Started);
+            var ret = parentView.dialogHostMain.ShowDialog(processingDialog, async (object s, DialogOpenedEventArgs args) =>
             {
+                processingDialog.Button.IsEnabled = false;
+
                 await vm.StartAsync();
-                args.Session.Close(false);
+
+                processingDialog.Message.Content = Properties.Resources.Dialog_Processing_Completed;
+                processingDialog.ProgressBar.IsIndeterminate = false;
+                processingDialog.Button.IsEnabled = true;
             });
         }
     }

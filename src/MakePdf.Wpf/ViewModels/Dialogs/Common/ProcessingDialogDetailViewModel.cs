@@ -11,6 +11,8 @@ namespace MakePdf.Wpf.ViewModels.Dialogs.Common
 {
     class ProcessingDialogDetailViewModel : BindableBase
     {
+        public string ButtonText { get; } = "OK";
+
         string title = "";
         public string Title
         {

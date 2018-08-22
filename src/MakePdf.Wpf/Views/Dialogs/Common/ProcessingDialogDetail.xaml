@@ -20,11 +20,12 @@
              FontFamily="{DynamicResource MaterialDesignFont}">
 
     <StackPanel Margin="10">
-        <Label Content="{Binding Title}" x:Name="labelTitle" FontSize="24"/>
-        <Label Content="{Binding Message}" x:Name="labelMessage" Margin="0 10" />
+        <Label Content="{Binding Title}" x:Name="Title" FontSize="24"/>
+        <Label Content="{Binding Message}" x:Name="Message" Margin="0 10" />
         <Border BorderThickness="1" BorderBrush="Silver">
             <ListBox x:Name="ListBox" SelectionMode="Single" Width="400" Height="300" Margin="0" />
         </Border>
-        <ProgressBar IsIndeterminate="True" Margin="0 10 0 0"/>
+        <ProgressBar x:Name="ProgressBar" IsIndeterminate="True" Margin="0 10 0 0"/>
+        <Button Margin="0,10" Content="{Binding ButtonText}" x:Name="Button" Style="{DynamicResource MaterialDesignFlatButton}" Command="{x:Static material:DialogHost.CloseDialogCommand}" />
     </StackPanel>
 </UserControl>

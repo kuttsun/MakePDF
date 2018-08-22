@@ -82,6 +82,7 @@
     <Compile Include="Documents\Word.cs" />
     <Compile Include="Extensions\String.cs" />
     <Compile Include="MakePdfCore.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setting.cs" />
     <Compile Include="Support.cs" />

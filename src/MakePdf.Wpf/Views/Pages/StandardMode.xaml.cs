@@ -49,7 +49,7 @@ namespace MakePdf.Wpf.Views.Pages
         async void Page_Drop(object sender, DragEventArgs e)
         {
             var element = e.Source as FrameworkElement;
-            if(element?.Name.Contains("DropAllowedControl") ?? false)
+            if (element?.Name.Contains("DropAllowedControl") ?? false)
             {
                 // ignore since the handler of the child control is being executed
                 return;
@@ -258,11 +258,16 @@ namespace MakePdf.Wpf.Views.Pages
             }
 
             // Start
-            var processingDialog = new ProcessingDialogDetail(Properties.Resources.Dialog_Processing_Title, Properties.Resources.Dialog_Processing_Message);
+            var processingDialog = new ProcessingDialogDetail(Properties.Resources.Dialog_Processing_Title, Properties.Resources.Dialog_Processing_Started);
             var re = parentView.dialogHostMain.ShowDialog(processingDialog, async (object s, DialogOpenedEventArgs args) =>
             {
+                processingDialog.Button.IsEnabled = false;
+                processingDialog.Button.IsEnabled = false;
                 await vm.StartAsync();
-                args.Session.Close(false);
+
+                processingDialog.Message.Content = Properties.Resources.Dialog_Processing_Completed;
+                processingDialog.ProgressBar.IsIndeterminate = false;
+                processingDialog.Button.IsEnabled = true;
             });
         }
     }
