@@ -227,7 +227,7 @@ namespace MakePdf.Wpf.Views.Pages
         async void StartButton_Click(object sender, RoutedEventArgs e)
         {
             // Working directory is empty
-            if (vm.WorkingDirectory == "")
+            if (string.IsNullOrEmpty(vm.WorkingDirectory))
             {
                 var overwriteDialog = new OneButtonDialog(Properties.Resources.Dialog_DirectoryEmpty_Title, Properties.Resources.Dialog_DirectoryEmpty_Message_WorkingDirectory);
                 await parentView.dialogHostMain.ShowDialog(overwriteDialog);
@@ -235,7 +235,7 @@ namespace MakePdf.Wpf.Views.Pages
             }
 
             // Output file is empty
-            if (vm.OutputFile == "")
+            if (string.IsNullOrEmpty(vm.OutputFile))
             {
                 var overwriteDialog = new OneButtonDialog(Properties.Resources.Dialog_FileNameEmpty_Title, Properties.Resources.Dialog_FileNameEmpty_Message_OutputFile);
                 await parentView.dialogHostMain.ShowDialog(overwriteDialog);
