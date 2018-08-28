@@ -50,7 +50,8 @@ namespace MakePdf.Wpf.ViewModels.Pages
                 {
                     baseDir = WorkingDirectory;
                 }
-                Setting.OutputFile = value.GetRelativePath(baseDir);
+
+                Setting.OutputFile = value?.GetRelativePath(baseDir);
             }
         }
 

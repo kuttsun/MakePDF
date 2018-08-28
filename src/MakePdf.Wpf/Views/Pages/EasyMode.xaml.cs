@@ -122,7 +122,7 @@ namespace MakePdf.Wpf.Views.Pages
             var parentView = Application.Current.MainWindow as Shell;
 
             // Output file is empty
-            if (vm.OutputFile == "")
+            if (string.IsNullOrEmpty(vm.OutputFile))
             {
                 var overwriteDialog = new OneButtonDialog(Properties.Resources.Dialog_FileNameEmpty_Title, Properties.Resources.Dialog_FileNameEmpty_Message_OutputFile);
                 await parentView.dialogHostMain.ShowDialog(overwriteDialog);
