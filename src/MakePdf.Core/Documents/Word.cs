@@ -7,18 +7,18 @@ using System.Text.RegularExpressions;
 
 
 using Microsoft.Extensions.Logging;
-using MsWord = Microsoft.Office.Interop.Word;
+using Microsoft.Office.Interop.Word;
 
 namespace MakePdf.Core.Documents
 {
     class Word : DocumentBase
     {
-        MsWord.Application word;
+        Application word;
         public WordSetting Setting { get; set; }
 
         public Word(string fullpath, ILogger logger) : base(fullpath, logger)
         {
-            word = new MsWord.Application();
+            word = new Application();
             Setting = new WordSetting();
         }
 
@@ -29,7 +29,7 @@ namespace MakePdf.Core.Documents
 
         public override void ToPdf()
         {
-            MsWord.Document doc = null;
+            Document doc = null;
 
             logger?.LogInformation($"Start conversion from Word to PDF : {Path.GetFileName(fullpath)}");
 
@@ -37,16 +37,52 @@ namespace MakePdf.Core.Documents
             {
                 doc = word.Documents.OpenNoRepairDialog(fullpath);
 
+                // Updating the table of contents
+                // https://www.c-sharpcorner.com/article/word-automation-using-C-Sharp/
+                if (doc.TablesOfContents.Count > 0)
+                {
+                    doc.TablesOfContents[1].Update();
+                    doc.TablesOfContents[1].UpdatePageNumbers();
+                }
+                doc.Fields.Update();
+
+                // Update All Fields
+                // https://superuser.com/questions/196703/how-do-i-update-all-fields-in-a-word-document
+                //foreach (Section section in doc.Sections)
+                //{
+                //    doc.Fields.Update();  // update each section
+
+                //    HeadersFooters headers = section.Headers;  //Get all headers
+                //    foreach (HeaderFooter header in headers)
+                //    {
+                //        Fields fields = header.Range.Fields;
+                //        foreach (Field field in fields)
+                //        {
+                //            field.Update();  // update all fields in headers
+                //        }
+                //    }
+
+                //    HeadersFooters footers = section.Footers;  //Get all footers
+                //    foreach (HeaderFooter footer in footers)
+                //    {
+                //        Fields fields = footer.Range.Fields;
+                //        foreach (Field field in fields)
+                //        {
+                //            field.Update();  //update all fields in footers
+                //        }
+                //    }
+                //}
+
                 // refs: https://msdn.microsoft.com/library/microsoft.office.tools.word.document.exportasfixedformat.aspx
                 doc.ExportAsFixedFormat(
                     OutputFullpath,
-                    MsWord.WdExportFormat.wdExportFormatPDF,
+                    WdExportFormat.wdExportFormatPDF,
                     false,
-                    MsWord.WdExportOptimizeFor.wdExportOptimizeForPrint,
-                    MsWord.WdExportRange.wdExportAllDocument,
+                    WdExportOptimizeFor.wdExportOptimizeForPrint,
+                    WdExportRange.wdExportAllDocument,
                     0,
                     0,
-                    MsWord.WdExportItem.wdExportDocumentContent,
+                    WdExportItem.wdExportDocumentContent,
                     true,
                     true,
                     GetBookmarkCreation(fullpath),
@@ -61,38 +97,38 @@ namespace MakePdf.Core.Documents
             }
             finally
             {
-                doc?.Close(MsWord.WdSaveOptions.wdDoNotSaveChanges);
+                doc?.Close(WdSaveOptions.wdDoNotSaveChanges);
             }
         }
 
-        MsWord.WdExportCreateBookmarks GetBookmarkCreation(string fullpath)
+        WdExportCreateBookmarks GetBookmarkCreation(string fullpath)
         {
-            MsWord.WdExportCreateBookmarks ret;
+            WdExportCreateBookmarks ret;
 
             switch (Setting.CreateBookmarkFromWord)
             {
                 case CreateBookmarkFromWord.Heading:
                     if ((Setting.ExclusionPattern != null) && Regex.IsMatch(Path.GetFileName(fullpath), Setting.ExclusionPattern))
                     {
-                        ret = MsWord.WdExportCreateBookmarks.wdExportCreateWordBookmarks;
+                        ret = WdExportCreateBookmarks.wdExportCreateWordBookmarks;
                     }
                     else
                     {
-                        ret = MsWord.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks;
+                        ret = WdExportCreateBookmarks.wdExportCreateHeadingBookmarks;
                     }
                     break;
                 case CreateBookmarkFromWord.Bookmark:
                     if ((Setting.ExclusionPattern != null) && Regex.IsMatch(Path.GetFileName(fullpath), Setting.ExclusionPattern))
                     {
-                        ret = MsWord.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks;
+                        ret = WdExportCreateBookmarks.wdExportCreateHeadingBookmarks;
                     }
                     else
                     {
-                        ret = MsWord.WdExportCreateBookmarks.wdExportCreateWordBookmarks;
+                        ret = WdExportCreateBookmarks.wdExportCreateWordBookmarks;
                     }
                     break;
                 default:
-                    ret = MsWord.WdExportCreateBookmarks.wdExportCreateNoBookmarks;
+                    ret = WdExportCreateBookmarks.wdExportCreateNoBookmarks;
                     break;
             }
 
