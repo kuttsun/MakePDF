@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -126,6 +127,21 @@ namespace MakePdf.Wpf.Views.Pages
             {
                 var overwriteDialog = new OneButtonDialog(Properties.Resources.Dialog_FileNameEmpty_Title, Properties.Resources.Dialog_FileNameEmpty_Message_OutputFile);
                 await parentView.dialogHostMain.ShowDialog(overwriteDialog);
+                return;
+            }
+
+            // Check winword process
+            if (Process.GetProcessesByName("winword").Length > 0)
+            {
+                var dialog = new OneButtonDialog(Properties.Resources.Dialog_ProcessExists_Title, Properties.Resources.Dialog_ProcessExists_Word);
+                await parentView.dialogHostMain.ShowDialog(dialog);
+                return;
+            }
+            // Check excel process
+            if (Process.GetProcessesByName("excel").Length > 0)
+            {
+                var dialog = new OneButtonDialog(Properties.Resources.Dialog_ProcessExists_Title, Properties.Resources.Dialog_ProcessExists_Excel);
+                await parentView.dialogHostMain.ShowDialog(dialog);
                 return;
             }
 

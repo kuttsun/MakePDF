@@ -448,6 +448,33 @@ namespace MakePdf.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please exit Excel before starting.
+        /// </summary>
+        public static string Dialog_ProcessExists_Excel {
+            get {
+                return ResourceManager.GetString("Dialog_ProcessExists_Excel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm.
+        /// </summary>
+        public static string Dialog_ProcessExists_Title {
+            get {
+                return ResourceManager.GetString("Dialog_ProcessExists_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please exit Word before starting.
+        /// </summary>
+        public static string Dialog_ProcessExists_Word {
+            get {
+                return ResourceManager.GetString("Dialog_ProcessExists_Word", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Completed..
         /// </summary>
         public static string Dialog_Processing_Completed {

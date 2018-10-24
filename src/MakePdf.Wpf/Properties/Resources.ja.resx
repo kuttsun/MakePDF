@@ -450,4 +450,13 @@
   <data name="Dialog_Processing_Completed" xml:space="preserve">
     <value>完了しました</value>
   </data>
+  <data name="Dialog_ProcessExists_Excel" xml:space="preserve">
+    <value>Excel を終了してから開始してください</value>
+  </data>
+  <data name="Dialog_ProcessExists_Title" xml:space="preserve">
+    <value>確認</value>
+  </data>
+  <data name="Dialog_ProcessExists_Word" xml:space="preserve">
+    <value>Word を終了してから開始してください</value>
+  </data>
 </root>
